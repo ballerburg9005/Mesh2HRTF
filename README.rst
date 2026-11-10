@@ -67,10 +67,10 @@ Experimental Ear Acoustic Lab (fork)
 ====================================
 
 This fork adds a graphical STL-based resonance tester under
-\`\`tools/ear_acoustic_lab\`\`. It imports \`\`~/model.stl\`\`, defaults the
+``tools/ear_acoustic_lab``. It imports ``~/model.stl``, defaults the
 microphone to the STL origin (0,0,0), runs NumCalc frequency sweeps, and
 plots the calculated pressure response. Blender export is automated;
 you do not need to install the Mesh2HRTF Blender add-on manually.
 
 For Arch Linux installation and usage instructions, see
-\`\`tools/ear_acoustic_lab/README.md\`\`.
+``tools/ear_acoustic_lab/README.md``.

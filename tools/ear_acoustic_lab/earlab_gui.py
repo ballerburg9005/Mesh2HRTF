@@ -63,6 +63,9 @@ class App:
         ttk.Button(outer, text='Prepare latest completed run for GitHub',
                    command=self.share_latest).grid(row=r,column=0,columnspan=2,
                                                    sticky='w',pady=(0,6))
+        ttk.Button(outer, text='Resume interrupted scan',
+                   command=self.resume_latest).grid(row=r,column=2,
+                                                   sticky='e',pady=(0,6))
         r+=1
         self.status=tk.StringVar(value='Ready: ~/model.stl, microphone (0,0,0). Click RUN ACOUSTIC SWEEP.')
         ttk.Label(outer,textvariable=self.status).grid(row=r,column=0,columnspan=3,sticky='w',pady=4);r+=1
@@ -116,6 +119,37 @@ class App:
                 if (p/'Output2HRTF'/'HRTF_MicProbe.sofa').is_file():
                     projects.append(p)
         return sorted(set(projects), key=lambda p:p.stat().st_mtime,reverse=True)
+
+    def resume_latest(self):
+        if self.running:
+            return
+        roots = [Path(self.results_root.get()).expanduser(),
+                 Path('~/EarAcousticLab/results').expanduser()]
+        candidates = []
+        for root in roots:
+            for project in root.glob('ear_*'):
+                if ((project/'NumCalc'/'source_1'/'NC.inp').is_file()
+                    and not (project/'Output2HRTF'/'HRTF_MicProbe.sofa').is_file()):
+                    candidates.append(project)
+        if not candidates:
+            messagebox.showinfo('Nothing to resume',
+                                'No exported but unfinished calculation was found.')
+            return
+        project = max(candidates,key=lambda p:p.stat().st_mtime)
+        if not messagebox.askyesno(
+                'Resume saved NumCalc project',
+                'Resume missing frequency steps in: '+str(project)+'?\\n'
+                'Do not run this while another NumCalc manager is still active.'):
+            return
+        jobs = int(self.jobs.get())
+        self.log.delete('1.0','end')
+        self.results = ''
+        self.running = True
+        self.run_button.configure(state='disabled')
+        self.status.set('Resuming previous NumCalc frequency calculation...')
+        cmd = [sys.executable,'-u',str(ROOT/'run_analysis.py'),
+               '--resume',str(project),'--jobs',str(jobs)]
+        threading.Thread(target=self.worker,args=(cmd,),daemon=True).start()
 
     def share_latest(self):
         candidates = self.completed_projects()

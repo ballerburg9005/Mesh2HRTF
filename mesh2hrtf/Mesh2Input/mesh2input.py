@@ -552,7 +552,7 @@ def _write_object_data(obj, objects, unitFactor, context, filepath1):
     # coordinate of nodes (vertices)
     for ii in range(len(obj_data.vertices[:])):
         fw("%i " % ii)
-        fw("%.6f %.6f %.6f\n" %
+        fw("%.12f %.12f %.12f\n" %
             (obj_data.vertices[ii].co[0] * unitFactor,
              obj_data.vertices[ii].co[1] * unitFactor,
              obj_data.vertices[ii].co[2] * unitFactor))

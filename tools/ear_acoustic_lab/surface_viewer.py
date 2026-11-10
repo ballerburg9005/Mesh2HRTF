@@ -139,3 +139,44 @@ def write_interactive_surface(output, vertices_mm, faces, frequencies_hz,
     path = output/"surface_3d.html"
     fig.write_html(str(path), include_plotlyjs=True, full_html=True)
     return path
+
+
+def write_vtk_surfaces(output, vertices_mm, faces, frequencies_hz, complex_pressure):
+    """Write selected already-calculated surface values to ParaView legacy VTK.
+
+    Unlike Mesh2HRTF.export_vtk this does not re-read ALL solver frequency
+    files for every selected tone; use this for long sweeps.
+    """
+    output = Path(output)
+    output.mkdir(parents=True, exist_ok=True)
+    verts = np.asarray(vertices_mm, float)
+    triangles = np.asarray(faces, int)
+    hz = np.asarray(frequencies_hz, float)
+    pressure = np.asarray(complex_pressure)
+    if pressure.shape != (len(triangles), len(hz)):
+        raise ValueError("Expected one pressure per face and selected tone")
+    geometry = (
+        "# vtk DataFile Version 3.0\nNumCalc pressure on BEM boundary\n"
+        "ASCII\nDATASET POLYDATA\n"
+        f"POINTS {len(verts)} float\n" +
+        "".join(f"{x:.9g} {y:.9g} {z:.9g}\n" for x,y,z in verts) +
+        f"POLYGONS {len(triangles)} {len(triangles)*4}\n" +
+        "".join(f"3 {a} {b} {c}\n" for a,b,c in triangles) +
+        f"CELL_DATA {len(triangles)}\n"
+    )
+    paths = []
+    for i, freq in enumerate(hz):
+        p_db = 20*np.log10(np.maximum(np.abs(pressure[:,i]), 1e-15))
+        rel = p_db - float(np.median(p_db))
+        suffix = str(int(round(freq))) if abs(freq-round(freq)) < .001 else f"{freq:.3f}".replace(".","p")
+        path = output / f"boundary_{suffix}Hz.vtk"
+        path.write_text(
+            geometry +
+            "SCALARS pressure_relative_surface_median_db float 1\n"
+            "LOOKUP_TABLE default\n" +
+            "".join(f"{v:.8g}\n" for v in rel) +
+            "SCALARS pressure_db_re_1Pa float 1\n"
+            "LOOKUP_TABLE default\n" +
+            "".join(f"{v:.8g}\n" for v in p_db))
+        paths.append(str(path))
+    return paths

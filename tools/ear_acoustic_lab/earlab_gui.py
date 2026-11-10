@@ -43,7 +43,7 @@ class App:
         ttk.Label(outer,text='Frequency test battery').grid(row=r,column=0,sticky='w',pady=3)
         ttk.Combobox(outer,textvariable=self.preset,values=list(PRESETS),state='readonly',width=25).grid(row=r,column=1,sticky='w');r+=1
         self.music=self.path(outer,r,'Optional WAV / MP3 music','');r+=1
-        self.results_root=self.path(outer,r,'Output folder','~/EarAcousticLab/results',folder=True);r+=1
+        self.results_root=self.path(outer,r,'Output folder',str(REPO_ROOT/'earlab_runs'),folder=True);r+=1
         self.jobs=self.field(outer,r,'Parallel CPU processes','4');r+=1
         note=('Blender exporter runs automatically — no add-on installation. '
               'Export the STL with microphone position at (0,0,0), or enter XYZ here. '
@@ -59,6 +59,10 @@ class App:
         ttk.Button(buttons,text='Reanalyze saved',command=self.reanalyze_last).pack(side='left',padx=5)
         ttk.Button(buttons,text='Play music audition',command=self.open_music).pack(side='left',padx=5)
         ttk.Button(buttons,text='Results folder',command=self.open_folder).pack(side='left',padx=5)
+        r+=1
+        ttk.Button(outer, text='Prepare latest completed run for GitHub',
+                   command=self.share_latest).grid(row=r,column=0,columnspan=2,
+                                                   sticky='w',pady=(0,6))
         r+=1
         self.status=tk.StringVar(value='Ready: ~/model.stl, microphone (0,0,0). Click RUN ACOUSTIC SWEEP.')
         ttk.Label(outer,textvariable=self.status).grid(row=r,column=0,columnspan=3,sticky='w',pady=4);r+=1
@@ -103,13 +107,44 @@ class App:
         self.status.set('Running actual Mesh2HRTF numerical simulation...')
         threading.Thread(target=self.worker,args=(cmd,),daemon=True).start()
 
+    def completed_projects(self):
+        roots = [Path(self.results_root.get()).expanduser(),
+                 Path('~/EarAcousticLab/results').expanduser()]
+        projects = []
+        for root in roots:
+            for p in root.glob('ear_*'):
+                if (p/'Output2HRTF'/'HRTF_MicProbe.sofa').is_file():
+                    projects.append(p)
+        return sorted(set(projects), key=lambda p:p.stat().st_mtime,reverse=True)
+
+    def share_latest(self):
+        candidates = self.completed_projects()
+        if not candidates:
+            messagebox.showinfo('No completed simulation',
+                                'There is no completed NumCalc calculation to share.')
+            return
+        try:
+            from share_results import prepare_snapshot
+            folder = Path(self.results).parent if self.results else candidates[0]
+            if not (folder/'analysis'/'response.csv').is_file():
+                folder = candidates[0]
+            snapshot = prepare_snapshot(folder)
+            messagebox.showinfo(
+                'GitHub snapshot prepared',
+                'Prepared a compact report and selected mesh/pressure data at:\\n'
+                +str(snapshot)
+                +'\\n\\nNothing was pushed. From the Mesh2HRTF folder run:\\n'
+                +'git add tools/ear_acoustic_lab/shared_runs\\n'
+                + 'git commit -m "Add ear simulation results"\\n'
+                + 'git push\\n\\nPublic GitHub commits expose this data.')
+        except Exception as exc:
+            messagebox.showerror('Could not prepare snapshot',str(exc))
+
     def reanalyze_last(self):
         """Generate more plots and spatial maps without re-running NumCalc."""
         if self.running:
             return
-        root = Path(self.results_root.get()).expanduser().resolve()
-        candidates = [p for p in root.glob('ear_*')
-                      if (p/'Output2HRTF'/'HRTF_MicProbe.sofa').is_file()]
+        candidates = self.completed_projects()
         if not candidates:
             messagebox.showinfo(
                 'No completed simulation',

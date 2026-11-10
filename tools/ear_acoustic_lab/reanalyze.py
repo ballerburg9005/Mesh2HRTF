@@ -145,11 +145,13 @@ def _surface_maps(project, output, freq, color_db):
             output, vertices_mm, faces, selected_frequencies, selected_pressure)
         viewer_note = None
         try:
-            cfg = json.loads((project / "earlab_config.json").read_text())
-            scale = 1.0 if cfg.get("units") == "mm" else 1000.0
+            config_path = project / "earlab_config.json"
+            cfg = json.loads(config_path.read_text()) if config_path.is_file() else {}
+            scale = 1.0 if cfg.get("units", "mm") == "mm" else 1000.0
+            mic_mm = np.asarray(cfg["mic"], float) * scale if "mic" in cfg else None
             write_interactive_surface(
                 output, vertices_mm, faces, selected_frequencies,
-                selected_pressure, np.asarray(cfg["mic"], float) * scale)
+                selected_pressure, mic_mm)
         except ImportError:
             viewer_note = "Install plotly to enable the interactive 3D boundary viewer."
         except Exception as exc:

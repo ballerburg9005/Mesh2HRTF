@@ -19,7 +19,7 @@ FILES = [
     "analysis/surface_pressure.png", "analysis/surface_cutaway.png",
     "analysis/surface_3d.html", "analysis/response.csv",
     "analysis/diagnostic_samples.csv", "analysis/diagnostics.json",
-    "analysis/peaks.json", "analysis/pressure.npz",
+    "analysis/peaks.json", "analysis/solver_checks.json", "analysis/pressure.npz",
     "analysis/surface_samples.npz", "analysis/surface_hotspots.csv",
     "Output2HRTF/HRTF_MicProbe.sofa"
 ]

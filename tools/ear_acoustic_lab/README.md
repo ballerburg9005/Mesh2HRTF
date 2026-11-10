@@ -37,6 +37,43 @@ cd ~/Mesh2HRTF
 
 The launcher automatically resolves the current clone's root; `--mesh2hrtf` optionally overrides it.
 
+## Inspect completed simulations without another NumCalc run
+
+The quick preset solves only **31 frequency points, 500–3500 Hz, 100 Hz apart**.
+That cannot establish there are no narrow resonances. A smooth graph from
+that sweep is inconclusive about peaks between the samples.
+
+After any completed run, press **Reanalyze saved** to read the newest completed
+project in your chosen results folder. Then click **Open report** to see:
+
+- `analysis/report.html`: explanation of each graph, frequency spacing, gain
+  statistics, sampled extrema and explicit interpretation limitations.
+- `analysis/response.png`: four panels — absolute relative gain, band-median
+  removed coloration, phase and phase-derived group delay.
+- `analysis/diagnostic_samples.csv` and `diagnostics.json`: numerical values
+  and warnings, not just a thresholded list of >3 dB resonance peaks.
+- `analysis/surface_pressure.png`: maps of the pressure solved on the surface
+  at up to three selected *actually simulated* frequencies.
+- `Output2HRTF/vtk/Reference_pressure_db/frequency_step_*.vtk`: the same
+  surface pressure fields for interactive inspection in ParaView.
+
+**There is no need to run NumCalc again to make these reports.** The tool
+uses saved solver output. It does not hallucinate missing frequencies or
+reconstruct a spatial volume pressure field from the boundary mesh.
+
+For an existing run, you can also use the command line:
+
+```sh
+cd ~/Mesh2HRTF
+./tools/ear_acoustic_lab/.venv/bin/python tools/ear_acoustic_lab/reanalyze.py \
+  ~/EarAcousticLab/results/ear_20261110_155147_122202
+```
+
+Select **Focused ~1kHz** or **Deep 1kHz** if you specifically need to
+resolve tonal peaks in the 700–1600 Hz range. For genuinely broad music EQ
+you must compute more of the audible range and validate the measured
+headphone/microphone arrangement; this program does not yet output a
+measurement-validated EQ correction.
 ## What is and is not modeled
 
 The STL **must contain the hollow, air-connected canal geometry, any microphone tube's air passage and its actual termination surface** to simulate their resonances. Simply importing an STL of the external pinna or a two-block print without the internal air surfaces does *not* recover them. Mic origin `(0,0,0)` is convenient only after you position the actual model to make the correct air probe coincide with that coordinate. The source must be in external air, not inside the plastic. The input may require repairing inconsistent winding, disconnected components, self-intersections or non-manifold surfaces first. The program warns about some mesh defects but does not automatically correct a bad STL.

@@ -55,7 +55,8 @@ class App:
         self.run_button=ttk.Button(buttons,text='▶ RUN ACOUSTIC SWEEP',command=self.start)
         self.run_button.pack(side='left',padx=(0,14))
         ttk.Button(buttons,text='Preview STL + mic',command=self.preview).pack(side='left',padx=5)
-        ttk.Button(buttons,text='Open graphs',command=self.open_graphs).pack(side='left',padx=5)
+        ttk.Button(buttons,text='Open report',command=self.open_graphs).pack(side='left',padx=5)
+        ttk.Button(buttons,text='Reanalyze saved',command=self.reanalyze_last).pack(side='left',padx=5)
         ttk.Button(buttons,text='Play music audition',command=self.open_music).pack(side='left',padx=5)
         ttk.Button(buttons,text='Results folder',command=self.open_folder).pack(side='left',padx=5)
         r+=1
@@ -101,6 +102,28 @@ class App:
         self.running=True;self.run_button.configure(state='disabled')
         self.status.set('Running actual Mesh2HRTF numerical simulation...')
         threading.Thread(target=self.worker,args=(cmd,),daemon=True).start()
+
+    def reanalyze_last(self):
+        """Generate more plots and spatial maps without re-running NumCalc."""
+        if self.running:
+            return
+        root = Path(self.results_root.get()).expanduser().resolve()
+        candidates = [p for p in root.glob('ear_*')
+                      if (p/'Output2HRTF'/'HRTF_MicProbe.sofa').is_file()]
+        if not candidates:
+            messagebox.showinfo(
+                'No completed simulation',
+                'No completed NumCalc run found in the results folder. Run a sweep first.')
+            return
+        project = max(candidates, key=lambda p: p.stat().st_mtime)
+        self.log.delete('1.0', 'end')
+        self.log.insert('end', '[REANALYZE] '+str(project)+'\\n')
+        self.results = ''
+        self.running = True
+        self.run_button.configure(state='disabled')
+        self.status.set('Reading completed NumCalc data and generating diagnostic plots...')
+        cmd = [sys.executable, '-u', str(ROOT/'reanalyze.py'), str(project)]
+        threading.Thread(target=self.worker, args=(cmd,), daemon=True).start()
 
     def worker(self,cmd):
         try:
@@ -180,7 +203,13 @@ class App:
                 cmd=['ffplay','-nodisp','-autoexit','-loglevel','error',str(p)]
             else:cmd=['xdg-open',str(p)]
         subprocess.Popen(cmd,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
-    def open_graphs(self):self.open_file(Path(self.results)/'response.png')
+    def open_graphs(self):
+        if not self.results:
+            messagebox.showinfo('No result', 'Run a sweep or reanalyze a saved run first.')
+            return
+        folder = Path(self.results)
+        self.open_file(folder/'report.html' if (folder/'report.html').is_file()
+                       else folder/'response.png')
     def open_music(self):self.open_file(Path(self.results)/'music_audition.wav')
     def open_folder(self):self.open_file(Path(self.results) if self.results else Path(self.results_root.get()).expanduser())
 

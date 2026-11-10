@@ -1,0 +1,175 @@
+istart= 931 iend = 931
+
+---------- NumCalc started: 10/11/2026 18:2:52 ----------
+
+Running on:         SYBURG
+
+3D analysis
+Job title: Ear acoustic cavity and microphone response
+
+Warning: Element with very long side found!
+external elemen number = 8823
+internal element number = 8823
+
+
+Warning: Element with very long side found!
+external elemen number = 8824
+internal element number = 8824
+
+
+Warning: Element with very long side found!
+external elemen number = 8825
+internal element number = 8825
+
+
+Warning: Element with very long side found!
+external elemen number = 8825
+internal element number = 8825
+
+
+Warning: Element with very long side found!
+external elemen number = 8828
+internal element number = 8828
+
+
+Warning: Element with very long side found!
+external elemen number = 8828
+internal element number = 8828
+
+
+Warning: Element with very long side found!
+external elemen number = 8831
+internal element number = 8831
+
+
+Warning: Element with very long side found!
+external elemen number = 8831
+internal element number = 8831
+
+
+Warning: Element with very long side found!
+external elemen number = 8842
+internal element number = 8842
+
+
+Warning: Element with very long side found!
+external elemen number = 8863
+internal element number = 8863
+
+
+Warning: Element with very long side found!
+external elemen number = 8888
+internal element number = 8888
+
+
+Warning: Element with very long side found!
+external elemen number = 8891
+internal element number = 8891
+
+
+Warning: Element with very long side found!
+external elemen number = 8892
+internal element number = 8892
+
+
+Warning: Element with very long side found!
+external elemen number = 8892
+internal element number = 8892
+
+
+Warning: Element with very long side found!
+external elemen number = 8933
+internal element number = 8933
+
+
+Warning: Element with very long side found!
+external elemen number = 8944
+internal element number = 8944
+
+
+Step 931, Frequency = 9400 Hz
+
+Direct multilevel fast multipole BEM
+
+Number of equations = 9074
+
+Informations about clusters:
+   Level    Num. of clusters    Maximum radius   Minimum radius
+     0           46                0.0630797         0.00959122
+     1          145                0.0630797         0.00158152
+ resu. nets       1                0.000105409         0.000105409
+
+
+Informations about the FMM expansion:
+   Level    N. expa. terms    N. p. theta    N. p. phi    N. p. sphere
+     0          24              24              48          1152
+     1          24              24              48          1152
+
+CGS: err_ori = 0.429102
+10 2.31681
+10 Abs Error:0.994148
+20 14.6683
+20 Abs Error:6.29421
+30 13.8999
+30 Abs Error:5.96446
+40 83.3888
+40 Abs Error:35.7823
+50 13.5004
+50 Abs Error:5.79306
+60 27.1047
+60 Abs Error:11.6307
+70 113.84
+70 Abs Error:48.8489
+80 114.238
+80 Abs Error:49.0199
+90 36.9816
+90 Abs Error:15.8689
+100 51.6752
+100 Abs Error:22.1739
+110 33.499
+110 Abs Error:14.3745
+120 36.1692
+120 Abs Error:15.5203
+130 42.6734
+130 Abs Error:18.3112
+140 43.2234
+140 Abs Error:18.5472
+150 52.3574
+150 Abs Error:22.4666
+160 80.4543
+160 Abs Error:34.5231
+170 143.396
+170 Abs Error:61.5314
+180 70.9605
+180 Abs Error:30.4493
+190 70.2379
+190 Abs Error:30.1392
+200 72.1539
+200 Abs Error:30.9614
+210 54.5051
+210 Abs Error:23.3882
+220 51.1499
+220 Abs Error:21.9485
+230 349.869
+230 Abs Error:150.129
+240 299.971
+240 Abs Error:128.718
+250 255.537
+250 Abs Error:109.651
+Warning: Maximum number of iterations is reached!
+
+Assembling the equation system         : 24
+Solving the equation system            : 67
+Post processing                        : 2
+Total                                  : 93
+
+
+Time Statistic for the job (in second):
+Input ............................ 0
+Address computation .............. 0
+Assembling the equation system ... 24
+Solving the equation system ...... 67
+Post processing .................. 2
+The whole job .................... 93
+
+---------- NumCalc ended: 10/11/2026 18:4:25 ----------

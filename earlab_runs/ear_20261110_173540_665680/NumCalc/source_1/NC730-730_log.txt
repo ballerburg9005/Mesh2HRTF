@@ -1,0 +1,175 @@
+istart= 730 iend = 730
+
+---------- NumCalc started: 10/11/2026 20:39:29 ----------
+
+Running on:         SYBURG
+
+3D analysis
+Job title: Ear acoustic cavity and microphone response
+
+Warning: Element with very long side found!
+external elemen number = 8823
+internal element number = 8823
+
+
+Warning: Element with very long side found!
+external elemen number = 8824
+internal element number = 8824
+
+
+Warning: Element with very long side found!
+external elemen number = 8825
+internal element number = 8825
+
+
+Warning: Element with very long side found!
+external elemen number = 8825
+internal element number = 8825
+
+
+Warning: Element with very long side found!
+external elemen number = 8828
+internal element number = 8828
+
+
+Warning: Element with very long side found!
+external elemen number = 8828
+internal element number = 8828
+
+
+Warning: Element with very long side found!
+external elemen number = 8831
+internal element number = 8831
+
+
+Warning: Element with very long side found!
+external elemen number = 8831
+internal element number = 8831
+
+
+Warning: Element with very long side found!
+external elemen number = 8842
+internal element number = 8842
+
+
+Warning: Element with very long side found!
+external elemen number = 8863
+internal element number = 8863
+
+
+Warning: Element with very long side found!
+external elemen number = 8888
+internal element number = 8888
+
+
+Warning: Element with very long side found!
+external elemen number = 8891
+internal element number = 8891
+
+
+Warning: Element with very long side found!
+external elemen number = 8892
+internal element number = 8892
+
+
+Warning: Element with very long side found!
+external elemen number = 8892
+internal element number = 8892
+
+
+Warning: Element with very long side found!
+external elemen number = 8933
+internal element number = 8933
+
+
+Warning: Element with very long side found!
+external elemen number = 8944
+internal element number = 8944
+
+
+Step 730, Frequency = 7390 Hz
+
+Direct multilevel fast multipole BEM
+
+Number of equations = 9074
+
+Informations about clusters:
+   Level    Num. of clusters    Maximum radius   Minimum radius
+     0           46                0.0630797         0.00959122
+     1          145                0.0630797         0.00158152
+ resu. nets       1                0.000105409         0.000105409
+
+
+Informations about the FMM expansion:
+   Level    N. expa. terms    N. p. theta    N. p. phi    N. p. sphere
+     0          19              19              38           722
+     1          19              19              38           722
+
+CGS: err_ori = 0.355537
+10 0.0153697
+10 Abs Error:0.0054645
+20 0.0606387
+20 Abs Error:0.0215593
+30 0.0757012
+30 Abs Error:0.0269146
+40 0.662746
+40 Abs Error:0.235631
+50 0.431982
+50 Abs Error:0.153585
+60 1.73975
+60 Abs Error:0.618544
+70 3.64643
+70 Abs Error:1.29644
+80 12223.4
+80 Abs Error:4345.85
+90 1044.51
+90 Abs Error:371.361
+100 983.429
+100 Abs Error:349.645
+110 1121.79
+110 Abs Error:398.837
+120 1579.15
+120 Abs Error:561.444
+130 1399.5
+130 Abs Error:497.574
+140 1413.38
+140 Abs Error:502.51
+150 1694.65
+150 Abs Error:602.511
+160 2773.57
+160 Abs Error:986.107
+170 2264.31
+170 Abs Error:805.047
+180 2084.42
+180 Abs Error:741.087
+190 3419.82
+190 Abs Error:1215.87
+200 12442.2
+200 Abs Error:4423.65
+210 3801.87
+210 Abs Error:1351.7
+220 1554.43
+220 Abs Error:552.657
+230 1283.63
+230 Abs Error:456.377
+240 1528.8
+240 Abs Error:543.545
+250 1853.84
+250 Abs Error:659.106
+Warning: Maximum number of iterations is reached!
+
+Assembling the equation system         : 18
+Solving the equation system            : 36
+Post processing                        : 2
+Total                                  : 56
+
+
+Time Statistic for the job (in second):
+Input ............................ 0
+Address computation .............. 0
+Assembling the equation system ... 18
+Solving the equation system ...... 36
+Post processing .................. 2
+The whole job .................... 56
+
+---------- NumCalc ended: 10/11/2026 20:40:25 ----------

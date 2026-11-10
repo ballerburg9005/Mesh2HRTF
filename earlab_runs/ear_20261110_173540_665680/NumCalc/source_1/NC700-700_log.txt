@@ -1,0 +1,175 @@
+istart= 700 iend = 700
+
+---------- NumCalc started: 10/11/2026 20:33:52 ----------
+
+Running on:         SYBURG
+
+3D analysis
+Job title: Ear acoustic cavity and microphone response
+
+Warning: Element with very long side found!
+external elemen number = 8823
+internal element number = 8823
+
+
+Warning: Element with very long side found!
+external elemen number = 8824
+internal element number = 8824
+
+
+Warning: Element with very long side found!
+external elemen number = 8825
+internal element number = 8825
+
+
+Warning: Element with very long side found!
+external elemen number = 8825
+internal element number = 8825
+
+
+Warning: Element with very long side found!
+external elemen number = 8828
+internal element number = 8828
+
+
+Warning: Element with very long side found!
+external elemen number = 8828
+internal element number = 8828
+
+
+Warning: Element with very long side found!
+external elemen number = 8831
+internal element number = 8831
+
+
+Warning: Element with very long side found!
+external elemen number = 8831
+internal element number = 8831
+
+
+Warning: Element with very long side found!
+external elemen number = 8842
+internal element number = 8842
+
+
+Warning: Element with very long side found!
+external elemen number = 8863
+internal element number = 8863
+
+
+Warning: Element with very long side found!
+external elemen number = 8888
+internal element number = 8888
+
+
+Warning: Element with very long side found!
+external elemen number = 8891
+internal element number = 8891
+
+
+Warning: Element with very long side found!
+external elemen number = 8892
+internal element number = 8892
+
+
+Warning: Element with very long side found!
+external elemen number = 8892
+internal element number = 8892
+
+
+Warning: Element with very long side found!
+external elemen number = 8933
+internal element number = 8933
+
+
+Warning: Element with very long side found!
+external elemen number = 8944
+internal element number = 8944
+
+
+Step 700, Frequency = 7090 Hz
+
+Direct multilevel fast multipole BEM
+
+Number of equations = 9074
+
+Informations about clusters:
+   Level    Num. of clusters    Maximum radius   Minimum radius
+     0           46                0.0630797         0.00959122
+     1          145                0.0630797         0.00158152
+ resu. nets       1                0.000105409         0.000105409
+
+
+Informations about the FMM expansion:
+   Level    N. expa. terms    N. p. theta    N. p. phi    N. p. sphere
+     0          19              19              38           722
+     1          19              19              38           722
+
+CGS: err_ori = 0.394949
+10 0.0194752
+10 Abs Error:0.0076917
+20 0.242469
+20 Abs Error:0.0957628
+30 2.68125
+30 Abs Error:1.05896
+40 2.48483
+40 Abs Error:0.981381
+50 2.37504
+50 Abs Error:0.938021
+60 1.33648
+60 Abs Error:0.527842
+70 3.8752
+70 Abs Error:1.53051
+80 2.0136
+80 Abs Error:0.795271
+90 9.79772
+90 Abs Error:3.8696
+100 17.6397
+100 Abs Error:6.96678
+110 36.3814
+110 Abs Error:14.3688
+120 5.69739
+120 Abs Error:2.25018
+130 3.18558
+130 Abs Error:1.25814
+140 2148.23
+140 Abs Error:848.443
+150 314.161
+150 Abs Error:124.078
+160 243.332
+160 Abs Error:96.1037
+170 424.112
+170 Abs Error:167.503
+180 226.642
+180 Abs Error:89.5121
+190 71.4962
+190 Abs Error:28.2374
+200 279.749
+200 Abs Error:110.486
+210 393.684
+210 Abs Error:155.485
+220 223.582
+220 Abs Error:88.3035
+230 165.411
+230 Abs Error:65.3288
+240 148.584
+240 Abs Error:58.6832
+250 146.654
+250 Abs Error:57.921
+Warning: Maximum number of iterations is reached!
+
+Assembling the equation system         : 20
+Solving the equation system            : 44
+Post processing                        : 1
+Total                                  : 65
+
+
+Time Statistic for the job (in second):
+Input ............................ 0
+Address computation .............. 0
+Assembling the equation system ... 20
+Solving the equation system ...... 44
+Post processing .................. 1
+The whole job .................... 65
+
+---------- NumCalc ended: 10/11/2026 20:34:57 ----------

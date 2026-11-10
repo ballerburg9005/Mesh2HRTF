@@ -1,0 +1,139 @@
+{
+  "project": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261110_173540_665680",
+  "samples": 991,
+  "frequency_min_hz": 100.0,
+  "frequency_max_hz": 10000.0,
+  "frequency_step_median_hz": 10.0,
+  "gain_median_db_relative_to_freefield": 19.12830949008432,
+  "gain_min_db": -22.50737207088551,
+  "gain_max_db": 132.07981541588194,
+  "observed_span_db": 154.58718748676745,
+  "sampled_extrema": [
+    {
+      "kind": "sampled local high",
+      "frequency_hz": 6850.0,
+      "relative_gain_db": 132.07981541588194,
+      "coloration_db": 112.95150592579762
+    },
+    {
+      "kind": "sampled local high",
+      "frequency_hz": 6870.0,
+      "relative_gain_db": 120.59240526099634,
+      "coloration_db": 101.46409577091202
+    },
+    {
+      "kind": "sampled local high",
+      "frequency_hz": 6470.0,
+      "relative_gain_db": 117.83408779921508,
+      "coloration_db": 98.70577830913076
+    },
+    {
+      "kind": "sampled local high",
+      "frequency_hz": 6780.0,
+      "relative_gain_db": 117.2410801006639,
+      "coloration_db": 98.11277061057957
+    },
+    {
+      "kind": "sampled local high",
+      "frequency_hz": 6940.0,
+      "relative_gain_db": 115.60201381818885,
+      "coloration_db": 96.47370432810453
+    },
+    {
+      "kind": "sampled local high",
+      "frequency_hz": 6920.0,
+      "relative_gain_db": 109.35295429715114,
+      "coloration_db": 90.22464480706682
+    },
+    {
+      "kind": "sampled local low",
+      "frequency_hz": 9380.0,
+      "relative_gain_db": -22.50737207088551,
+      "coloration_db": -41.63568156096983
+    },
+    {
+      "kind": "sampled local low",
+      "frequency_hz": 9210.0,
+      "relative_gain_db": -16.836436069544888,
+      "coloration_db": -35.96474555962921
+    },
+    {
+      "kind": "sampled local low",
+      "frequency_hz": 8790.0,
+      "relative_gain_db": -11.950026528544665,
+      "coloration_db": -31.078336018628985
+    },
+    {
+      "kind": "sampled local low",
+      "frequency_hz": 8640.0,
+      "relative_gain_db": -4.99668287606871,
+      "coloration_db": -24.12499236615303
+    },
+    {
+      "kind": "sampled local low",
+      "frequency_hz": 9180.0,
+      "relative_gain_db": -4.537329739231857,
+      "coloration_db": -23.665639229316177
+    },
+    {
+      "kind": "sampled local low",
+      "frequency_hz": 9500.0,
+      "relative_gain_db": -3.1173271432138465,
+      "coloration_db": -22.245636633298165
+    }
+  ],
+  "ranked_points": [
+    {
+      "kind": "highest sampled point",
+      "frequency_hz": 6850.0,
+      "relative_gain_db": 132.07981541588194,
+      "coloration_db": 112.95150592579762
+    },
+    {
+      "kind": "highest sampled point",
+      "frequency_hz": 6870.0,
+      "relative_gain_db": 120.59240526099634,
+      "coloration_db": 101.46409577091202
+    },
+    {
+      "kind": "highest sampled point",
+      "frequency_hz": 6470.0,
+      "relative_gain_db": 117.83408779921508,
+      "coloration_db": 98.70577830913076
+    },
+    {
+      "kind": "lowest sampled point",
+      "frequency_hz": 9380.0,
+      "relative_gain_db": -22.50737207088551,
+      "coloration_db": -41.63568156096983
+    },
+    {
+      "kind": "lowest sampled point",
+      "frequency_hz": 9210.0,
+      "relative_gain_db": -16.836436069544888,
+      "coloration_db": -35.96474555962921
+    },
+    {
+      "kind": "lowest sampled point",
+      "frequency_hz": 8790.0,
+      "relative_gain_db": -11.950026528544665,
+      "coloration_db": -31.078336018628985
+    }
+  ],
+  "warnings": [
+    "PARTIAL SPECTRUM: 100\u201310000 Hz only. Not a full audio-band EQ profile.",
+    "This is a linear frequency-domain BEM result, not measured microphone distortion.",
+    "Only the listed frequency points were calculated; peaks between points may be completely absent from this report.",
+    "A constant positive gain does not establish calibrated SPL, perceptual coloration or a valid canal boundary model.",
+    "The point source is not a headphone diaphragm or headphone-pad acoustic boundary.",
+    "The microphone is an ideal non-loading pressure probe. Capsule, termination and viscothermal losses are not modeled.",
+    "The fluid domain and microphone-to-opening air connection have not been independently validated."
+  ],
+  "surface_map": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261110_173540_665680/analysis/surface_pressure.png",
+  "boundary_vtk_files": [
+    "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261110_173540_665680/analysis/boundary_100Hz.vtk",
+    "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261110_173540_665680/analysis/boundary_1000Hz.vtk",
+    "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261110_173540_665680/analysis/boundary_6850Hz.vtk",
+    "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261110_173540_665680/analysis/boundary_10000Hz.vtk"
+  ]
+}

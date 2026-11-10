@@ -1,0 +1,175 @@
+istart= 719 iend = 719
+
+---------- NumCalc started: 10/11/2026 20:30:18 ----------
+
+Running on:         SYBURG
+
+3D analysis
+Job title: Ear acoustic cavity and microphone response
+
+Warning: Element with very long side found!
+external elemen number = 8823
+internal element number = 8823
+
+
+Warning: Element with very long side found!
+external elemen number = 8824
+internal element number = 8824
+
+
+Warning: Element with very long side found!
+external elemen number = 8825
+internal element number = 8825
+
+
+Warning: Element with very long side found!
+external elemen number = 8825
+internal element number = 8825
+
+
+Warning: Element with very long side found!
+external elemen number = 8828
+internal element number = 8828
+
+
+Warning: Element with very long side found!
+external elemen number = 8828
+internal element number = 8828
+
+
+Warning: Element with very long side found!
+external elemen number = 8831
+internal element number = 8831
+
+
+Warning: Element with very long side found!
+external elemen number = 8831
+internal element number = 8831
+
+
+Warning: Element with very long side found!
+external elemen number = 8842
+internal element number = 8842
+
+
+Warning: Element with very long side found!
+external elemen number = 8863
+internal element number = 8863
+
+
+Warning: Element with very long side found!
+external elemen number = 8888
+internal element number = 8888
+
+
+Warning: Element with very long side found!
+external elemen number = 8891
+internal element number = 8891
+
+
+Warning: Element with very long side found!
+external elemen number = 8892
+internal element number = 8892
+
+
+Warning: Element with very long side found!
+external elemen number = 8892
+internal element number = 8892
+
+
+Warning: Element with very long side found!
+external elemen number = 8933
+internal element number = 8933
+
+
+Warning: Element with very long side found!
+external elemen number = 8944
+internal element number = 8944
+
+
+Step 719, Frequency = 7280 Hz
+
+Direct multilevel fast multipole BEM
+
+Number of equations = 9074
+
+Informations about clusters:
+   Level    Num. of clusters    Maximum radius   Minimum radius
+     0           46                0.0630797         0.00959122
+     1          145                0.0630797         0.00158152
+ resu. nets       1                0.000105409         0.000105409
+
+
+Informations about the FMM expansion:
+   Level    N. expa. terms    N. p. theta    N. p. phi    N. p. sphere
+     0          19              19              38           722
+     1          19              19              38           722
+
+CGS: err_ori = 0.37401
+10 0.0417784
+10 Abs Error:0.0156256
+20 0.316378
+20 Abs Error:0.118329
+30 3.22938
+30 Abs Error:1.20782
+40 0.313514
+40 Abs Error:0.117257
+50 0.17045
+50 Abs Error:0.06375
+60 0.419761
+60 Abs Error:0.156995
+70 0.231258
+70 Abs Error:0.0864928
+80 0.425199
+80 Abs Error:0.159029
+90 1.26938
+90 Abs Error:0.474763
+100 0.785988
+100 Abs Error:0.293968
+110 0.509599
+110 Abs Error:0.190595
+120 1.86406
+120 Abs Error:0.697177
+130 3.42475
+130 Abs Error:1.28089
+140 14.3366
+140 Abs Error:5.36205
+150 7.16256
+150 Abs Error:2.67887
+160 4684.48
+160 Abs Error:1752.04
+170 1340.06
+170 Abs Error:501.195
+180 573.199
+180 Abs Error:214.383
+190 305.989
+190 Abs Error:114.443
+200 181.564
+200 Abs Error:67.9067
+210 118.272
+210 Abs Error:44.235
+220 84.4426
+220 Abs Error:31.5824
+230 67.2502
+230 Abs Error:25.1523
+240 59.4749
+240 Abs Error:22.2442
+250 56.8261
+250 Abs Error:21.2535
+Warning: Maximum number of iterations is reached!
+
+Assembling the equation system         : 19
+Solving the equation system            : 44
+Post processing                        : 1
+Total                                  : 64
+
+
+Time Statistic for the job (in second):
+Input ............................ 0
+Address computation .............. 0
+Assembling the equation system ... 19
+Solving the equation system ...... 44
+Post processing .................. 1
+The whole job .................... 64
+
+---------- NumCalc ended: 10/11/2026 20:31:22 ----------

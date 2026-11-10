@@ -1,0 +1,9 @@
+{
+  "nearest_boundary_mm": {
+    "microphone": 1.2159168720245361,
+    "source": 76.42825317382812
+  },
+  "mic_probe_triangle_radius_mm": 0.1,
+  "inside_outside_validated": false,
+  "note": "Nearest-wall distances do not establish that the microphone is in connected air."
+}

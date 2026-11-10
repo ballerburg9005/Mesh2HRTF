@@ -25,5 +25,4 @@ tests/resources/install_addons.py
 *.DS_Store
 
 # Ear Acoustic Lab: large solver data stays local; shareable summaries are tracked
-/earlab_runs/
 /tools/ear_acoustic_lab/.venv/

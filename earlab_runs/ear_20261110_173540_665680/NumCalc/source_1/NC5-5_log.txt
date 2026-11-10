@@ -1,0 +1,152 @@
+istart= 5 iend = 5
+
+---------- NumCalc started: 10/11/2026 18:36:2 ----------
+
+Running on:         SYBURG
+
+3D analysis
+Job title: Ear acoustic cavity and microphone response
+
+Warning: Element with very long side found!
+external elemen number = 8823
+internal element number = 8823
+
+
+Warning: Element with very long side found!
+external elemen number = 8824
+internal element number = 8824
+
+
+Warning: Element with very long side found!
+external elemen number = 8825
+internal element number = 8825
+
+
+Warning: Element with very long side found!
+external elemen number = 8825
+internal element number = 8825
+
+
+Warning: Element with very long side found!
+external elemen number = 8828
+internal element number = 8828
+
+
+Warning: Element with very long side found!
+external elemen number = 8828
+internal element number = 8828
+
+
+Warning: Element with very long side found!
+external elemen number = 8831
+internal element number = 8831
+
+
+Warning: Element with very long side found!
+external elemen number = 8831
+internal element number = 8831
+
+
+Warning: Element with very long side found!
+external elemen number = 8842
+internal element number = 8842
+
+
+Warning: Element with very long side found!
+external elemen number = 8863
+internal element number = 8863
+
+
+Warning: Element with very long side found!
+external elemen number = 8888
+internal element number = 8888
+
+
+Warning: Element with very long side found!
+external elemen number = 8891
+internal element number = 8891
+
+
+Warning: Element with very long side found!
+external elemen number = 8892
+internal element number = 8892
+
+
+Warning: Element with very long side found!
+external elemen number = 8892
+internal element number = 8892
+
+
+Warning: Element with very long side found!
+external elemen number = 8933
+internal element number = 8933
+
+
+Warning: Element with very long side found!
+external elemen number = 8944
+internal element number = 8944
+
+
+Step 5, Frequency = 140 Hz
+
+Informations about the canceled interacting cluster pairs:
+   Level   N. canceled pairs   N. interacting pairs   Cancel ratio (%)
+     0             24                  226               10.6195
+
+Single level fast multipole BEM
+
+Number of equations = 9074
+
+Informations about clusters:
+   Level    Num. of clusters    Maximum radius   Minimum radius
+     0           46                0.0630797         0.00959122
+ resu. nets       1                0.000105409         0.000105409
+
+Informations about the FMM expansion:
+   Level    N. expa. terms    N. p. theta    N. p. phi    N. p. sphere
+     0           8               8              16           128
+
+CGS: err_ori = 106.47
+10 0.00118613
+10 Abs Error:0.126287
+20 0.0283436
+20 Abs Error:3.01774
+30 0.000231253
+30 Abs Error:0.0246215
+40 8.04185e-05
+40 Abs Error:0.00856215
+50 0.000963484
+50 Abs Error:0.102582
+60 0.00457866
+60 Abs Error:0.48749
+70 0.00190249
+70 Abs Error:0.202558
+80 0.00109692
+80 Abs Error:0.116789
+90 0.00151603
+90 Abs Error:0.161412
+100 7.49205e-05
+100 Abs Error:0.00797678
+110 1.37355e-05
+110 Abs Error:0.00146242
+120 6.94027e-07
+120 Abs Error:7.3893e-05
+130 8.97436e-08
+130 Abs Error:9.555e-06
+138 9.89277e-10
+
+Assembling the equation system         : 58
+Solving the equation system            : 31
+Post processing                        : 0
+Total                                  : 89
+
+
+Time Statistic for the job (in second):
+Input ............................ 0
+Address computation .............. 0
+Assembling the equation system ... 58
+Solving the equation system ...... 31
+Post processing .................. 0
+The whole job .................... 89
+
+---------- NumCalc ended: 10/11/2026 18:37:31 ----------

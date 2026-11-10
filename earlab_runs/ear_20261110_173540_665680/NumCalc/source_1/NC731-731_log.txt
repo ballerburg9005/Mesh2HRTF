@@ -1,0 +1,175 @@
+istart= 731 iend = 731
+
+---------- NumCalc started: 10/11/2026 20:38:7 ----------
+
+Running on:         SYBURG
+
+3D analysis
+Job title: Ear acoustic cavity and microphone response
+
+Warning: Element with very long side found!
+external elemen number = 8823
+internal element number = 8823
+
+
+Warning: Element with very long side found!
+external elemen number = 8824
+internal element number = 8824
+
+
+Warning: Element with very long side found!
+external elemen number = 8825
+internal element number = 8825
+
+
+Warning: Element with very long side found!
+external elemen number = 8825
+internal element number = 8825
+
+
+Warning: Element with very long side found!
+external elemen number = 8828
+internal element number = 8828
+
+
+Warning: Element with very long side found!
+external elemen number = 8828
+internal element number = 8828
+
+
+Warning: Element with very long side found!
+external elemen number = 8831
+internal element number = 8831
+
+
+Warning: Element with very long side found!
+external elemen number = 8831
+internal element number = 8831
+
+
+Warning: Element with very long side found!
+external elemen number = 8842
+internal element number = 8842
+
+
+Warning: Element with very long side found!
+external elemen number = 8863
+internal element number = 8863
+
+
+Warning: Element with very long side found!
+external elemen number = 8888
+internal element number = 8888
+
+
+Warning: Element with very long side found!
+external elemen number = 8891
+internal element number = 8891
+
+
+Warning: Element with very long side found!
+external elemen number = 8892
+internal element number = 8892
+
+
+Warning: Element with very long side found!
+external elemen number = 8892
+internal element number = 8892
+
+
+Warning: Element with very long side found!
+external elemen number = 8933
+internal element number = 8933
+
+
+Warning: Element with very long side found!
+external elemen number = 8944
+internal element number = 8944
+
+
+Step 731, Frequency = 7400 Hz
+
+Direct multilevel fast multipole BEM
+
+Number of equations = 9074
+
+Informations about clusters:
+   Level    Num. of clusters    Maximum radius   Minimum radius
+     0           46                0.0630797         0.00959122
+     1          145                0.0630797         0.00158152
+ resu. nets       1                0.000105409         0.000105409
+
+
+Informations about the FMM expansion:
+   Level    N. expa. terms    N. p. theta    N. p. phi    N. p. sphere
+     0          19              19              38           722
+     1          19              19              38           722
+
+CGS: err_ori = 0.35222
+10 0.0670921
+10 Abs Error:0.0236312
+20 0.119329
+20 Abs Error:0.0420301
+30 0.300059
+30 Abs Error:0.105687
+40 0.263984
+40 Abs Error:0.0929805
+50 0.168766
+50 Abs Error:0.0594427
+60 0.136843
+60 Abs Error:0.048199
+70 0.0799843
+70 Abs Error:0.0281721
+80 0.640129
+80 Abs Error:0.225466
+90 0.645407
+90 Abs Error:0.227325
+100 0.315751
+100 Abs Error:0.111214
+110 2.08106
+110 Abs Error:0.732992
+120 1.40418
+120 Abs Error:0.49458
+130 0.410118
+130 Abs Error:0.144452
+140 0.662889
+140 Abs Error:0.233483
+150 0.456895
+150 Abs Error:0.160928
+160 1.09867
+160 Abs Error:0.386975
+170 0.660666
+170 Abs Error:0.2327
+180 3.56349
+180 Abs Error:1.25513
+190 1.04198
+190 Abs Error:0.367006
+200 7.52355
+200 Abs Error:2.64995
+210 1.50244
+210 Abs Error:0.529189
+220 1.39027
+220 Abs Error:0.48968
+230 1.65255
+230 Abs Error:0.582063
+240 1.10614
+240 Abs Error:0.389605
+250 2.01151
+250 Abs Error:0.708494
+Warning: Maximum number of iterations is reached!
+
+Assembling the equation system         : 17
+Solving the equation system            : 39
+Post processing                        : 2
+Total                                  : 58
+
+
+Time Statistic for the job (in second):
+Input ............................ 0
+Address computation .............. 0
+Assembling the equation system ... 17
+Solving the equation system ...... 39
+Post processing .................. 2
+The whole job .................... 58
+
+---------- NumCalc ended: 10/11/2026 20:39:5 ----------

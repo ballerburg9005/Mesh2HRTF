@@ -18,14 +18,14 @@ def mesh_views(vertices_mm, faces):
     # Filter by longest edge, NOT by area: long, narrow back/enclosure
     # triangles can have a tiny area even if their longest edge is 60 mm.
     # Prefer retaining the detailed pinna triangles while hiding those
-    # oversized panels. The hard 12 mm floor avoids removing normal faces
+    # oversized panels. The hard 20 mm floor avoids removing normal faces
     # from a finely tessellated pinna, even on a small/atypical mesh.
     # NumCalc triangle distortion diagnostic is a separate display mode.
     e0 = np.linalg.norm(tri[:, 1] - tri[:, 0], axis=1)
     e1 = np.linalg.norm(tri[:, 2] - tri[:, 1], axis=1)
     e2 = np.linalg.norm(tri[:, 0] - tri[:, 2], axis=1)
     max_edge = np.maximum(np.maximum(e0, e1), e2)
-    cutoff_mm = max(12.0, float(np.quantile(max_edge, .97)))
+    cutoff_mm = max(20.0, float(np.quantile(max_edge, .97)))
     trimmed = max_edge <= cutoff_mm
     if not np.any(trimmed):
         trimmed = np.ones(len(faces), dtype=bool)

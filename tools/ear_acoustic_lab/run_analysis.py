@@ -39,6 +39,24 @@ FAST_PRESETS = {
 }
 
 
+def safe_numcalc_options(args):
+    """Conservative system-wide physical-memory cap, without swap budget."""
+    import psutil
+    total_gib = psutil.virtual_memory().total / (1024 ** 3)
+    reserved = max(8.0, total_gib * 0.35)
+    if total_gib <= reserved + 1.0:
+        raise RuntimeError("Not enough physical RAM after NumCalc safety reserve")
+    budget = total_gib - reserved
+    workers = min(int(args.jobs), 2)
+    print(f"[RAM GUARD] {total_gib:.1f} GiB physical RAM; "
+          f"reserve {reserved:.1f} GiB; global memory ceiling {budget:.1f} GiB; "
+          f"{workers} worker(s).", flush=True)
+    print("[RAM GUARD] 2x NumCalc memory estimates and 30-second stagger. "
+          "Jobs that cannot fit without swap are refused.", flush=True)
+    return dict(max_ram_load=budget, ram_safety_factor=2.0,
+                max_instances=workers, wait_time=30, max_cpu_load=90,
+                confirm_errors=False)
+
 def step(title):
     print('\n' + '=' * 12 + ' ' + title + ' ' + '=' * 12, flush=True)
 
@@ -94,6 +112,7 @@ def resume_project(args):
     cfg = json.loads((project/'earlab_config.json').read_text())
     repo = Path(args.mesh2hrtf).expanduser().resolve()
     binary = repo/'mesh2hrtf'/'NumCalc'/'bin'/'NumCalc'
+    call(['make','-C',repo/'mesh2hrtf'/'NumCalc'/'src','-j2'])
     if not binary.is_file():
         raise FileNotFoundError('NumCalc executable not found: '+str(binary))
     import mesh2hrtf as m2h
@@ -103,8 +122,7 @@ def resume_project(args):
     print('[RESUME] Do not start another NumCalc manager for this same project.',flush=True)
     m2h.manage_numcalc(project_path=str(project),
                       numcalc_path=str(binary),
-                      max_instances=int(args.jobs),
-                      wait_time=2,max_cpu_load=99,confirm_errors=False)
+                      **safe_numcalc_options(args))
     step('Convert completed NumCalc output to microphone analysis')
     m2h.output2hrtf(str(project))
     sofa = project/'Output2HRTF'/'HRTF_MicProbe.sofa'
@@ -240,9 +258,8 @@ def run(args):
             f"(max_edge/(1.51967*sqrt(area)) > 100). "
             f"First element: {quality['fatal_ids'][0]}. "
             f"See {quality['report_csv']} for coordinates and Blender overlay.")
-    step('Compile NumCalc if necessary')
-    if not binary.is_file():
-        call(['make','-C',mesh2module/'NumCalc'/'src','-j2'])
+    step('Recompile NumCalc if source files changed')
+    call(['make','-C',mesh2module/'NumCalc'/'src','-j2'])
     if not binary.is_file():raise RuntimeError('NumCalc missing after build: '+str(binary))
     if not os.access(binary,os.X_OK):
         raise PermissionError('NumCalc is not executable: '+str(binary))
@@ -287,9 +304,8 @@ def run(args):
     # Memory-aware parallelization via the original NumCalc manager. Avoid
     # promising a CUDA speedup: Mesh2HRTF/NumCalc is CPU based.
     m2h.manage_numcalc(
-        project_path=str(project),numcalc_path=str(binary),
-        max_instances=int(args.jobs),wait_time=2,
-        max_cpu_load=99,confirm_errors=False)
+        project_path=str(project), numcalc_path=str(binary),
+        **safe_numcalc_options(args))
     step('Convert actual solver pressures to SOFA and plots')
     m2h.output2hrtf(str(project))
     sofa=project/'Output2HRTF'/'HRTF_MicProbe.sofa'
@@ -353,7 +369,7 @@ def get_args():
     ap.add_argument('--preset',choices=list(PRESETS),default='20 kHz fast (80 tones)')
     ap.add_argument('--results',default=str(REPO_ROOT / 'earlab_runs'))
     ap.add_argument('--music',default='')
-    ap.add_argument('--jobs',type=int,default=4)
+    ap.add_argument('--jobs',type=int,default=1)
     a=ap.parse_args()
     if a.jobs<1 or a.jobs>32:ap.error('--jobs must be in 1..32')
     return a

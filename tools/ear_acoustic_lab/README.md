@@ -18,6 +18,24 @@ If you already have the branch locally, use `git switch feature/ear-acoustic-lab
 
 If your clone's `origin` is `Any2HRTF/Mesh2HRTF` rather than your fork, first run `git remote add mine https://github.com/ballerburg9005/Mesh2HRTF.git`, then `git fetch mine` and `git switch --track mine/feature/ear-acoustic-lab`.
 
+## Physical RAM / swap safety
+
+For desktop machines with 32 GiB of RAM the previous **four workers, two-second
+launch stagger and no fixed memory budget** could cause severe swap traffic.
+The default is now **one worker** (two maximum), with a *system-wide*
+physical-memory cap leaving 35% of RAM or at least 8 GiB free for other work.
+NumCalc's per-frequency memory estimate is multiplied by two, and process starts
+are staggered by 30 seconds. The same limit applies on resumed runs; a step that
+cannot fit safely is refused rather than deliberately scheduled into swap.
+This cannot guarantee zero swapping if RAM use grows in other applications.
+Avoid running two independent managers at once.
+
+If an older manager is currently running, stop it and its NumCalc workers before
+pulling these changes. Keep the existing `earlab_runs/ear_*` folder: completed
+steps may be reused with `--resume ... --jobs 1`. Do not resume while another
+manager is active. Both new and resumed runs now check `make` for stale NumCalc
+binaries so C++ solver patches are not silently ignored.
+
 ## One-button test
 
 1. Save the physical **air-facing** 3D ear geometry as `~/model.stl`. If possible, **move the STL's coordinate origin to the microphone** in Blender before exporting. Then the GUI's default `Mic XYZ = 0 0 0` is correct; no other microphone setup required. Coordinates must use the same units as the STL, default **millimetres**. You can also specify a different microphone XYZ if you prefer. The STL is imported automatically, not via the Blender GUI.

@@ -25,6 +25,10 @@ class SurfaceViewerTest(unittest.TestCase):
             self.assertIn("pinna opening", content)
             self.assertIn("Cut Y: show back half", content)
             self.assertIn("Hide large faces", content)
+            self.assertIn("Side/back (+X,-Y)", content)
+            # Mode selection also updates scene.camera; users need not
+            # manually switch away from the front view.
+            self.assertIn("scene.camera", content)
             vtk = write_vtk_surfaces(output, verts, faces, hz, pressure)
             self.assertEqual(len(vtk), 3)
             self.assertTrue(Path(vtk[0]).is_file())

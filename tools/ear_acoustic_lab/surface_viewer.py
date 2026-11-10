@@ -1,0 +1,141 @@
+"""Interactive inspection of NumCalc *boundary* pressure (never a new solve).
+
+The visualization-only masks do not alter the solver surface or acoustic
+boundary conditions. In particular, a cutaway does NOT calculate pressure
+on a new cutting plane or at interior air points.
+"""
+from pathlib import Path
+import numpy as np
+
+
+def mesh_views(vertices_mm, faces):
+    """Masks for full, remove large triangles, and two geometric cutaways."""
+    verts = np.asarray(vertices_mm, float)
+    faces = np.asarray(faces, int)
+    tri = verts[faces]
+    cross = np.cross(tri[:, 1]-tri[:, 0], tri[:, 2]-tri[:, 0])
+    areas = .5 * np.linalg.norm(cross, axis=1)
+    median = float(np.median(areas[areas > 0])) if np.any(areas > 0) else 0.0
+    # Only hide extreme, unusually large panels; cap by upper 8% of area.
+    cutoff = max(median * 6.0, float(np.quantile(areas, .92)))
+    trimmed = areas < cutoff if median > 0 else np.ones(len(faces), dtype=bool)
+    if not np.any(trimmed):
+        trimmed = np.ones(len(faces), dtype=bool)
+    centers = tri.mean(axis=1)
+    xmid = float(np.median(verts[:, 0]))
+    ymid = float(np.median(verts[:, 1]))
+    x_cut = centers[:, 0] >= xmid
+    y_cut = centers[:, 1] <= ymid
+    return {
+        "Full mesh": np.ones(len(faces), dtype=bool),
+        f"Hide large faces ({np.count_nonzero(~trimmed)} removed)": trimmed,
+        "Cut X: show +X half": x_cut,
+        "Cut Y: show back half": y_cut,
+    }
+
+
+def write_interactive_surface(output, vertices_mm, faces, frequencies_hz,
+                              complex_surface_pressure, mic_mm=None):
+    """Create an offline, rotatable 3-D surface viewer.
+
+    complex_surface_pressure must have shape (n_faces, n_selected_freq).
+    Colors are dB relative to the surface median at each displayed frequency.
+    """
+    import plotly.graph_objects as go
+
+    output = Path(output)
+    output.mkdir(parents=True, exist_ok=True)
+    verts = np.asarray(vertices_mm, dtype=float)
+    faces = np.asarray(faces, dtype=int)
+    freq = np.asarray(frequencies_hz, dtype=float).reshape(-1)
+    pressure = np.asarray(complex_surface_pressure)
+    if verts.ndim != 2 or verts.shape[1] != 3:
+        raise ValueError("Expected (vertices,3) geometry")
+    if faces.ndim != 2 or faces.shape[1] != 3:
+        raise ValueError("Expected triangular surface geometry")
+    if len(faces) == 0 or np.any(faces < 0) or np.any(faces >= len(verts)):
+        raise ValueError("Invalid face indices")
+    if pressure.shape != (len(faces), len(freq)):
+        raise ValueError("Expected one complex boundary pressure per face and frequency")
+    if len(freq) == 0:
+        raise ValueError("At least one solved frequency is required")
+
+    db = 20.0*np.log10(np.maximum(np.abs(pressure), 1e-15))
+    db -= np.median(db, axis=0, keepdims=True)
+    limit = float(np.clip(np.quantile(np.abs(db), .95), 3., 30.))
+    views = mesh_views(verts, faces)
+    fig = go.Figure()
+    settings = []
+    for fi, hz in enumerate(freq):
+        for label, mask in views.items():
+            subset = faces[mask]
+            # Plotly supports one intensity value per triangle in cell mode.
+            fig.add_trace(go.Mesh3d(
+                x=verts[:, 0], y=verts[:, 1], z=verts[:, 2],
+                i=subset[:, 0], j=subset[:, 1], k=subset[:, 2],
+                intensity=db[mask, fi],
+                intensitymode="cell", flatshading=True,
+                colorscale="RdBu_r", cmin=-limit, cmax=limit,
+                showscale=True, colorbar=dict(title="relative dB"),
+                hovertemplate="Boundary pressure: %{intensity:.2f} dB<extra></extra>",
+                name=f"{hz:g} Hz · {label}",
+                visible=(fi == 0 and label == "Full mesh"),
+                lighting=dict(ambient=.65, diffuse=.75, specular=.08),
+                lightposition=dict(x=100, y=100, z=100)))
+            settings.append((fi, hz, label))
+
+    if mic_mm is not None:
+        xyz = np.asarray(mic_mm, dtype=float)
+        if xyz.shape == (3,):
+            fig.add_trace(go.Scatter3d(
+                x=[xyz[0]], y=[xyz[1]], z=[xyz[2]], mode="markers",
+                marker=dict(color="#191919", size=5, symbol="circle"),
+                name="Microphone at selected XYZ", visible=True))
+
+    camera = {
+        "Front (+Y / pinna opening)": dict(eye=dict(x=0, y=2.4, z=.4)),
+        "Back (-Y)": dict(eye=dict(x=0, y=-2.4, z=.4)),
+        "Side (+X)": dict(eye=dict(x=2.4, y=.15, z=.5)),
+        "Side (-X)": dict(eye=dict(x=-2.4, y=.15, z=.5)),
+        "Top (+Z)": dict(eye=dict(x=.15, y=.2, z=2.4)),
+        "Angled (+Y,+X)": dict(eye=dict(x=1.4, y=1.9, z=.6)),
+    }
+    selection_buttons = []
+    for i, (_, hz, label) in enumerate(settings):
+        visible = [j == i for j in range(len(settings))]
+        if mic_mm is not None and np.asarray(mic_mm).shape == (3,):
+            visible.append(True)
+        selection_buttons.append(dict(
+            label=f"{hz:g} Hz · {label}",
+            method="update",
+            args=[{"visible": visible}, {"title": f"{hz:g} Hz · {label}"}]))
+    camera_buttons = [
+        dict(label=name, method="relayout",
+             args=[{"scene.camera": viewpoint}])
+        for name, viewpoint in camera.items()]
+    bounds = np.ptp(verts, axis=0)
+    aspect = bounds / max(float(bounds.max()), 1.)
+    fig.update_layout(
+        title=f"{freq[0]:g} Hz · Full mesh",
+        scene=dict(
+            xaxis_title="X (mm)", yaxis_title="Y (mm)",
+            zaxis_title="Z (mm)", aspectmode="manual",
+            aspectratio=dict(x=max(aspect[0], .1),
+                             y=max(aspect[1], .1),
+                             z=max(aspect[2], .1)),
+            camera=camera["Front (+Y / pinna opening)"]),
+        updatemenus=[
+            dict(type="dropdown", x=.0, y=1.12, xanchor="left",
+                 buttons=selection_buttons, showactive=True),
+            dict(type="dropdown", x=.57, y=1.12, xanchor="left",
+                 buttons=camera_buttons, showactive=True)],
+        annotations=[dict(
+            text="Mesh display only · source faces and cutaways do NOT change acoustic solution",
+            x=0, y=-.07, xref="paper", yref="paper", showarrow=False,
+            xanchor="left", font=dict(size=12))],
+        width=1100, height=770,
+        margin=dict(l=0, r=30, b=65, t=100),
+        showlegend=False)
+    path = output/"surface_3d.html"
+    fig.write_html(str(path), include_plotlyjs=True, full_html=True)
+    return path

@@ -86,7 +86,7 @@ def _surface_maps(project, output, freq, color_db):
             ax.set_zlim(center[2] - halfwidth, center[2] + halfwidth)
             ax.set_box_aspect((1, 1, 1))
             ax.set_axis_off()
-            ax.view_init(elev=20, azim=-65)
+            ax.view_init(elev=20, azim=90)
             ax.set_title(f"{freq[index]:.0f} Hz — boundary pressure", fontsize=11)
         fig.subplots_adjust(left=.03, right=.88, bottom=.05, top=.91, wspace=.02)
         cax = fig.add_axes([.90, .20, .014, .58])

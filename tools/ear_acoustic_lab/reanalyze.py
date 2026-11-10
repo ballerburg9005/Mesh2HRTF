@@ -113,7 +113,8 @@ def _surface_maps(project, output, freq, color_db):
                 ax.set_zlim(center[2]-halfwidth, center[2]+halfwidth)
                 ax.set_box_aspect((1,1,1))
                 ax.set_axis_off()
-                ax.view_init(elev=20, azim=65)
+                # Side/back angle: looking into geometry exposed by panel removal.
+                ax.view_init(elev=18, azim=-18)
                 ax.set_title(f"{freq[index]:.0f} Hz - large faces hidden")
             cut.subplots_adjust(left=.03,right=.88,bottom=.05,top=.91,wspace=.02)
             cax = cut.add_axes([.90,.20,.014,.58])
@@ -209,6 +210,17 @@ def render_project(path):
         "The microphone is an ideal non-loading pressure probe. Capsule, termination and viscothermal losses are not modeled.",
         "The fluid domain and microphone-to-opening air connection have not been independently validated.",
     ]
+    if float(np.max(gain)) > 60.0:
+        warnings.insert(0, (
+            f"UNVALIDATED EXTREME GAIN: peak {float(np.max(gain)):+.1f} dB at "
+            f"{float(freq[np.argmax(gain)]):g} Hz relative to free field. "
+            "Do not treat this as a physical resonance or use it for EQ without "
+            "checking numerical convergence, surface quality and fluid connectivity."))
+    if len(gain) > 1 and np.max(np.abs(np.diff(gain))) > 20.0 and step <= 25:
+        warnings.insert(0, (
+            "ABRUPT SPECTRAL INSTABILITY: adjacent solved frequencies differ "
+            f"by up to {float(np.max(np.abs(np.diff(gain)))):.1f} dB. "
+            "Verify the solver and mesh before interpreting narrow peaks."))
     if step >= 50:
         warnings.insert(0, f"COARSE SWEEP: {step:g} Hz spacing. Narrow resonances and ringing cannot be resolved.")
     if freq.min() > 100 or freq.max() < 15000:
@@ -300,7 +312,7 @@ def render_project(path):
              'Each frequency is color-normalized to its own surface median. '
              'Inspect exported VTK in ParaView for a rotatable 3D field.</p>'
              '<img src="surface_pressure.png" alt="Boundary pressure from +Y ear-opening view">'
-             '<p>Display-only removal of oversized flat faces, seen from +Y/+X:</p>'
+             '<p>Display-only removal of oversized faces, viewed from the +X/-Y side/back:</p>'
              '<img src="surface_cutaway.png" alt="Boundary pressure with large display faces hidden">'
              '<p><a href="surface_3d.html">ROTATABLE 3D VIEWER: face hiding, X/Y cuts, all camera angles</a> '
              '| <a href="surface_hotspots.csv">Surface pressure hotspots CSV</a>. '

@@ -47,7 +47,7 @@ class TestRetrospectiveReport(unittest.TestCase):
             self.assertTrue(any("COARSE SWEEP" in w for w in data["warnings"]))
             self.assertTrue(any("PARTIAL SPECTRUM" in w for w in data["warnings"]))
             html = report.read_text()
-            self.assertIn("Spectral coloration", html)
+            self.assertIn("spectral coloration", html.lower())
             self.assertIn("COARSE SWEEP", html)
             self.assertIn("frequency table", html.lower())
             for name in ["response.png", "diagnostic_samples.csv", "diagnostics.json"]:

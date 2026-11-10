@@ -5,10 +5,18 @@ import tempfile
 import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from frequency_grid import log_overview, replace_frequency_vector
+from frequency_grid import log_overview, linear_overview, replace_frequency_vector
 
 
 class FrequencyVectorTest(unittest.TestCase):
+    def test_endpoint_exact_fast_broadband_grid(self):
+        for high in (20000., 24000.):
+            f = linear_overview(n=80, low=100, high=high)
+            self.assertEqual(len(f), 80)
+            self.assertEqual(f[0], 100.)
+            self.assertEqual(f[-1], high)
+            self.assertTrue(all(a < b for a,b in zip(f, f[1:])))
+
     def test_rewrite_numcalc_curve_and_metadata(self):
         with tempfile.TemporaryDirectory() as d:
             project = Path(d)

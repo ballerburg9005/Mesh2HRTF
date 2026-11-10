@@ -126,6 +126,21 @@ def _surface_maps(project, output, freq, color_db):
                             vertices_mm=vertices_mm, faces=faces,
                             frequency_hz=selected_frequencies,
                             pressure_complex=selected_pressure)
+        with (output / "surface_hotspots.csv").open("w", newline="") as file:
+            writer = csv.writer(file)
+            writer.writerow(["frequency_hz", "element_id", "centroid_x_mm",
+                             "centroid_y_mm", "centroid_z_mm",
+                             "pressure_relative_surface_median_db"])
+            face_centres = faces_mm.mean(axis=1)
+            for fi, hz in enumerate(selected_frequencies):
+                gain_db = _safe_db(selected_pressure[:, fi])
+                relative = gain_db - np.median(gain_db)
+                extremes = np.unique(np.concatenate(
+                    [np.argsort(relative)[:30], np.argsort(relative)[-30:]]))
+                for index in extremes:
+                    writer.writerow([float(hz), int(index),
+                                     *[float(v) for v in face_centres[index]],
+                                     float(relative[index])])
         vtk_paths = write_vtk_surfaces(
             output, vertices_mm, faces, selected_frequencies, selected_pressure)
         viewer_note = None

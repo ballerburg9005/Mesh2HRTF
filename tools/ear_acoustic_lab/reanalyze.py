@@ -159,7 +159,8 @@ def _surface_maps(project, output, freq, color_db, suspect_onset_hz=None):
             mic_mm = np.asarray(cfg["mic"], float) * scale if "mic" in cfg else None
             write_interactive_surface(
                 output, vertices_mm, faces, selected_frequencies,
-                selected_pressure, mic_mm)
+                selected_pressure, mic_mm,
+                suspect_onset_hz=suspect_onset_hz)
         except ImportError:
             viewer_note = "Install plotly to enable the interactive 3D boundary viewer."
         except Exception as exc:

@@ -44,7 +44,7 @@ class App:
         ttk.Combobox(outer,textvariable=self.preset,values=list(PRESETS),state='readonly',width=25).grid(row=r,column=1,sticky='w');r+=1
         self.music=self.path(outer,r,'Optional WAV / MP3 music','');r+=1
         self.results_root=self.path(outer,r,'Output folder','~/EarAcousticLab/results',folder=True);r+=1
-        self.jobs=self.field(outer,r,'Parallel CPU processes','2');r+=1
+        self.jobs=self.field(outer,r,'Parallel CPU processes','4');r+=1
         note=('Blender exporter runs automatically — no add-on installation. '
               'Export the STL with microphone position at (0,0,0), or enter XYZ here. '
               'A real open canal/tube must exist in the STL surface. '

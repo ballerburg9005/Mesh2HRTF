@@ -317,7 +317,8 @@ def run(args):
     print('[RESULT] Peaks:',flush=True)
     for item in peaks[:10]:
         print(f"  {item['frequency_hz']:8.1f} Hz  {item['gain_db']:+7.1f} dB  "
-              f"prominence {item['prominence_db']:.1f} dB  Q~{item['q']:.1f}",flush=True)
+              f"prominence {item['prominence_db']:.1f} dB  Q~{item['q']:.1f}"
+              + ("  [UNVERIFIED]" if item.get("unverified_spectrum") else ""),flush=True)
     if not peaks:print('  No peaks greater than 3 dB prominence within simulated band.',flush=True)
     if args.music:
         step('Offline music audition — interpolate simulated transfer spectrum')

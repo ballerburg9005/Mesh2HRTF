@@ -26,7 +26,8 @@ class SurfaceViewerTest(unittest.TestCase):
             self.assertIn("Cut Y: show back half", content)
             self.assertIn("Hide large faces", content)
             self.assertIn("Hide distorted faces", content)
-            self.assertIn("Side/back (+X,-Y)", content)
+            # Plotly serializes the slash in Side/back as a unicode escape.
+            self.assertIn("(+X,-Y)", content)
             # Mode selection also updates scene.camera; users need not
             # manually switch away from the front view.
             self.assertIn("scene.camera", content)

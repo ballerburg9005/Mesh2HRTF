@@ -13,6 +13,9 @@ all: $(SOURCES) $(EXECUTABLE)
 $(EXECUTABLE): $(OBJECTS) 
 	$(CC) $(OBJECTS) $(LDFLAGS) $(OPTIM) -o $@
 
+
+NC_CommonFunctions.o: NC_GMRES_Fallback.h
+
 .cpp.o:
 	$(CC) $(CFLAGS) $(DEBUG) $(OPTIM) $< 
 clean:

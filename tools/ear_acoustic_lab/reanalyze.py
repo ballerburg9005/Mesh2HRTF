@@ -13,7 +13,7 @@ import traceback
 
 import numpy as np
 
-from analysis_tools import get_sofa_response, reference_transfer
+from analysis_tools import get_sofa_response, reference_transfer, probe_spread
 from spectral_diagnostics import inspect_spectrum, inspect_numcalc_logs
 
 SPEED_OF_SOUND = 343.0
@@ -198,6 +198,29 @@ def render_project(path):
     (output / "solver_checks.json").write_text(json.dumps(solver_checks, indent=2))
     suspect = np.zeros(len(freq), dtype=bool)
     suspect[integrity["suspect_indices"]] = True
+    probe_check = {"available": False}
+    try:
+        probe_freq, probe_difference = probe_spread(sofa)
+        if len(probe_freq) != len(freq) or not np.allclose(probe_freq, freq):
+            raise ValueError("Probe and microphone frequencies disagree")
+        flag_probe = np.flatnonzero(probe_difference > .20)
+        probe_check = {
+            "available": True,
+            "max_normalized_complex_spread": float(np.max(probe_difference)),
+            "samples_over_20_percent": int(len(flag_probe)),
+            "first_over_20_percent_hz": float(freq[flag_probe[0]]) if len(flag_probe) else None,
+            "interpretation": "Spread among three nearly coincident evaluation nodes; "
+                              "large differences suggest an evaluation or field problem, "
+                              "not automatically a genuine acoustic resonance.",
+        }
+        with (output / "probe_spread.csv").open("w", newline="") as pfile:
+            probe_writer = csv.writer(pfile)
+            probe_writer.writerow(["frequency_hz", "relative_complex_pressure_spread",
+                                   "over_20_percent_flag"])
+            for hz, difference in zip(freq, probe_difference):
+                probe_writer.writerow([float(hz), float(difference), int(difference > .20)])
+    except Exception as exc:
+        probe_check["reason"] = str(exc)
     phase = np.unwrap(np.angle(h))
     delay_ms = -np.gradient(phase, 2 * np.pi * freq) * 1000
     df = np.diff(freq)
@@ -229,6 +252,11 @@ def render_project(path):
             f"{integrity['extreme_gain_threshold_db']:g} dB. "
             "This could be a solver, mesh, boundary-condition or undersampling "
             "problem; the flagged frequencies are NOT validated resonances."))
+    if probe_check.get("samples_over_20_percent"):
+        warnings.insert(0, (
+            f"MICROPHONE PROBE DISAGREEMENT: {probe_check['samples_over_20_percent']} "
+            "frequency points have >20% complex pressure spread across the three "
+            "nearly co-located evaluation nodes. See probe_spread.csv."))
     if solver_checks["steps_with_reported_residual"] == 0:
         warnings.append("NumCalc iterative residuals could not be read from saved logs. "
                         "Convergence has not been verified.")
@@ -354,6 +382,7 @@ def render_project(path):
         "sampled_extrema": extrema, "ranked_points": rankings,
         "warnings": warnings,
         "spectral_integrity": integrity, "solver_log_diagnostics": solver_checks,
+        "microphone_probe_consistency": probe_check,
         "surface_map": str(surface) if surface else None,
         "boundary_vtk_files": vtk
     }
@@ -433,6 +462,7 @@ A narrow resonance between sampled tones will not appear here.</p>
 <p><a href="diagnostic_samples.csv">Frequency table (CSV)</a> ·
 <a href="diagnostics.json">Full numeric summary (JSON)</a> ·
 <a href="solver_checks.json">NumCalc solver convergence checks (JSON)</a> ·
+<a href="probe_spread.csv">Three-point mic probe consistency (CSV)</a> ·
 <a href="pressure.npz">Saved complex microphone pressure (NPZ)</a> ·
 <a href="../Output2HRTF/HRTF_MicProbe.sofa">Original SOFA data</a></p>
 <small>Sources: NumCalc / Mesh2HRTF model output. No measured recording was

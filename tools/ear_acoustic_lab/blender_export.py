@@ -14,6 +14,27 @@ def get_args():
     return p.parse_args(args)
 
 
+def _resize_microphone_grid(grid, xyz, units, radius_mm):
+    """Write a tiny valid evaluation triangle centred exactly on the mic.
+
+    Size is capped at one quarter of the nearest wall distance; this is a
+    numerical grid, not a physical microphone capsule.
+    """
+    scale = .001 if units == 'mm' else 1.0
+    x, y, z = (float(v) * scale for v in xyz)
+    delta = radius_mm * .001
+    nodes = ((x-delta, y-delta/3, z),
+             (x+delta, y-delta/3, z),
+             (x, y+2*delta/3, z))
+    grid = Path(grid)
+    grid.joinpath('Nodes.txt').write_text(
+        '3\n' + ''.join(
+            f'{10000000+i} {a:.14f} {b:.14f} {c:.14f}\n'
+            for i, (a, b, c) in enumerate(nodes)))
+    grid.joinpath('Elements.txt').write_text(
+        '1\n10000000 10000000 10000001 10000002 2 0 1\n')
+
+
 def main():
     import bpy
     from mathutils import Vector
@@ -55,18 +76,39 @@ def main():
     obj.data.materials.append(skin)
     for poly in obj.data.polygons: poly.material_index = 0
 
-    # Reject microphone placed *on* a surface. Full inside/outside detection
-    # depends on reliable watertight orientation and is not inferred here.
+    # Near-wall microphone points are legal. The old arbitrary 0.15 mm
+    # cutoff rejected them before NumCalc started. We shrink the three-node
+    # evaluation triangle to remain small relative to wall clearance.
     from mathutils.bvhtree import BVHTree
     tree = BVHTree.FromObject(obj, bpy.context.evaluated_depsgraph_get())
     mm_per_unit = 1.0 if cfg['units'] == 'mm' else 1000.0
+    distances = {}
     for label, coords in [('microphone', cfg['mic']), ('source', cfg['source'])]:
         hit = tree.find_nearest(Vector(coords))
         if hit[0] is not None:
             d_mm = float(hit[3]) * mm_per_unit
-            print(f'[GEOMETRY] {label} nearest solid boundary {d_mm:.4f} mm')
+            distances[label] = d_mm
+            print(f'[GEOMETRY] {label} nearest solid boundary {d_mm:.4f} mm', flush=True)
+            if d_mm < 0.001:
+                raise ValueError(
+                    f'{label} lies on or within 0.001 mm of a mesh surface. '
+                    'Move it into the intended air space or correct the STL origin.')
             if d_mm < 0.15:
-                raise ValueError(f'{label} is within 0.15 mm of a mesh surface. Move it into open air.')
+                print(
+                    f'[WARNING] {label} is only {d_mm:.4f} mm from the mesh. '
+                    'Proceeding, but near-wall pressure may have significant numerical error. '
+                    'Unsigned distance cannot establish whether the point is in air or PLA.',
+                    flush=True)
+    radius_mm = min(0.1, 0.25 * distances.get('microphone', 0.4))
+    _resize_microphone_grid(Path(cfg['grid']), cfg['mic'], cfg['units'], radius_mm)
+    print(f'[GEOMETRY] Mic evaluation triangle radius: {radius_mm:.5f} mm',
+          flush=True)
+    (Path(cfg['project']) / 'geometry_check.json').write_text(json.dumps({
+        'nearest_boundary_mm': distances,
+        'mic_probe_triangle_radius_mm': radius_mm,
+        'inside_outside_validated': False,
+        'note': 'Nearest-wall distances do not establish that the microphone is in connected air.'
+    }, indent=2))
 
     light_data = bpy.data.lights.new(name='Point source', type='POINT')
     point = bpy.data.objects.new('Point source', light_data)

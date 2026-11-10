@@ -27,9 +27,11 @@ def _select_spatial_frequencies(freq, color_db):
     available = np.arange(len(freq), dtype=int)
     if not len(available):
         return []
-    # Beginning, strongest sampled tonal departure, and end.
-    picks = [0, int(np.argmax(np.abs(color_db))), len(freq) - 1]
-    return list(dict.fromkeys(picks))
+    # Include 1 kHz deliberately: user's problematic notes may occur there.
+    # Only frequencies already solved by NumCalc are eligible.
+    picks = [0, int(np.argmin(np.abs(np.asarray(freq) - 1000.))),
+             int(np.argmax(np.abs(color_db))), len(freq)-1]
+    return sorted(set(picks))
 
 
 def _surface_maps(project, output, freq, color_db):

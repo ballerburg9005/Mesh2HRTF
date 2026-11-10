@@ -209,6 +209,19 @@ def run(args):
     H=reference_transfer(freq,pressure,mic,source,args.units)
     output=project/'analysis'
     peaks=save_analysis(output,freq,H,pressure,mic,source,args.units)
+    # Reuse the full NumCalc output (including the surface pressures) to build
+    # an interpretable report. A visualization failure must never discard
+    # the successful physical computation or the original numeric results.
+    try:
+        from reanalyze import render_project
+        report = render_project(project)
+        print('[RESULT] Interactive HTML summary: ' + str(report), flush=True)
+        print('[RESULT] Surface pressure maps: ' + str(output/'surface_pressure.png'), flush=True)
+    except Exception as exc:
+        print('[REPORT WARNING] Enhanced interpretation unavailable: ' + str(exc),
+              flush=True)
+        print('[REPORT WARNING] Original response.csv, response.png and SOFA remain valid.',
+              flush=True)
     print('[RESULT] Response: '+str(output/'response.png'),flush=True)
     print('[RESULT] CSV: '+str(output/'response.csv'),flush=True)
     print('[RESULT] Peaks:',flush=True)

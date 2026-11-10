@@ -13,12 +13,16 @@ import traceback
 from analysis_tools import mic_grid, get_sofa_response, reference_transfer, save_analysis, audition_music
 from mesh_quality import analyze_exported_mesh
 from frequency_grid import log_overview, replace_frequency_vector
+from share_results import prepare_snapshot
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
 PRESETS = {
     'Log overview 80 tones': (100, 20000, 100),  # exporter placeholder; patched after Blender
     'Quick ~1kHz': (500, 3500, 100),
+    '10 kHz overview (100 Hz)': (100, 10000, 100),
+    '10 kHz detailed (25 Hz)': (100, 10000, 25),
+    '10 kHz deep (10 Hz)': (100, 10000, 10),
     'Focused ~1kHz': (700, 1600, 10),
     'Deep 1kHz': (700, 1600, 5),
     'Full spectrum': (100, 20000, 100),
@@ -246,6 +250,12 @@ def run(args):
             print('[MUSIC] Could not audition:',e,flush=True)
             print('[MUSIC] The physical BEM frequency response and graphs are still saved.',flush=True)
     (output/'README.txt').write_text('''Mesh2HRTF NumCalc produced this 3D linear-wave response.\n\nresponse.csv / response.png show H(f) as microphone pressure divided by\nfree-field point-source pressure at the same true source-to-mic distance.\n\nThe model assumes rigid PLA-like boundaries, open air connected to the\nsource, ideal point source, and an ideal zero-volume non-loading microphone.\nIt does NOT yet simulate the microphone capsule diaphragm impedance, tube\nviscothermal losses, PLA mechanical vibration, or nonlinear distortion.\nIf the STL does not contain an open, air-connected canal and tube, its\nresults CANNOT diagnose those cavities. Validate mesh geometry first.\n\nThe WAV audition interpolates a possibly sparse frequency spectrum and is\nonly a qualitative comparison, NOT a verified full-band physical HRIR.\nThe source distance does not change boundary mesh size in this solver.\n''')
+    try:
+        shared = prepare_snapshot(project)
+        print('[SHARE] Ready for GitHub:', shared,flush=True)
+        print('[SHARE] Commit and push tools/ear_acoustic_lab/shared_runs to let me inspect it.',flush=True)
+    except Exception as exc:
+        print('[SHARE WARNING] Results saved; snapshot creation failed:',exc,flush=True)
     print('\nRESULT_DIR='+str(output),flush=True)
     print('RUN_FINISHED',flush=True)
     return 0
@@ -261,7 +271,7 @@ def get_args():
     ap.add_argument('--axis',choices=['+Y','-Y','-X','+X','-Z','+Z'],default='+Y')
     ap.add_argument('--source',nargs=3,type=float,default=[0,120,0],metavar=('X','Y','Z'))
     ap.add_argument('--preset',choices=list(PRESETS),default='Quick ~1kHz')
-    ap.add_argument('--results',default='~/EarAcousticLab/results')
+    ap.add_argument('--results',default=str(REPO_ROOT / 'earlab_runs'))
     ap.add_argument('--music',default='')
     ap.add_argument('--jobs',type=int,default=4)
     a=ap.parse_args()

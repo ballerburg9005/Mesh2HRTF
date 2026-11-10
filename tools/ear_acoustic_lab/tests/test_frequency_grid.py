@@ -6,9 +6,29 @@ import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from frequency_grid import log_overview, linear_overview, replace_frequency_vector
+from run_analysis import PRESETS, FAST_PRESETS, export_frequency_settings
 
 
 class FrequencyVectorTest(unittest.TestCase):
+
+    def test_every_preset_can_export_before_frequency_rewrite(self):
+        """Regression: Blender rejects 250 Hz / 300 Hz placeholder increments."""
+        for preset, (low, high, step) in PRESETS.items():
+            with self.subTest(preset=preset):
+                mode, value = export_frequency_settings(preset)
+                if preset in FAST_PRESETS or preset == 'Log overview 80 tones':
+                    self.assertEqual((mode, value), ('Num steps', 80))
+                    self.assertEqual(len(linear_overview(80, low, high)), 80)
+                else:
+                    self.assertEqual(mode, 'Step size')
+                    self.assertEqual(value, step)
+                    self.assertEqual((high - low) % value, 0)
+
+    def test_fast_presets_have_safe_legacy_export_step_too(self):
+        for preset in FAST_PRESETS:
+            low, high, placeholder = PRESETS[preset]
+            self.assertEqual((high - low) % placeholder, 0)
+
     def test_endpoint_exact_fast_broadband_grid(self):
         for high in (20000., 24000.):
             f = linear_overview(n=80, low=100, high=high)

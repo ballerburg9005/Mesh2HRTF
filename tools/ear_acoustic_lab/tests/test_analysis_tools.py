@@ -28,6 +28,13 @@ class AnalysisToolsTest(unittest.TestCase):
         np.testing.assert_allclose(abs(reference_transfer(
             f, p, [0, 0, 0], [0, -120, 0], 'mm')), 1, atol=1e-12)
 
+    def test_extreme_gain_peak_marked_unverified(self):
+        f = np.arange(100., 10100., 100.)
+        h = np.ones(len(f), dtype=complex)
+        h[f == 6000.] = 1e5
+        peaks = find_resonances(f, h)
+        self.assertTrue(peaks[0]["unverified_spectrum"])
+
     def test_detect_synthetic_peak_graph_and_music(self):
         f = np.linspace(500, 3500, 301)
         h = 1 + 8 / (1 + 1j * (f - 1050) / 15)

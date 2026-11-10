@@ -15,18 +15,20 @@ def mesh_views(vertices_mm, faces):
     tri = verts[faces]
     cross = np.cross(tri[:, 1]-tri[:, 0], tri[:, 2]-tri[:, 0])
     areas = .5 * np.linalg.norm(cross, axis=1)
-    median = float(np.median(areas[areas > 0])) if np.any(areas > 0) else 0.0
-    # Only hide extreme, unusually large panels; cap by upper 8% of area.
-    cutoff = max(median * 6.0, float(np.quantile(areas, .92)))
-    trimmed = areas < cutoff if median > 0 else np.ones(len(faces), dtype=bool)
-    if not np.any(trimmed):
-        trimmed = np.ones(len(faces), dtype=bool)
-    # NumCalc triangle distortion diagnostic: extreme slivers can produce
-    # isolated pressure spots unrelated to the acoustic field. Display-only.
+    # Filter by longest edge, NOT by area: long, narrow back/enclosure
+    # triangles can have a tiny area even if their longest edge is 60 mm.
+    # Prefer retaining the detailed pinna triangles while hiding those
+    # oversized panels. The hard 12 mm floor avoids removing normal faces
+    # from a finely tessellated pinna, even on a small/atypical mesh.
+    # NumCalc triangle distortion diagnostic is a separate display mode.
     e0 = np.linalg.norm(tri[:, 1] - tri[:, 0], axis=1)
     e1 = np.linalg.norm(tri[:, 2] - tri[:, 1], axis=1)
     e2 = np.linalg.norm(tri[:, 0] - tri[:, 2], axis=1)
     max_edge = np.maximum(np.maximum(e0, e1), e2)
+    cutoff_mm = max(12.0, float(np.quantile(max_edge, .97)))
+    trimmed = max_edge <= cutoff_mm
+    if not np.any(trimmed):
+        trimmed = np.ones(len(faces), dtype=bool)
     distortion = max_edge / (1.51967 * np.sqrt(np.maximum(areas, 1e-30)))
     well_shaped = (areas > 1e-14) & (distortion <= 10.0)
     if not np.any(well_shaped):
@@ -38,7 +40,7 @@ def mesh_views(vertices_mm, faces):
     y_cut = centers[:, 1] <= ymid
     return {
         "Full mesh": np.ones(len(faces), dtype=bool),
-        f"Hide large faces ({np.count_nonzero(~trimmed)} removed)": trimmed,
+        f"Hide large faces ({np.count_nonzero(~trimmed)} removed; edge >{cutoff_mm:.1f} mm)": trimmed,
         f"Hide distorted faces ({np.count_nonzero(~well_shaped)} removed)": well_shaped,
         "Cut X: show +X half": x_cut,
         "Cut Y: show back half": y_cut,

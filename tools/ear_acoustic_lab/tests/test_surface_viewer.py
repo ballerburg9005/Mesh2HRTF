@@ -37,6 +37,17 @@ class SurfaceViewerTest(unittest.TestCase):
             self.assertIn("pressure_relative_surface_median_db",
                           Path(vtk[0]).read_text())
 
+    def test_skinny_back_panel_is_hidden_but_small_pinna_face_kept(self):
+        # Old AREA-only cutoff kept the 60-mm sliver and could discard
+        # detailed pinna faces instead. All coordinates are millimetres.
+        verts = np.array([[0,0,0],[6,0,0],[0,6,0],
+                          [0,0,2],[60,0,2],[0,.001,2]], float)
+        faces = np.array([[0,1,2],[3,4,5]], int)
+        masks = mesh_views(verts, faces)
+        large = next(mask for label, mask in masks.items()
+                     if label.startswith("Hide large faces"))
+        self.assertEqual(large.tolist(), [True, False])
+
     def test_face_masks_do_not_mutate_solver_geometry(self):
         verts = np.array([[0,0,0],[1,0,0],[0,1,0],[0,0,1]], float)
         faces = np.array([[0,1,2],[0,2,3]], int)

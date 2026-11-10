@@ -16,6 +16,13 @@ def log_overview(n=80, low=100., high=20000.):
     return np.geomspace(float(low), float(high), n).tolist()
 
 
+def linear_overview(n=80, low=100., high=20000.):
+    """Coarse broadband scan with both endpoint frequencies solved exactly."""
+    if n < 2 or low <= 0 or high <= low:
+        raise ValueError("Invalid linear sweep")
+    return np.linspace(float(low), float(high), int(n)).tolist()
+
+
 def replace_frequency_vector(project, frequencies):
     project = Path(project)
     freq = np.asarray(frequencies, dtype=float)

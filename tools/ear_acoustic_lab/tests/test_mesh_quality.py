@@ -33,6 +33,9 @@ class MeshQualityTest(unittest.TestCase):
             self.assertEqual(q["fatal_ids"], [2])
             self.assertEqual(q["fatal_count"], 1)
             self.assertEqual(q["warning_count"], 1)
+            self.assertIn("frequency_resolution", q)
+            self.assertEqual(len(q["frequency_resolution"]), 4)
+            self.assertGreater(q["longest_edge_mm_max"], q["longest_edge_mm_p50"])
             self.assertTrue(Path(q["overlay_obj"]).exists())
             with open(q["report_csv"], newline="") as file:
                 rows = list(csv.DictReader(file))

@@ -117,7 +117,7 @@ class App:
             return
         project = max(candidates, key=lambda p: p.stat().st_mtime)
         self.log.delete('1.0', 'end')
-        self.log.insert('end', '[REANALYZE] '+str(project)+'\\n')
+        self.log.insert('end', '[REANALYZE] '+str(project)+'\n')
         self.results = ''
         self.running = True
         self.run_button.configure(state='disabled')

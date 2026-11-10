@@ -11,6 +11,7 @@ import sys
 import traceback
 
 from analysis_tools import mic_grid, get_sofa_response, reference_transfer, save_analysis, audition_music
+from mesh_quality import analyze_exported_mesh
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
@@ -124,6 +125,32 @@ def run(args):
           '--','--config',project/'earlab_config.json'])
     if not (project/'NumCalc'/'source_1'/'NC.inp').is_file():
         raise RuntimeError('Blender export did not create a valid NumCalc input')
+    step('Check exported triangle quality (NumCalc exact thresholds)')
+    quality = analyze_exported_mesh(project, args.units)
+    print(f"[MESH QUALITY] {quality['triangle_count']} triangles; "
+          f"{quality['warning_count']} warnings; {quality['fatal_count']} fatal slivers",
+          flush=True)
+    if quality["fatal_count"] or quality["warning_count"]:
+        print("[MESH QUALITY] CSV: " + quality["report_csv"], flush=True)
+        print("[MESH QUALITY] Colored Blender overlay: " + quality["overlay_obj"], flush=True)
+        for hit in quality["worst"][:8]:
+            print(f"  Element {hit['element_id']:6d}: {hit['grade']:5} "
+                  f"ratio {hit['ratio']:.1f}, max edge {hit['max_edge_mm']:.4f} mm, "
+                  f"centroid ({hit['centroid_x_mm']:.3f}, "
+                  f"{hit['centroid_y_mm']:.3f}, {hit['centroid_z_mm']:.3f}) mm",
+                  flush=True)
+    if quality["fatal_count"]:
+        print("[MESH QUALITY] NumCalc would abort on these triangles. "
+              "Fix their geometry locally; no change to microphone coordinates is needed.",
+              flush=True)
+        print("[MESH QUALITY] Open the saved '3d Model.blend' and select the "
+              "listed Reference polygon indices, or import mesh_bad_triangles.obj "
+              "over the original STL to see the thin faces.", flush=True)
+        raise RuntimeError(
+            f"{quality['fatal_count']} triangles exceed NumCalc's aspect-ratio limit "
+            f"(max_edge/(1.51967*sqrt(area)) > 100). "
+            f"First element: {quality['fatal_ids'][0]}. "
+            f"See {quality['report_csv']} for coordinates and Blender overlay.")
     step('Compile NumCalc if necessary')
     if not binary.is_file():
         call(['make','-C',mesh2module/'NumCalc'/'src','-j2'])

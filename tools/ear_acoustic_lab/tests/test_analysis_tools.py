@@ -1,4 +1,6 @@
 import sys
+from types import SimpleNamespace
+from unittest.mock import patch
 import tempfile
 import unittest
 from pathlib import Path
@@ -7,10 +9,22 @@ import numpy as np
 import soundfile as sf
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from analysis_tools import mic_grid, reference_transfer, find_resonances, save_analysis, audition_music
+from analysis_tools import mic_grid, reference_transfer, find_resonances, save_analysis, audition_music, probe_spread
 
 
 class AnalysisToolsTest(unittest.TestCase):
+    def test_three_point_probe_disagreement_is_measured(self):
+        data = np.ones((3, 1, 2), dtype=float)
+        data[0, 0, 1] = 3.
+        sofa = SimpleNamespace(N=np.array([100., 6000.]),
+                               Data_Real=data, Data_Imag=np.zeros_like(data))
+        stub = SimpleNamespace(read_sofa=lambda _: sofa)
+        with patch.dict(sys.modules, {"sofar": stub}):
+            freq, spread = probe_spread("synthetic.sofa")
+        np.testing.assert_allclose(freq, [100., 6000.])
+        self.assertAlmostEqual(spread[0], 0.)
+        self.assertGreater(spread[1], .2)
+
     def test_probe_grid_has_all_nodes_in_element(self):
         with tempfile.TemporaryDirectory() as d:
             p = mic_grid(Path(d) / 'MicProbe', [0, 0, 0], 'mm')

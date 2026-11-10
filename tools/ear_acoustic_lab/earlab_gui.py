@@ -35,10 +35,10 @@ class App:
         self.mode=tk.StringVar(value='Near 12 cm')
         ttk.Label(outer,text='Sound source').grid(row=r,column=0,sticky='w',pady=3)
         ttk.Combobox(outer,textvariable=self.mode,values=['Near 12 cm','Far 1 m','Custom XYZ'],state='readonly').grid(row=r,column=1,sticky='w');r+=1
-        self.axis=tk.StringVar(value='-Y')
+        self.axis=tk.StringVar(value='+Y')
         ttk.Label(outer,text='From microphone toward sound').grid(row=r,column=0,sticky='w',pady=3)
-        ttk.Combobox(outer,textvariable=self.axis,values=['-Y','+Y','-X','+X','-Z','+Z'],state='readonly',width=12).grid(row=r,column=1,sticky='w');r+=1
-        self.source=self.field(outer,r,'Custom source XYZ (if selected)','0 -120 0');r+=1
+        ttk.Combobox(outer,textvariable=self.axis,values=['+Y','-Y','-X','+X','-Z','+Z'],state='readonly',width=12).grid(row=r,column=1,sticky='w');r+=1
+        self.source=self.field(outer,r,'Custom source XYZ (if selected)','0 120 0');r+=1
         self.preset=tk.StringVar(value='Quick ~1kHz')
         ttk.Label(outer,text='Frequency test battery').grid(row=r,column=0,sticky='w',pady=3)
         ttk.Combobox(outer,textvariable=self.preset,values=list(PRESETS),state='readonly',width=25).grid(row=r,column=1,sticky='w');r+=1

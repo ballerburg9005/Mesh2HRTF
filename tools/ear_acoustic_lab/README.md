@@ -56,8 +56,11 @@ project in your chosen results folder. Then click **Open report** to see:
   suspect gain spikes / adjacent-frequency jumps in 500 Hz bands.
 - `analysis/solver_checks.json`: NumCalc solver residuals from saved `NC*.out`
   logs, if present. Even tiny residuals do NOT verify mesh convergence.
+- `analysis/probe_spread.csv`: consistency of the three closely spaced
+  microphone-pressure samples, useful for detecting high-frequency evaluation
+  instability. Unverified extreme-gain responses are refused for music audition.
 - `analysis/surface_pressure.png`: maps of the pressure solved on the surface
-  at up to three selected *actually simulated* frequencies.
+  at up to four selected *actually simulated* frequencies.
 - `Output2HRTF/vtk/Reference_pressure_db/frequency_step_*.vtk`: the same
   surface pressure fields for interactive inspection in ParaView.
 
@@ -78,7 +81,7 @@ resolve tonal peaks in the 700–1600 Hz range. For genuinely broad music EQ
 you must compute more of the audible range and validate the measured
 headphone/microphone arrangement; this program does not yet output a
 measurement-validated EQ correction.
-## Long 10 kHz runs, 3D cutaways, and sharing results through GitHub
+## Long broadband runs, 3D cutaways, and sharing results through GitHub
 
 From the GUI choose one of these additional frequency test batteries:
 

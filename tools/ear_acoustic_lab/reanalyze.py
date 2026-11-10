@@ -405,7 +405,7 @@ def render_project(path):
         f"<td>{band['largest_adjacent_jump_db']:.1f}</td>"
         f"<td>{band['suspect_points']}</td></tr>"
         for band in integrity["bands_500hz"])
-    probe_link = ('{probe_link}'
+    probe_link = ('<a href="probe_spread.csv">Three-point mic probe consistency (CSV)</a> ·'
                   if probe_check.get("available") else '')
     band_table = (
         '<h2>Frequency-by-frequency numerical screening (500 Hz bands)</h2>'
@@ -464,7 +464,7 @@ A narrow resonance between sampled tones will not appear here.</p>
 <p><a href="diagnostic_samples.csv">Frequency table (CSV)</a> ·
 <a href="diagnostics.json">Full numeric summary (JSON)</a> ·
 <a href="solver_checks.json">NumCalc solver convergence checks (JSON)</a> ·
-<a href="probe_spread.csv">Three-point mic probe consistency (CSV)</a> ·
+{probe_link}
 <a href="pressure.npz">Saved complex microphone pressure (NPZ)</a> ·
 <a href="../Output2HRTF/HRTF_MicProbe.sofa">Original SOFA data</a></p>
 <small>Sources: NumCalc / Mesh2HRTF model output. No measured recording was

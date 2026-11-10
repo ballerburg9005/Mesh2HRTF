@@ -12,13 +12,17 @@ import traceback
 
 from analysis_tools import mic_grid, get_sofa_response, reference_transfer, save_analysis, audition_music
 from mesh_quality import analyze_exported_mesh
-from frequency_grid import log_overview, replace_frequency_vector
+from frequency_grid import log_overview, linear_overview, replace_frequency_vector
 from share_results import prepare_snapshot
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
 PRESETS = {
-    'Log overview 80 tones': (100, 20000, 100),  # exporter placeholder; patched after Blender
+    '20 kHz fast (80 tones)': (100, 20000, 250),  # exporter placeholder; overridden to 80 exact steps
+    '24 kHz fast (80 tones)': (100, 24000, 300),  # exporter placeholder; overridden to 80 exact steps
+    '20 kHz overview (100 Hz)': (100, 20000, 100),
+    '24 kHz overview (100 Hz)': (100, 24000, 100),
+    'Log overview 80 tones': (100, 20000, 100),  # legacy geometric survey
     'Quick ~1kHz': (500, 3500, 100),
     '10 kHz overview (100 Hz)': (100, 10000, 100),
     '10 kHz detailed (25 Hz)': (100, 10000, 25),
@@ -27,6 +31,11 @@ PRESETS = {
     'Deep 1kHz': (700, 1600, 5),
     'Full spectrum': (100, 20000, 100),
     'Detailed spectrum': (100, 20000, 25),
+}
+
+FAST_PRESETS = {
+    '20 kHz fast (80 tones)': (80, 100., 20000.),
+    '24 kHz fast (80 tones)': (80, 100., 24000.),
 }
 
 
@@ -169,7 +178,11 @@ def run(args):
     print('[RUN] Project: '+str(project),flush=True)
     print("[INFO] Blender's Mesh2HRTF exporter is registered automatically for this run; no manual add-on installation.",flush=True)
     print('[RUN] Mic / source:',mic,'/',source,'('+args.units+')',flush=True)
-    if args.preset == 'Log overview 80 tones':
+    if args.preset in FAST_PRESETS:
+        _, low, high = FAST_PRESETS[args.preset]
+        print(f'[RUN] 80 linearly spaced frequencies across {low:g}–{high:g} Hz; '
+              'fast screening only, narrow resonances may be missed.',flush=True)
+    elif args.preset == 'Log overview 80 tones':
         print('[RUN] 80 geometric frequencies across 100–20000 Hz; this is a *coarse* broadband survey.',flush=True)
     else:
         print('[RUN] '+args.preset+f': {fmin}-{fmax} Hz in {stepf} Hz steps',flush=True)
@@ -180,7 +193,11 @@ def run(args):
           '--','--config',project/'earlab_config.json'])
     if not (project/'NumCalc'/'source_1'/'NC.inp').is_file():
         raise RuntimeError('Blender export did not create a valid NumCalc input')
-    if args.preset == 'Log overview 80 tones':
+    if args.preset in FAST_PRESETS:
+        count = replace_frequency_vector(project, linear_overview(*FAST_PRESETS[args.preset]))
+        print(f'[RUN] Installed {count} endpoint-exact broadband frequencies '
+              'in NumCalc and parameters.json', flush=True)
+    elif args.preset == 'Log overview 80 tones':
         count = replace_frequency_vector(project, log_overview())
         print(f'[RUN] Installed {count} nonuniform frequency steps in NumCalc and parameters.json', flush=True)
     step('Check exported triangle quality (NumCalc exact thresholds)')
@@ -251,7 +268,8 @@ def run(args):
     except ImportError as e:
         raise ImportError('Python mesh2hrtf package not installed. Run: pip install -e '+str(mesh2hrtf)) from e
     print('[BEM] Starting CPU solver. Number of frequency points:',
-          80 if args.preset == 'Log overview 80 tones' else 1+int((fmax-fmin)//stepf),flush=True)
+          80 if args.preset in FAST_PRESETS or args.preset == 'Log overview 80 tones'
+          else 1+int((fmax-fmin)//stepf),flush=True)
     # Memory-aware parallelization via the original NumCalc manager. Avoid
     # promising a CUDA speedup: Mesh2HRTF/NumCalc is CPU based.
     m2h.manage_numcalc(
@@ -317,7 +335,7 @@ def get_args():
     ap.add_argument('--source-mode',choices=['Near 12 cm','Far 1 m','Custom XYZ'],default='Near 12 cm')
     ap.add_argument('--axis',choices=['+Y','-Y','-X','+X','-Z','+Z'],default='+Y')
     ap.add_argument('--source',nargs=3,type=float,default=[0,120,0],metavar=('X','Y','Z'))
-    ap.add_argument('--preset',choices=list(PRESETS),default='Quick ~1kHz')
+    ap.add_argument('--preset',choices=list(PRESETS),default='20 kHz fast (80 tones)')
     ap.add_argument('--results',default=str(REPO_ROOT / 'earlab_runs'))
     ap.add_argument('--music',default='')
     ap.add_argument('--jobs',type=int,default=4)

@@ -1062,6 +1062,8 @@ void BLGauCooWe
 	}
 }
 
+#include "NC_GMRES_Fallback.h"
+
 // CGS solver for the BEM equation system (Andreas Meister, p 168)
 void NC_IterativeSolverCGS
 (
@@ -1074,6 +1076,11 @@ void NC_IterativeSolverCGS
 	double err_ori = 0.0, err_rel = 1.0, dwk1;
 	Complex zalph, zbet, zrjr0, zrjr1;
 	bool ifmodyprecond = false;
+    Vector<Complex> original_rhs(numRowsOfCoefficientMatrix_);
+    for (i = 0; i < numRowsOfCoefficientMatrix_; ++i)
+        original_rhs[i] = zrhs[i];
+    bool cgs_converged = false;
+    double cgs_true_relative = 1.;
 
 BeginCGS:
 	// compute the arrays used by the preconditioners
@@ -1159,10 +1166,14 @@ BeginCGS:
 		  cout << j << " Abs Error:" << sqrt(dwk1) << endl;
 		}
 
+        if (!std::isfinite(dwk1) || !std::isfinite(err_rel)) {
+            NC_Error_Warning_0(NCout,
+                "CGS nonfinite residual; trying verified GMRES fallback.");
+            break;
+        }
 		if(err_rel < ErroIterSols || j == niter_max_)
 		{
 			if(j/10*10 != j) cout << j << " " << err_rel << "\n" << endl;
-			for(i=0; i<numRowsOfCoefficientMatrix_; i++) zrhs[i] = zX_j[i];
 			if(j == niter_max_) {
 				NC_Error_Warning_0(NCout, "Warning: Maximum number of iterations is reached!");
 			}
@@ -1177,10 +1188,29 @@ BeginCGS:
 
 	NCout << "\nCGS solver: number of iterations = "
 		<< j << ", relative error = " << err_rel << endl;
-
-	if(j >= niter_max_ && methodFMM_ == 0)
+    cgs_true_relative = NC_GMRES_TrueRelativeResidual(original_rhs, zX_j);
+    cgs_converged = std::isfinite(cgs_true_relative) &&
+                    cgs_true_relative <= 1.e-8;
+    NCout << "CGS TRUE relative residual = " << cgs_true_relative << endl;
+    if (!cgs_converged && methodFMM_) {
+        NC_Error_Warning_0(NCout,
+            "CGS failed true residual verification; trying restarted GMRES.");
+        Vector<Complex> stable(numRowsOfCoefficientMatrix_);
+        if (!NC_GMRES_Fallback(NCout, original_rhs, stable))
+            NC_Error_Exit_0(NCout,
+                "CGS and GMRES failed convergence. Frequency rejected "
+                "without pressure output; do not interpret it as resonance.");
+        for (i = 0; i < numRowsOfCoefficientMatrix_; ++i)
+            zrhs[i] = stable[i];
+    } else if (cgs_converged) {
+        for (i = 0; i < numRowsOfCoefficientMatrix_; ++i)
+            zrhs[i] = zX_j[i];
+    }
+	if(!cgs_converged && methodFMM_ == 0)
 	{
 DirectCGS:
+        for (i = 0; i < numRowsOfCoefficientMatrix_; ++i)
+            zrhs[i] = original_rhs[i];
 		NC_Error_Warning_0(NCout, "Iteration method CGS failed, direct method is used!");
 
 		// Gauss elimination method

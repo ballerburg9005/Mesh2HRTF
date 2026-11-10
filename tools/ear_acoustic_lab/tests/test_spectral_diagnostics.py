@@ -48,6 +48,34 @@ class SpectralIntegrityTest(unittest.TestCase):
             self.assertEqual(results["steps_over_threshold_details"][0]["frequency_hz"], 6000.)
             self.assertAlmostEqual(results["max_reported_residual"], 0.03)
 
+    def test_prefers_true_verified_gmres_fallback(self):
+        with tempfile.TemporaryDirectory() as d:
+            source = Path(d) / "NumCalc" / "source_1"
+            source.mkdir(parents=True)
+            (source / "NC1-1.out").write_text(
+                "Step 1, Frequency = 6850 Hz\n"
+                "CGS solver: number of iterations = 250, relative error = 11157.9\n"
+                "CGS TRUE relative residual = 9000\n"
+                "GMRES fallback: iterations = 97, true relative residual = 3.4e-9\n")
+            results = inspect_numcalc_logs(d)
+            self.assertEqual(results["steps_with_reported_residual"], 1)
+            self.assertEqual(results["steps_over_threshold"], 0)
+            point = results["worst_steps"][0]
+            self.assertEqual(point["method"], "GMRES fallback")
+            self.assertAlmostEqual(point["relative_error"], 3.4e-9)
+
+    def test_reports_failed_cgs_true_residual(self):
+        with tempfile.TemporaryDirectory() as d:
+            source = Path(d) / "NumCalc" / "source_1"
+            source.mkdir(parents=True)
+            (source / "NC1-1.out").write_text(
+                "Step 1, Frequency = 6850 Hz\n"
+                "CGS solver: number of iterations = 250, relative error = 11157.9\n"
+                "CGS TRUE relative residual = 9000\n")
+            results = inspect_numcalc_logs(d)
+            self.assertEqual(results["steps_over_threshold"], 1)
+            self.assertEqual(results["worst_steps"][0]["method"], "CGS")
+
 
 if __name__ == "__main__":
     unittest.main()

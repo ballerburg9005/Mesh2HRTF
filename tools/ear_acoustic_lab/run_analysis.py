@@ -104,6 +104,47 @@ def np_all(x):
     return np.all(x)
 
 
+def check_cached_solver_convergence(project, threshold=1e-8):
+    """Block resume when finished-looking outputs came from failed CGS solves.
+
+    The manager checks only for pEvalGrid existence. Old nonconverged data
+    would otherwise be silently reused after installing a newer solver.
+    """
+    from spectral_diagnostics import inspect_numcalc_logs
+    project = Path(project)
+    checks = inspect_numcalc_logs(project, residual_warning=threshold)
+    results = project / 'NumCalc' / 'source_1' / 'be.out'
+    # The report caps details at 100 entries. Fail closed if more failures
+    # exist than can be checked against their cached pressure files.
+    if (checks['steps_over_threshold'] >
+            len(checks['steps_over_threshold_details'])):
+        raise RuntimeError(
+            'More than 100 nonconverged solver steps are recorded and cached '
+            'results cannot be fully verified. Keep this project for '
+            'inspection; start a NEW fast scan instead.')
+    flagged = []
+    for hit in checks['steps_over_threshold_details']:
+        step_number = int(hit['step'])
+        if (results / f'be.{step_number}' / 'pEvalGrid').is_file():
+            flagged.append((step_number, float(hit['frequency_hz']),
+                            float(hit['relative_error'])))
+    if flagged:
+        samples = ', '.join(f'{hz:g} Hz (step {step}, residual {err:.2g})'
+                            for step, hz, err in flagged[:5])
+        raise RuntimeError(
+            f'{len(flagged)} cached NumCalc frequency steps failed convergence '
+            f'(relative residual > {threshold:g}); examples: {samples}. '
+            'NumCalc would incorrectly skip these old pressure files on '
+            'resume. Preserve this project for inspection and start a NEW '
+            'fast scan with the repaired solver instead.')
+    if checks['steps_with_reported_residual'] == 0:
+        print('[RESUME WARNING] No stored CGS/GMRES convergence records found; '
+              'existing cached pressure outputs cannot be verified.', flush=True)
+    else:
+        print(f"[RESUME] Checked {checks['steps_with_reported_residual']} "
+              "saved solver residuals; no cached failures detected.", flush=True)
+
+
 def resume_project(args):
     """Resume missing NumCalc frequency steps in an existing export."""
     project = Path(args.resume).expanduser().resolve()
@@ -120,6 +161,7 @@ def resume_project(args):
     print('[RESUME] Reusing the previous geometry and frequencies:', project, flush=True)
     print('[RESUME] Completed frequency steps are not recalculated by manage_numcalc.',flush=True)
     print('[RESUME] Do not start another NumCalc manager for this same project.',flush=True)
+    check_cached_solver_convergence(project)
     m2h.manage_numcalc(project_path=str(project),
                       numcalc_path=str(binary),
                       **safe_numcalc_options(args))

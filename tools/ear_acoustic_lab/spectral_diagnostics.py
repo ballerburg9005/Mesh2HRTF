@@ -68,6 +68,12 @@ _SOLVER_RE = re.compile(
     re.I)
 
 
+_GMRES_FALLBACK_RE = re.compile(
+    r"GMRES fallback:\s*iterations\s*=\s*(\d+),\s*"
+    r"true relative residual\s*=\s*([+\d.eE-]+)", re.I)
+_CGS_TRUE_RE = re.compile(r"CGS TRUE relative residual\s*=\s*([+\d.eE-]+)", re.I)
+
+
 def inspect_numcalc_logs(project, residual_warning=1e-5):
     """Read saved NumCalc iteration residuals without launching NumCalc again."""
     folder = Path(project) / "NumCalc" / "source_1"
@@ -80,16 +86,22 @@ def inspect_numcalc_logs(project, residual_warning=1e-5):
             end = matches[n+1].start() if n+1 < len(matches) else len(data)
             block = data[match.end():end]
             solver_match = _SOLVER_RE.search(block)
-            if solver_match is None:
+            gmres_match = _GMRES_FALLBACK_RE.search(block)
+            true_match = _CGS_TRUE_RE.search(block)
+            if solver_match is None and gmres_match is None:
                 continue
-            error = float(solver_match.group(2))
+            error = float(gmres_match.group(2) if gmres_match else
+                          true_match.group(1) if true_match else
+                          solver_match.group(2))
             if not np.isfinite(error):
                 continue
             step = int(match.group(1))
             results[step] = {
                 "step": step,
                 "frequency_hz": float(match.group(2)),
-                "iterations": int(solver_match.group(1)),
+                "iterations": int(gmres_match.group(1) if gmres_match else
+                                  solver_match.group(1)),
+                "method": "GMRES fallback" if gmres_match else "CGS",
                 "relative_error": error,
                 "log_file": path.name,
             }

@@ -22,7 +22,7 @@ If your clone's `origin` is `Any2HRTF/Mesh2HRTF` rather than your fork, first ru
 
 1. Save the physical **air-facing** 3D ear geometry as `~/model.stl`. If possible, **move the STL's coordinate origin to the microphone** in Blender before exporting. Then the GUI's default `Mic XYZ = 0 0 0` is correct; no other microphone setup required. Coordinates must use the same units as the STL, default **millimetres**. You can also specify a different microphone XYZ if you prefer. The STL is imported automatically, not via the Blender GUI.
 2. Leave `Sound source` on **Near 12 cm**, `axis +Y` (toward your ear opening) unless your model uses another orientation. Check **Preview STL + mic** to verify the red mic position and orange source position relative to the geometry. The **Far 1 m** analytical point source does not itself increase the number of BEM surface elements. (For accurate physical geometry, the mic must lie in the connected air region; being at the origin alone does not make it correct.)
-3. Choose **Log overview 80 tones** (default) to survey 100 Hz–20 kHz at 80 logarithmically spaced frequencies, then press **RUN ACOUSTIC SWEEP**. NumCalc runs selected frequency-domain acoustic solves and saves `response.png`, `response.csv`, `peaks.json` and the complete solver project to `<your-clone>/earlab_runs/ear_<timestamp>/`. Use **Open graphs** to see the response and prominent resonance peaks.
+3. Choose **20 kHz fast (80 tones)** (new default) to survey 100 Hz–20 kHz at 80 approximately 252 Hz-spaced frequencies, including both endpoints, then press **RUN ACOUSTIC SWEEP**. Choose **24 kHz fast (80 tones)** to extend the endpoint to 24 kHz. For finer broadband screening, use the 100 Hz overview modes (200 points through 20 kHz or 240 through 24 kHz). The fast sweeps are screening tools and can miss narrow resonances. NumCalc runs selected frequency-domain acoustic solves and saves `response.png`, `response.csv`, `peaks.json` and the complete solver project to `<your-clone>/earlab_runs/ear_<timestamp>/`. Use **Open graphs** to see the response and prominent resonance peaks.
 4. For a more precise sweep around a suspicious tone select **Focused ~1kHz** (10 Hz spacing) or **Deep 1kHz** (5 Hz). Use **Full spectrum** for 100 Hz–20 kHz at 100 Hz steps, or **Detailed spectrum** for 25 Hz steps. These presets can take much longer with detailed meshes.
 5. Optionally select a WAV/MP3 music file before running; **Play music audition** applies the simulated *linear complex frequency response* to up to 30 s of the input, creating `music_audition.wav`. This is offline auralization, **not** nonlinear mic distortion or actual music being injected into the frequency-domain solver. Sparse sweeps may be inaccurate for listening; use a denser sweep for music.
 
@@ -39,7 +39,7 @@ The launcher automatically resolves the current clone's root; `--mesh2hrtf` opti
 
 ## Inspect completed simulations without another NumCalc run
 
-The optional quick 1 kHz preset solves only **31 frequency points, 500–3500 Hz, 100 Hz apart**. The new default **Log overview 80 tones** is a low-cost full-band survey, not a high-resolution resonance search.
+The optional quick 1 kHz preset solves only **31 frequency points, 500–3500 Hz, 100 Hz apart**. The new default **20 kHz fast (80 tones)** is a low-cost full-band survey, not a high-resolution resonance search.
 That cannot establish there are no narrow resonances. A smooth graph from
 that sweep is inconclusive about peaks between the samples.
 
@@ -51,7 +51,11 @@ project in your chosen results folder. Then click **Open report** to see:
 - `analysis/response.png`: four panels — absolute relative gain, band-median
   removed coloration, phase and phase-derived group delay.
 - `analysis/diagnostic_samples.csv` and `diagnostics.json`: numerical values
-  and warnings, not just a thresholded list of >3 dB resonance peaks.
+  and warnings, not just a thresholded list of >3 dB resonance peaks. The new
+  numeric screening identifies the first suspicious frequency and reports
+  suspect gain spikes / adjacent-frequency jumps in 500 Hz bands.
+- `analysis/solver_checks.json`: NumCalc solver residuals from saved `NC*.out`
+  logs, if present. Even tiny residuals do NOT verify mesh convergence.
 - `analysis/surface_pressure.png`: maps of the pressure solved on the surface
   at up to three selected *actually simulated* frequencies.
 - `Output2HRTF/vtk/Reference_pressure_db/frequency_step_*.vtk`: the same
@@ -80,11 +84,15 @@ From the GUI choose one of these additional frequency test batteries:
 
 | Preset | Frequencies | Sampling |
 | --- | ---: | --- |
+| 20 kHz fast (80 tones) | 80 | 100 Hz to 20 kHz, endpoint-exact, ~252 Hz |
+| 24 kHz fast (80 tones) | 80 | 100 Hz to 24 kHz, endpoint-exact, ~303 Hz |
+| 20 kHz overview (100 Hz) | 200 | 100 Hz to 20 kHz |
+| 24 kHz overview (100 Hz) | 240 | 100 Hz to 24 kHz |
 | 10 kHz overview (100 Hz) | 100 | 100 Hz to 10 kHz |
 | 10 kHz detailed (25 Hz) | 397 | 100 Hz to 10 kHz |
 | 10 kHz deep (10 Hz) | 991 | 100 Hz to 10 kHz |
 
-Long scans can run for an hour or longer; there is no artificial time limit.
+**For tonight's first diagnostic, choose the fast 20 kHz 80-tone preset; choose fast 24 kHz if you want the higher endpoint.** The 80 solves are substantially fewer than the previous 991-tone 10 Hz run, but even fast mode may take longer than 30 minutes because high-frequency NumCalc solves are more costly. If the broad-band scan looks plausible, run a denser targeted grid in the suspicious band. Long scans can run for an hour or longer; there is no artificial time limit.
 Wall-clock time depends on your CPU, number of NumCalc jobs, available memory
 and the mesh. Four NumCalc processes is the default. Leave the GUI running.
 These scans are linear acoustic solves; nonlinear rattling, clipping and
@@ -107,7 +115,7 @@ The report now renders from the **+Y pinna opening**, includes a more sideward
 static view with unusually large triangles hidden, and an offline interactive
 surface_3d.html viewer with camera presets (+Y/-Y/+X/-X/+Z/angled) and modes
 Full mesh / Hide large faces / Cut X / Cut Y. The geometry is never altered
-for the underlying BEM computation. The display cuts reveal existing inner
+for the underlying BEM computation. **Hide large faces** now uses longest-edge length instead of triangle area (a 12 mm floor and adaptive 97th-percentile cutoff), so it can hide skinny back panels without discarding smaller pinna triangles. The display cuts reveal existing inner
 surface triangles if present, but do NOT calculate pressure on an interior
 cross-sectional plane through air. For that we would need additional
 NumCalc evaluation points along an actual canal centreline.
@@ -183,6 +191,8 @@ bpy.ops.object.mode_set(mode='EDIT')
 Return to the 3D Viewport and press **Frame Selected** (numpad decimal).
 Correct the local sliver/Boolean topology; do not blindly voxel-remesh
 the ear cavity. `Smooth by Angle` only changes shading normals.
+
+The mesh report additionally records longest-edge statistics and the fraction exceeding a wavelength/6 rule-of-thumb at 5, 10, 20 and 24 kHz. These are warnings, not proof of a valid calculation. In the first published 991-tone example, the original STL was **non-watertight**; 12 of 9074 triangles exceeded NumCalc's aspect-ratio warning threshold, and the microphone response jumped to +132 dB. Treat the spikes as unverified until mesh, topology, and solver residuals have been checked.
 
 The Mesh2Input exporter now keeps twelve decimal places in metres instead
 of six, so sub-millimetre geometry is not needlessly quantized.

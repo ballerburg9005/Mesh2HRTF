@@ -36,7 +36,7 @@ def _surface_maps(project, output, freq, color_db):
     """Map *computed boundary pressure*; never interpolate unsolved tones."""
     try:
         from mesh2hrtf.Output2HRTF.output2hrtf import _read_numcalc_data
-        import mesh2hrtf as m2h
+        from surface_viewer import mesh_views, write_interactive_surface, write_vtk_surfaces
         import matplotlib
         matplotlib.use("Agg")
         import matplotlib.pyplot as plt
@@ -96,6 +96,12 @@ def _surface_maps(project, output, freq, color_db):
         fig.savefig(outpath, dpi=140)
         plt.close(fig)
 
+        selected_pressure = np.take(pressure[:, 0, :], indices, axis=1)
+        selected_frequencies = np.asarray(freq)[indices]
+        np.savez_compressed(output / "surface_samples.npz",
+                            vertices_mm=vertices_mm, faces=faces,
+                            frequency_hz=selected_frequencies,
+                            pressure_complex=selected_pressure)
         vtk_paths = []
         for index in indices:
             # ParaView-compatible 3D scalar field, using Mesh2HRTF's own exporter.

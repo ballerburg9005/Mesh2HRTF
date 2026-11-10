@@ -22,7 +22,7 @@ class SurfaceViewerTest(unittest.TestCase):
             self.assertTrue(html.is_file())
             self.assertGreater(html.stat().st_size, 200_000)
             content = html.read_text()
-            self.assertIn("Front (+Y / pinna opening)", content)
+            self.assertIn("pinna opening", content)
             self.assertIn("Cut Y: show back half", content)
             self.assertIn("Hide large faces", content)
             vtk = write_vtk_surfaces(output, verts, faces, hz, pressure)

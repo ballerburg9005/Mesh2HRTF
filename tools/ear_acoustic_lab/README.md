@@ -47,6 +47,42 @@ Outputs are normalized against an analytical unobstructed point source at the tr
 
 **Verification:** The Python diagnostic, geometry-grid, and music-audition tests can run locally; however full Blender → NumCalc → STL mesh integration depends on your machine and must be checked with the real `~/model.stl`.
 
+## Mesh diagnostics: a manifold surface can still fail NumCalc
+
+NumCalc rejects extremely skinny triangles even on a manifold mesh. For
+triangles it uses `reference length = 1.51967 * sqrt(area)`, warns if
+`longest_edge / reference_length > 10`, and stops at `> 100`.
+
+Ear Acoustic Lab now diagnoses the **exported NumCalc mesh** rather than the
+unprocessed STL. For suspect elements it writes into the run folder:
+
+- `mesh_quality.csv`: exact NumCalc element IDs, edge lengths, areas, quality
+  ratios and triangle-centroid coordinates in millimetres.
+- `mesh_quality.json`: counts, offending element IDs and the worst triangles.
+- `mesh_bad_triangles.obj` plus `.mtl`: import over the source STL in Blender
+  to see bad elements (red = fatal, orange = warning). Coordinates match
+  the original STL unit setting.
+- `3d Model.blend`: the exact exported Reference mesh with matching face IDs.
+
+For example, to select NumCalc element **9917** in Blender, open the saved
+`3d Model.blend`, select `Reference`, then run this in Blender's Python Console:
+
+```python
+import bpy
+bpy.ops.object.mode_set(mode='OBJECT')
+o = bpy.data.objects['Reference']
+bpy.context.view_layer.objects.active = o
+o.select_set(True)
+o.data.polygons[9917].select = True
+bpy.ops.object.mode_set(mode='EDIT')
+```
+
+Return to the 3D Viewport and press **Frame Selected** (numpad decimal).
+Correct the local sliver/Boolean topology; do not blindly voxel-remesh
+the ear cavity. `Smooth by Angle` only changes shading normals.
+
+The Mesh2Input exporter now keeps twelve decimal places in metres instead
+of six, so sub-millimetre geometry is not needlessly quantized.
 ## Troubleshooting
 
 - `Blender not found` / `No module named ...`: Install Arch packages above and rerun `install_and_run.sh`.

@@ -32,7 +32,7 @@ If your clone's `origin` is `Any2HRTF/Mesh2HRTF` rather than your fork, first ru
 cd ~/Mesh2HRTF
 ./tools/ear_acoustic_lab/.venv/bin/python tools/ear_acoustic_lab/run_analysis.py \
   --stl ~/model.stl --mic 0 0 0 --units mm \
-  --source-mode 'Near 12 cm' --axis=+Y --preset 'Quick ~1kHz' --jobs 2
+  --source-mode 'Near 12 cm' --axis=+Y --preset 'Quick ~1kHz' --jobs 4
 ```
 
 The launcher automatically resolves the current clone's root; `--mesh2hrtf` optionally overrides it.
@@ -41,7 +41,7 @@ The launcher automatically resolves the current clone's root; `--mesh2hrtf` opti
 
 The STL **must contain the hollow, air-connected canal geometry, any microphone tube's air passage and its actual termination surface** to simulate their resonances. Simply importing an STL of the external pinna or a two-block print without the internal air surfaces does *not* recover them. Mic origin `(0,0,0)` is convenient only after you position the actual model to make the correct air probe coincide with that coordinate. The source must be in external air, not inside the plastic. The input may require repairing inconsistent winding, disconnected components, self-intersections or non-manifold surfaces first. The program warns about some mesh defects but does not automatically correct a bad STL.
 
-The initial model uses **rigid PLA-like walls, an ideal point source, an ideal pressure probe and linear wave acoustics**; it does not yet model the capsule's acoustic impedance, narrow-passage viscothermal attenuation, leaks, PLA bending, or nonlinear microphone clipping. Those omissions may shift, exaggerate or suppress peaks. The 0.1 mm microphone evaluation triangle is just three nearly coincident numerical probe locations; it does **not** set the BEM surface discretization. Make sure the probe is at least 0.15 mm from the modeled wall.
+The initial model uses **rigid PLA-like walls, an ideal point source, an ideal pressure probe and linear wave acoustics**; it does not yet model the capsule's acoustic impedance, narrow-passage viscothermal attenuation, leaks, PLA bending, or nonlinear microphone clipping. Those omissions may shift, exaggerate or suppress peaks. The 0.1 mm microphone evaluation triangle is just three nearly coincident numerical probe locations; it does **not** set the BEM surface discretization. The probe triangle is automatically reduced when the requested microphone lies closer than 0.4 mm to the wall. A microphone within 0.15 mm now produces a warning rather than an unconditional failure; measurements that close to an acoustic boundary may still be numerically inaccurate. The model does not infer whether the coordinate lies inside PLA or the connected air cavity.
 
 Outputs are normalized against an analytical unobstructed point source at the true **source–microphone separation** to give a relative frequency-response curve. `response.csv` also reports raw complex microphone pressure. `peaks.json` includes peak frequency, prominence and approximate Q, which is only meaningful if the frequency spacing resolves the peak. A coarse sweep can miss narrow resonances.
 
@@ -50,6 +50,7 @@ Outputs are normalized against an analytical unobstructed point source at the tr
 ## Troubleshooting
 
 - `Blender not found` / `No module named ...`: Install Arch packages above and rerun `install_and_run.sh`.
+- `NumCalc -estimate_ram failed`: The launcher now prints NumCalc's terminal diagnostics and the end of `NumCalc/source_1/NC.out`, rather than suppressing the actual error. An open or invalidly oriented STL is a potential cause; inspect those messages before trying a repair.
 - `Invalid mesh` / missing pressure response: Check `mesh_preflight.json`, the saved Blender `.blend`, and NumCalc logs under the same result directory.
 - `Mic lies on wall` / `source in plastic`: Re-export the STL relative to its true microphone location and adjust source axis.
 - OOM or very slow solver: Start with `Quick ~1kHz` and a cleaned, reduced triangle count *away from the canal*. NumCalc limits concurrent jobs according to host RAM. Use `--jobs 1` if necessary.

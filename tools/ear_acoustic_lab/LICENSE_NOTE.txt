@@ -1,0 +1,2 @@
+Ear Acoustic Lab adds independently written Python tooling to Mesh2HRTF.
+The main project retains its existing EUPL license; see LICENSE.txt in the repository root.

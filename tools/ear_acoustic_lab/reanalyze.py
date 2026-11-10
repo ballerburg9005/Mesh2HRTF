@@ -102,18 +102,20 @@ def _surface_maps(project, output, freq, color_db):
                             vertices_mm=vertices_mm, faces=faces,
                             frequency_hz=selected_frequencies,
                             pressure_complex=selected_pressure)
-        vtk_paths = []
-        for index in indices:
-            # ParaView-compatible 3D scalar field, using Mesh2HRTF's own exporter.
-            try:
-                m2h.export_vtk(str(project), object="Reference", mode="pressure",
-                               frequency_steps=[index + 1, index + 1], dB=True)
-                vtk_paths.append(str(project / "Output2HRTF" / "vtk" /
-                                     "Reference_pressure_db" /
-                                     f"frequency_step_{index + 1}.vtk"))
-            except Exception as exc:
-                return outpath, vtk_paths, f"VTK export warning: {exc}"
-        return outpath, vtk_paths, None
+        vtk_paths = write_vtk_surfaces(
+            output, vertices_mm, faces, selected_frequencies, selected_pressure)
+        viewer_note = None
+        try:
+            cfg = json.loads((project / "earlab_config.json").read_text())
+            scale = 1.0 if cfg.get("units") == "mm" else 1000.0
+            write_interactive_surface(
+                output, vertices_mm, faces, selected_frequencies,
+                selected_pressure, np.asarray(cfg["mic"], float) * scale)
+        except ImportError:
+            viewer_note = "Install plotly to enable the interactive 3D boundary viewer."
+        except Exception as exc:
+            viewer_note = "3D boundary viewer failed: " + str(exc)
+        return outpath, vtk_paths, viewer_note
     except Exception as exc:
         return None, [], f"Boundary maps unavailable: {exc}"
 

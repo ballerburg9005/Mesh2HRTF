@@ -90,6 +90,18 @@ and the mesh. Four NumCalc processes is the default. Leave the GUI running.
 These scans are linear acoustic solves; nonlinear rattling, clipping and
 harmonic distortion are not simulated.
 
+**Resume a long run after interruption:** use the GUI button **Resume interrupted
+scan**, or restart from the existing run folder without importing the STL again:
+
+```sh
+cd ~/Mesh2HRTF
+tools/ear_acoustic_lab/.venv/bin/python tools/ear_acoustic_lab/run_analysis.py \
+  --resume ~/Mesh2HRTF/earlab_runs/ear_YOUR_TIMESTAMP --jobs 4
+```
+
+NumCalc's manager skips previously written per-frequency pEvalGrid outputs.
+Do not resume a project while an earlier NumCalc manager is still working
+on it; the files are not designed for concurrent runs of the same project.
 **3D inspection after an existing run:** press Reanalyze saved and Open report.
 The report now renders from the **+Y pinna opening**, includes a more sideward
 static view with unusually large triangles hidden, and an offline interactive

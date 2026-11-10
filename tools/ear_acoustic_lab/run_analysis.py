@@ -12,10 +12,12 @@ import traceback
 
 from analysis_tools import mic_grid, get_sofa_response, reference_transfer, save_analysis, audition_music
 from mesh_quality import analyze_exported_mesh
+from frequency_grid import log_overview, replace_frequency_vector
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
 PRESETS = {
+    'Log overview 80 tones': (100, 20000, 100),  # exporter placeholder; patched after Blender
     'Quick ~1kHz': (500, 3500, 100),
     'Focused ~1kHz': (700, 1600, 10),
     'Deep 1kHz': (700, 1600, 5),
@@ -117,7 +119,10 @@ def run(args):
     print('[RUN] Project: '+str(project),flush=True)
     print("[INFO] Blender's Mesh2HRTF exporter is registered automatically for this run; no manual add-on installation.",flush=True)
     print('[RUN] Mic / source:',mic,'/',source,'('+args.units+')',flush=True)
-    print('[RUN] '+args.preset+f': {fmin}-{fmax} Hz in {stepf} Hz steps',flush=True)
+    if args.preset == 'Log overview 80 tones':
+        print('[RUN] 80 geometric frequencies across 100–20000 Hz; this is a *coarse* broadband survey.',flush=True)
+    else:
+        print('[RUN] '+args.preset+f': {fmin}-{fmax} Hz in {stepf} Hz steps',flush=True)
     print('[NOTE] Source at 1 metre does not require a larger BEM domain; it is NOT inherently a more expensive mode.',flush=True)
     print('[NOTE] Simulated response assumes rigid surfaces, ideal point source, ideal non-loading microphone.',flush=True)
     step('Export STL and custom microphone probe using Blender')
@@ -125,6 +130,9 @@ def run(args):
           '--','--config',project/'earlab_config.json'])
     if not (project/'NumCalc'/'source_1'/'NC.inp').is_file():
         raise RuntimeError('Blender export did not create a valid NumCalc input')
+    if args.preset == 'Log overview 80 tones':
+        count = replace_frequency_vector(project, log_overview())
+        print(f'[RUN] Installed {count} nonuniform frequency steps in NumCalc and parameters.json', flush=True)
     step('Check exported triangle quality (NumCalc exact thresholds)')
     quality = analyze_exported_mesh(project, args.units)
     print(f"[MESH QUALITY] {quality['triangle_count']} triangles; "
@@ -193,7 +201,7 @@ def run(args):
     except ImportError as e:
         raise ImportError('Python mesh2hrtf package not installed. Run: pip install -e '+str(mesh2hrtf)) from e
     print('[BEM] Starting CPU solver. Number of frequency points:',
-          1+int((fmax-fmin)//stepf),flush=True)
+          80 if args.preset == 'Log overview 80 tones' else 1+int((fmax-fmin)//stepf),flush=True)
     # Memory-aware parallelization via the original NumCalc manager. Avoid
     # promising a CUDA speedup: Mesh2HRTF/NumCalc is CPU based.
     m2h.manage_numcalc(

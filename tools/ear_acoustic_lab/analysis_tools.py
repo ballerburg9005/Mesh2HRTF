@@ -5,6 +5,7 @@ from pathlib import Path
 
 import numpy as np
 from scipy.signal import find_peaks, peak_widths
+from spectral_diagnostics import inspect_spectrum
 
 
 def mic_grid(folder, xyz, units):
@@ -44,6 +45,25 @@ def get_sofa_response(path):
     return freq, response
 
 
+def probe_spread(path):
+    """Complex-pressure disagreement among the 3 nominally co-located probes.
+
+    This is a consistency diagnostic, not a correction to the acoustic field.
+    The probes are separated by only fractions of a millimetre.
+    """
+    import sofar as sf
+    obj = sf.read_sofa(str(path))
+    freq = np.asarray(obj.N, dtype=float).reshape(-1)
+    node_pressures = np.asarray(obj.Data_Real) + 1j*np.asarray(obj.Data_Imag)
+    if node_pressures.shape != (3, 1, len(freq)):
+        raise ValueError("Unexpected SOFA probe shape: " + str(node_pressures.shape))
+    nodes = node_pressures[:, 0, :]
+    mean = np.mean(nodes, axis=0)
+    rms = np.sqrt(np.mean(np.abs(nodes)**2, axis=0))
+    spread = np.max(np.abs(nodes - mean), axis=0) / np.maximum(rms, 1e-15)
+    return freq, spread
+
+
 def reference_transfer(freq, pressure, mic, source, units, speed=343.):
     mic = np.asarray(mic, float)
     source = np.asarray(source, float)
@@ -60,6 +80,7 @@ def reference_transfer(freq, pressure, mic, source, units, speed=343.):
 def find_resonances(f, h, threshold_db=3.):
     db = 20*np.log10(np.maximum(abs(h), 1e-14))
     if len(f)<5: return []
+    flags = set(inspect_spectrum(f, db)["suspect_indices"])
     inds, meta = find_peaks(db, prominence=threshold_db, distance=2)
     if not len(inds): return []
     widths = peak_widths(db, inds, rel_height=.5)
@@ -69,7 +90,8 @@ def find_resonances(f, h, threshold_db=3.):
         bw = float(widths[0][j]*df)
         peaks.append(dict(frequency_hz=float(f[ind]), gain_db=float(db[ind]),
                           prominence_db=float(meta['prominences'][j]),
-                          bandwidth_hz=bw, q=float(f[ind]/bw) if bw>0 else 0.))
+                          bandwidth_hz=bw, q=float(f[ind]/bw) if bw>0 else 0.,
+                          unverified_spectrum=bool(ind in flags)))
     return sorted(peaks,key=lambda p:p['prominence_db'],reverse=True)
 
 
@@ -144,6 +166,11 @@ def audition_music(audio_path, freq, h, outfile, max_seconds=30):
         rate=48000
     n=len(samples)
     xf=np.fft.rfftfreq(n,1/rate)
+    quality = inspect_spectrum(freq, 20*np.log10(np.maximum(np.abs(h), 1e-14)))
+    if quality["suspect_point_count"]:
+        raise ValueError("Refusing to audition unverified frequency response: "
+                         f"{quality['suspect_point_count']} suspect samples. "
+                         "Resolve high-frequency solver/mesh anomalies first.")
     amp=np.abs(h);phi=np.unwrap(np.angle(h))
     amp_interp=np.interp(xf,freq,amp,left=amp[0],right=1.)
     phase_interp=np.interp(xf,freq,phi,left=phi[0],right=0.)

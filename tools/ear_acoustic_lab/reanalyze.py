@@ -405,6 +405,8 @@ def render_project(path):
         f"<td>{band['largest_adjacent_jump_db']:.1f}</td>"
         f"<td>{band['suspect_points']}</td></tr>"
         for band in integrity["bands_500hz"])
+    probe_link = ('{probe_link}'
+                  if probe_check.get("available") else '')
     band_table = (
         '<h2>Frequency-by-frequency numerical screening (500 Hz bands)</h2>'
         '<p>Suspect means unverified, not necessarily a false peak. Fast sweeps '

@@ -97,6 +97,8 @@ def write_interactive_surface(output, vertices_mm, faces, frequencies_hz,
         "Back (-Y)": dict(eye=dict(x=0, y=-2.4, z=.4)),
         "Side (+X)": dict(eye=dict(x=2.4, y=.15, z=.5)),
         "Side (-X)": dict(eye=dict(x=-2.4, y=.15, z=.5)),
+        "Side/back (+X,-Y)": dict(eye=dict(x=2.4, y=-.65, z=.5)),
+        "Side/back (-X,-Y)": dict(eye=dict(x=-2.4, y=-.65, z=.5)),
         "Top (+Z)": dict(eye=dict(x=.15, y=.2, z=2.4)),
         "Angled (+Y,+X)": dict(eye=dict(x=1.4, y=1.9, z=.6)),
     }
@@ -105,10 +107,22 @@ def write_interactive_surface(output, vertices_mm, faces, frequencies_hz,
         visible = [j == i for j in range(len(settings))]
         if mic_mm is not None and np.asarray(mic_mm).shape == (3,):
             visible.append(True)
+        # A side/back camera is essential when the large enclosure panels
+        # are hidden. Selecting a mode must change camera as well as mesh.
+        if label.startswith("Hide large faces"):
+            preferred_camera = camera["Side/back (+X,-Y)"]
+        elif label.startswith("Cut X"):
+            preferred_camera = camera["Side (-X)"]
+        elif label.startswith("Cut Y"):
+            preferred_camera = camera["Front (+Y / pinna opening)"]
+        else:
+            preferred_camera = camera["Front (+Y / pinna opening)"]
         selection_buttons.append(dict(
             label=f"{hz:g} Hz · {label}",
             method="update",
-            args=[{"visible": visible}, {"title": f"{hz:g} Hz · {label}"}]))
+            args=[{"visible": visible},
+                  {"title": f"{hz:g} Hz · {label}",
+                   "scene.camera": preferred_camera}]))
     camera_buttons = [
         dict(label=name, method="relayout",
              args=[{"scene.camera": viewpoint}])
@@ -130,7 +144,7 @@ def write_interactive_surface(output, vertices_mm, faces, frequencies_hz,
             dict(type="dropdown", x=.57, y=1.12, xanchor="left",
                  buttons=camera_buttons, showactive=True)],
         annotations=[dict(
-            text="Mesh display only · source faces and cutaways do NOT change acoustic solution",
+            text="Camera follows display mode (manual camera presets still available). Geometry masks DO NOT change the acoustic solution.",
             x=0, y=-.07, xref="paper", yref="paper", showarrow=False,
             xanchor="left", font=dict(size=12))],
         width=1100, height=770,

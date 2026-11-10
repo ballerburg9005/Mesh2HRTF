@@ -21,7 +21,7 @@ jobs:
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install -e . matplotlib soundfile trimesh
+          python -m pip install -e . matplotlib soundfile trimesh plotly
       - name: Compile Python sources
         run: python -m compileall -q tools/ear_acoustic_lab
       - name: Test probe placement and analysis

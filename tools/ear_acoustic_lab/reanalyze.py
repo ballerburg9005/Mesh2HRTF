@@ -23,7 +23,7 @@ def _safe_db(values):
 
 
 def _select_spatial_frequencies(freq, color_db):
-    """At most 3 distinctive frequencies already contained in the run."""
+    """At most 4 distinctive frequencies already contained in the run."""
     available = np.arange(len(freq), dtype=int)
     if not len(available):
         return []

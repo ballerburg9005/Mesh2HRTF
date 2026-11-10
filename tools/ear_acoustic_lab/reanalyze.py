@@ -295,7 +295,13 @@ def render_project(path):
              '<p>This is boundary pressure on the mesh, NOT an interior cross-section. '
              'Each frequency is color-normalized to its own surface median. '
              'Inspect exported VTK in ParaView for a rotatable 3D field.</p>'
-             '<img src="surface_pressure.png" alt="Boundary pressure maps">') if surface else ""
+             '<img src="surface_pressure.png" alt="Boundary pressure from +Y ear-opening view">'
+             '<p>Display-only removal of oversized flat faces, seen from +Y/+X:</p>'
+             '<img src="surface_cutaway.png" alt="Boundary pressure with large display faces hidden">'
+             '<p><a href="surface_3d.html">ROTATABLE 3D VIEWER: face hiding, X/Y cuts, all camera angles</a> '
+             '| <a href="surface_hotspots.csv">Surface pressure hotspots CSV</a>. '
+             'Cutaways only hide rendered faces: they do NOT solve a pressure '
+             'field inside the air cavity.</p>') if surface else ""
     dashboard = f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Ear Acoustic Lab – completed simulation report</title><style>

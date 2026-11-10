@@ -131,12 +131,12 @@ class App:
             snapshot = prepare_snapshot(folder)
             messagebox.showinfo(
                 'GitHub snapshot prepared',
-                'Prepared a compact report and selected mesh/pressure data at:\\n'
+                'Prepared a compact report and selected mesh/pressure data at:\n'
                 +str(snapshot)
-                +'\\n\\nNothing was pushed. From the Mesh2HRTF folder run:\\n'
-                +'git add tools/ear_acoustic_lab/shared_runs\\n'
-                + 'git commit -m "Add ear simulation results"\\n'
-                + 'git push\\n\\nPublic GitHub commits expose this data.')
+                +'\n\nNothing was pushed. From the Mesh2HRTF folder run:\n'
+                +'git add tools/ear_acoustic_lab/shared_runs\n'
+                + 'git commit -m "Add ear simulation results"\n'
+                + 'git push\n\nPublic GitHub commits expose this data.')
         except Exception as exc:
             messagebox.showerror('Could not prepare snapshot',str(exc))
 

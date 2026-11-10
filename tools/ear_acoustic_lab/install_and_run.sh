@@ -16,6 +16,6 @@ done
 if [[ ! -x "$HERE/.venv/bin/python" ]]; then
   python -m venv "$HERE/.venv"
 fi
-"$HERE/.venv/bin/python" -m pip install -e "$REPO" numpy scipy matplotlib soundfile trimesh
+"$HERE/.venv/bin/python" -m pip install -e "$REPO" numpy scipy matplotlib soundfile trimesh plotly
 make -C "$REPO/mesh2hrtf/NumCalc/src" -j2
 exec "$HERE/.venv/bin/python" "$HERE/earlab_gui.py"

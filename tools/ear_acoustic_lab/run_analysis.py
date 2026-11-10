@@ -149,7 +149,7 @@ def run(args):
         report = source_folder/'NC.out'
         if report.is_file():
             print('[NUMCALC ERROR] Last 160 lines of NC.out:', flush=True)
-            print('\\n'.join(report.read_text(errors='replace').splitlines()[-160:]),
+            print('\n'.join(report.read_text(errors='replace').splitlines()[-160:]),
                   flush=True)
         raise RuntimeError(
             f'NumCalc -estimate_ram failed with exit code {estimate.returncode}. '

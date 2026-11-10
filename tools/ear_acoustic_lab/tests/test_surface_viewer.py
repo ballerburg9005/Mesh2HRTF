@@ -31,6 +31,10 @@ class SurfaceViewerTest(unittest.TestCase):
             # Mode selection also updates scene.camera; users need not
             # manually switch away from the front view.
             self.assertIn("scene.camera", content)
+            flagged = write_interactive_surface(
+                output, verts, faces, hz, pressure, mic_mm=[0,0,0],
+                suspect_onset_hz=1000.)
+            self.assertIn("[UNVERIFIED]", flagged.read_text())
             vtk = write_vtk_surfaces(output, verts, faces, hz, pressure)
             self.assertEqual(len(vtk), 3)
             self.assertTrue(Path(vtk[0]).is_file())

@@ -214,6 +214,20 @@ def run(args):
                   f"centroid ({hit['centroid_x_mm']:.3f}, "
                   f"{hit['centroid_y_mm']:.3f}, {hit['centroid_z_mm']:.3f}) mm",
                   flush=True)
+    print(f"[MESH RESOLUTION] Longest edge: median={quality['longest_edge_mm_p50']:.2f} mm, "
+          f"p95={quality['longest_edge_mm_p95']:.2f} mm, "
+          f"max={quality['longest_edge_mm_max']:.2f} mm", flush=True)
+    for estimate in quality["frequency_resolution"]:
+        if estimate["frequency_hz"] > fmax:
+            continue
+        pct = 100 * estimate["fraction_over_lambda_over_6"]
+        print(f"[MESH RESOLUTION] {estimate['frequency_hz']} Hz: "
+              f"{pct:.1f}% of triangle longest edges exceed "
+              f"lambda/6 ({estimate['lambda_over_6_edge_mm']:.2f} mm)", flush=True)
+        if pct > 5:
+            print("[WARNING] Mesh is not adequately resolved at this frequency "
+                  "by the lambda/6 screening rule. Results may be invalid; "
+                  "compare with a refined mesh before trusting peaks.", flush=True)
     if quality["fatal_count"]:
         print("[MESH QUALITY] NumCalc would abort on these triangles. "
               "Fix their geometry locally; no change to microphone coordinates is needed.",

@@ -35,6 +35,7 @@ def analyze_exported_mesh(project, units="mm"):
         raise ValueError(f"Exported mesh expected {count} nodes, found {len(nodes)}")
 
     findings = []
+    longest_edges_mm = []
     element_count = 0
     with element_path.open() as f:
         expected = int(f.readline().strip())
@@ -54,6 +55,7 @@ def analyze_exported_mesh(project, units="mm"):
             except KeyError as exc:
                 raise ValueError(f"Element {element_id} has nonexistent vertex") from exc
             edges = np.linalg.norm(np.roll(pts, -1, axis=0) - pts, axis=1)
+            longest_edges_mm.append(float(max(edges) * 1000.))
             area = float(np.linalg.norm(np.cross(pts[1] - pts[0],
                                                  pts[2] - pts[0])) * .5)
             ref_length = TRIANGLE_AREA_REFERENCE * np.sqrt(area)
@@ -107,8 +109,25 @@ def analyze_exported_mesh(project, units="mm"):
                 idx += 3
 
     fatalities = [h for h in findings if h["grade"] == "FATAL"]
+    lengths = np.asarray(longest_edges_mm, dtype=float)
+    # A heuristic, not a convergence test. BEM surface meshes typically need
+    # several elements per wavelength; local pinna curvature may need more.
+    resolution = []
+    for hz in (5000, 10000, 20000, 24000):
+        target_mm = 343000.0 / (6.0 * hz)
+        resolution.append({
+            "frequency_hz": hz,
+            "wavelength_mm": 343000.0 / hz,
+            "lambda_over_6_edge_mm": target_mm,
+            "count_over_lambda_over_6": int(np.count_nonzero(lengths > target_mm)),
+            "fraction_over_lambda_over_6": float(np.mean(lengths > target_mm)) if len(lengths) else 0.0,
+        })
     summary = {
         "triangle_count": expected,
+        "longest_edge_mm_p50": float(np.median(lengths)) if len(lengths) else None,
+        "longest_edge_mm_p95": float(np.percentile(lengths, 95)) if len(lengths) else None,
+        "longest_edge_mm_max": float(np.max(lengths)) if len(lengths) else None,
+        "frequency_resolution": resolution,
         "warning_count": len(findings) - len(fatalities),
         "fatal_count": len(fatalities),
         "fatal_ids": [h["element_id"] for h in fatalities],
@@ -119,7 +138,8 @@ def analyze_exported_mesh(project, units="mm"):
         "explanation": (
             "Matches NumCalc NC_Input.cpp: for a triangle, "
             "ratio=max_edge/(1.51967*sqrt(area)); warning>10; fatal>100. "
-            "Manifoldness alone does not imply numerically well-shaped elements."
+            "Manifoldness alone does not imply numerically well-shaped elements. "
+            "lambda/6 figures estimate discretization risk, not verified BEM convergence."
         )
     }
     (project / "mesh_quality.json").write_text(json.dumps(summary, indent=2))

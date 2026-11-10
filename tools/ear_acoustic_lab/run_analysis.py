@@ -18,8 +18,8 @@ from share_results import prepare_snapshot
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
 PRESETS = {
-    '20 kHz fast (80 tones)': (100, 20000, 250),  # exporter placeholder; overridden to 80 exact steps
-    '24 kHz fast (80 tones)': (100, 24000, 300),  # exporter placeholder; overridden to 80 exact steps
+    '20 kHz fast (80 tones)': (100, 20000, 100),  # safe legacy placeholder; Blender exports 80 steps
+    '24 kHz fast (80 tones)': (100, 24000, 100),  # safe legacy placeholder; Blender exports 80 steps
     '20 kHz overview (100 Hz)': (100, 20000, 100),
     '24 kHz overview (100 Hz)': (100, 24000, 100),
     'Log overview 80 tones': (100, 20000, 100),  # legacy geometric survey
@@ -37,6 +37,26 @@ FAST_PRESETS = {
     '20 kHz fast (80 tones)': (80, 100., 20000.),
     '24 kHz fast (80 tones)': (80, 100., 24000.),
 }
+
+
+def export_frequency_settings(preset):
+    """Return a Blender Mesh2Input-valid frequency setup.
+
+    Fast/nonuniform scans use an 80-step temporary project which is replaced
+    with the exact intended frequency vector after export. Step-size sweeps
+    must divide the interval *exactly* or Mesh2Input raises before NumCalc.
+    """
+    low, high, increment = PRESETS[preset]
+    if preset in FAST_PRESETS:
+        return 'Num steps', FAST_PRESETS[preset][0]
+    if preset == 'Log overview 80 tones':
+        return 'Num steps', 80
+    if (low >= high or increment <= 0 or
+            (high - low) % increment != 0):
+        raise ValueError(
+            f"Invalid Mesh2Input step for {preset!r}: "
+            f"{increment:g} does not divide {high-low:g} Hz")
+    return 'Step size', increment
 
 
 def safe_numcalc_options(args):
@@ -205,6 +225,7 @@ def run(args):
     if not blender:raise RuntimeError('Blender not found in PATH. Install Blender 3.6+ or Blender 4/5.')
     if args.preset not in PRESETS:raise ValueError('Unknown preset: '+args.preset)
     fmin,fmax,stepf=PRESETS[args.preset]
+    export_type, export_value = export_frequency_settings(args.preset)
     mic=np_array(args.mic).tolist()
     if args.source_mode=='Custom XYZ':
         source=np_array(args.source).tolist()
@@ -227,7 +248,10 @@ def run(args):
     cfg={
       'mesh2hrtf':str(mesh2hrtf),'stl':str(stl),'units':args.units,
       'mic':mic,'source':source,'min_freq':fmin,'max_freq':fmax,
-      'step_freq':stepf,'project':str(project),'grid':str(grid),
+      'step_freq':stepf,
+      'export_frequency_type':export_type,
+      'export_frequency_value':export_value,
+      'project':str(project),'grid':str(grid),
       'music':str(Path(args.music).expanduser()) if args.music else '',
       'preset':args.preset,
     }

@@ -67,6 +67,17 @@ to reuse a cached pressure file with residual over 1e-8. Keep the old
 results for analysis and **start a fresh low-resolution run** with the new
 solver. Missing convergence logs are explicitly reported as unverified.
 
+## Blender fast-sweep export compatibility
+
+Fast 20/24 kHz modes now ask Blender Mesh2Input for **80 frequency steps**
+rather than passing a 250 or 300 Hz placeholder step that does not divide
+the selected interval. The exported project is then rewritten to the
+endpoint-exact 80-tone grid before NumCalc runs. All fixed-step presets are
+validated before Blender launches. This prevents the
+`frequencyStepSize is not a divisor of maxFrequency-minFrequency` error.
+Use a **new run** after pulling this fix; the failed Blender export did not
+create any NumCalc frequency results to recover.
+
 ## One-button test
 
 1. Save the physical **air-facing** 3D ear geometry as `~/model.stl`. If possible, **move the STL's coordinate origin to the microphone** in Blender before exporting. Then the GUI's default `Mic XYZ = 0 0 0` is correct; no other microphone setup required. Coordinates must use the same units as the STL, default **millimetres**. You can also specify a different microphone XYZ if you prefer. The STL is imported automatically, not via the Blender GUI.

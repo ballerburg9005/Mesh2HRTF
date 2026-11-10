@@ -137,8 +137,9 @@ def main():
         unit=cfg['units'],
         minFrequency=float(cfg['min_freq']),
         maxFrequency=float(cfg['max_freq']),
-        frequencyVectorType='Step size',
-        frequencyVectorValue=float(cfg['step_freq']),
+        frequencyVectorType=cfg.get('export_frequency_type', 'Step size'),
+        frequencyVectorValue=float(cfg.get(
+            'export_frequency_value', cfg['step_freq'])),
         evaluationGrids=str(Path(cfg['grid']).resolve()),
         pictures=False,
         reference=False,

@@ -22,7 +22,7 @@ If your clone's `origin` is `Any2HRTF/Mesh2HRTF` rather than your fork, first ru
 
 1. Save the physical **air-facing** 3D ear geometry as `~/model.stl`. If possible, **move the STL's coordinate origin to the microphone** in Blender before exporting. Then the GUI's default `Mic XYZ = 0 0 0` is correct; no other microphone setup required. Coordinates must use the same units as the STL, default **millimetres**. You can also specify a different microphone XYZ if you prefer. The STL is imported automatically, not via the Blender GUI.
 2. Leave `Sound source` on **Near 12 cm**, `axis +Y` (toward your ear opening) unless your model uses another orientation. Check **Preview STL + mic** to verify the red mic position and orange source position relative to the geometry. The **Far 1 m** analytical point source does not itself increase the number of BEM surface elements. (For accurate physical geometry, the mic must lie in the connected air region; being at the origin alone does not make it correct.)
-3. Choose **Log overview 80 tones** (default) to survey 100 Hz–20 kHz at 80 logarithmically spaced frequencies, then press **RUN ACOUSTIC SWEEP**. NumCalc runs selected frequency-domain acoustic solves and saves `response.png`, `response.csv`, `peaks.json` and the complete solver project to `~/EarAcousticLab/results/ear_<timestamp>/`. Use **Open graphs** to see the response and prominent resonance peaks.
+3. Choose **Log overview 80 tones** (default) to survey 100 Hz–20 kHz at 80 logarithmically spaced frequencies, then press **RUN ACOUSTIC SWEEP**. NumCalc runs selected frequency-domain acoustic solves and saves `response.png`, `response.csv`, `peaks.json` and the complete solver project to `<your-clone>/earlab_runs/ear_<timestamp>/`. Use **Open graphs** to see the response and prominent resonance peaks.
 4. For a more precise sweep around a suspicious tone select **Focused ~1kHz** (10 Hz spacing) or **Deep 1kHz** (5 Hz). Use **Full spectrum** for 100 Hz–20 kHz at 100 Hz steps, or **Detailed spectrum** for 25 Hz steps. These presets can take much longer with detailed meshes.
 5. Optionally select a WAV/MP3 music file before running; **Play music audition** applies the simulated *linear complex frequency response* to up to 30 s of the input, creating `music_audition.wav`. This is offline auralization, **not** nonlinear mic distortion or actual music being injected into the frequency-domain solver. Sparse sweeps may be inaccurate for listening; use a denser sweep for music.
 
@@ -74,6 +74,60 @@ resolve tonal peaks in the 700–1600 Hz range. For genuinely broad music EQ
 you must compute more of the audible range and validate the measured
 headphone/microphone arrangement; this program does not yet output a
 measurement-validated EQ correction.
+## Long 10 kHz runs, 3D cutaways, and sharing results through GitHub
+
+From the GUI choose one of these additional frequency test batteries:
+
+| Preset | Frequencies | Sampling |
+| --- | ---: | --- |
+| 10 kHz overview (100 Hz) | 100 | 100 Hz to 10 kHz |
+| 10 kHz detailed (25 Hz) | 397 | 100 Hz to 10 kHz |
+| 10 kHz deep (10 Hz) | 991 | 100 Hz to 10 kHz |
+
+Long scans can run for an hour or longer; there is no artificial time limit.
+Wall-clock time depends on your CPU, number of NumCalc jobs, available memory
+and the mesh. Four NumCalc processes is the default. Leave the GUI running.
+These scans are linear acoustic solves; nonlinear rattling, clipping and
+harmonic distortion are not simulated.
+
+**3D inspection after an existing run:** press Reanalyze saved and Open report.
+The report now renders from the **+Y pinna opening**, includes a more sideward
+static view with unusually large triangles hidden, and an offline interactive
+surface_3d.html viewer with camera presets (+Y/-Y/+X/-X/+Z/angled) and modes
+Full mesh / Hide large faces / Cut X / Cut Y. The geometry is never altered
+for the underlying BEM computation. The display cuts reveal existing inner
+surface triangles if present, but do NOT calculate pressure on an interior
+cross-sectional plane through air. For that we would need additional
+NumCalc evaluation points along an actual canal centreline.
+
+**Results are now stored inside the checkout.** Full solver workspaces go to
+earlab_runs/ (Git-ignored: potentially gigabytes). After a successful run
+the tool automatically copies a compact snapshot to
+tools/ear_acoustic_lab/shared_runs/<run-name>/, containing plots, SOFA,
+CSV/JSON and up to three selected complex boundary-pressure samples with
+the associated mesh geometry. The GUI has a **Prepare latest completed run
+for GitHub** button to do the same for old results, including runs in the
+previous ~/EarAcousticLab/results location.
+
+Git changes are local until you choose to publish:
+
+```sh
+cd ~/Mesh2HRTF
+git add tools/ear_acoustic_lab/shared_runs
+git commit -m "Add ear acoustic measurement snapshot"
+git push
+```
+
+**Privacy:** this is a public GitHub fork. Snapshots can expose ear geometry
+and the source/microphone coordinates when pushed. Your original STL is
+excluded by default; adding --include-stl via share_results.py is optional.
+
+To share an older completed run explicitly:
+
+```sh
+tools/ear_acoustic_lab/.venv/bin/python tools/ear_acoustic_lab/share_results.py \
+  ~/EarAcousticLab/results/ear_20261110_155147_122202
+```
 ## What is and is not modeled
 
 The STL **must contain the hollow, air-connected canal geometry, any microphone tube's air passage and its actual termination surface** to simulate their resonances. Simply importing an STL of the external pinna or a two-block print without the internal air surfaces does *not* recover them. Mic origin `(0,0,0)` is convenient only after you position the actual model to make the correct air probe coincide with that coordinate. The source must be in external air, not inside the plastic. The input may require repairing inconsistent winding, disconnected components, self-intersections or non-manifold surfaces first. The program warns about some mesh defects but does not automatically correct a bad STL.

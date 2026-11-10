@@ -21,7 +21,7 @@ If your clone's `origin` is `Any2HRTF/Mesh2HRTF` rather than your fork, first ru
 ## One-button test
 
 1. Save the physical **air-facing** 3D ear geometry as `~/model.stl`. If possible, **move the STL's coordinate origin to the microphone** in Blender before exporting. Then the GUI's default `Mic XYZ = 0 0 0` is correct; no other microphone setup required. Coordinates must use the same units as the STL, default **millimetres**. You can also specify a different microphone XYZ if you prefer. The STL is imported automatically, not via the Blender GUI.
-2. Leave `Sound source` on **Near 12 cm**, `axis -Y` unless that points into solid PLA. Check **Preview STL + mic** to verify the red mic position and orange source position relative to the geometry. The **Far 1 m** analytical point source does not itself increase the number of BEM surface elements. (For accurate physical geometry, the mic must lie in the connected air region; being at the origin alone does not make it correct.)
+2. Leave `Sound source` on **Near 12 cm**, `axis +Y` (toward your ear opening) unless your model uses another orientation. Check **Preview STL + mic** to verify the red mic position and orange source position relative to the geometry. The **Far 1 m** analytical point source does not itself increase the number of BEM surface elements. (For accurate physical geometry, the mic must lie in the connected air region; being at the origin alone does not make it correct.)
 3. Choose **Quick ~1kHz** initially, then press **RUN ACOUSTIC SWEEP**. NumCalc runs selected frequency-domain acoustic solves and saves `response.png`, `response.csv`, `peaks.json` and the complete solver project to `~/EarAcousticLab/results/ear_<timestamp>/`. Use **Open graphs** to see the response and prominent resonance peaks.
 4. For a more precise sweep select **Focused ~1kHz** (10 Hz spacing) or **Deep 1kHz** (5 Hz). Use **Full spectrum** for 100 Hz–20 kHz at 100 Hz steps, or **Detailed spectrum** for 25 Hz steps. These presets can take much longer with detailed meshes.
 5. Optionally select a WAV/MP3 music file before running; **Play music audition** applies the simulated *linear complex frequency response* to up to 30 s of the input, creating `music_audition.wav`. This is offline auralization, **not** nonlinear mic distortion or actual music being injected into the frequency-domain solver. Sparse sweeps may be inaccurate for listening; use a denser sweep for music.
@@ -32,7 +32,7 @@ If your clone's `origin` is `Any2HRTF/Mesh2HRTF` rather than your fork, first ru
 cd ~/Mesh2HRTF
 ./tools/ear_acoustic_lab/.venv/bin/python tools/ear_acoustic_lab/run_analysis.py \
   --stl ~/model.stl --mic 0 0 0 --units mm \
-  --source-mode 'Near 12 cm' --axis=-Y --preset 'Quick ~1kHz' --jobs 2
+  --source-mode 'Near 12 cm' --axis=+Y --preset 'Quick ~1kHz' --jobs 2
 ```
 
 The launcher automatically resolves the current clone's root; `--mesh2hrtf` optionally overrides it.

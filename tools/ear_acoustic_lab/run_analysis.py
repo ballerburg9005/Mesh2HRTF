@@ -120,7 +120,7 @@ def run(args):
     print('[NOTE] Source at 1 metre does not require a larger BEM domain; it is NOT inherently a more expensive mode.',flush=True)
     print('[NOTE] Simulated response assumes rigid surfaces, ideal point source, ideal non-loading microphone.',flush=True)
     step('Export STL and custom microphone probe using Blender')
-    call([blender,'--background','--python',Path(__file__).resolve().parent/'blender_export.py',
+    call([blender,'--background','--python-exit-code','1','--python',Path(__file__).resolve().parent/'blender_export.py',
           '--','--config',project/'earlab_config.json'])
     if not (project/'NumCalc'/'source_1'/'NC.inp').is_file():
         raise RuntimeError('Blender export did not create a valid NumCalc input')
@@ -130,6 +130,36 @@ def run(args):
     if not binary.is_file():raise RuntimeError('NumCalc missing after build: '+str(binary))
     if not os.access(binary,os.X_OK):
         raise PermissionError('NumCalc is not executable: '+str(binary))
+    step('Check NumCalc input and estimate memory')
+    # Mesh2HRTF's manager suppresses the estimator's stdout, which made
+    # errors unhelpful ("CalledProcessError ... -estimate_ram"). Run it
+    # once ourselves, printing the diagnostic and the solver's NC.out.
+    source_folder = project/'NumCalc'/'source_1'
+    memory_file = source_folder/'Memory.txt'
+    if memory_file.exists():
+        memory_file.unlink()  # do not trust a partial file from a failed run
+    estimate = subprocess.run(
+        [str(binary), '-estimate_ram'],
+        cwd=source_folder, text=True, stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT, errors='replace')
+    if estimate.returncode:
+        output = estimate.stdout or '(NumCalc produced no terminal output)'
+        print('[NUMCALC ERROR] RAM estimation failed. Solver output follows:', flush=True)
+        print(output[-24000:], flush=True)
+        report = source_folder/'NC.out'
+        if report.is_file():
+            print('[NUMCALC ERROR] Last 160 lines of NC.out:', flush=True)
+            print('\\n'.join(report.read_text(errors='replace').splitlines()[-160:]),
+                  flush=True)
+        raise RuntimeError(
+            f'NumCalc -estimate_ram failed with exit code {estimate.returncode}. '
+            f'See diagnostic above and {report}. '
+            'Mesh2HRTF may reject open/self-intersecting surfaces, bad normals, '
+            'or invalid mesh/solver input.')
+    if not memory_file.is_file() or memory_file.stat().st_size == 0:
+        raise RuntimeError(
+            f'NumCalc exited successfully but generated no RAM estimates: {memory_file}')
+    print('[NUMCALC] RAM estimation completed:', memory_file, flush=True)
     step('Solve frequency-domain acoustic boundary problem')
     try:
         import mesh2hrtf as m2h
@@ -185,7 +215,7 @@ def get_args():
     ap.add_argument('--preset',choices=list(PRESETS),default='Quick ~1kHz')
     ap.add_argument('--results',default='~/EarAcousticLab/results')
     ap.add_argument('--music',default='')
-    ap.add_argument('--jobs',type=int,default=2)
+    ap.add_argument('--jobs',type=int,default=4)
     a=ap.parse_args()
     if a.jobs<1 or a.jobs>32:ap.error('--jobs must be in 1..32')
     return a

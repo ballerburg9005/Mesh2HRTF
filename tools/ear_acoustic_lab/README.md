@@ -56,6 +56,17 @@ converge above 5 kHz. Do not run a 240-frequency night scan first: try a
 small, targeted frequency sweep with `--jobs 1`. The strict residual check
 cannot establish mesh convergence, boundary orientation or acoustic truth.
 
+
+### Do not silently reuse the old 991/240-step pressure files
+
+The original Mesh2HRTF manager considers a frequency complete when
+`NumCalc/source_1/be.out/be.N/pEvalGrid` exists. It does **not** reject
+an output from a CGS iteration that failed convergence. On this branch,
+`--resume` checks stored NumCalc per-step solver residuals and refuses
+to reuse a cached pressure file with residual over 1e-8. Keep the old
+results for analysis and **start a fresh low-resolution run** with the new
+solver. Missing convergence logs are explicitly reported as unverified.
+
 ## One-button test
 
 1. Save the physical **air-facing** 3D ear geometry as `~/model.stl`. If possible, **move the STL's coordinate origin to the microphone** in Blender before exporting. Then the GUI's default `Mic XYZ = 0 0 0` is correct; no other microphone setup required. Coordinates must use the same units as the STL, default **millimetres**. You can also specify a different microphone XYZ if you prefer. The STL is imported automatically, not via the Blender GUI.

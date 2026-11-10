@@ -49,6 +49,31 @@ class ResumeTest(unittest.TestCase):
             self.assertEqual(manager.call_args.kwargs["max_instances"], 4)
             self.assertTrue((project/"analysis"/"response.csv").is_file())
 
+    def test_fails_closed_on_cached_nonconverged_pressure(self):
+        with tempfile.TemporaryDirectory() as d:
+            project = Path(d)
+            source = project / "NumCalc" / "source_1"
+            directory = source / "be.out" / "be.2"
+            directory.mkdir(parents=True)
+            (directory / "pEvalGrid").write_text("stale pressure values")
+            (source / "NC2-2.out").write_text(
+                "Step 2, Frequency = 6850 Hz\n"
+                "CGS solver: number of iterations = 250, relative error = 11157.9\n")
+            with self.assertRaisesRegex(RuntimeError, "cached NumCalc"):
+                run_analysis.check_cached_solver_convergence(project)
+
+    def test_allows_unfinished_or_converged_output(self):
+        with tempfile.TemporaryDirectory() as d:
+            project = Path(d)
+            source = project / "NumCalc" / "source_1"
+            directory = source / "be.out" / "be.2"
+            directory.mkdir(parents=True)
+            (directory / "pEvalGrid").write_text("converged")
+            (source / "NC2-2.out").write_text(
+                "Step 2, Frequency = 5000 Hz\n"
+                "CGS solver: number of iterations = 124, relative error = 5.8e-10\n")
+            run_analysis.check_cached_solver_convergence(project)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -48,7 +48,8 @@ def mesh_views(vertices_mm, faces):
 
 
 def write_interactive_surface(output, vertices_mm, faces, frequencies_hz,
-                              complex_surface_pressure, mic_mm=None):
+                              complex_surface_pressure, mic_mm=None,
+                              suspect_onset_hz=None):
     """Create an offline, rotatable 3-D surface viewer.
 
     complex_surface_pressure must have shape (n_faces, n_selected_freq).
@@ -80,6 +81,8 @@ def write_interactive_surface(output, vertices_mm, faces, frequencies_hz,
     fig = go.Figure()
     settings = []
     for fi, hz in enumerate(freq):
+        flag_text = " [UNVERIFIED]" if (suspect_onset_hz is not None
+                     and hz >= suspect_onset_hz) else ""
         for label, mask in views.items():
             subset = faces[mask]
             # Plotly supports one intensity value per triangle in cell mode.
@@ -91,11 +94,11 @@ def write_interactive_surface(output, vertices_mm, faces, frequencies_hz,
                 colorscale="RdBu_r", cmin=-limit, cmax=limit,
                 showscale=True, colorbar=dict(title="relative dB"),
                 hovertemplate="Boundary pressure: %{intensity:.2f} dB<extra></extra>",
-                name=f"{hz:g} Hz · {label}",
+                name=f"{hz:g} Hz{flag_text} · {label}",
                 visible=(fi == 0 and label == "Full mesh"),
                 lighting=dict(ambient=.65, diffuse=.75, specular=.08),
                 lightposition=dict(x=100, y=100, z=100)))
-            settings.append((fi, hz, label))
+            settings.append((fi, hz, label, flag_text))
 
     if mic_mm is not None:
         xyz = np.asarray(mic_mm, dtype=float)
@@ -116,7 +119,7 @@ def write_interactive_surface(output, vertices_mm, faces, frequencies_hz,
         "Angled (+Y,+X)": dict(eye=dict(x=1.4, y=1.9, z=.6)),
     }
     selection_buttons = []
-    for i, (_, hz, label) in enumerate(settings):
+    for i, (_, hz, label, flag_text) in enumerate(settings):
         visible = [j == i for j in range(len(settings))]
         if mic_mm is not None and np.asarray(mic_mm).shape == (3,):
             visible.append(True)
@@ -133,10 +136,10 @@ def write_interactive_surface(output, vertices_mm, faces, frequencies_hz,
         else:
             preferred_camera = camera["Front (+Y / pinna opening)"]
         selection_buttons.append(dict(
-            label=f"{hz:g} Hz · {label}",
+            label=f"{hz:g} Hz{flag_text} · {label}",
             method="update",
             args=[{"visible": visible},
-                  {"title": f"{hz:g} Hz · {label}",
+                  {"title": f"{hz:g} Hz{flag_text} · {label}",
                    "scene.camera": preferred_camera}]))
     camera_buttons = [
         dict(label=name, method="relayout",

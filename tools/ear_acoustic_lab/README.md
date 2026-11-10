@@ -118,7 +118,7 @@ The report now renders from the **+Y pinna opening**, includes a more sideward
 static view with unusually large triangles hidden, and an offline interactive
 surface_3d.html viewer with camera presets (+Y/-Y/+X/-X/+Z/angled) and modes
 Full mesh / Hide large faces / Cut X / Cut Y. The geometry is never altered
-for the underlying BEM computation. **Hide large faces** now uses longest-edge length instead of triangle area (a 12 mm floor and adaptive 97th-percentile cutoff), so it can hide skinny back panels without discarding smaller pinna triangles. The display cuts reveal existing inner
+for the underlying BEM computation. **Hide large faces** now uses longest-edge length instead of triangle area (a 20 mm floor and adaptive 97th-percentile cutoff), so it can hide skinny back panels without discarding smaller pinna triangles. The display cuts reveal existing inner
 surface triangles if present, but do NOT calculate pressure on an interior
 cross-sectional plane through air. For that we would need additional
 NumCalc evaluation points along an actual canal centreline.

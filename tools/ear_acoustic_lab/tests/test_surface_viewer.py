@@ -25,6 +25,7 @@ class SurfaceViewerTest(unittest.TestCase):
             self.assertIn("pinna opening", content)
             self.assertIn("Cut Y: show back half", content)
             self.assertIn("Hide large faces", content)
+            self.assertIn("Hide distorted faces", content)
             self.assertIn("Side/back (+X,-Y)", content)
             # Mode selection also updates scene.camera; users need not
             # manually switch away from the front view.
@@ -40,7 +41,7 @@ class SurfaceViewerTest(unittest.TestCase):
         faces = np.array([[0,1,2],[0,2,3]], int)
         before = faces.copy()
         modes = mesh_views(verts, faces)
-        self.assertEqual(len(modes), 4)
+        self.assertEqual(len(modes), 5)
         self.assertTrue(modes["Full mesh"].all())
         for mask in modes.values():
             self.assertEqual(mask.shape, (len(faces),))

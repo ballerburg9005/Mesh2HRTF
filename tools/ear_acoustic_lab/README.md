@@ -104,7 +104,7 @@ NumCalc evaluation points along an actual canal centreline.
 earlab_runs/ (Git-ignored: potentially gigabytes). After a successful run
 the tool automatically copies a compact snapshot to
 tools/ear_acoustic_lab/shared_runs/<run-name>/, containing plots, SOFA,
-CSV/JSON and up to three selected complex boundary-pressure samples with
+CSV/JSON and up to four selected complex boundary-pressure samples with
 the associated mesh geometry. The GUI has a **Prepare latest completed run
 for GitHub** button to do the same for old results, including runs in the
 previous ~/EarAcousticLab/results location.

@@ -114,8 +114,14 @@ def check_cached_solver_convergence(project, threshold=1e-8):
     project = Path(project)
     checks = inspect_numcalc_logs(project, residual_warning=threshold)
     results = project / 'NumCalc' / 'source_1' / 'be.out'
-    # The public summary caps details at 100 entries; conservatively fall
-    # back to a full scan of the file paths if a run has more failures.
+    # The report caps details at 100 entries. Fail closed if more failures
+    # exist than can be checked against their cached pressure files.
+    if (checks['steps_over_threshold'] >
+            len(checks['steps_over_threshold_details'])):
+        raise RuntimeError(
+            'More than 100 nonconverged solver steps are recorded and cached '
+            'results cannot be fully verified. Keep this project for '
+            'inspection; start a NEW fast scan instead.')
     flagged = []
     for hit in checks['steps_over_threshold_details']:
         step_number = int(hit['step'])

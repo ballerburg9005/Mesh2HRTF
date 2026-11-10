@@ -21,6 +21,16 @@ def mesh_views(vertices_mm, faces):
     trimmed = areas < cutoff if median > 0 else np.ones(len(faces), dtype=bool)
     if not np.any(trimmed):
         trimmed = np.ones(len(faces), dtype=bool)
+    # NumCalc triangle distortion diagnostic: extreme slivers can produce
+    # isolated pressure spots unrelated to the acoustic field. Display-only.
+    e0 = np.linalg.norm(tri[:, 1] - tri[:, 0], axis=1)
+    e1 = np.linalg.norm(tri[:, 2] - tri[:, 1], axis=1)
+    e2 = np.linalg.norm(tri[:, 0] - tri[:, 2], axis=1)
+    max_edge = np.maximum(np.maximum(e0, e1), e2)
+    distortion = max_edge / (1.51967 * np.sqrt(np.maximum(areas, 1e-30)))
+    well_shaped = (areas > 1e-14) & (distortion <= 10.0)
+    if not np.any(well_shaped):
+        well_shaped = np.ones(len(faces), dtype=bool)
     centers = tri.mean(axis=1)
     xmid = float(np.median(verts[:, 0]))
     ymid = float(np.median(verts[:, 1]))
@@ -29,6 +39,7 @@ def mesh_views(vertices_mm, faces):
     return {
         "Full mesh": np.ones(len(faces), dtype=bool),
         f"Hide large faces ({np.count_nonzero(~trimmed)} removed)": trimmed,
+        f"Hide distorted faces ({np.count_nonzero(~well_shaped)} removed)": well_shaped,
         "Cut X: show +X half": x_cut,
         "Cut Y: show back half": y_cut,
     }
@@ -111,6 +122,8 @@ def write_interactive_surface(output, vertices_mm, faces, frequencies_hz,
         # are hidden. Selecting a mode must change camera as well as mesh.
         if label.startswith("Hide large faces"):
             preferred_camera = camera["Side/back (+X,-Y)"]
+        elif label.startswith("Hide distorted faces"):
+            preferred_camera = camera["Front (+Y / pinna opening)"]
         elif label.startswith("Cut X"):
             preferred_camera = camera["Side (-X)"]
         elif label.startswith("Cut Y"):
@@ -144,7 +157,7 @@ def write_interactive_surface(output, vertices_mm, faces, frequencies_hz,
             dict(type="dropdown", x=.57, y=1.12, xanchor="left",
                  buttons=camera_buttons, showactive=True)],
         annotations=[dict(
-            text="Camera follows display mode (manual camera presets still available). Geometry masks DO NOT change the acoustic solution.",
+            text="Filters hide faces in the picture only, NOT in the solver. Distorted-face mode is diagnostic; it cannot repair numerical artifacts.",
             x=0, y=-.07, xref="paper", yref="paper", showarrow=False,
             xanchor="left", font=dict(size=12))],
         width=1100, height=770,

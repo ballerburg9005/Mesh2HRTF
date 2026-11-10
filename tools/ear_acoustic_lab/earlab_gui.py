@@ -39,9 +39,9 @@ class App:
         ttk.Label(outer,text='From microphone toward sound').grid(row=r,column=0,sticky='w',pady=3)
         ttk.Combobox(outer,textvariable=self.axis,values=['+Y','-Y','-X','+X','-Z','+Z'],state='readonly',width=12).grid(row=r,column=1,sticky='w');r+=1
         self.source=self.field(outer,r,'Custom source XYZ (if selected)','0 120 0');r+=1
-        self.preset=tk.StringVar(value='Log overview 80 tones')
+        self.preset=tk.StringVar(value='20 kHz fast (80 tones)')
         ttk.Label(outer,text='Frequency test battery').grid(row=r,column=0,sticky='w',pady=3)
-        ttk.Combobox(outer,textvariable=self.preset,values=list(PRESETS),state='readonly',width=25).grid(row=r,column=1,sticky='w');r+=1
+        ttk.Combobox(outer,textvariable=self.preset,values=list(PRESETS),state='readonly',width=29).grid(row=r,column=1,sticky='w');r+=1
         self.music=self.path(outer,r,'Optional WAV / MP3 music','');r+=1
         self.results_root=self.path(outer,r,'Output folder',str(REPO_ROOT/'earlab_runs'),folder=True);r+=1
         self.jobs=self.field(outer,r,'Parallel CPU processes','4');r+=1
@@ -49,6 +49,8 @@ class App:
               'Export the STL with microphone position at (0,0,0), or enter XYZ here. '
               'A real open canal/tube must exist in the STL surface. '
               '1 m source distance costs approximately the same as 12 cm in BEM. '
+              'Fast 20/24 kHz scans solve 80 tones; 100 Hz overview is available for refinement. '
+              'Wideband accuracy still depends on mesh resolution and solver convergence. '
               'The simulator uses CPU NumCalc; your RTX 3090 is not used.')
         ttk.Label(outer,text=note,foreground='#555555',wraplength=790).grid(row=r,column=0,columnspan=3,sticky='w',pady=8);r+=1
         buttons=ttk.Frame(outer);buttons.grid(row=r,column=0,columnspan=3,sticky='ew',pady=9)

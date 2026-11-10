@@ -77,7 +77,53 @@ def np_all(x):
     return np.all(x)
 
 
+def resume_project(args):
+    """Resume missing NumCalc frequency steps in an existing export."""
+    project = Path(args.resume).expanduser().resolve()
+    if not (project/'NumCalc'/'source_1'/'NC.inp').is_file():
+        raise FileNotFoundError('No existing NumCalc input to resume: '+str(project))
+    cfg = json.loads((project/'earlab_config.json').read_text())
+    repo = Path(args.mesh2hrtf).expanduser().resolve()
+    binary = repo/'mesh2hrtf'/'NumCalc'/'bin'/'NumCalc'
+    if not binary.is_file():
+        raise FileNotFoundError('NumCalc executable not found: '+str(binary))
+    import mesh2hrtf as m2h
+    step('Resume existing BEM calculation')
+    print('[RESUME] Reusing the previous geometry and frequencies:', project, flush=True)
+    print('[RESUME] Completed frequency steps are not recalculated by manage_numcalc.',flush=True)
+    print('[RESUME] Do not start another NumCalc manager for this same project.',flush=True)
+    m2h.manage_numcalc(project_path=str(project),
+                      numcalc_path=str(binary),
+                      max_instances=int(args.jobs),
+                      wait_time=2,max_cpu_load=99,confirm_errors=False)
+    step('Convert completed NumCalc output to microphone analysis')
+    m2h.output2hrtf(str(project))
+    sofa = project/'Output2HRTF'/'HRTF_MicProbe.sofa'
+    if not sofa.is_file():
+        raise RuntimeError('Missing microphone SOFA after resumed simulation')
+    frequencies, pressure = get_sofa_response(sofa)
+    response = reference_transfer(frequencies,pressure,cfg['mic'],
+                                   cfg['source'],cfg['units'])
+    output = project/'analysis'
+    save_analysis(output,frequencies,response,pressure,cfg['mic'],
+                  cfg['source'],cfg['units'])
+    try:
+        from reanalyze import render_project
+        print('[RESUME] Report:',render_project(project),flush=True)
+    except Exception as exc:
+        print('[REPORT WARNING]',str(exc),flush=True)
+    try:
+        print('[SHARE] Snapshot:',prepare_snapshot(project),flush=True)
+    except Exception as exc:
+        print('[SHARE WARNING]',str(exc),flush=True)
+    print('RESULT_DIR='+str(output),flush=True)
+    print('RUN_FINISHED',flush=True)
+    return 0
+
+
 def run(args):
+    if args.resume:
+        return resume_project(args)
     mesh2hrtf=Path(args.mesh2hrtf).expanduser().resolve()
     mesh2module=mesh2hrtf/'mesh2hrtf'
     exporter=mesh2module/'Mesh2Input'/'mesh2input.py'
@@ -264,6 +310,7 @@ def run(args):
 def get_args():
     ap=argparse.ArgumentParser()
     ap.add_argument('--mesh2hrtf',default=str(REPO_ROOT))
+    ap.add_argument('--resume',default='',help='Resume a previously exported NumCalc project without re-exporting STL')
     ap.add_argument('--stl',default='~/model.stl')
     ap.add_argument('--units',choices=['mm','m'],default='mm')
     ap.add_argument('--mic',nargs=3,type=float,default=[0,0,0],metavar=('X','Y','Z'))

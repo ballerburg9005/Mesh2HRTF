@@ -14,6 +14,7 @@ import traceback
 import numpy as np
 
 from analysis_tools import get_sofa_response, reference_transfer
+from spectral_diagnostics import inspect_spectrum, inspect_numcalc_logs
 
 SPEED_OF_SOUND = 343.0
 
@@ -34,7 +35,7 @@ def _select_spatial_frequencies(freq, color_db):
     return sorted(set(picks))
 
 
-def _surface_maps(project, output, freq, color_db):
+def _surface_maps(project, output, freq, color_db, suspect_onset_hz=None):
     """Map *computed boundary pressure*; never interpolate unsolved tones."""
     try:
         from mesh2hrtf.Output2HRTF.output2hrtf import _read_numcalc_data
@@ -89,7 +90,9 @@ def _surface_maps(project, output, freq, color_db):
             ax.set_box_aspect((1, 1, 1))
             ax.set_axis_off()
             ax.view_init(elev=20, azim=90)
-            ax.set_title(f"{freq[index]:.0f} Hz — boundary pressure", fontsize=11)
+            suspect_note = " [UNVERIFIED]" if (suspect_onset_hz is not None
+                           and freq[index] >= suspect_onset_hz) else ""
+            ax.set_title(f"{freq[index]:.0f} Hz — boundary pressure{suspect_note}", fontsize=11)
         fig.subplots_adjust(left=.03, right=.88, bottom=.05, top=.91, wspace=.02)
         cax = fig.add_axes([.90, .20, .014, .58])
         fig.colorbar(ScalarMappable(norm=norm, cmap=cmap), cax=cax,
@@ -115,7 +118,9 @@ def _surface_maps(project, output, freq, color_db):
                 ax.set_axis_off()
                 # Side/back angle: looking into geometry exposed by panel removal.
                 ax.view_init(elev=18, azim=-18)
-                ax.set_title(f"{freq[index]:.0f} Hz - large faces hidden")
+                suspect_note = " [UNVERIFIED]" if (suspect_onset_hz is not None
+                               and freq[index] >= suspect_onset_hz) else ""
+                ax.set_title(f"{freq[index]:.0f} Hz - large faces hidden{suspect_note}")
             cut.subplots_adjust(left=.03,right=.88,bottom=.05,top=.91,wspace=.02)
             cax = cut.add_axes([.90,.20,.014,.58])
             cut.colorbar(ScalarMappable(norm=norm, cmap=cmap),
@@ -188,6 +193,11 @@ def render_project(path):
     gain = _safe_db(h)
     median = float(np.median(gain))
     color_db = gain - median  # Show *shape* independently of overall pressure scale
+    integrity = inspect_spectrum(freq, gain)
+    solver_checks = inspect_numcalc_logs(project)
+    (output / "solver_checks.json").write_text(json.dumps(solver_checks, indent=2))
+    suspect = np.zeros(len(freq), dtype=bool)
+    suspect[integrity["suspect_indices"]] = True
     phase = np.unwrap(np.angle(h))
     delay_ms = -np.gradient(phase, 2 * np.pi * freq) * 1000
     df = np.diff(freq)
@@ -210,6 +220,47 @@ def render_project(path):
         "The microphone is an ideal non-loading pressure probe. Capsule, termination and viscothermal losses are not modeled.",
         "The fluid domain and microphone-to-opening air connection have not been independently validated.",
     ]
+    if integrity["first_suspected_frequency_hz"] is not None:
+        warnings.insert(0, (
+            f"UNVERIFIED SPECTRAL REGION: first flagged sample at "
+            f"{integrity['first_suspected_frequency_hz']:g} Hz; "
+            f"{integrity['large_jump_count']} adjacent changes exceed "
+            f"{integrity['jump_threshold_db']:g} dB and/or gain exceeds "
+            f"{integrity['extreme_gain_threshold_db']:g} dB. "
+            "This could be a solver, mesh, boundary-condition or undersampling "
+            "problem; the flagged frequencies are NOT validated resonances."))
+    if solver_checks["steps_with_reported_residual"] == 0:
+        warnings.append("NumCalc iterative residuals could not be read from saved logs. "
+                        "Convergence has not been verified.")
+    elif solver_checks["steps_over_threshold"]:
+        warnings.insert(0, (
+            f"NUMCALC CONVERGENCE WARNING: {solver_checks['steps_over_threshold']} "
+            f"steps have residual > {solver_checks['residual_warning_threshold']:.0e}. "
+            "Inspect solver_checks.json and the NC*.out files."))
+    preflight_path = project / "mesh_preflight.json"
+    if preflight_path.is_file():
+        preflight = json.loads(preflight_path.read_text())
+        if preflight.get("watertight") is False:
+            warnings.insert(0, "OPEN STL: the input surface is non-watertight. "
+                            "The intended external/air-connected interior acoustic "
+                            "domain is not established; fix or verify open-boundary "
+                            "topology before trusting high-frequency response.")
+    mesh_quality_path = project / "mesh_quality.json"
+    if mesh_quality_path.is_file():
+        mesh_quality = json.loads(mesh_quality_path.read_text())
+        if mesh_quality.get("warning_count"):
+            warnings.append(f"{mesh_quality['warning_count']} exported triangles "
+                            "exceed NumCalc aspect-ratio warning limit (10). "
+                            "See mesh_quality.csv for element IDs.")
+        for estimate in mesh_quality.get("frequency_resolution", []):
+            if estimate["frequency_hz"] <= freq[-1] and estimate["frequency_hz"] >= min(5000, freq[-1]):
+                percentage = 100 * estimate["fraction_over_lambda_over_6"]
+                if percentage > 5:
+                    warnings.append(
+                        f"MESH UNDER-RESOLUTION at {estimate['frequency_hz']} Hz: "
+                        f"{percentage:.1f}% of triangles have an edge exceeding "
+                        f"lambda/6 ({estimate['lambda_over_6_edge_mm']:.2f} mm). "
+                        "This is a screening heuristic, not a convergence test.")
     if float(np.max(gain)) > 60.0:
         warnings.insert(0, (
             f"UNVALIDATED EXTREME GAIN: peak {float(np.max(gain)):+.1f} dB at "
@@ -233,11 +284,11 @@ def render_project(path):
         writer.writerow(["frequency_hz", "gain_relative_free_field_db",
                          "coloration_relative_to_band_median_db",
                          "phase_unwrapped_degrees", "group_delay_ms",
-                         "magnitude_ratio_linear"])
+                         "magnitude_ratio_linear", "unverified_spectrum_flag"])
         for i in range(len(freq)):
             writer.writerow([float(freq[i]), float(gain[i]), float(color_db[i]),
                              float(np.degrees(phase[i])), float(delay_ms[i]),
-                             float(np.abs(h[i]))])
+                             float(np.abs(h[i])), int(suspect[i])])
 
     import matplotlib
     matplotlib.use("Agg")
@@ -257,6 +308,13 @@ def render_project(path):
     axs[1, 1].plot(freq, delay_ms, marker="o", markersize=2.5, lw=1.4)
     axs[1, 1].set_title("Phase-derived group delay (coarse: approximate only)")
     axs[1, 1].set_ylabel("ms")
+    if integrity["first_suspected_frequency_hz"] is not None:
+        for ax in axs.flat:
+            ax.axvspan(integrity["first_suspected_frequency_hz"], freq[-1],
+                       color="#f2aa49", alpha=.09, zorder=0)
+        axs[0, 0].scatter(freq[suspect], gain[suspect], color="#ae3841",
+                          s=10, zorder=4, label="Unverified samples")
+        axs[0, 0].legend(fontsize=8, loc="upper left")
     for ax in axs.flat:
         ax.set_xlabel("Frequency (Hz)")
         ax.grid(alpha=.25)
@@ -281,7 +339,9 @@ def render_project(path):
 
     extrema = point_rows(high, "sampled local high") + point_rows(low, "sampled local low")
     rankings = point_rows(highest, "highest sampled point") + point_rows(lowest, "lowest sampled point")
-    surface, vtk, field_warning = _surface_maps(project, output, freq, color_db)
+    surface, vtk, field_warning = _surface_maps(
+        project, output, freq, color_db,
+        suspect_onset_hz=integrity["first_suspected_frequency_hz"])
     if field_warning:
         warnings.append(field_warning)
     summary = {
@@ -292,7 +352,9 @@ def render_project(path):
         "gain_min_db": float(gain.min()), "gain_max_db": float(gain.max()),
         "observed_span_db": span,
         "sampled_extrema": extrema, "ranked_points": rankings,
-        "warnings": warnings, "surface_map": str(surface) if surface else None,
+        "warnings": warnings,
+        "spectral_integrity": integrity, "solver_log_diagnostics": solver_checks,
+        "surface_map": str(surface) if surface else None,
         "boundary_vtk_files": vtk
     }
     (output / "diagnostics.json").write_text(json.dumps(summary, indent=2))
@@ -307,6 +369,21 @@ def render_project(path):
         )
 
     bullets = "".join(f"<li>{html.escape(w)}</li>" for w in warnings)
+    band_rows = "".join(
+        f"<tr><td>{band['from_hz']:g}–{band['to_hz']:g}</td>"
+        f"<td>{band['points']}</td>"
+        f"<td>{band['gain_min_db']:+.1f} to {band['gain_max_db']:+.1f}</td>"
+        f"<td>{band['largest_adjacent_jump_db']:.1f}</td>"
+        f"<td>{band['suspect_points']}</td></tr>"
+        for band in integrity["bands_500hz"])
+    band_table = (
+        '<h2>Frequency-by-frequency numerical screening (500 Hz bands)</h2>'
+        '<p>Suspect means unverified, not necessarily a false peak. Fast sweeps '
+        'can miss narrow resonances. NumCalc residuals alone do not establish '
+        'mesh convergence.</p><table><thead><tr><th>Band (Hz)</th>'
+        '<th>Samples</th><th>Gain (dB)</th><th>Largest step (dB)</th>'
+        '<th>Unverified samples</th></tr></thead><tbody>'
+        + band_rows + '</tbody></table>')
     image = ('<h2>Pressure distribution on the simulated surface</h2>'
              '<p>This is boundary pressure on the mesh, NOT an interior cross-section. '
              'Each frequency is color-normalized to its own surface median. '
@@ -350,10 +427,12 @@ A narrow resonance between sampled tones will not appear here.</p>
 <table><thead><tr><th>Type</th><th>Hz</th><th>Gain vs free field (dB)</th>
 <th>Relative to this sweep's median (dB)</th></tr></thead><tbody>
 {fmt_rows(extrema or rankings)}</tbody></table>
+{band_table}
 {image}
 <h2>Interpretation limits</h2><div class="warning"><ul>{bullets}</ul></div>
 <p><a href="diagnostic_samples.csv">Frequency table (CSV)</a> ·
 <a href="diagnostics.json">Full numeric summary (JSON)</a> ·
+<a href="solver_checks.json">NumCalc solver convergence checks (JSON)</a> ·
 <a href="pressure.npz">Saved complex microphone pressure (NPZ)</a> ·
 <a href="../Output2HRTF/HRTF_MicProbe.sofa">Original SOFA data</a></p>
 <small>Sources: NumCalc / Mesh2HRTF model output. No measured recording was

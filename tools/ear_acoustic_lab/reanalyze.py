@@ -95,6 +95,30 @@ def _surface_maps(project, output, freq, color_db):
         outpath = output / "surface_pressure.png"
         fig.savefig(outpath, dpi=140)
         plt.close(fig)
+        masks = mesh_views(vertices_mm, faces)
+        flat_mask = next((m for label, m in masks.items()
+                          if label.startswith("Hide large faces")), None)
+        if flat_mask is not None:
+            cut = plt.figure(figsize=(5.1 * len(indices), 5.5), dpi=120)
+            for col, (index, values) in enumerate(zip(indices, surface_values)):
+                ax = cut.add_subplot(1, len(indices), col+1, projection="3d")
+                visible_faces = Poly3DCollection(
+                    faces_mm[flat_mask], linewidths=0, antialiased=False)
+                visible_faces.set_facecolor(cmap(norm(values[flat_mask])))
+                ax.add_collection3d(visible_faces)
+                ax.set_xlim(center[0]-halfwidth, center[0]+halfwidth)
+                ax.set_ylim(center[1]-halfwidth, center[1]+halfwidth)
+                ax.set_zlim(center[2]-halfwidth, center[2]+halfwidth)
+                ax.set_box_aspect((1,1,1))
+                ax.set_axis_off()
+                ax.view_init(elev=20, azim=65)
+                ax.set_title(f"{freq[index]:.0f} Hz - large faces hidden")
+            cut.subplots_adjust(left=.03,right=.88,bottom=.05,top=.91,wspace=.02)
+            cax = cut.add_axes([.90,.20,.014,.58])
+            cut.colorbar(ScalarMappable(norm=norm, cmap=cmap),
+                         cax=cax, label="dB relative to surface median")
+            cut.savefig(output / "surface_cutaway.png", dpi=140)
+            plt.close(cut)
 
         selected_pressure = np.take(pressure[:, 0, :], indices, axis=1)
         selected_frequencies = np.asarray(freq)[indices]

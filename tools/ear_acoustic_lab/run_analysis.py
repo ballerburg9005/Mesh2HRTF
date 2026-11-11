@@ -233,6 +233,19 @@ def run(args):
     if getattr(args, "inspect_resume", ""):
         audit, path = save_audit(args.inspect_resume)
         print_audit(audit, path)
+        # Salvage the verified partial response without pretending that the
+        # missing frequencies have been calculated. Never modify response.csv.
+        try:
+            from partial_response import export_partial_response
+            summary, csv_path = export_partial_response(args.inspect_resume)
+            print(f"[PARTIAL] {summary['verified_points']} verified "
+                  f"frequency points -> {csv_path}", flush=True)
+            if summary['verified_points']:
+                print("[PARTIAL] Scatter plot -> " +
+                      str(csv_path.with_suffix('.png')), flush=True)
+        except Exception as exc:
+            print(f"[PARTIAL WARNING] Cannot export verified samples: {exc}",
+                  flush=True)
         return 0
     if args.resume:
         return resume_project(args)

@@ -1,0 +1,164 @@
+{
+  "triangle_count": 9074,
+  "longest_edge_mm_p50": 1.8891588747295307,
+  "longest_edge_mm_p95": 4.650068568026056,
+  "longest_edge_mm_max": 82.55527042230453,
+  "frequency_resolution": [
+    {
+      "frequency_hz": 5000,
+      "wavelength_mm": 68.6,
+      "lambda_over_6_edge_mm": 11.433333333333334,
+      "count_over_lambda_over_6": 74,
+      "fraction_over_lambda_over_6": 0.008155168613621335
+    },
+    {
+      "frequency_hz": 10000,
+      "wavelength_mm": 34.3,
+      "lambda_over_6_edge_mm": 5.716666666666667,
+      "count_over_lambda_over_6": 277,
+      "fraction_over_lambda_over_6": 0.030526779810447432
+    },
+    {
+      "frequency_hz": 20000,
+      "wavelength_mm": 17.15,
+      "lambda_over_6_edge_mm": 2.8583333333333334,
+      "count_over_lambda_over_6": 1707,
+      "fraction_over_lambda_over_6": 0.18811990301961648
+    },
+    {
+      "frequency_hz": 24000,
+      "wavelength_mm": 14.291666666666666,
+      "lambda_over_6_edge_mm": 2.3819444444444446,
+      "count_over_lambda_over_6": 2798,
+      "fraction_over_lambda_over_6": 0.3083535375798986
+    }
+  ],
+  "warning_count": 12,
+  "fatal_count": 0,
+  "fatal_ids": [],
+  "worst": [
+    {
+      "element_id": 8828,
+      "grade": "WARN",
+      "ratio": 31.226020255484222,
+      "max_edge_mm": 49.12697367996558,
+      "area_mm2": 1.0717862193502243,
+      "centroid_x_mm": -37.83214696233333,
+      "centroid_y_mm": 25.736555735666663,
+      "centroid_z_mm": -21.270570436999996
+    },
+    {
+      "element_id": 8825,
+      "grade": "WARN",
+      "ratio": 19.944093043640965,
+      "max_edge_mm": 29.301453841615476,
+      "area_mm2": 0.9346546585732437,
+      "centroid_x_mm": -37.83215713466667,
+      "centroid_y_mm": 26.221294403333335,
+      "centroid_z_mm": -19.182052135666666
+    },
+    {
+      "element_id": 8892,
+      "grade": "WARN",
+      "ratio": 15.497997413638881,
+      "max_edge_mm": 27.548763117877588,
+      "area_mm2": 1.368215358222623,
+      "centroid_x_mm": -20.251696268666667,
+      "centroid_y_mm": 27.572930654,
+      "centroid_z_mm": 22.305241902666666
+    },
+    {
+      "element_id": 8823,
+      "grade": "WARN",
+      "ratio": 14.538315663014608,
+      "max_edge_mm": 16.091969864466414,
+      "area_mm2": 0.5305076520252711,
+      "centroid_x_mm": -37.832265218,
+      "centroid_y_mm": 25.923459371,
+      "centroid_z_mm": -26.92577362066667
+    },
+    {
+      "element_id": 8831,
+      "grade": "WARN",
+      "ratio": 13.719385435662296,
+      "max_edge_mm": 63.596811830775934,
+      "area_mm2": 9.304708973850827,
+      "centroid_x_mm": -37.83172861733333,
+      "centroid_y_mm": 24.746132532999997,
+      "centroid_z_mm": -19.426961263333332
+    },
+    {
+      "element_id": 8944,
+      "grade": "WARN",
+      "ratio": 11.266156271347993,
+      "max_edge_mm": 4.201764595551408,
+      "area_mm2": 0.06023006232077579,
+      "centroid_x_mm": -2.412020405333333,
+      "centroid_y_mm": 0.6141557296666668,
+      "centroid_z_mm": 0.8364255030000001
+    },
+    {
+      "element_id": 8824,
+      "grade": "WARN",
+      "ratio": 10.96079697743479,
+      "max_edge_mm": 13.20976448512128,
+      "area_mm2": 0.6289372278841725,
+      "centroid_x_mm": -37.83213043200001,
+      "centroid_y_mm": 26.59617996233333,
+      "centroid_z_mm": -11.290647030333334
+    },
+    {
+      "element_id": 8842,
+      "grade": "WARN",
+      "ratio": 10.834522794635456,
+      "max_edge_mm": 41.59828891361739,
+      "area_mm2": 6.383116609635574,
+      "centroid_x_mm": 30.167634964,
+      "centroid_y_mm": 20.681075414000002,
+      "centroid_z_mm": -21.683850049999997
+    },
+    {
+      "element_id": 8891,
+      "grade": "WARN",
+      "ratio": 10.531233596915426,
+      "max_edge_mm": 41.9652735047478,
+      "area_mm2": 6.875796957323905,
+      "centroid_x_mm": -15.182765722333333,
+      "centroid_y_mm": 28.501991272,
+      "centroid_z_mm": 22.305437724
+    },
+    {
+      "element_id": 8863,
+      "grade": "WARN",
+      "ratio": 10.491004912333105,
+      "max_edge_mm": 10.101149142349396,
+      "area_mm2": 0.40142905770669063,
+      "centroid_x_mm": -19.876333872333337,
+      "centroid_y_mm": 25.271862029999998,
+      "centroid_z_mm": -45.693585713666664
+    },
+    {
+      "element_id": 8888,
+      "grade": "WARN",
+      "ratio": 10.337701891046995,
+      "max_edge_mm": 14.422182615198965,
+      "area_mm2": 0.8427822728234786,
+      "centroid_x_mm": -5.9687014419999995,
+      "centroid_y_mm": 30.592915853,
+      "centroid_z_mm": 22.305259705
+    },
+    {
+      "element_id": 8933,
+      "grade": "WARN",
+      "ratio": 10.068020306706439,
+      "max_edge_mm": 2.847251245057939,
+      "area_mm2": 0.034630984440299696,
+      "centroid_x_mm": -1.2565479080000002,
+      "centroid_y_mm": 0.6037832896666666,
+      "centroid_z_mm": -2.253855149
+    }
+  ],
+  "report_csv": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261110_234807_961528/mesh_quality.csv",
+  "overlay_obj": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261110_234807_961528/mesh_bad_triangles.obj",
+  "explanation": "Matches NumCalc NC_Input.cpp: for a triangle, ratio=max_edge/(1.51967*sqrt(area)); warning>10; fatal>100. Manifoldness alone does not imply numerically well-shaped elements. lambda/6 figures estimate discretization risk, not verified BEM convergence."
+}

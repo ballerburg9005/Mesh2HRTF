@@ -122,6 +122,8 @@
   ],
   "warnings": [
     "PARTIAL SPECTRUM: 100\u201310000 Hz only. Not a full audio-band EQ profile.",
+    "ABRUPT SPECTRAL INSTABILITY: adjacent solved frequencies differ by up to 112.8 dB. Verify the solver and mesh before interpreting narrow peaks.",
+    "UNVALIDATED EXTREME GAIN: peak +132.1 dB at 6850 Hz relative to free field. Do not treat this as a physical resonance or use it for EQ without checking numerical convergence, surface quality and fluid connectivity.",
     "This is a linear frequency-domain BEM result, not measured microphone distortion.",
     "Only the listed frequency points were calculated; peaks between points may be completely absent from this report.",
     "A constant positive gain does not establish calibrated SPL, perceptual coloration or a valid canal boundary model.",

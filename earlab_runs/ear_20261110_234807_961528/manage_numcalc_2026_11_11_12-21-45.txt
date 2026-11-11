@@ -1,0 +1,554 @@
+
+Starting manage_numcalc with the following arguments [Nov 11 2026, 12:21:45]
+----------------------------------------------------------------------------
+project_path: /home/l0rd/Mesh2HRTF/earlab_runs/ear_20261110_234807_961528
+numcalc_path: /home/l0rd/Mesh2HRTF/mesh2hrtf/NumCalc/bin/NumCalc
+max_ram_load: 28.19 GB (30.69 GB detected, 12.81 GB available)
+ram_safety_factor: 2.0
+max_cpu_load: 90 %
+max_instances: 1 (12 cores detected)
+wait_time: 30 seconds
+starting_order: alternate
+confirm_errors: False
+
+NumCalc executable: /home/l0rd/Mesh2HRTF/mesh2hrtf/NumCalc/bin/NumCalc
+
+
+Per project summary of instances that will be run
+-------------------------------------------------
+Detected 1 Mesh2HRTF projects in
+/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261110_234807_961528
+
+
+65/80 frequency steps to run in 'ear_20261110_234807_961528'
+
+
+Started 'ear_20261110_234807_961528' project (1/1, Nov 11 2026, 12:21:45)
+-------------------------------------------------------------------------
+Running 65/80 unfinished frequency steps in the project
+
+1/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 12:21:45)
+source 1, step 80, 20000.0 Hz
+estimated 4.89 GB RAM of available 10.31 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 12:22:15)
+1 NumCalc instances running at 30.90% CPU load
+5.74 GB RAM available (22.45 GB used), 1.44 GB required
+
+2/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 12:27:36)
+source 1, step 17, 4130.38 Hz
+estimated 0.72 GB RAM of available 10.52 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 12:28:06)
+1 NumCalc instances running at 51.20% CPU load
+9.43 GB RAM available (18.75 GB used), 1.44 GB required
+
+3/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 12:28:32)
+source 1, step 79, 19748.1 Hz
+estimated 4.89 GB RAM of available 10.13 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 12:29:03)
+1 NumCalc instances running at 50.80% CPU load
+5.53 GB RAM available (22.66 GB used), 1.44 GB required
+
+4/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 12:34:40)
+source 1, step 18, 4382.28 Hz
+estimated 0.72 GB RAM of available 10.53 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 12:35:10)
+1 NumCalc instances running at 40.30% CPU load
+9.8 GB RAM available (18.38 GB used), 1.53 GB required
+
+5/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 12:35:35)
+source 1, step 78, 19496.2 Hz
+estimated 4.71 GB RAM of available 10.50 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 12:36:06)
+1 NumCalc instances running at 43.10% CPU load
+6.03 GB RAM available (22.16 GB used), 1.53 GB required
+
+6/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 12:42:48)
+source 1, step 19, 4634.18 Hz
+estimated 0.76 GB RAM of available 10.14 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 12:43:18)
+1 NumCalc instances running at 48.40% CPU load
+9.33 GB RAM available (18.86 GB used), 1.53 GB required
+
+7/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 12:43:44)
+source 1, step 77, 19244.3 Hz
+estimated 4.54 GB RAM of available 9.95 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 12:44:14)
+1 NumCalc instances running at 39.20% CPU load
+6.02 GB RAM available (22.16 GB used), 1.53 GB required
+
+8/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 12:49:19)
+source 1, step 20, 4886.08 Hz
+estimated 0.76 GB RAM of available 10.36 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 12:49:49)
+1 NumCalc instances running at 46.70% CPU load
+9.62 GB RAM available (18.57 GB used), 1.63 GB required
+
+9/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 12:50:13)
+source 1, step 76, 18992.4 Hz
+estimated 4.54 GB RAM of available 9.62 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 12:50:44)
+1 NumCalc instances running at 37.30% CPU load
+6.0 GB RAM available (22.19 GB used), 1.63 GB required
+
+10/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 12:55:45)
+source 1, step 21, 5137.97 Hz
+estimated 0.81 GB RAM of available 6.57 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 12:56:15)
+1 NumCalc instances running at 36.60% CPU load
+9.73 GB RAM available (18.45 GB used), 1.74 GB required
+
+11/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 12:56:46)
+source 1, step 75, 18740.5 Hz
+estimated 4.37 GB RAM of available 10.68 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 12:57:16)
+1 NumCalc instances running at 47.20% CPU load
+6.34 GB RAM available (21.84 GB used), 1.74 GB required
+
+12/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 13:02:31)
+source 1, step 22, 5389.87 Hz
+estimated 0.87 GB RAM of available 10.42 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 13:03:01)
+1 NumCalc instances running at 37.30% CPU load
+9.6 GB RAM available (18.59 GB used), 1.74 GB required
+
+13/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 13:03:42)
+source 1, step 74, 18488.6 Hz
+estimated 4.37 GB RAM of available 10.40 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 13:04:12)
+1 NumCalc instances running at 43.40% CPU load
+5.91 GB RAM available (22.27 GB used), 1.74 GB required
+
+14/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 13:09:29)
+source 1, step 23, 5641.77 Hz
+estimated 0.87 GB RAM of available 10.14 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 13:09:59)
+1 NumCalc instances running at 41.10% CPU load
+9.65 GB RAM available (18.54 GB used), 1.85 GB required
+
+15/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 13:10:38)
+source 1, step 73, 18236.7 Hz
+estimated 4.20 GB RAM of available 10.09 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 13:11:08)
+1 NumCalc instances running at 38.40% CPU load
+6.5 GB RAM available (21.68 GB used), 1.85 GB required
+
+16/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 13:15:43)
+source 1, step 24, 5893.67 Hz
+estimated 0.93 GB RAM of available 10.34 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 13:16:13)
+1 NumCalc instances running at 39.20% CPU load
+9.53 GB RAM available (18.65 GB used), 1.85 GB required
+
+17/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 13:17:10)
+source 1, step 72, 17984.8 Hz
+estimated 4.20 GB RAM of available 10.38 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 13:17:40)
+1 NumCalc instances running at 38.20% CPU load
+6.42 GB RAM available (21.77 GB used), 1.85 GB required
+
+18/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 13:22:14)
+source 1, step 25, 6145.57 Hz
+estimated 0.93 GB RAM of available 10.37 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 13:22:44)
+1 NumCalc instances running at 40.00% CPU load
+9.5 GB RAM available (18.68 GB used), 1.97 GB required
+
+19/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 13:23:41)
+source 1, step 71, 17732.9 Hz
+estimated 4.03 GB RAM of available 10.35 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 13:24:11)
+1 NumCalc instances running at 38.20% CPU load
+6.39 GB RAM available (21.79 GB used), 1.97 GB required
+
+20/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 13:28:54)
+source 1, step 26, 6397.47 Hz
+estimated 0.99 GB RAM of available 10.45 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 13:29:25)
+1 NumCalc instances running at 34.10% CPU load
+9.43 GB RAM available (18.75 GB used), 2.1 GB required
+
+21/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 13:30:19)
+source 1, step 70, 17481.0 Hz
+estimated 3.87 GB RAM of available 10.31 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 13:30:49)
+1 NumCalc instances running at 35.50% CPU load
+6.76 GB RAM available (21.43 GB used), 2.1 GB required
+
+22/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 13:35:00)
+source 1, step 28, 6901.27 Hz
+estimated 1.05 GB RAM of available 10.54 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 13:35:31)
+1 NumCalc instances running at 37.10% CPU load
+9.49 GB RAM available (18.70 GB used), 2.1 GB required
+
+23/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 13:36:29)
+source 1, step 69, 17229.1 Hz
+estimated 3.87 GB RAM of available 9.12 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 13:36:59)
+1 NumCalc instances running at 33.30% CPU load
+6.85 GB RAM available (21.34 GB used), 2.1 GB required
+
+24/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 13:41:11)
+source 1, step 27, 6649.37 Hz
+estimated 1.05 GB RAM of available 10.43 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 13:41:41)
+1 NumCalc instances running at 47.50% CPU load
+9.1 GB RAM available (19.09 GB used), 2.24 GB required
+
+25/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 13:42:33)
+source 1, step 68, 16977.2 Hz
+estimated 3.71 GB RAM of available 12.67 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 13:43:03)
+1 NumCalc instances running at 12.50% CPU load
+9.29 GB RAM available (18.89 GB used), 2.24 GB required
+
+26/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 13:46:12)
+source 1, step 30, 7405.06 Hz
+estimated 1.12 GB RAM of available 12.43 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 13:46:42)
+1 NumCalc instances running at 39.50% CPU load
+11.47 GB RAM available (16.72 GB used), 2.24 GB required
+
+27/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 13:47:28)
+source 1, step 67, 16725.3 Hz
+estimated 3.71 GB RAM of available 12.55 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 13:47:58)
+1 NumCalc instances running at 13.90% CPU load
+9.3 GB RAM available (18.89 GB used), 2.24 GB required
+
+28/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 13:51:06)
+source 1, step 29, 7153.16 Hz
+estimated 1.12 GB RAM of available 12.69 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 13:51:36)
+1 NumCalc instances running at 19.80% CPU load
+11.84 GB RAM available (16.34 GB used), 2.38 GB required
+
+29/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 13:52:17)
+source 1, step 66, 16473.4 Hz
+estimated 3.56 GB RAM of available 12.78 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 13:52:48)
+1 NumCalc instances running at 19.20% CPU load
+9.27 GB RAM available (18.91 GB used), 2.38 GB required
+
+30/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 13:55:33)
+source 1, step 31, 7656.96 Hz
+estimated 1.19 GB RAM of available 12.64 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 13:56:03)
+1 NumCalc instances running at 10.70% CPU load
+11.51 GB RAM available (16.68 GB used), 2.53 GB required
+
+31/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 13:56:51)
+source 1, step 65, 16221.5 Hz
+estimated 3.41 GB RAM of available 12.26 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 13:57:21)
+1 NumCalc instances running at 13.20% CPU load
+9.34 GB RAM available (18.85 GB used), 2.53 GB required
+
+32/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 14:00:27)
+source 1, step 32, 7908.86 Hz
+estimated 1.27 GB RAM of available 11.96 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 14:00:57)
+1 NumCalc instances running at 21.50% CPU load
+10.8 GB RAM available (17.38 GB used), 2.53 GB required
+
+33/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 14:01:47)
+source 1, step 64, 15969.6 Hz
+estimated 3.41 GB RAM of available 12.45 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 14:02:17)
+1 NumCalc instances running at 10.90% CPU load
+9.42 GB RAM available (18.77 GB used), 2.53 GB required
+
+34/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 14:05:18)
+source 1, step 33, 8160.76 Hz
+estimated 1.27 GB RAM of available 12.49 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 14:05:48)
+1 NumCalc instances running at 13.20% CPU load
+11.42 GB RAM available (16.76 GB used), 2.69 GB required
+
+35/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 14:06:38)
+source 1, step 63, 15717.7 Hz
+estimated 3.26 GB RAM of available 12.60 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 14:07:08)
+1 NumCalc instances running at 10.90% CPU load
+9.64 GB RAM available (18.55 GB used), 2.69 GB required
+
+36/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 14:09:38)
+source 1, step 34, 8412.66 Hz
+estimated 1.35 GB RAM of available 12.03 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 14:10:08)
+1 NumCalc instances running at 11.50% CPU load
+10.9 GB RAM available (17.29 GB used), 2.69 GB required
+
+37/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 14:11:02)
+source 1, step 62, 15465.8 Hz
+estimated 3.26 GB RAM of available 12.22 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 14:11:32)
+1 NumCalc instances running at 19.70% CPU load
+9.11 GB RAM available (19.07 GB used), 2.69 GB required
+
+38/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 14:14:00)
+source 1, step 35, 8664.56 Hz
+estimated 1.35 GB RAM of available 8.86 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 14:14:30)
+1 NumCalc instances running at 19.00% CPU load
+10.67 GB RAM available (17.51 GB used), 2.86 GB required
+
+39/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 14:15:26)
+source 1, step 61, 15213.9 Hz
+estimated 3.12 GB RAM of available 10.75 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 14:15:56)
+1 NumCalc instances running at 10.80% CPU load
+9.06 GB RAM available (19.12 GB used), 2.86 GB required
+
+40/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 14:18:20)
+source 1, step 36, 8916.46 Hz
+estimated 1.43 GB RAM of available 11.96 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 14:18:50)
+1 NumCalc instances running at 15.70% CPU load
+10.48 GB RAM available (17.70 GB used), 3.03 GB required
+
+41/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 14:19:46)
+source 1, step 60, 14962.0 Hz
+estimated 2.98 GB RAM of available 10.60 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 14:20:17)
+1 NumCalc instances running at 15.70% CPU load
+8.87 GB RAM available (19.32 GB used), 3.03 GB required
+
+42/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 14:22:29)
+source 1, step 38, 9420.25 Hz
+estimated 1.52 GB RAM of available 11.82 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 14:22:59)
+1 NumCalc instances running at 21.30% CPU load
+10.25 GB RAM available (17.94 GB used), 3.03 GB required
+
+43/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 14:24:10)
+source 1, step 59, 14710.1 Hz
+estimated 2.98 GB RAM of available 11.79 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 14:24:40)
+1 NumCalc instances running at 12.40% CPU load
+8.99 GB RAM available (19.20 GB used), 3.03 GB required
+
+44/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 14:26:55)
+source 1, step 37, 9168.35 Hz
+estimated 1.52 GB RAM of available 11.73 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 14:27:25)
+1 NumCalc instances running at 21.50% CPU load
+10.31 GB RAM available (17.88 GB used), 3.22 GB required
+
+45/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 14:28:38)
+source 1, step 58, 14458.2 Hz
+estimated 2.85 GB RAM of available 11.83 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 14:29:08)
+1 NumCalc instances running at 15.40% CPU load
+9.15 GB RAM available (19.03 GB used), 3.22 GB required
+
+46/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 14:31:24)
+source 1, step 40, 9924.05 Hz
+estimated 1.61 GB RAM of available 11.94 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 14:31:54)
+1 NumCalc instances running at 11.50% CPU load
+10.37 GB RAM available (17.81 GB used), 3.22 GB required
+
+47/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 14:32:57)
+source 1, step 57, 14206.3 Hz
+estimated 2.85 GB RAM of available 11.95 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 14:33:27)
+1 NumCalc instances running at 10.70% CPU load
+8.97 GB RAM available (19.22 GB used), 3.22 GB required
+
+48/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 14:35:43)
+source 1, step 39, 9672.15 Hz
+estimated 1.61 GB RAM of available 8.80 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 14:36:13)
+1 NumCalc instances running at 14.60% CPU load
+10.43 GB RAM available (17.75 GB used), 3.25 GB required
+
+49/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 14:37:17)
+source 1, step 56, 13954.4 Hz
+estimated 2.72 GB RAM of available 11.92 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 14:37:47)
+1 NumCalc instances running at 15.60% CPU load
+9.18 GB RAM available (19.01 GB used), 3.25 GB required
+
+50/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 14:39:47)
+source 1, step 1, 100.0 Hz
+estimated 1.63 GB RAM of available 11.98 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 14:40:17)
+1 NumCalc instances running at 11.70% CPU load
+10.47 GB RAM available (17.71 GB used), 3.4 GB required
+
+51/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 14:41:37)
+source 1, step 55, 13702.5 Hz
+estimated 2.59 GB RAM of available 11.95 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 14:42:07)
+1 NumCalc instances running at 9.80% CPU load
+9.5 GB RAM available (18.69 GB used), 3.4 GB required
+
+52/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 14:44:01)
+source 1, step 41, 10175.9 Hz
+estimated 1.70 GB RAM of available 9.07 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 14:44:31)
+1 NumCalc instances running at 8.40% CPU load
+10.26 GB RAM available (17.92 GB used), 3.6 GB required
+
+53/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 14:45:41)
+source 1, step 54, 13450.6 Hz
+estimated 2.59 GB RAM of available 11.82 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 14:46:11)
+1 NumCalc instances running at 9.20% CPU load
+9.3 GB RAM available (18.89 GB used), 3.6 GB required
+
+54/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 14:48:04)
+source 1, step 42, 10427.8 Hz
+estimated 1.80 GB RAM of available 11.93 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 14:48:34)
+1 NumCalc instances running at 9.90% CPU load
+10.23 GB RAM available (17.95 GB used), 3.6 GB required
+
+55/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 14:49:46)
+source 1, step 53, 13198.7 Hz
+estimated 2.47 GB RAM of available 11.85 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 14:50:16)
+1 NumCalc instances running at 9.20% CPU load
+9.48 GB RAM available (18.70 GB used), 3.6 GB required
+
+56/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 14:52:01)
+source 1, step 43, 10679.7 Hz
+estimated 1.80 GB RAM of available 9.52 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 14:52:31)
+1 NumCalc instances running at 16.80% CPU load
+10.12 GB RAM available (18.06 GB used), 3.8 GB required
+
+57/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 14:53:44)
+source 1, step 52, 12946.8 Hz
+estimated 2.47 GB RAM of available 12.25 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 14:54:14)
+1 NumCalc instances running at 10.80% CPU load
+9.83 GB RAM available (18.35 GB used), 3.8 GB required
+
+58/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 14:56:04)
+source 1, step 44, 10931.6 Hz
+estimated 1.90 GB RAM of available 12.38 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 14:56:34)
+1 NumCalc instances running at 12.20% CPU load
+10.59 GB RAM available (17.59 GB used), 3.8 GB required
+
+59/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 14:58:02)
+source 1, step 51, 12694.9 Hz
+estimated 2.35 GB RAM of available 12.22 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 14:58:32)
+1 NumCalc instances running at 13.30% CPU load
+10.13 GB RAM available (18.05 GB used), 3.8 GB required
+
+60/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 15:01:35)
+source 1, step 45, 11183.5 Hz
+estimated 1.90 GB RAM of available 12.48 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 15:02:06)
+1 NumCalc instances running at 12.40% CPU load
+10.32 GB RAM available (17.87 GB used), 4.01 GB required
+
+61/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 15:03:39)
+source 1, step 50, 12443.0 Hz
+estimated 2.23 GB RAM of available 11.92 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 15:04:09)
+1 NumCalc instances running at 25.40% CPU load
+10.12 GB RAM available (18.06 GB used), 4.01 GB required
+
+62/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 15:05:57)
+source 1, step 46, 11435.4 Hz
+estimated 2.01 GB RAM of available 12.11 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 15:06:27)
+1 NumCalc instances running at 18.90% CPU load
+10.33 GB RAM available (17.86 GB used), 4.23 GB required
+
+63/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 15:08:04)
+source 1, step 49, 12191.1 Hz
+estimated 2.23 GB RAM of available 12.20 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 15:08:34)
+1 NumCalc instances running at 42.40% CPU load
+9.96 GB RAM available (18.22 GB used), 4.23 GB required
+
+64/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 15:10:22)
+source 1, step 47, 11687.3 Hz
+estimated 2.12 GB RAM of available 11.93 GB required
+
+... waiting for resources and checking every second (Nov 11 2026, 15:10:53)
+1 NumCalc instances running at 36.50% CPU load
+10.1 GB RAM available (18.09 GB used), 4.23 GB required
+
+65/65 starting instance from 'ear_20261110_234807_961528' (Nov 11 2026, 15:12:36)
+source 1, step 48, 11939.2 Hz
+estimated 2.12 GB RAM of available 12.10 GB required
+
+
+... waiting for the last NumCalc instances to finish (checking every second, Nov 11 2026, 15:13:07)
+
+
+
+The following instances did not finish
+--------------------------------------
+'ear_20261110_234807_961528': source 1 step 1; source 1 step 17; source 1 step 18; source 1 step 19; source 1 step 20; source 1 step 21; source 1 step 22; source 1 step 23; source 1 step 24; source 1 step 25; source 1 step 26; source 1 step 27; source 1 step 28; source 1 step 29; source 1 step 30; source 1 step 31; source 1 step 32; source 1 step 33; source 1 step 34; source 1 step 35; source 1 step 36; source 1 step 37; source 1 step 38; source 1 step 39; source 1 step 40; source 1 step 41; source 1 step 42; source 1 step 43; source 1 step 44; source 1 step 45; source 1 step 46; source 1 step 47; source 1 step 48; source 1 step 49; source 1 step 50; source 1 step 51; source 1 step 52; source 1 step 53; source 1 step 54; source 1 step 55; source 1 step 56; source 1 step 57; source 1 step 58; source 1 step 59; source 1 step 60; source 1 step 61; source 1 step 62; source 1 step 63; source 1 step 64; source 1 step 65; source 1 step 66; source 1 step 67; source 1 step 68; source 1 step 69; source 1 step 70; source 1 step 71; source 1 step 72; source 1 step 73; source 1 step 74; source 1 step 75; source 1 step 76; source 1 step 77; source 1 step 78; source 1 step 79; source 1 step 80
+Finished at Nov 11 2026, 15:14:49

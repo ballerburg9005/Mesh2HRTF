@@ -1,0 +1,145 @@
+istart= 23 iend = 23
+
+---------- NumCalc started: 11/11/2026 13:9:29 ----------
+
+Running on:         SYBURG
+
+3D analysis
+Job title: Ear acoustic cavity and microphone response
+
+Warning: Element with very long side found!
+external elemen number = 8823
+internal element number = 8823
+
+
+Warning: Element with very long side found!
+external elemen number = 8824
+internal element number = 8824
+
+
+Warning: Element with very long side found!
+external elemen number = 8825
+internal element number = 8825
+
+
+Warning: Element with very long side found!
+external elemen number = 8825
+internal element number = 8825
+
+
+Warning: Element with very long side found!
+external elemen number = 8828
+internal element number = 8828
+
+
+Warning: Element with very long side found!
+external elemen number = 8828
+internal element number = 8828
+
+
+Warning: Element with very long side found!
+external elemen number = 8831
+internal element number = 8831
+
+
+Warning: Element with very long side found!
+external elemen number = 8831
+internal element number = 8831
+
+
+Warning: Element with very long side found!
+external elemen number = 8842
+internal element number = 8842
+
+
+Warning: Element with very long side found!
+external elemen number = 8863
+internal element number = 8863
+
+
+Warning: Element with very long side found!
+external elemen number = 8888
+internal element number = 8888
+
+
+Warning: Element with very long side found!
+external elemen number = 8891
+internal element number = 8891
+
+
+Warning: Element with very long side found!
+external elemen number = 8892
+internal element number = 8892
+
+
+Warning: Element with very long side found!
+external elemen number = 8892
+internal element number = 8892
+
+
+Warning: Element with very long side found!
+external elemen number = 8933
+internal element number = 8933
+
+
+Warning: Element with very long side found!
+external elemen number = 8944
+internal element number = 8944
+
+
+Step 23, Frequency = 5641.77 Hz
+
+Direct multilevel fast multipole BEM
+
+Number of equations = 9074
+
+Informations about clusters:
+   Level    Num. of clusters    Maximum radius   Minimum radius
+     0           46                0.0630797         0.00959122
+     1          145                0.0630797         0.00158152
+ resu. nets       1                0.000105409         0.000105409
+
+
+Informations about the FMM expansion:
+   Level    N. expa. terms    N. p. theta    N. p. phi    N. p. sphere
+     0          15              15              30           450
+     1          15              15              30           450
+
+CGS: err_ori = 9.20978
+10 0.00095765
+10 Abs Error:0.00881975
+20 0.0836971
+20 Abs Error:0.770832
+30 0.149437
+30 Abs Error:1.37629
+40 0.00660176
+40 Abs Error:0.0608008
+50 0.000133424
+50 Abs Error:0.00122881
+60 1.38637e-06
+60 Abs Error:1.27682e-05
+70 0.00024297
+70 Abs Error:0.0022377
+80 0.000704699
+80 Abs Error:0.00649013
+90 6.4315e-07
+90 Abs Error:5.92327e-06
+100 1.56935e-06
+100 Abs Error:1.44534e-05
+110 1.02534e-05
+110 Abs Error:9.44319e-05
+120 8.16412e-07
+120 Abs Error:7.51897e-06
+130 8.76071e-06
+130 Abs Error:8.06842e-05
+140 1.0689e-07
+140 Abs Error:9.84431e-07
+150 2.37676e-07
+150 Abs Error:2.18895e-06
+160 3.11924e-08
+160 Abs Error:2.87275e-07
+163 9.32869e-10
+
+CGS failed true residual verification; trying restarted GMRES.
+
+CGS and GMRES failed convergence. Frequency rejected without pressure output; do not interpret it as resonance.

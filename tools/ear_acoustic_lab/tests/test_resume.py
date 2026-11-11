@@ -50,6 +50,7 @@ class ResumeTest(unittest.TestCase):
                               return_value=root/"some_snapshot"):
                 self.assertEqual(run_analysis.resume_project(args), 0)
             manager.assert_called_once()
+            self.assertTrue(manager.call_args.kwargs["stop_on_failed_step"])
             self.assertEqual(manager.call_args.kwargs["max_instances"], 2)
             self.assertTrue((project/"analysis"/"response.csv").is_file())
 

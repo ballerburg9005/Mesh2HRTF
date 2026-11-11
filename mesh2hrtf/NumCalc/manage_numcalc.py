@@ -583,34 +583,28 @@ def _check_project(project, numcalc_executable, log_file):
         # loop frequency steps
         for step in range(estimates.shape[0]):
 
-            if not os.path.isfile(os.path.join(
-                    ff, "be.out", f"be.{1 + step}", "pEvalGrid")):
+            pressure_file = os.path.join(
+                ff, "be.out", f"be.{1 + step}", "pEvalGrid")
+            nc_log = os.path.join(ff, f"NC{1 + step}-{1 + step}.out")
 
-                # there are no output files, process this
+            # NumCalc writes pEvalGrid before the log's "End time:" marker.
+            # A partially written or abandoned grid must not be reused.
+            pressure_ok = (os.path.isfile(pressure_file) and
+                           os.path.getsize(pressure_file) > 0)
+            completed = False
+            if pressure_ok and os.path.isfile(nc_log):
+                with open(nc_log, "r", encoding="utf8",
+                          errors="replace") as f:
+                    log_text = f.read()
+                completed = ("End time:" in log_text and
+                             "CGS and GMRES failed convergence" not in log_text
+                             and "GMRES fallback failed after" not in log_text)
+            if not completed:
                 if instances_to_run is None:
                     instances_to_run = np.atleast_2d(estimates[step])
                 else:
                     instances_to_run = np.append(
                         instances_to_run, np.atleast_2d(estimates[step]),
                         axis=0)
-
-            elif os.path.isfile(os.path.join(
-                    ff, f'NC{1 + step}-{1 + step}.out')):
-
-                # check if "NCx-x.out" contains "End time:" to confirm that
-                # the simulation was completed.
-                nc_out = os.path.join(
-                    ff, f'NC{1 + step}-{1 + step}.out')
-                with open(nc_out, "r", encoding="utf8", newline="\n") as f:
-                    nc_out = "".join(f.readlines())
-
-                if 'End time:' not in nc_out:
-                    # instance did not finish
-                    if instances_to_run is None:
-                        instances_to_run = np.atleast_2d(estimates[step])
-                    else:
-                        instances_to_run = np.append(
-                            instances_to_run, np.atleast_2d(estimates[step]),
-                            axis=0)
 
     return all_instances, instances_to_run, source_counter

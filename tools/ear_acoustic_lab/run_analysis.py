@@ -63,7 +63,11 @@ def safe_numcalc_options(args):
     """Conservative system-wide physical-memory cap, without swap budget."""
     import psutil
     total_gib = psutil.virtual_memory().total / (1024 ** 3)
-    reserved = max(8.0, total_gib * 0.35)
+    # Reserve physical RAM for Linux and unestimated allocations, but do not
+    # strand otherwise available RAM behind an arbitrary 35% cap. On a
+    # 30 GiB machine, this reserves 2.5 GiB; 13 GiB available can satisfy
+    # a 9.78 GiB safety-adjusted job without scheduling swap.
+    reserved = max(2.5, total_gib * 0.08)
     if total_gib <= reserved + 1.0:
         raise RuntimeError("Not enough physical RAM after NumCalc safety reserve")
     budget = total_gib - reserved
@@ -71,8 +75,8 @@ def safe_numcalc_options(args):
     print(f"[RAM GUARD] {total_gib:.1f} GiB physical RAM; "
           f"reserve {reserved:.1f} GiB; global memory ceiling {budget:.1f} GiB; "
           f"{workers} worker(s).", flush=True)
-    print("[RAM GUARD] 2x NumCalc memory estimates and 30-second stagger. "
-          "Jobs that cannot fit without swap are refused.", flush=True)
+    print("[RAM GUARD] Only psutil.available physical RAM counts, not swap. "
+          "2x NumCalc estimates; 30-second stagger.", flush=True)
     return dict(max_ram_load=budget, ram_safety_factor=2.0,
                 max_instances=workers, wait_time=30, max_cpu_load=90,
                 confirm_errors=False)

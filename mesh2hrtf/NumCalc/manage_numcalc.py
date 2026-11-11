@@ -303,6 +303,7 @@ def manage_numcalc(project_path=None, numcalc_path=None,
 
         # main loop for starting instances
         started_instance = False  # init
+        memory_stall_since = None
 
         while instances_to_run.shape[0]:
 
@@ -323,6 +324,26 @@ def manage_numcalc(project_path=None, numcalc_path=None,
                     or running_instances >= max_instances \
                     or ram_available < ram_required:
 
+                # A stalled manager with zero active workers can never free
+                # enough NumCalc memory on its own. Report the blocker rather
+                # than spinning indefinitely (and preserve completed steps).
+                if running_instances == 0 and ram_available < ram_required:
+                    if memory_stall_since is None:
+                        memory_stall_since = time.monotonic()
+                    elif time.monotonic() - memory_stall_since >= 120:
+                        _raise_error((
+                            "NumCalc scheduling stalled for 120 seconds with "
+                            "no active workers: remaining step needs at least "
+                            f"{ram_required:.2f} GiB including the safety "
+                            f"factor, but only {ram_available:.2f} GiB of "
+                            "the physical-memory budget is available. "
+                            "Close other memory-heavy applications or reduce "
+                            "the RAM reserve, then resume this project. "
+                            "Completed frequencies remain intact."),
+                            text_color_red, log_file, confirm_errors)
+                else:
+                    memory_stall_since = None
+
                 # print message (only done once between launching instances)
                 if started_instance:
                     _print_message(
@@ -340,10 +361,20 @@ def manage_numcalc(project_path=None, numcalc_path=None,
                 time.sleep(wait_time_busy)
                 continue
 
-            # find frequency step with the highest possible RAM consumption
-            for idx, ram_required in enumerate(instances_to_run[:, 3]):
-                if ram_required <= ram_available:
+            memory_stall_since = None
+            # Select using the SAME safety-adjusted estimate as the gate
+            # above. The original code checked the minimum x factor, then
+            # selected using an unscaled number, which could overcommit RAM.
+            for idx, estimated_ram in enumerate(instances_to_run[:, 3]):
+                if estimated_ram * ram_safety_factor <= ram_available:
                     break
+            else:
+                # The resource gate checks the minimum, so this should be
+                # unreachable. Refuse to run if the estimate table is bad.
+                _raise_error(
+                    "No NumCalc job fits the safety-adjusted physical RAM "
+                    "budget; refusing to overcommit memory.",
+                    text_color_red, log_file, confirm_errors)
 
             # start new NumCalc instance
             source = int(instances_to_run[idx, 0])

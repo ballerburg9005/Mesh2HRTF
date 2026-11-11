@@ -22,12 +22,19 @@ If your clone's `origin` is `Any2HRTF/Mesh2HRTF` rather than your fork, first ru
 
 For desktop machines with 32 GiB of RAM the previous **four workers, two-second
 launch stagger and no fixed memory budget** could cause severe swap traffic.
-The default is now **one worker** (two maximum), with a *system-wide*
-physical-memory cap leaving 35% of RAM or at least 8 GiB free for other work.
-NumCalc's per-frequency memory estimate is multiplied by two, and process starts
-are staggered by 30 seconds. The same limit applies on resumed runs; a step that
-cannot fit safely is refused rather than deliberately scheduled into swap.
-This cannot guarantee zero swapping if RAM use grows in other applications.
+The default remains **one worker** (two maximum), with a *system-wide*
+physical-memory cap leaving at least 2.5 GiB or 8% of installed RAM available
+for other work. The former 35%/8 GiB reserve deadlocked a nearly finished
+80-frequency run despite 13 GiB of Linux-reported available physical RAM.
+NumCalc's per-frequency memory estimate remains multiplied by two, and process
+starts remain staggered by 30 seconds. The manager now applies that same safety
+factor when **selecting** a job, preventing accidental memory overcommit.
+If there are no NumCalc workers and even the smallest remaining job cannot
+fit for two minutes, it exits with an actionable error rather than waiting
+forever. The same scheduling rules apply to resumed runs.
+No swap capacity is counted as free physical RAM. Linux's `Swap: used`
+number alone is not proof of ongoing disk activity. This cannot guarantee
+zero swapping if other applications begin consuming memory later.
 Avoid running two independent managers at once.
 
 If an older manager is currently running, stop it and its NumCalc workers before

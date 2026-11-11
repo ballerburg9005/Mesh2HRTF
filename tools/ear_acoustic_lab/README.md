@@ -157,6 +157,47 @@ A clear failure is not silently counted as a valid pressure response.
 Interrupted steps remain eligible for retry; already completed steps
 remain intact. Do not start a second manager while one is still running.
 
+## Fast numerical reality check: ONE frequency, no 80-tone sweep
+
+Your uploaded 80-tone scan has only 15 verified pressures, from 352 to
+3878 Hz, and a suspicious **+3.22 dB jump at 3123 Hz**. NumCalc changes
+from one-level FMM to two-level FMM exactly at this frequency. The older,
+smooth 10 Hz scan used the same mic/source placement, but only reported
+CGS recurrence residuals. They cannot establish true solver convergence.
+
+Run **one independent single-level FMM solve** at the already-completed
+3123 Hz frequency, then compare it with the existing multilevel solution:
+
+\`\`\`sh
+cd ~/Mesh2HRTF
+git pull --ff-only
+tools/ear_acoustic_lab/.venv/bin/python \
+  tools/ear_acoustic_lab/fmm_one_frequency_check.py \
+  --project ./earlab_runs/ear_20261110_234807_961528 \
+  --step 13 --timeout 180
+\`\`\`
+
+This reuses the existing exported triangle mesh and the exact same source,
+microphone, frequency, and boundary conditions. It creates an **independent
+sandbox in the run's analysis folder**, links the mesh read-only, changes
+only \`methodBEM\` from 4 (adaptive ML-FMM) to 1 (single-level FMM), and
+runs only \`NumCalc -istart 13 -iend 13\`. It does **not** launch Blender,
+reschedule failed frequencies, or mutate the original result. It refuses
+to run if NumCalc is already active or fewer than 6 GiB of physical RAM
+are available. The hard timeout kills its subprocess if it exceeds 180
+seconds; use \`--timeout N\` to choose a different cap (1–900 seconds).
+
+On successful convergence, it prints the two gains and their dB
+difference and saves \`comparison.json\` under
+\`analysis/fmm_single_level_step13_*/\`. If the single-level result is
+near the neighboring smooth trend rather than the 17.08 dB peak,
+the method switch is implicated. If both methods agree, inspect actual
+physical resonance and geometry. If the test fails its strict 1e-8
+true-residual criterion, no new acoustic pressure is accepted: inspect
+the saved NumCalc log instead of launching another entire sweep.
+Neither comparison proves the original nonwatertight, under-resolved
+geometry is acoustically valid.
+
 ## One-button test
 
 1. Save the physical **air-facing** 3D ear geometry as `~/model.stl`. If possible, **move the STL's coordinate origin to the microphone** in Blender before exporting. Then the GUI's default `Mic XYZ = 0 0 0` is correct; no other microphone setup required. Coordinates must use the same units as the STL, default **millimetres**. You can also specify a different microphone XYZ if you prefer. The STL is imported automatically, not via the Blender GUI.

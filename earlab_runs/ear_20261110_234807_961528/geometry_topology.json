@@ -1,0 +1,150 @@
+{
+  "project": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261110_234807_961528",
+  "node_count": 4539,
+  "triangle_count": 9074,
+  "open_boundary_edges": 4,
+  "nonmanifold_edges": 3,
+  "winding_conflicts": 0,
+  "degenerate_triangle_ids": [],
+  "edge_connected_components": 1,
+  "component_triangle_counts": [
+    9074
+  ],
+  "issue_edges": [
+    {
+      "kind": "nonmanifold",
+      "vertex_ids": [
+        71,
+        72
+      ],
+      "triangle_ids": [
+        49,
+        7506,
+        9069
+      ],
+      "midpoint_mm": [
+        -3.9605,
+        -19.2701,
+        -1.7397
+      ],
+      "length_mm": 1.58031
+    },
+    {
+      "kind": "nonmanifold",
+      "vertex_ids": [
+        4044,
+        4045
+      ],
+      "triangle_ids": [
+        7521,
+        7533,
+        8914,
+        8970
+      ],
+      "midpoint_mm": [
+        -0.5772,
+        0.6085,
+        3.8784
+      ],
+      "length_mm": 0.7776
+    },
+    {
+      "kind": "nonmanifold",
+      "vertex_ids": [
+        4511,
+        4512
+      ],
+      "triangle_ids": [
+        8937,
+        8941,
+        8984
+      ],
+      "midpoint_mm": [
+        -4.2263,
+        0.5424,
+        0.1369
+      ],
+      "length_mm": 1.14243
+    },
+    {
+      "kind": "open_boundary",
+      "vertex_ids": [
+        70,
+        71
+      ],
+      "triangle_ids": [
+        49
+      ],
+      "midpoint_mm": [
+        -4.3275,
+        -19.2683,
+        -1.2149
+      ],
+      "length_mm": 0.3085
+    },
+    {
+      "kind": "open_boundary",
+      "vertex_ids": [
+        70,
+        72
+      ],
+      "triangle_ids": [
+        49
+      ],
+      "midpoint_mm": [
+        -3.9075,
+        -19.2599,
+        -1.8842
+      ],
+      "length_mm": 1.28068
+    },
+    {
+      "kind": "open_boundary",
+      "vertex_ids": [
+        4512,
+        4513
+      ],
+      "triangle_ids": [
+        8937
+      ],
+      "midpoint_mm": [
+        -4.2374,
+        0.5477,
+        0.4034
+      ],
+      "length_mm": 0.61061
+    },
+    {
+      "kind": "open_boundary",
+      "vertex_ids": [
+        4511,
+        4513
+      ],
+      "triangle_ids": [
+        8937
+      ],
+      "midpoint_mm": [
+        -4.2401,
+        0.5594,
+        -0.1677
+      ],
+      "length_mm": 0.53371
+    }
+  ],
+  "resolution": {
+    "max_frequency_hz": 20000,
+    "wavelength_mm": 17.15,
+    "lambda_over_six_max_edge_mm": 2.8583333333333334,
+    "edges_of_triangles_over_lambda_over_six": 1707,
+    "fraction_of_triangles_over": 0.18811990301961648,
+    "worst_triangle_edge_mm": 82.55527042230453
+  },
+  "blockers": [
+    "4 open_boundary edges",
+    "3 nonmanifold edges",
+    "18.8% of triangles exceed wavelength/6 at 20000 Hz"
+  ],
+  "ready_for_unattended_solver": false,
+  "overlay_obj": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261110_234807_961528/topology_defects.obj",
+  "note": "This precheck detects mesh topological and resolution risks. Even a passing mesh is not proof of a correct acoustic boundary model, a source-to-microphone air path, or BEM convergence."
+}

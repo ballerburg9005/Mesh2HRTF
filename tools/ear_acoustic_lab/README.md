@@ -66,6 +66,37 @@ use `--jobs 1` to reflect the effective concurrency. Other callers of
 `mesh2hrtf.manage_numcalc` retain the original asynchronous behavior
 unless they opt into `stop_on_failed_step=True`.
 
+## Salvage partial responses from a failed multi-hour sweep
+
+A scan may launch all 80 jobs but fail many CGS/GMRES solves. Do **not**
+rerun the full sweep automatically or generate a misleading 80-frequency
+SOFA from missing data. On the experimental solver branch you can recover
+the **genuinely finished and convergence-verified** microphone samples:
+
+```sh
+tools/ear_acoustic_lab/.venv/bin/python tools/ear_acoustic_lab/run_analysis.py \
+  --inspect-resume ./earlab_runs/ear_20261110_234807_961528
+```
+
+This inspects saved NumCalc logs and actual `pEvalGrid` files **without
+launching Blender or NumCalc**. It produces `analysis/resume_audit.json`,
+`analysis/partial_response.csv`, `analysis/partial_response.json`, and a
+scatter-only `analysis/partial_response.png` when verified points exist.
+Only samples with a genuine final `End time:`, nonempty 3-node probe
+pressure, and **CGS true residual or successful GMRES residual <= 1e-8**
+are admitted. Missing frequencies are **not interpolated, treated as zero,
+or filled by a fictitious resonance**. A legacy output without true solver
+residual verification is excluded; the regular branch may therefore
+produce a partial file with zero verified points. Full-band audio audition
+remains unavailable.
+
+For the uploaded 80-tone example, step 1 at 100 Hz ended GMRES near
+1.16e-7 (too high for the 1e-8 limit); steps 2–16 produced pressure files
+with finished logs; step 17 at ~4.13 kHz failed near 7.45e-8; and step 80
+at 20 kHz failed around 0.99. More iterations might help near-misses,
+but neither convergence nor accurate acoustics can be claimed for the
+under-resolved high-frequency model.
+
 ## Diagnose 79 started but only 15 completed frequency steps
 
 The `N/M starting instance` counter counts **launched** frequencies, not

@@ -54,6 +54,18 @@ validated before Blender launches. This prevents the
 Use a **new run** after pulling this fix; the failed Blender export did not
 create any NumCalc frequency results to recover.
 
+## Fail-fast solver scheduling
+
+Ear Acoustic Lab now verifies **each frequency's actual completion** before
+starting another. If NumCalc exits unsuccessfully, writes no microphone
+pressure, or does not finish its log, the scan **stops immediately** instead
+of wasting hours launching the next dozens of frequencies. The saved run
+folder and already completed frequency files are preserved. This strict
+mode currently executes workers sequentially even if `--jobs 2` is selected;
+use `--jobs 1` to reflect the effective concurrency. Other callers of
+`mesh2hrtf.manage_numcalc` retain the original asynchronous behavior
+unless they opt into `stop_on_failed_step=True`.
+
 ## Diagnose 79 started but only 15 completed frequency steps
 
 The `N/M starting instance` counter counts **launched** frequencies, not

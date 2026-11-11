@@ -41,6 +41,7 @@ class ResumeTest(unittest.TestCase):
                 (output2hrtf/"HRTF_MicProbe.sofa").touch()
             args = Namespace(resume=str(project), mesh2hrtf=str(root), jobs=4)
             with patch.object(run_analysis, "call"), \
+                 patch.object(run_analysis, "enforce_topology_gate"), \
                  patch.object(m2h, "manage_numcalc") as manager, \
                  patch.object(m2h, "output2hrtf", side_effect=fake_output), \
                  patch.object(run_analysis, "get_sofa_response",

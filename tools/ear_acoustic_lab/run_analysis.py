@@ -14,6 +14,7 @@ from analysis_tools import mic_grid, get_sofa_response, reference_transfer, save
 from mesh_quality import analyze_exported_mesh
 from frequency_grid import log_overview, linear_overview, replace_frequency_vector
 from share_results import prepare_snapshot
+from resume_audit import save_audit, print_audit
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
@@ -166,7 +167,7 @@ def check_cached_solver_convergence(project, threshold=1e-8):
               'existing cached pressure outputs cannot be verified.', flush=True)
     else:
         print(f"[RESUME] Checked {checks['steps_with_reported_residual']} "
-              "saved solver residuals; no cached failures detected.", flush=True)
+              "saved solver residual records (not completed frequencies).", flush=True)
 
 
 def resume_project(args):
@@ -185,7 +186,21 @@ def resume_project(args):
     print('[RESUME] Reusing the previous geometry and frequencies:', project, flush=True)
     print('[RESUME] Completed frequency steps are not recalculated by manage_numcalc.',flush=True)
     print('[RESUME] Do not start another NumCalc manager for this same project.',flush=True)
+    audit, report = save_audit(project)
+    print_audit(audit, report)
     check_cached_solver_convergence(project)
+    rejected = [r for r in audit["steps"]
+                if r["status"] == "solver_rejected"]
+    if rejected and not getattr(args, "retry_failed", False):
+        examples = ", ".join(
+            f"step {r['step']} ({r['frequency_hz']} Hz)"
+            for r in rejected[:8])
+        raise RuntimeError(
+            f"{len(rejected)} frequencies previously failed both CGS and "
+            f"GMRES (e.g. {examples}). Automatically retrying unchanged "
+            "numerical failures wastes hours. See " + str(report) + ". "
+            "Inspect mesh and solver settings, or explicitly pass "
+            "--retry-failed to reattempt. Completed outputs remain intact.")
     m2h.manage_numcalc(project_path=str(project),
                       numcalc_path=str(binary),
                       **safe_numcalc_options(args))
@@ -215,6 +230,10 @@ def resume_project(args):
 
 
 def run(args):
+    if getattr(args, "inspect_resume", ""):
+        audit, path = save_audit(args.inspect_resume)
+        print_audit(audit, path)
+        return 0
     if args.resume:
         return resume_project(args)
     mesh2hrtf=Path(args.mesh2hrtf).expanduser().resolve()
@@ -430,6 +449,10 @@ def get_args():
     ap=argparse.ArgumentParser()
     ap.add_argument('--mesh2hrtf',default=str(REPO_ROOT))
     ap.add_argument('--resume',default='',help='Resume a previously exported NumCalc project without re-exporting STL')
+    ap.add_argument('--inspect-resume',default='',metavar='PROJECT',
+                    help='Audit frequency completion without running NumCalc')
+    ap.add_argument('--retry-failed',action='store_true',
+                    help='Deliberately rerun known CGS/GMRES failures on resume')
     ap.add_argument('--stl',default='~/model.stl')
     ap.add_argument('--units',choices=['mm','m'],default='mm')
     ap.add_argument('--mic',nargs=3,type=float,default=[0,0,0],metavar=('X','Y','Z'))

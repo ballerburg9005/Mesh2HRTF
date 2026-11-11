@@ -10,7 +10,8 @@ import mesh2hrtf as m2h
 def manage_numcalc(project_path=None, numcalc_path=None,
                    max_ram_load=None, ram_safety_factor=1.05, max_cpu_load=90,
                    max_instances=None, wait_time=15,
-                   starting_order='alternate', confirm_errors=False):
+                   starting_order='alternate', confirm_errors=False,
+                   stop_on_failed_step=False):
     """
     Run NumCalc on one or multiple Mesh2HRTF project folders.
 
@@ -122,6 +123,10 @@ def manage_numcalc(project_path=None, numcalc_path=None,
     # (this is not the wait time directly after a NumCalc instance was
     # launched. That is given by wait time!)
     wait_time_busy = 1
+
+    if stop_on_failed_step and max_instances not in (None, 1):
+        print("[NumCalc] stop_on_failed_step runs one worker at a time "
+              "to verify each output before proceeding.")
 
     # check input -------------------------------------------------------------
     if max_instances is None:
@@ -393,17 +398,37 @@ def manage_numcalc(project_path=None, numcalc_path=None,
             # new working directory
             cwd = os.path.join(root_NumCalc, "source_" + str(source))
 
-            if os.name == 'nt':  # Windows detected
-                # create a log file for all print-outs
+            if stop_on_failed_step:
+                # Mesh2HRTF's original manager only checks whether all
+                # outputs exist AFTER scheduling every frequency. Abort on
+                # the first failed solve instead of spending hours on the
+                # same invalid frequency band. Never manufacture pressure.
+                log_capture = os.path.join(
+                    cwd, f"NC{step}-{step}_log.txt")
+                with open(log_capture, "w", encoding="utf8") as stdout:
+                    result = subprocess.run(
+                        [numcalc_executable, "-istart", str(step),
+                         "-iend", str(step)],
+                        cwd=cwd, stdout=stdout, stderr=subprocess.STDOUT,
+                        check=False)
+                if result.returncode != 0 or not _step_is_complete(cwd, step):
+                    details = os.path.join(cwd, f"NC{step}-{step}.out")
+                    _raise_error(
+                        f"NumCalc source {source}, step {step}, "
+                        f"{frequency:g} Hz failed (exit code "
+                        f"{result.returncode}); valid finished pressure "
+                        "output not found. Stopping instead of launching "
+                        "more unverified frequencies. The project remains "
+                        f"resumable; inspect {details} and {log_capture}.",
+                        text_color_red, log_file, confirm_errors)
+            elif os.name == 'nt':  # Windows detected
                 LogFileHandle = open(
-                    os.path.join(cwd, "NC{step}-{step}_log.txt"), "w")
-                # run NumCalc and route all printouts to a log file
+                    os.path.join(cwd, f"NC{step}-{step}_log.txt"), "w")
                 subprocess.Popen(
                     f"{numcalc_executable} -istart {step} -iend {step}",
                     stdout=LogFileHandle, cwd=cwd)
-
-            else:  # elif os.name == 'posix': Linux or Mac detected
-                # run NumCalc and route all printouts to a log file
+                LogFileHandle.close()
+            else:  # Linux or Mac
                 subprocess.Popen((
                     f"{numcalc_executable} -istart {step} -iend {step}"
                     f" >NC{step}-{step}_log.txt"), shell=True, cwd=cwd)
@@ -414,7 +439,8 @@ def manage_numcalc(project_path=None, numcalc_path=None,
                 instances_to_run = np.flip(instances_to_run, axis=0)
 
             started_instance = True
-            time.sleep(wait_time)  # long wait to initialize RAM
+            if not stop_on_failed_step:
+                time.sleep(wait_time)  # long wait to initialize RAM
         #  END of per project loop --------------------------------------------
     #  END of all projects loop -----------------------------------------------
 
@@ -517,6 +543,22 @@ def _numcalc_instances():
     return num_instances
 
 
+def _step_is_complete(source, step):
+    """Require both a finished NumCalc log and nonempty microphone pressure."""
+    pressure_file = os.path.join(
+        source, "be.out", f"be.{step}", "pEvalGrid")
+    nc_log = os.path.join(source, f"NC{step}-{step}.out")
+    if (not os.path.isfile(pressure_file) or
+            os.path.getsize(pressure_file) == 0 or
+            not os.path.isfile(nc_log)):
+        return False
+    with open(nc_log, "r", encoding="utf8", errors="replace") as handle:
+        log_text = handle.read()
+    return ("End time:" in log_text and
+            "CGS and GMRES failed convergence" not in log_text and
+            "GMRES fallback failed after" not in log_text)
+
+
 def _check_project(project, numcalc_executable, log_file):
     """
     Find unfinished instances (frequency steps) in a Mesh2HRTF project folder
@@ -583,22 +625,7 @@ def _check_project(project, numcalc_executable, log_file):
         # loop frequency steps
         for step in range(estimates.shape[0]):
 
-            pressure_file = os.path.join(
-                ff, "be.out", f"be.{1 + step}", "pEvalGrid")
-            nc_log = os.path.join(ff, f"NC{1 + step}-{1 + step}.out")
-
-            # NumCalc writes pEvalGrid before the log's "End time:" marker.
-            # A partially written or abandoned grid must not be reused.
-            pressure_ok = (os.path.isfile(pressure_file) and
-                           os.path.getsize(pressure_file) > 0)
-            completed = False
-            if pressure_ok and os.path.isfile(nc_log):
-                with open(nc_log, "r", encoding="utf8",
-                          errors="replace") as f:
-                    log_text = f.read()
-                completed = ("End time:" in log_text and
-                             "CGS and GMRES failed convergence" not in log_text
-                             and "GMRES fallback failed after" not in log_text)
+            completed = _step_is_complete(ff, 1 + step)
             if not completed:
                 if instances_to_run is None:
                     instances_to_run = np.atleast_2d(estimates[step])

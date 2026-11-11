@@ -54,6 +54,35 @@ validated before Blender launches. This prevents the
 Use a **new run** after pulling this fix; the failed Blender export did not
 create any NumCalc frequency results to recover.
 
+## Diagnose 79 started but only 15 completed frequency steps
+
+The `N/M starting instance` counter counts **launched** frequencies, not
+completed ones. A residual in `NCn-n.out` proves only that the solver reached
+its iteration reporting; NumCalc writes the microphone `pEvalGrid` file
+separately, and writes `End time:` after post-processing.
+
+Inspect the actual saved run **without starting any workers**:
+
+```sh
+tools/ear_acoustic_lab/.venv/bin/python tools/ear_acoustic_lab/run_analysis.py \
+  --inspect-resume ./earlab_runs/ear_20261110_234807_961528
+```
+
+This saves `analysis/resume_audit.json` with one status per frequency:
+`completed`, `solver_rejected`, `interrupted_or_failed`,
+`partial_pressure`, `postprocessing_missing`, or `not_started`.
+Completion requires a **nonempty** `be.out/be.N/pEvalGrid` and an
+`End time:` marker in the matching NumCalc log. A partial output is not
+treated as success. The audit does not change solver results or prove
+acoustic/mesh convergence.
+
+`--resume` now prints this audit automatically. If the logs explicitly say
+CGS and GMRES both failed, the tool refuses to rerun those known failed
+frequencies in an unchanged project unless `--retry-failed` is passed.
+A clear failure is not silently counted as a valid pressure response.
+Interrupted steps remain eligible for retry; already completed steps
+remain intact. Do not start a second manager while one is still running.
+
 ## One-button test
 
 1. Save the physical **air-facing** 3D ear geometry as `~/model.stl`. If possible, **move the STL's coordinate origin to the microphone** in Blender before exporting. Then the GUI's default `Mic XYZ = 0 0 0` is correct; no other microphone setup required. Coordinates must use the same units as the STL, default **millimetres**. You can also specify a different microphone XYZ if you prefer. The STL is imported automatically, not via the Blender GUI.

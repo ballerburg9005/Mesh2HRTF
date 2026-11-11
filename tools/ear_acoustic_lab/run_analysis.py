@@ -161,7 +161,7 @@ def resume_project(args):
             "--retry-failed to reattempt. Completed outputs remain intact.")
     m2h.manage_numcalc(project_path=str(project),
                       numcalc_path=str(binary),
-                      **safe_numcalc_options(args))
+                      stop_on_failed_step=True, **safe_numcalc_options(args))
     step('Convert completed NumCalc output to microphone analysis')
     m2h.output2hrtf(str(project))
     sofa = project/'Output2HRTF'/'HRTF_MicProbe.sofa'
@@ -352,7 +352,7 @@ def run(args):
     # promising a CUDA speedup: Mesh2HRTF/NumCalc is CPU based.
     m2h.manage_numcalc(
         project_path=str(project), numcalc_path=str(binary),
-        **safe_numcalc_options(args))
+        stop_on_failed_step=True, **safe_numcalc_options(args))
     step('Convert actual solver pressures to SOFA and plots')
     m2h.output2hrtf(str(project))
     sofa=project/'Output2HRTF'/'HRTF_MicProbe.sofa'

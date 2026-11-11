@@ -15,6 +15,7 @@ from mesh_quality import analyze_exported_mesh
 from frequency_grid import log_overview, linear_overview, replace_frequency_vector
 from share_results import prepare_snapshot
 from resume_audit import save_audit, print_audit
+from topology_audit import audit_exported_topology, print_topology, enforce_topology_gate
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
@@ -189,6 +190,10 @@ def resume_project(args):
     audit, report = save_audit(project)
     print_audit(audit, report)
     check_cached_solver_convergence(project)
+    # Catch topological/mesh-resolution defects even for older exported runs.
+    # No source or pressure files are modified by this precheck.
+    enforce_topology_gate(
+        project, allow=getattr(args, 'allow_unvalidated_geometry', False))
     rejected = [r for r in audit["steps"]
                 if r["status"] == "solver_rejected"]
     if rejected and not getattr(args, "retry_failed", False):
@@ -230,6 +235,10 @@ def resume_project(args):
 
 
 def run(args):
+    if getattr(args, "inspect_geometry", ""):
+        report = audit_exported_topology(args.inspect_geometry)
+        print_topology(report)
+        return 0
     if getattr(args, "inspect_resume", ""):
         audit, path = save_audit(args.inspect_resume)
         print_audit(audit, path)
@@ -360,6 +369,12 @@ def run(args):
             f"(max_edge/(1.51967*sqrt(area)) > 100). "
             f"First element: {quality['fatal_ids'][0]}. "
             f"See {quality['report_csv']} for coordinates and Blender overlay.")
+    # Fail before compiling or launching any NumCalc frequency if the
+    # exported surface has holes, nonmanifold edges, or severe
+    # wavelength-to-triangle-size problems. Save an OBJ overlay for Blender.
+    enforce_topology_gate(
+        project, max_frequency_hz=fmax,
+        allow=getattr(args, 'allow_unvalidated_geometry', False))
     step('Recompile NumCalc if source files changed')
     call(['make','-C',mesh2module/'NumCalc'/'src','-j2'])
     if not binary.is_file():raise RuntimeError('NumCalc missing after build: '+str(binary))
@@ -462,6 +477,10 @@ def get_args():
     ap=argparse.ArgumentParser()
     ap.add_argument('--mesh2hrtf',default=str(REPO_ROOT))
     ap.add_argument('--resume',default='',help='Resume a previously exported NumCalc project without re-exporting STL')
+    ap.add_argument('--inspect-geometry',default='',metavar='PROJECT',
+                    help='Audit existing exported mesh topology without starting Blender or NumCalc')
+    ap.add_argument('--allow-unvalidated-geometry',action='store_true',
+                    help='Expert override of topology and wavelength-resolution blockers')
     ap.add_argument('--inspect-resume',default='',metavar='PROJECT',
                     help='Audit frequency completion without running NumCalc')
     ap.add_argument('--retry-failed',action='store_true',

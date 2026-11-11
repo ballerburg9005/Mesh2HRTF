@@ -1,0 +1,175 @@
+istart= 939 iend = 939
+
+---------- NumCalc started: 10/11/2026 18:7:29 ----------
+
+Running on:         SYBURG
+
+3D analysis
+Job title: Ear acoustic cavity and microphone response
+
+Warning: Element with very long side found!
+external elemen number = 8823
+internal element number = 8823
+
+
+Warning: Element with very long side found!
+external elemen number = 8824
+internal element number = 8824
+
+
+Warning: Element with very long side found!
+external elemen number = 8825
+internal element number = 8825
+
+
+Warning: Element with very long side found!
+external elemen number = 8825
+internal element number = 8825
+
+
+Warning: Element with very long side found!
+external elemen number = 8828
+internal element number = 8828
+
+
+Warning: Element with very long side found!
+external elemen number = 8828
+internal element number = 8828
+
+
+Warning: Element with very long side found!
+external elemen number = 8831
+internal element number = 8831
+
+
+Warning: Element with very long side found!
+external elemen number = 8831
+internal element number = 8831
+
+
+Warning: Element with very long side found!
+external elemen number = 8842
+internal element number = 8842
+
+
+Warning: Element with very long side found!
+external elemen number = 8863
+internal element number = 8863
+
+
+Warning: Element with very long side found!
+external elemen number = 8888
+internal element number = 8888
+
+
+Warning: Element with very long side found!
+external elemen number = 8891
+internal element number = 8891
+
+
+Warning: Element with very long side found!
+external elemen number = 8892
+internal element number = 8892
+
+
+Warning: Element with very long side found!
+external elemen number = 8892
+internal element number = 8892
+
+
+Warning: Element with very long side found!
+external elemen number = 8933
+internal element number = 8933
+
+
+Warning: Element with very long side found!
+external elemen number = 8944
+internal element number = 8944
+
+
+Step 939, Frequency = 9480 Hz
+
+Direct multilevel fast multipole BEM
+
+Number of equations = 9074
+
+Informations about clusters:
+   Level    Num. of clusters    Maximum radius   Minimum radius
+     0           46                0.0630797         0.00959122
+     1          145                0.0630797         0.00158152
+ resu. nets       1                0.000105409         0.000105409
+
+
+Informations about the FMM expansion:
+   Level    N. expa. terms    N. p. theta    N. p. phi    N. p. sphere
+     0          24              24              48          1152
+     1          24              24              48          1152
+
+CGS: err_ori = 0.432782
+10 10.874
+10 Abs Error:4.70607
+20 20.8757
+20 Abs Error:9.03465
+30 1238.11
+30 Abs Error:535.832
+40 941.145
+40 Abs Error:407.311
+50 1189.98
+50 Abs Error:515.001
+60 674.899
+60 Abs Error:292.084
+70 824.595
+70 Abs Error:356.87
+80 1031.15
+80 Abs Error:446.265
+90 1274.21
+90 Abs Error:551.455
+100 1010.6
+100 Abs Error:437.37
+110 861.086
+110 Abs Error:372.663
+120 5185.9
+120 Abs Error:2244.36
+130 10632.1
+130 Abs Error:4601.39
+140 29290.8
+140 Abs Error:12676.5
+150 6069.41
+150 Abs Error:2626.73
+160 6353.92
+160 Abs Error:2749.86
+170 8584.79
+170 Abs Error:3715.35
+180 6691.7
+180 Abs Error:2896.05
+190 10605.9
+190 Abs Error:4590.05
+200 7406.18
+200 Abs Error:3205.26
+210 6742.78
+210 Abs Error:2918.16
+220 6542.38
+220 Abs Error:2831.42
+230 7741.39
+230 Abs Error:3350.34
+240 8278.06
+240 Abs Error:3582.6
+250 10136
+250 Abs Error:4386.67
+Warning: Maximum number of iterations is reached!
+
+Assembling the equation system         : 23
+Solving the equation system            : 68
+Post processing                        : 2
+Total                                  : 93
+
+
+Time Statistic for the job (in second):
+Input ............................ 0
+Address computation .............. 0
+Assembling the equation system ... 23
+Solving the equation system ...... 68
+Post processing .................. 2
+The whole job .................... 93
+
+---------- NumCalc ended: 10/11/2026 18:9:2 ----------

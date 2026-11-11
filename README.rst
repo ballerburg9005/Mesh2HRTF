@@ -61,3 +61,16 @@ References
 .. [7] W\. Kreuzer, K. Pollack, F. Brinkmann, and P. Majdak, `''NumCalc: An open-source BEM code for solving acoustic scattering problems,'' <https://doi.org/10.1016/j.enganabound.2024.01.008>`_, Engineering Analysis with Boundary Elements, vol. 161, pp. 157-178, April 2024.
 
 .. [8] W\. Kreuzer, K. Pollack, P. Majdak, and F. Brinkmann, `''Mesh2HRTF / NumCalc: An Open-Source Project to Calculate HRTFs and wave scattering in 3D,'' <https://www.conforg.fr/erbnam2022/output_directory/data/articles/000042.pdf>`_ in Euroregio BNAM 2022, Aalborg, Denmark, May 2022.
+
+
+Experimental Ear Acoustic Lab (fork)
+====================================
+
+This fork adds a graphical STL-based resonance tester under
+``tools/ear_acoustic_lab``. It imports ``~/model.stl``, defaults the
+microphone to the STL origin (0,0,0), runs NumCalc frequency sweeps, and
+plots the calculated pressure response. Blender export is automated;
+you do not need to install the Mesh2HRTF Blender add-on manually.
+
+For Arch Linux installation and usage instructions, see
+``tools/ear_acoustic_lab/README.md``.

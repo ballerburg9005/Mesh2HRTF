@@ -1,0 +1,146 @@
+istart= 26 iend = 26
+
+---------- NumCalc started: 10/11/2026 19:33:56 ----------
+
+Running on:         SYBURG
+
+3D analysis
+Job title: Ear acoustic cavity and microphone response
+
+Warning: Element with very long side found!
+external elemen number = 8823
+internal element number = 8823
+
+
+Warning: Element with very long side found!
+external elemen number = 8824
+internal element number = 8824
+
+
+Warning: Element with very long side found!
+external elemen number = 8825
+internal element number = 8825
+
+
+Warning: Element with very long side found!
+external elemen number = 8825
+internal element number = 8825
+
+
+Warning: Element with very long side found!
+external elemen number = 8828
+internal element number = 8828
+
+
+Warning: Element with very long side found!
+external elemen number = 8828
+internal element number = 8828
+
+
+Warning: Element with very long side found!
+external elemen number = 8831
+internal element number = 8831
+
+
+Warning: Element with very long side found!
+external elemen number = 8831
+internal element number = 8831
+
+
+Warning: Element with very long side found!
+external elemen number = 8842
+internal element number = 8842
+
+
+Warning: Element with very long side found!
+external elemen number = 8863
+internal element number = 8863
+
+
+Warning: Element with very long side found!
+external elemen number = 8888
+internal element number = 8888
+
+
+Warning: Element with very long side found!
+external elemen number = 8891
+internal element number = 8891
+
+
+Warning: Element with very long side found!
+external elemen number = 8892
+internal element number = 8892
+
+
+Warning: Element with very long side found!
+external elemen number = 8892
+internal element number = 8892
+
+
+Warning: Element with very long side found!
+external elemen number = 8933
+internal element number = 8933
+
+
+Warning: Element with very long side found!
+external elemen number = 8944
+internal element number = 8944
+
+
+Step 26, Frequency = 350 Hz
+
+Single level fast multipole BEM
+
+Number of equations = 9074
+
+Informations about clusters:
+   Level    Num. of clusters    Maximum radius   Minimum radius
+     0           46                0.0630797         0.00959122
+ resu. nets       1                0.000105409         0.000105409
+
+Informations about the FMM expansion:
+   Level    N. expa. terms    N. p. theta    N. p. phi    N. p. sphere
+     0           8               8              16           128
+
+CGS: err_ori = 5.52019
+10 0.0411087
+10 Abs Error:0.226928
+20 0.000531305
+20 Abs Error:0.0029329
+30 0.112066
+30 Abs Error:0.618625
+40 0.0228199
+40 Abs Error:0.12597
+50 0.00044766
+50 Abs Error:0.00247117
+60 0.00354695
+60 Abs Error:0.0195798
+70 0.000412716
+70 Abs Error:0.00227827
+80 1.96618e-06
+80 Abs Error:1.08537e-05
+90 7.64792e-05
+90 Abs Error:0.00042218
+100 6.52772e-09
+100 Abs Error:3.60342e-08
+110 1.83334e-09
+110 Abs Error:1.01204e-08
+120 5.20806e-08
+120 Abs Error:2.87495e-07
+130 5.49149e-10
+130 Abs Error:3.0314e-09
+Assembling the equation system         : 54
+Solving the equation system            : 29
+Post processing                        : 0
+Total                                  : 83
+
+
+Time Statistic for the job (in second):
+Input ............................ 0
+Address computation .............. 0
+Assembling the equation system ... 54
+Solving the equation system ...... 29
+Post processing .................. 0
+The whole job .................... 83
+
+---------- NumCalc ended: 10/11/2026 19:35:19 ----------

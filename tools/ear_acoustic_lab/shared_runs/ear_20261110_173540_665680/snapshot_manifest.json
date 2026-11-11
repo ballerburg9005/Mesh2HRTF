@@ -1,0 +1,28 @@
+{
+  "source_run": "ear_20261110_173540_665680",
+  "snapshot_version": 1,
+  "included": [
+    "earlab_config.json",
+    "parameters.json",
+    "mesh_preflight.json",
+    "geometry_check.json",
+    "mesh_quality.json",
+    "mesh_quality.csv",
+    "analysis/report.html",
+    "analysis/response.png",
+    "analysis/surface_pressure.png",
+    "analysis/surface_cutaway.png",
+    "analysis/surface_3d.html",
+    "analysis/response.csv",
+    "analysis/diagnostic_samples.csv",
+    "analysis/diagnostics.json",
+    "analysis/peaks.json",
+    "analysis/pressure.npz",
+    "analysis/surface_samples.npz",
+    "analysis/surface_hotspots.csv",
+    "Output2HRTF/HRTF_MicProbe.sofa"
+  ],
+  "omitted": [],
+  "solver_results_reused": true,
+  "github_note": "A compact preview; contains source/mic coordinates, mesh and pressure data. No files are committed or pushed automatically."
+}

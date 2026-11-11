@@ -1,0 +1,40 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ear Acoustic Lab – completed simulation report</title><style>
+body{font:16px/1.55 system-ui,sans-serif;max-width:1170px;margin:24px auto;padding:0 18px;color:#20252a;background:#fafafa}
+h1,h2{line-height:1.2} img{display:block;width:100%;height:auto;margin:16px 0;border:1px solid #ddd;background:white}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.card{padding:12px 16px;border:1px solid #ddd;border-radius:8px;background:#fff}
+.card strong{display:block;font-size:25px} table{width:100%;border-collapse:collapse;background:white}
+th,td{padding:8px 10px;border-bottom:1px solid #e5e5e5;text-align:left}
+.warning{border-left:4px solid #9b6825;background:#fff9ed;padding:8px 18px}
+small{color:#555}a{color:#075f96}
+</style></head><body>
+<h1>Ear Acoustic Lab — frequency response report</h1>
+<p>Saved simulation: <code>ear_20261110_173540_665680</code>. All values below
+come from the original NumCalc run; reanalysis did not solve another frequency.</p>
+<div class="cards"><div class="card">Solved tones<strong>991</strong></div>
+<div class="card">Frequency range<strong>100–10000 Hz</strong></div>
+<div class="card">Median spacing<strong>10 Hz</strong></div>
+<div class="card">Measured band variation<strong>154.59 dB</strong></div>
+<div class="card">Median free-field gain<strong>+19.13 dB</strong></div></div>
+<h2>Microphone transfer function</h2>
+<p>Upper-left: simulated mic pressure divided by the analytical unoccluded
+point-source pressure. Upper-right: exactly the same values with the band
+median subtracted to reveal the <b>frequency dependence</b>; it is not an EQ target.
+Lower panels: phase and group delay, reliable only at adequate spacing.</p>
+<img src="response.png" alt="Gain, spectral coloration, phase and delay">
+<h2>Where are the strongest observed changes?</h2>
+<p>These are <b>sampled values</b>, not accurately resolved resonance frequencies.
+A narrow resonance between sampled tones will not appear here.</p>
+<table><thead><tr><th>Type</th><th>Hz</th><th>Gain vs free field (dB)</th>
+<th>Relative to this sweep's median (dB)</th></tr></thead><tbody>
+<tr><td>sampled local high</td><td>6850</td><td>+132.08</td><td>+112.95</td></tr><tr><td>sampled local high</td><td>6870</td><td>+120.59</td><td>+101.46</td></tr><tr><td>sampled local high</td><td>6470</td><td>+117.83</td><td>+98.71</td></tr><tr><td>sampled local high</td><td>6780</td><td>+117.24</td><td>+98.11</td></tr><tr><td>sampled local high</td><td>6940</td><td>+115.60</td><td>+96.47</td></tr><tr><td>sampled local high</td><td>6920</td><td>+109.35</td><td>+90.22</td></tr><tr><td>sampled local low</td><td>9380</td><td>-22.51</td><td>-41.64</td></tr><tr><td>sampled local low</td><td>9210</td><td>-16.84</td><td>-35.96</td></tr><tr><td>sampled local low</td><td>8790</td><td>-11.95</td><td>-31.08</td></tr><tr><td>sampled local low</td><td>8640</td><td>-5.00</td><td>-24.12</td></tr><tr><td>sampled local low</td><td>9180</td><td>-4.54</td><td>-23.67</td></tr><tr><td>sampled local low</td><td>9500</td><td>-3.12</td><td>-22.25</td></tr></tbody></table>
+<h2>Pressure distribution on the simulated surface</h2><p>This is boundary pressure on the mesh, NOT an interior cross-section. Each frequency is color-normalized to its own surface median. Inspect exported VTK in ParaView for a rotatable 3D field.</p><img src="surface_pressure.png" alt="Boundary pressure from +Y ear-opening view"><p>Display-only removal of oversized flat faces, seen from +Y/+X:</p><img src="surface_cutaway.png" alt="Boundary pressure with large display faces hidden"><p><a href="surface_3d.html">ROTATABLE 3D VIEWER: face hiding, X/Y cuts, all camera angles</a> | <a href="surface_hotspots.csv">Surface pressure hotspots CSV</a>. Cutaways only hide rendered faces: they do NOT solve a pressure field inside the air cavity.</p>
+<h2>Interpretation limits</h2><div class="warning"><ul><li>PARTIAL SPECTRUM: 100–10000 Hz only. Not a full audio-band EQ profile.</li><li>This is a linear frequency-domain BEM result, not measured microphone distortion.</li><li>Only the listed frequency points were calculated; peaks between points may be completely absent from this report.</li><li>A constant positive gain does not establish calibrated SPL, perceptual coloration or a valid canal boundary model.</li><li>The point source is not a headphone diaphragm or headphone-pad acoustic boundary.</li><li>The microphone is an ideal non-loading pressure probe. Capsule, termination and viscothermal losses are not modeled.</li><li>The fluid domain and microphone-to-opening air connection have not been independently validated.</li></ul></div>
+<p><a href="diagnostic_samples.csv">Frequency table (CSV)</a> ·
+<a href="diagnostics.json">Full numeric summary (JSON)</a> ·
+<a href="pressure.npz">Saved complex microphone pressure (NPZ)</a> ·
+<a href="../Output2HRTF/HRTF_MicProbe.sofa">Original SOFA data</a></p>
+<small>Sources: NumCalc / Mesh2HRTF model output. No measured recording was
+used, no mic loading or distortion was solved.</small></body></html>

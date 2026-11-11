@@ -1,0 +1,28 @@
+name: Ear Acoustic Lab Python checks
+
+on:
+  push:
+    paths:
+      - 'tools/ear_acoustic_lab/**'
+      - '.github/workflows/ear-acoustic-lab.yml'
+  pull_request:
+    paths:
+      - 'tools/ear_acoustic_lab/**'
+      - '.github/workflows/ear-acoustic-lab.yml'
+
+jobs:
+  ear-lab-cpu-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e . matplotlib soundfile trimesh plotly
+      - name: Compile Python sources
+        run: python -m compileall -q tools/ear_acoustic_lab
+      - name: Test probe placement and analysis
+        run: python -m unittest discover -s tools/ear_acoustic_lab/tests -v

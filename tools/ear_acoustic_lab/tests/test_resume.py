@@ -21,6 +21,9 @@ class ResumeTest(unittest.TestCase):
             solver = project / "NumCalc" / "source_1"
             solver.mkdir(parents=True)
             (solver / "NC.inp").write_text("NumCalc input stub")
+            (project / "parameters.json").write_text(json.dumps({
+                "numFrequencies": 1, "frequencies": [500]
+            }))
             (project / "earlab_config.json").write_text(json.dumps({
                 "mic": [0, 0, 0], "source": [0, 120, 0],
                 "units": "mm", "stl": "~/model.stl"
@@ -37,7 +40,8 @@ class ResumeTest(unittest.TestCase):
                 output2hrtf.mkdir(exist_ok=True)
                 (output2hrtf/"HRTF_MicProbe.sofa").touch()
             args = Namespace(resume=str(project), mesh2hrtf=str(root), jobs=4)
-            with patch.object(m2h, "manage_numcalc") as manager, \
+            with patch.object(run_analysis, "call"), \
+                 patch.object(m2h, "manage_numcalc") as manager, \
                  patch.object(m2h, "output2hrtf", side_effect=fake_output), \
                  patch.object(run_analysis, "get_sofa_response",
                               return_value=(frequencies, pressure)), \
@@ -46,7 +50,7 @@ class ResumeTest(unittest.TestCase):
                               return_value=root/"some_snapshot"):
                 self.assertEqual(run_analysis.resume_project(args), 0)
             manager.assert_called_once()
-            self.assertEqual(manager.call_args.kwargs["max_instances"], 4)
+            self.assertEqual(manager.call_args.kwargs["max_instances"], 2)
             self.assertTrue((project/"analysis"/"response.csv").is_file())
 
     def test_fails_closed_on_cached_nonconverged_pressure(self):

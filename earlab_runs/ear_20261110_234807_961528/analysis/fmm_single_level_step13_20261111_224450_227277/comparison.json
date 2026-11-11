@@ -1,0 +1,18 @@
+{
+  "step": 13,
+  "frequency_hz": 3122.7848101265827,
+  "multilevel": {
+    "gain_db": 17.080227597969678,
+    "phase_deg": 73.50809315656707,
+    "method": "GMRES",
+    "true_relative_residual": 8.69907e-09
+  },
+  "single_level": {
+    "gain_db": 12.846283678220837,
+    "phase_deg": 65.0837213072947,
+    "method": "GMRES",
+    "true_relative_residual": 9.85641e-09
+  },
+  "single_minus_multilevel_db": -4.233943919748841,
+  "interpretation": "Method disagreement, not proof either solution matches real acoustics."
+}

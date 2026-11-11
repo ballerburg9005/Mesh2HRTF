@@ -1,0 +1,732 @@
+{
+  "project": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261110_234807_961528",
+  "total": 80,
+  "completed": 15,
+  "unfinished": 65,
+  "counts": {
+    "completed": 15,
+    "solver_rejected": 65
+  },
+  "steps": [
+    {
+      "source": 1,
+      "step": 1,
+      "frequency_hz": 100.0,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 2,
+      "frequency_hz": 351.8987341772152,
+      "status": "completed",
+      "has_pressure": true,
+      "has_log": true,
+      "end_marker": true
+    },
+    {
+      "source": 1,
+      "step": 3,
+      "frequency_hz": 603.7974683544304,
+      "status": "completed",
+      "has_pressure": true,
+      "has_log": true,
+      "end_marker": true
+    },
+    {
+      "source": 1,
+      "step": 4,
+      "frequency_hz": 855.6962025316457,
+      "status": "completed",
+      "has_pressure": true,
+      "has_log": true,
+      "end_marker": true
+    },
+    {
+      "source": 1,
+      "step": 5,
+      "frequency_hz": 1107.5949367088608,
+      "status": "completed",
+      "has_pressure": true,
+      "has_log": true,
+      "end_marker": true
+    },
+    {
+      "source": 1,
+      "step": 6,
+      "frequency_hz": 1359.493670886076,
+      "status": "completed",
+      "has_pressure": true,
+      "has_log": true,
+      "end_marker": true
+    },
+    {
+      "source": 1,
+      "step": 7,
+      "frequency_hz": 1611.3924050632913,
+      "status": "completed",
+      "has_pressure": true,
+      "has_log": true,
+      "end_marker": true
+    },
+    {
+      "source": 1,
+      "step": 8,
+      "frequency_hz": 1863.2911392405065,
+      "status": "completed",
+      "has_pressure": true,
+      "has_log": true,
+      "end_marker": true
+    },
+    {
+      "source": 1,
+      "step": 9,
+      "frequency_hz": 2115.1898734177216,
+      "status": "completed",
+      "has_pressure": true,
+      "has_log": true,
+      "end_marker": true
+    },
+    {
+      "source": 1,
+      "step": 10,
+      "frequency_hz": 2367.088607594937,
+      "status": "completed",
+      "has_pressure": true,
+      "has_log": true,
+      "end_marker": true
+    },
+    {
+      "source": 1,
+      "step": 11,
+      "frequency_hz": 2618.987341772152,
+      "status": "completed",
+      "has_pressure": true,
+      "has_log": true,
+      "end_marker": true
+    },
+    {
+      "source": 1,
+      "step": 12,
+      "frequency_hz": 2870.8860759493673,
+      "status": "completed",
+      "has_pressure": true,
+      "has_log": true,
+      "end_marker": true
+    },
+    {
+      "source": 1,
+      "step": 13,
+      "frequency_hz": 3122.7848101265827,
+      "status": "completed",
+      "has_pressure": true,
+      "has_log": true,
+      "end_marker": true
+    },
+    {
+      "source": 1,
+      "step": 14,
+      "frequency_hz": 3374.6835443037976,
+      "status": "completed",
+      "has_pressure": true,
+      "has_log": true,
+      "end_marker": true
+    },
+    {
+      "source": 1,
+      "step": 15,
+      "frequency_hz": 3626.582278481013,
+      "status": "completed",
+      "has_pressure": true,
+      "has_log": true,
+      "end_marker": true
+    },
+    {
+      "source": 1,
+      "step": 16,
+      "frequency_hz": 3878.481012658228,
+      "status": "completed",
+      "has_pressure": true,
+      "has_log": true,
+      "end_marker": true
+    },
+    {
+      "source": 1,
+      "step": 17,
+      "frequency_hz": 4130.379746835443,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 18,
+      "frequency_hz": 4382.278481012659,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 19,
+      "frequency_hz": 4634.177215189874,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 20,
+      "frequency_hz": 4886.0759493670885,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 21,
+      "frequency_hz": 5137.974683544304,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 22,
+      "frequency_hz": 5389.873417721519,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 23,
+      "frequency_hz": 5641.772151898735,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 24,
+      "frequency_hz": 5893.67088607595,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 25,
+      "frequency_hz": 6145.569620253165,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 26,
+      "frequency_hz": 6397.46835443038,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 27,
+      "frequency_hz": 6649.367088607595,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 28,
+      "frequency_hz": 6901.265822784811,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 29,
+      "frequency_hz": 7153.164556962026,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 30,
+      "frequency_hz": 7405.063291139241,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 31,
+      "frequency_hz": 7656.962025316456,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 32,
+      "frequency_hz": 7908.860759493671,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 33,
+      "frequency_hz": 8160.7594936708865,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 34,
+      "frequency_hz": 8412.658227848102,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 35,
+      "frequency_hz": 8664.556962025317,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 36,
+      "frequency_hz": 8916.455696202533,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 37,
+      "frequency_hz": 9168.354430379748,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 38,
+      "frequency_hz": 9420.253164556963,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 39,
+      "frequency_hz": 9672.151898734177,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 40,
+      "frequency_hz": 9924.050632911392,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 41,
+      "frequency_hz": 10175.949367088608,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 42,
+      "frequency_hz": 10427.848101265823,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 43,
+      "frequency_hz": 10679.746835443038,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 44,
+      "frequency_hz": 10931.645569620254,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 45,
+      "frequency_hz": 11183.54430379747,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 46,
+      "frequency_hz": 11435.443037974685,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 47,
+      "frequency_hz": 11687.3417721519,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 48,
+      "frequency_hz": 11939.240506329115,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 49,
+      "frequency_hz": 12191.13924050633,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 50,
+      "frequency_hz": 12443.037974683544,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 51,
+      "frequency_hz": 12694.93670886076,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 52,
+      "frequency_hz": 12946.835443037975,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 53,
+      "frequency_hz": 13198.73417721519,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 54,
+      "frequency_hz": 13450.632911392406,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 55,
+      "frequency_hz": 13702.531645569621,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 56,
+      "frequency_hz": 13954.430379746836,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 57,
+      "frequency_hz": 14206.329113924052,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 58,
+      "frequency_hz": 14458.227848101267,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 59,
+      "frequency_hz": 14710.126582278483,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 60,
+      "frequency_hz": 14962.025316455696,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 61,
+      "frequency_hz": 15213.924050632912,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 62,
+      "frequency_hz": 15465.822784810127,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 63,
+      "frequency_hz": 15717.721518987342,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 64,
+      "frequency_hz": 15969.620253164558,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 65,
+      "frequency_hz": 16221.518987341773,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 66,
+      "frequency_hz": 16473.41772151899,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 67,
+      "frequency_hz": 16725.316455696204,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 68,
+      "frequency_hz": 16977.21518987342,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 69,
+      "frequency_hz": 17229.113924050635,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 70,
+      "frequency_hz": 17481.01265822785,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 71,
+      "frequency_hz": 17732.911392405065,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 72,
+      "frequency_hz": 17984.81012658228,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 73,
+      "frequency_hz": 18236.708860759496,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 74,
+      "frequency_hz": 18488.60759493671,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 75,
+      "frequency_hz": 18740.506329113927,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 76,
+      "frequency_hz": 18992.40506329114,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 77,
+      "frequency_hz": 19244.303797468354,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 78,
+      "frequency_hz": 19496.20253164557,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 79,
+      "frequency_hz": 19748.101265822785,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    },
+    {
+      "source": 1,
+      "step": 80,
+      "frequency_hz": 20000.0,
+      "status": "solver_rejected",
+      "has_pressure": false,
+      "has_log": true,
+      "end_marker": false
+    }
+  ]
+}

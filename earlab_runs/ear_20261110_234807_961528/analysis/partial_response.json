@@ -1,0 +1,12 @@
+{
+  "verified_points": 15,
+  "total_project_steps": 80,
+  "completed_steps": 15,
+  "missing_or_failed_steps": 65,
+  "completed_but_unverified": [],
+  "frequency_range_hz": [
+    351.8987341772152,
+    3878.481012658228
+  ],
+  "warning": "ONLY completed frequencies with true relative residual <= 1e-08 are included. Missing frequencies are NOT interpolated. Mesh/watertightness/acoustic accuracy is not established. Do not use for full-band audition."
+}

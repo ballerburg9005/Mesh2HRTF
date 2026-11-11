@@ -198,6 +198,53 @@ the saved NumCalc log instead of launching another entire sweep.
 Neither comparison proves the original nonwatertight, under-resolved
 geometry is acoustically valid.
 
+## Stop invalid geometry before the next NumCalc sweep
+
+**The existing 80-tone run was inspected directly from its GitHub-exported
+Mesh2Input nodes and elements.** It has 9,074 triangles, **four unmatched
+boundary edges** and **three nonmanifold edges** (two incident triangles
+is normal, but one edge has four incident triangles). All triangles belong
+to one edge-connected component, which is **not** a guarantee of manifoldness.
+It also has 1,707 triangles (18.8%) whose longest edge exceeds wavelength/6
+at 20 kHz. These are concrete flaws or unverified assumptions, independent
+of the GMRES/FMM residuals.
+
+The actual defect overlay and detailed report are committed next to the
+existing run in \`earlab_runs/ear_20261110_234807_961528/\`:
+
+- \`geometry_topology.json\` — each defective edge, its vertex IDs,
+  triangle IDs, coordinates in millimetres, and mesh-resolution limits
+- \`topology_defects.obj\` + \`topology_defects.mtl\` — import the
+  **OBJ** into Blender over the original model; orange indicates an open
+  boundary, red a nonmanifold edge's incident faces
+
+Notably, triangle **49** and triangle **8937** each have two boundary
+edges and belong to an extra-incident edge. The third nonmanifold edge
+is between vertices **4044 and 4045**, with incident triangles
+**7521, 7533, 8914, and 8970**. The overlay highlights the affected
+faces. **Do not delete these faces automatically without inspecting
+whether they represent a physical wall, intentional opening, or seam.**
+
+Re-run the geometry audit at any time; this starts no Blender or NumCalc:
+
+\`\`\`sh
+cd ~/Mesh2HRTF
+git pull --ff-only
+tools/ear_acoustic_lab/.venv/bin/python \
+  tools/ear_acoustic_lab/run_analysis.py \
+  --inspect-geometry earlab_runs/ear_20261110_234807_961528
+\`\`\`
+
+Any new scan or resume now runs this audit before the expensive solver.
+An unresolved open/nonmanifold boundary, inconsistent winding, disconnected
+component, degenerate triangle, or >5% over wavelength/6 at the maximum
+frequency **blocks unattended execution**. A knowledgeable user may supply
+\`--allow-unvalidated-geometry\` to override, but doing so does not validate
+the results. Intentional open sheets must be inspected and overridden
+explicitly. A passing topology audit also does not prove that the source
+and microphone occupy the intended, connected air region or that the BEM
+solutions converge with mesh refinement.
+
 ## One-button test
 
 1. Save the physical **air-facing** 3D ear geometry as `~/model.stl`. If possible, **move the STL's coordinate origin to the microphone** in Blender before exporting. Then the GUI's default `Mic XYZ = 0 0 0` is correct; no other microphone setup required. Coordinates must use the same units as the STL, default **millimetres**. You can also specify a different microphone XYZ if you prefer. The STL is imported automatically, not via the Blender GUI.

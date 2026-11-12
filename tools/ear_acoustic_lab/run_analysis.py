@@ -238,6 +238,29 @@ def run(args):
     if getattr(args, "inspect_geometry", ""):
         report = audit_exported_topology(args.inspect_geometry)
         print_topology(report)
+        # Detect where triangulation damage originates instead of blaming
+        # an intentional cylinder-to-slit transition in the user's CAD.
+        # A raw STL has duplicated vertex IDs; compare welded geometry.
+        try:
+            from source_export_compare import compare_source_export
+            compare, saved = compare_source_export(args.inspect_geometry)
+            print("[SOURCE VS EXPORT] STL: "
+                  f"{compare['original_triangles']} triangles; NumCalc: "
+                  f"{compare['exported_triangles']} triangles.", flush=True)
+            print("[SOURCE VS EXPORT] Matching faces: "
+                  f"{compare['exact_face_matches_at_tolerance']}; "
+                  f"STL only: {compare['triangles_only_in_stl']}; "
+                  f"export only: {compare['triangles_only_in_export']}.",
+                  flush=True)
+            print("[SOURCE VS EXPORT] Exceptional edges present only "
+                  f"in exported mesh: "
+                  f"{compare['bad_edges_present_only_in_export']}.",
+                  flush=True)
+            print("[SOURCE VS EXPORT] Detailed report: " + str(saved),
+                  flush=True)
+        except FileNotFoundError as exc:
+            print("[SOURCE VS EXPORT] Original STL unavailable: " + str(exc),
+                  flush=True)
         return 0
     if getattr(args, "inspect_resume", ""):
         audit, path = save_audit(args.inspect_resume)

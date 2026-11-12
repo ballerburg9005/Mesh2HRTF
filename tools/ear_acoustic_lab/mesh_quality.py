@@ -10,6 +10,7 @@ from pathlib import Path
 
 import numpy as np
 
+
 TRIANGLE_AREA_REFERENCE = 1.51967  # NumCalc NC_WriteParameters, NC_Input.cpp
 WARNING_RATIO = 10.0
 FATAL_RATIO = 100.0
@@ -104,7 +105,11 @@ def analyze_exported_mesh(project, units="mm"):
                 file.write("usemtl fatal\n" if hit["grade"] == "FATAL"
                            else "usemtl warning\n")
                 for p in hit["_points"]:
-                    file.write("v " + " ".join(f"{coord:.12g}" for coord in p) + "\n")
+                    # _points are Blender-native coordinates already in
+                    # STL units. Convert axes for Blender's default OBJ
+                    # importer without applying the metre conversion twice.
+                    obj_point = (p[0], p[2], -p[1])
+                    file.write("v " + " ".join(f"{coord:.12g}" for coord in obj_point) + "\n")
                 file.write(f"f {idx} {idx+1} {idx+2}\n")
                 idx += 3
 

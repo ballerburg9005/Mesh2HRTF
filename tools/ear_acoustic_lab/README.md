@@ -198,6 +198,40 @@ the saved NumCalc log instead of launching another entire sweep.
 Neither comparison proves the original nonwatertight, under-resolved
 geometry is acoustically valid.
 
+## Validate a newly revised STL before any NumCalc run
+
+If you repaired the cylinder-to-slit junction and exported a **new STL**,
+do **not** resume the old NumCalc folder: its mesh is still the old one.
+Use the new \`--export-only\` preflight. This creates a separate project,
+runs the standard Blender/Mesh2Input conversion once, audits triangle
+quality and welded topology, and compares original STL faces against the
+NumCalc Reference geometry. **It does not compile, estimate memory,
+launch NumCalc, or start a sweep.**
+
+\`\`\`sh
+cd ~/Mesh2HRTF
+git pull --ff-only
+tools/ear_acoustic_lab/.venv/bin/python -u \
+  tools/ear_acoustic_lab/run_analysis.py \
+  --stl ~/model.stl \
+  --preset '20 kHz fast (80 tones)' \
+  --export-only
+\`\`\`
+
+If the revised file has another name, specify its full path after
+\`--stl\`. The command prints \`[EXPORT ONLY] New project:\` and reports
+\`[TOPOLOGY]\`, \`[RESOLUTION]\`, and \`[SOURCE VS EXPORT]\`. It exits
+with status 0 only when the basic topology/wavelength screens and STL
+comparison execute successfully, and status 2 if the preflight finds
+blockers. Successful preflight is **not proof of physically correct
+acoustics** or a suitable near-canal mesh; it is the first checkpoint
+before choosing any further numerical tests.
+
+The old 80-tone project, its logs, and existing verified results are
+preserved. Do not launch an entire 80-frequency simulation immediately
+after the check; review whether the new cylinder-to-slit topology is
+correct and choose a bounded single-frequency numerical validation.
+
 ## Cylinder-to-slit transition: check original STL versus export, not just OBJ
 
 A slotted cylinder's polygon/triangulation junction can produce skinny or

@@ -103,18 +103,31 @@ def _preflight_stl(stl,units,mic,source):
         bbox=np_array(m.bounds)*scale
         print('[MESH] Triangles:',len(m.faces),flush=True)
         print('[MESH] Bounding box (m):',bbox.tolist(),flush=True)
-        if not m.is_watertight:
-            print('[WARNING] STL is not watertight. BEM scattering and cavity results may be invalid.',flush=True)
-        if not m.is_winding_consistent:
-            print('[WARNING] Inconsistent triangle winding may invalidate internal/external fluid regions.',flush=True)
+        # STL is a triangle soup: each face may have independent copies
+        # of its vertices. Trimesh process=False does NOT weld those, so
+        # asking m.is_watertight here falsely marks closed STLs as open.
+        # Weld a diagnostic COPY; never edit the source STL or the exporter.
+        welded = m.copy()
+        welded.merge_vertices()
+        if not welded.is_watertight:
+            print('[WARNING] Welded STL still has open or nonmanifold edges. '
+                  'Run the exact exported topology check for locations.',
+                  flush=True)
+        if not welded.is_winding_consistent:
+            print('[WARNING] Welded STL has inconsistent triangle winding.',
+                  flush=True)
         if len(m.faces)>150000:
             print('[WARNING] >150k triangles; CPU BEM frequency solves could be very expensive. Decimate outside the canal first.',flush=True)
         for name,coords in [('Mic',mic),('Source',source)]:
             c=np_array(coords)*scale
             if name=='Mic' and not np_all((c>=bbox[0]-.005)&(c<=bbox[1]+.005)):
                 print('[WARNING] Microphone lies outside or far beyond the STL bounding box.',flush=True)
-        return {'triangles':len(m.faces),'watertight':bool(m.is_watertight),
-                'winding_consistent':bool(m.is_winding_consistent),
+        return {'triangles':len(m.faces),
+                'watertight':bool(welded.is_watertight),
+                'winding_consistent':bool(welded.is_winding_consistent),
+                'welded_vertex_count':len(welded.vertices),
+                'raw_vertex_count':len(m.vertices),
+                'topology_check':'coincident STL vertices welded on a diagnostic copy',
                 'bounds_m':bbox.tolist()}
     except ImportError:
         print('[INFO] trimesh not installed; skipping optional mesh preflight.',flush=True)

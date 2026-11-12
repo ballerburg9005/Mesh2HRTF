@@ -10,7 +10,7 @@ import trimesh
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from source_export_compare import compare_source_export
-from blender_obj_axes import mesh2input_to_obj, obj_default_import_to_blender
+from blender_obj_axes import mesh2input_to_obj, obj_y_forward_z_up_to_blender
 
 
 class SourceVsExportGeometryTest(unittest.TestCase):
@@ -63,13 +63,14 @@ class SourceVsExportGeometryTest(unittest.TestCase):
             self.assertEqual(report["bad_edges_shared_by_source_and_export"], 0)
             self.assertEqual(report["bad_edges_present_only_in_export"], 3)
 
-    def test_obj_default_axes_roundtrip(self):
-        p=(.002, -.019, .003)
-        obj=mesh2input_to_obj(p, "mm")
-        self.assertEqual(obj, (2., 3., 19.))
+    def test_obj_native_axes_roundtrip(self):
+        p = (.002, -.019, .003)
+        obj = mesh2input_to_obj(p, "mm")
+        self.assertEqual(obj, (2., -19., 3.))
         self.assertEqual(
-            obj_default_import_to_blender(obj),
+            obj_y_forward_z_up_to_blender(obj),
             (2., -19., 3.))
+        self.assertEqual(mesh2input_to_obj(p, "m"), p)
         with self.assertRaises(ValueError):
             mesh2input_to_obj(p, "invalid")
 

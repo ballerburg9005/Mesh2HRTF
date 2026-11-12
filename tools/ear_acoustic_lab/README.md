@@ -198,6 +198,66 @@ the saved NumCalc log instead of launching another entire sweep.
 Neither comparison proves the original nonwatertight, under-resolved
 geometry is acoustically valid.
 
+## Overnight bounded BEM validation on repaired geometry
+
+The repaired 8994-triangle mesh still gave **+14.863 dB SL-FMM** versus
+**+19.433 dB ML-FMM** at 3122.78 Hz: **4.570 dB disagreement**, despite
+both methods satisfying their own solver residual tests. That difference
+is **not** a measured ear resonance, and the topology repair did not fix
+the FMM disagreement.
+
+A single unattended job now tests **only steps 13 and 14** (~3123 and
+3375 Hz), at standard and higher FMM expansion orders, plus a
+**traditional dense BEM** solve for each frequency. Dense BEM uses
+\`METHODBEM=0\` and the iterative solver, so it computes the same surface
+discretization **without FMM far-field approximations**. It may run out
+of numerical iterations, memory or time; the job records that as
+a failed reference instead of inventing an answer. No 80-tone sweep
+or Blender re-export is involved.
+
+**Start once, then leave it running:**
+
+\`\`\`sh
+cd ~/Mesh2HRTF
+git pull --ff-only
+nohup tools/ear_acoustic_lab/.venv/bin/python -u \
+  tools/ear_acoustic_lab/overnight_bem_validation.py \
+  --project earlab_runs/ear_20261112_014827_323293 \
+  --timeout-per-case 900 --max-hours 6 \
+  > overnight_bem.log 2>&1 < /dev/null &
+\`\`\`
+
+The process has **15 minutes maximum per calculation**, a **6-hour
+overall budget**, a **2.5 GiB physical-memory reserve**, and **at least
+6 GiB available RAM required** before starting a case. It runs cases
+sequentially at normal CPU priority, starts no background polling
+workers, and terminates each process group if its timeout or memory
+limit trips. A failed or timed-out case **does not block the remaining
+tests**. It reuses the two prior successful 3123 Hz results on this
+same repaired mesh only after checking hashes, original NumCalc settings,
+the real solver logs, and the pressure files. Existing project data
+is never overwritten. NumCalc must already be compiled and executable.
+
+**The morning after:**
+
+\`\`\`sh
+cat earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_13_14/overnight_report.txt
+tail -80 overnight_bem.log
+\`\`\`
+
+Progress is checkpointed after **every case** in
+\`analysis/overnight_bem_validation_steps_13_14/results.json\`. Launching
+the same command again **skips completed or previously failed cases**
+and refuses to mix inputs from a changed model or NumCalc binary.
+The complete solver logs remain inside one sandbox directory per case.
+
+A converged dense BEM result is a better discrete-operator comparison
+than just looking at which FMM curve is smoother. It is **not proof** of
+mesh convergence, correct air connectivity, or physical acoustic
+accuracy. At 20 kHz, the repaired mesh still fails the earlier
+wavelength/6 resolution heuristic; this overnight job does **not**
+attempt to validate that high-frequency band.
+
 ## Repaired 8994-triangle export: bounded 3123 Hz FMM check
 
 The export-only project \`ear_20261112_014827_323293\` has **zero open

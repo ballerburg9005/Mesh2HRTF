@@ -198,6 +198,49 @@ the saved NumCalc log instead of launching another entire sweep.
 Neither comparison proves the original nonwatertight, under-resolved
 geometry is acoustically valid.
 
+## Repaired 8994-triangle export: bounded 3123 Hz FMM check
+
+The export-only project \`ear_20261112_014827_323293\` has **zero open
+edges, zero nonmanifold edges, consistent winding**, one connected surface,
+and an **8994/8994 STL-to-NumCalc triangle match**. The repaired cylinder
+junction is no longer failing the topology check. Its **20 kHz bandwidth**
+still fails the wavelength/6 discretization heuristic (18.5% of faces
+too large); this is **not** a reason to fill/delete more triangles.
+
+Before trying any broadband simulation, run just one diagnostic frequency on
+the newly exported clean mesh, 3122.78 Hz, sequentially with the single-level
+and multilevel FMM operators:
+
+\`\`\`sh
+cd ~/Mesh2HRTF
+git pull --ff-only
+tools/ear_acoustic_lab/.venv/bin/python -u \
+  tools/ear_acoustic_lab/fmm_clean_mesh_one_point.py \
+  --project earlab_runs/ear_20261112_014827_323293 \
+  --step 13 --timeout 150
+\`\`\`
+
+This **does not** run Blender or the 80-step manager. It uses isolated
+\`analysis/fmm_new_mesh_step13_*/single_level/\` and
+\`.../multilevel/\` sandboxes. Each NumCalc solve has a **150-second
+hard timeout**, runs one step only, validates the actual FMM method and
+true solver residual (<=1e-8), and leaves the original project's input
+and solver outputs untouched. It requires at least 6 GiB *available
+physical* RAM and refuses to overlap another NumCalc process.
+After both converge, it writes \`comparison.json\` with microphone gains
+and the difference between the two methods. If one fails, it writes
+\`failed_comparison.json\` and preserves logs without claiming a result.
+
+The older, *unrepaired* mesh gave **+17.080 vs +12.846 dB** at this
+frequency (a 4.234 dB disagreement between ML-FMM and SL-FMM). If a
+similar discrepancy persists on the repaired mesh, it is strong
+evidence that repairing the cylinder-to-slit junction alone does not
+resolve the FMM approximation mismatch. If the discrepancy shrinks,
+that is evidence the geometry contributed. **Neither outcome makes the
+computed response physically validated**: independent operator
+validation, local mesh refinement and checking the actual microphone
+air region are still required.
+
 ## Validate a newly revised STL before any NumCalc run
 
 If you repaired the cylinder-to-slit junction and exported a **new STL**,

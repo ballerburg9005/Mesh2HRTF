@@ -249,13 +249,30 @@ def print_topology(report):
         print(f"[RESOLUTION] At {r['max_frequency_hz']:g} Hz: "
               f"{100*r['fraction_of_triangles_over']:.1f}% of triangles "
               "have an edge longer than wavelength/6", flush=True)
-    if report["blockers"]:
-        print("[TOPOLOGY BLOCKED] " + "; ".join(report["blockers"]), flush=True)
-        print("[TOPOLOGY] Repair defective faces; inspect "
-              + str(report["overlay_obj"]), flush=True)
+    geometry_issues = (report["open_boundary_edges"] or
+                       report["nonmanifold_edges"] or
+                       report["winding_conflicts"] or
+                       report["degenerate_triangle_ids"] or
+                       report["edge_connected_components"] != 1)
+    if geometry_issues:
+        print("[TOPOLOGY FAILED] Actual edge-connectivity or face defects; "
+              "inspect " + str(report["overlay_obj"]), flush=True)
     else:
-        print("[TOPOLOGY] No edge-connectivity or coarse-resolution blockers. "
-              "Physical validity still unverified.", flush=True)
+        print("[TOPOLOGY PASSED] Closed edge-manifold, consistent winding, "
+              "one connected component; physical air path NOT verified.",
+              flush=True)
+    r = report["resolution"]
+    coarse = bool(r and r["fraction_of_triangles_over"] > .05)
+    if coarse:
+        print(f"[RESOLUTION FAILED] At {r['max_frequency_hz']:g} Hz, "
+              f"{100*r['fraction_of_triangles_over']:.1f}% of triangles "
+              "exceed wavelength/6. Refine for this band or test at lower "
+              "frequencies; not an instruction to fill faces.", flush=True)
+    elif r:
+        print("[RESOLUTION SCREEN] Passed heuristic wavelength/6 fraction "
+              "check. Not a mesh-convergence certificate.", flush=True)
+    if report["blockers"]:
+        print("[PRE-SOLVER GATE] " + "; ".join(report["blockers"]), flush=True)
     print("[TOPOLOGY] Saved: " +
           str(Path(report["project"]) / "geometry_topology.json"), flush=True)
 
@@ -264,13 +281,23 @@ def enforce_topology_gate(project, max_frequency_hz=None, allow=False):
     report = audit_exported_topology(project, max_frequency_hz)
     print_topology(report)
     if report["blockers"] and not allow:
+        geometry_failed = (report["open_boundary_edges"] or
+                           report["nonmanifold_edges"] or
+                           report["winding_conflicts"] or
+                           report["degenerate_triangle_ids"] or
+                           report["edge_connected_components"] != 1)
+        remedy = (
+            "Inspect the exact topology defects before changing the STL. "
+            if geometry_failed else
+            "Topology has passed. The requested upper frequency is not "
+            "adequately resolved by the heuristic screen; use a refined "
+            "surface or test selected lower frequencies. "
+        )
         raise RuntimeError(
-            "Refusing to launch another expensive NumCalc sweep on an "
-            "unvalidated mesh: " + "; ".join(report["blockers"]) + ". "
-            "Import topology_defects.obj into Blender to locate the affected "
-            "triangles, repair the original STL, and re-export. "
+            "Refusing to launch an unattended NumCalc sweep: "
+            + "; ".join(report["blockers"]) + ". " + remedy +
             "An expert can override with --allow-unvalidated-geometry, "
-            "but the output must not be treated as physically validated.")
+            "but this does not validate acoustic accuracy.")
     if report["blockers"]:
         print("[TOPOLOGY OVERRIDE] User explicitly allowed unvalidated geometry; "
               "solver results require independent verification.", flush=True)

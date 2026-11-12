@@ -132,7 +132,7 @@
     }
   ],
   "resolution": {
-    "max_frequency_hz": 20000,
+    "max_frequency_hz": 20000.0,
     "wavelength_mm": 17.15,
     "lambda_over_six_max_edge_mm": 2.8583333333333334,
     "edges_of_triangles_over_lambda_over_six": 1707,

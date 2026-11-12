@@ -1,0 +1,20 @@
+{
+  "triangles": 8998,
+  "watertight": false,
+  "winding_consistent": true,
+  "welded_vertex_count": 4501,
+  "raw_vertex_count": 26994,
+  "topology_check": "coincident STL vertices welded on a diagnostic copy",
+  "bounds_m": [
+    [
+      -0.037832752227783206,
+      -0.01930282020568848,
+      -0.04569386291503906
+    ],
+    [
+      0.030167894363403322,
+      0.04648069763183594,
+      0.022306549072265626
+    ]
+  ]
+}

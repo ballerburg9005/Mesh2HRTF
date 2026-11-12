@@ -1,0 +1,24 @@
+{
+  "mesh2hrtf": "/home/l0rd/Mesh2HRTF",
+  "stl": "/home/l0rd/model.stl",
+  "units": "mm",
+  "mic": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "source": [
+    0.0,
+    120.0,
+    0.0
+  ],
+  "min_freq": 100,
+  "max_freq": 20000,
+  "step_freq": 100,
+  "export_frequency_type": "Num steps",
+  "export_frequency_value": 80,
+  "project": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014727_820600",
+  "grid": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014727_820600/MicProbe",
+  "music": "",
+  "preset": "20 kHz fast (80 tones)"
+}

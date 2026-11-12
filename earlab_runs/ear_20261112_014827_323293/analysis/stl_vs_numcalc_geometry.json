@@ -1,0 +1,25 @@
+{
+  "source_stl": "/home/l0rd/model.stl",
+  "project": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293",
+  "matching_tolerance_mm": 0.0001,
+  "original_triangles": 8994,
+  "exported_triangles": 8994,
+  "exact_face_matches_at_tolerance": 8994,
+  "triangles_only_in_stl": 0,
+  "triangles_only_in_export": 0,
+  "stl_welded_edge_topology": {
+    "open_boundary_edges": 0,
+    "nonmanifold_edges": 0,
+    "degenerate_triangles": 0
+  },
+  "numcalc_export_welded_edge_topology": {
+    "open_boundary_edges": 0,
+    "nonmanifold_edges": 0,
+    "degenerate_triangles": 0
+  },
+  "bad_edges_shared_by_source_and_export": 0,
+  "bad_edges_present_only_in_export": 0,
+  "stl_only_face_examples": [],
+  "export_only_face_examples": [],
+  "note": "Geometric triangle matching after quantizing vertices to the given tolerance. STL is a triangle soup, and raw trimesh watertightness with process=False can be misleading. The STL and NumCalc reference can differ due to import validation, triangulation, or unit/axis conversions. Matching topology alone does not validate acoustic physics."
+}

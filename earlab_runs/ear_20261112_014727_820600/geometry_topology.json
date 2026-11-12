@@ -1,0 +1,28 @@
+{
+  "project": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014727_820600",
+  "node_count": 4499,
+  "triangle_count": 8994,
+  "open_boundary_edges": 0,
+  "nonmanifold_edges": 0,
+  "winding_conflicts": 0,
+  "degenerate_triangle_ids": [],
+  "edge_connected_components": 1,
+  "component_triangle_counts": [
+    8994
+  ],
+  "issue_edges": [],
+  "resolution": {
+    "max_frequency_hz": 20000.0,
+    "wavelength_mm": 17.15,
+    "lambda_over_six_max_edge_mm": 2.8583333333333334,
+    "edges_of_triangles_over_lambda_over_six": 1662,
+    "fraction_of_triangles_over": 0.1847898599066044,
+    "worst_triangle_edge_mm": 96.16654112411044
+  },
+  "blockers": [
+    "18.5% of triangles exceed wavelength/6 at 20000 Hz"
+  ],
+  "ready_for_unattended_solver": false,
+  "overlay_obj": null,
+  "note": "This precheck detects mesh topological and resolution risks. Even a passing mesh is not proof of a correct acoustic boundary model, a source-to-microphone air path, or BEM convergence."
+}

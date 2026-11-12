@@ -113,6 +113,70 @@ def _read_result(source, step, expected_label, frequency, cfg, params):
     }
 
 
+def _read_dense_direct_fallback_unverified(source, step, frequency, cfg, params):
+    """Recognize NumCalc's post-CGS Gaussian-elimination fallback.
+
+    The CGS TRUE residual is NOT the Gaussian-elimination residual.
+    Do not classify this as converged without an independently checked
+    direct-solution residual. No solver runs or inputs are modified.
+    """
+    import re
+
+    log_path = source / f"NC{step}-{step}.out"
+    grid_path = source / "be.out" / f"be.{step}" / "pEvalGrid"
+    if not log_path.is_file() or not grid_path.is_file():
+        raise FileNotFoundError(
+            "Traditional BEM direct-fallback outputs missing")
+    log = log_path.read_text(errors="replace")
+    if ("Traditional BEM" not in log or "End time:" not in log or
+            "Iteration method CGS failed, direct method is used!" not in log):
+        raise ValueError(
+            "Not a completed NumCalc traditional BEM direct fallback")
+    match = re.search(
+        r"CGS TRUE relative residual\s*=\s*([\d.eE+-]+)", log)
+    if not match:
+        raise ValueError("Missing earlier, failed CGS residual")
+    failed_cgs_residual = float(match.group(1))
+    pressure = load_three_node_pressure(grid_path)
+    gain, phase = gain_db(
+        pressure, frequency, cfg, params.get("speedOfSound", 343.))
+    return {
+        "status": "direct_unverified",
+        "candidate_gain_db": gain,
+        "candidate_phase_deg": phase,
+        "pressure_real": pressure.real,
+        "pressure_imag": pressure.imag,
+        "prior_failed_cgs_relative_residual": failed_cgs_residual,
+        "direct_relative_residual": None,
+        "reason": (
+            "NumCalc switched from failed CGS to Gaussian elimination. "
+            "Saved output exists, but no independently verified residual "
+            "for the direct solution was produced."),
+        "log_path": str(log_path),
+        "source": "existing_dense_direct_fallback",
+    }
+
+
+def _recover_existing_dense_outputs(project, root, steps, results, cfg, params):
+    """Reclassify *only* direct-fallback cases, without launching NumCalc."""
+    refreshed = 0
+    for step in steps:
+        case_id = f"{step}:dense"
+        rec = results.get(case_id, {})
+        if rec.get("status") not in ("failed", "direct_unverified"):
+            continue
+        source = root / f"step{step:02d}_dense" / "project" / "NumCalc" / "source_1"
+        try:
+            classified = _read_dense_direct_fallback_unverified(
+                source, step, float(params["frequencies"][step-1]),
+                cfg, params)
+        except (FileNotFoundError, ValueError):
+            continue
+        results[case_id] = classified
+        refreshed += 1
+    return refreshed
+
+
 def _reuse_existing_step13(project, initial_hash, cfg, params, frequency):
     """Reuse prior clean-mesh step13 ONLY if inputs and verified outputs match."""
     analysis = project / "analysis"
@@ -260,6 +324,12 @@ def _reports_to_text(project, steps, results, params, budget_h, start_time):
                     f"  {key:6s} {rec['gain_db']:+9.3f} dB"
                     f"  true residual {rec['true_relative_residual']:.3e}"
                     f"  ({rec.get('source','new_solve')})")
+            elif status == "direct_unverified":
+                lines.append(
+                    f"  {key:6s} {rec['candidate_gain_db']:+9.3f} dB"
+                    "  DIRECT FALLBACK, RESIDUAL NOT VERIFIED"
+                    f"  (earlier CGS residual "
+                    f"{rec['prior_failed_cgs_relative_residual']:.3e})")
             else:
                 lines.append(f"  {key:6s} {status:15s}  "
                              f"{rec.get('reason','')}")
@@ -358,6 +428,11 @@ def run(project, steps=(13,14), per_case_timeout=900,
     results_path = root / "results.json"
     results = (json.loads(results_path.read_text())
                if results_path.is_file() else {})
+    recovered = _recover_existing_dense_outputs(
+        project, root, steps, results, cfg, params)
+    if recovered:
+        print(f"[OVERNIGHT] Reclassified {recovered} saved dense cases "
+              "as direct_unverified. No solver was rerun.", flush=True)
     begun = dt.datetime.now().isoformat()
     deadline = time.monotonic() + max_hours * 3600
     cases = []
@@ -456,18 +531,30 @@ def run(project, steps=(13,14), per_case_timeout=900,
             if subprocess_meta["return_code"] != 0:
                 raise RuntimeError(
                     f"NumCalc exit code {subprocess_meta['return_code']}")
-            verified = _read_result(
-                workdir, step, expected, freq, cfg, params)
+            try:
+                verified = _read_result(
+                    workdir, step, expected, freq, cfg, params)
+            except ValueError:
+                if key != "dense":
+                    raise
+                verified = _read_dense_direct_fallback_unverified(
+                    workdir, step, freq, cfg, params)
             verified["source"] = "new_solve"
             verified["elapsed_s"] = subprocess_meta["seconds_elapsed"]
             verified["max_observed_process_rss_gib"] = (
                 subprocess_meta["max_observed_process_rss_gib"])
             verified["input_sha256"] = _sha256(workdir / "NC.inp")
             results[case_id] = verified
-            print(f"[OVERNIGHT] PASS {case_id}: "
-                  f"{verified['gain_db']:+.3f} dB, "
-                  f"residual {verified['true_relative_residual']:.2e}",
-                  flush=True)
+            if verified["status"] == "converged":
+                print(f"[OVERNIGHT] PASS {case_id}: "
+                      f"{verified['gain_db']:+.3f} dB, "
+                      f"residual {verified['true_relative_residual']:.2e}",
+                      flush=True)
+            else:
+                print(f"[OVERNIGHT] UNVERIFIED {case_id}: "
+                      f"{verified['candidate_gain_db']:+.3f} dB direct "
+                      "fallback with NO checked final residual.",
+                      flush=True)
         except Exception as exc:
             results[case_id] = {
                 "status": "failed", "reason": str(exc),

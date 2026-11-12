@@ -380,6 +380,48 @@ def run(args):
             print("[WARNING] Mesh is not adequately resolved at this frequency "
                   "by the lambda/6 screening rule. Results may be invalid; "
                   "compare with a refined mesh before trusting peaks.", flush=True)
+    if getattr(args, 'export_only', False):
+        # Diagnose the *new* STL after Blender export, never the old
+        # NumCalc mesh. This exits before compilation/estimation/solving.
+        step('Export-only geometry validation (NO NumCalc)')
+        report = audit_exported_topology(project, max_frequency_hz=fmax)
+        print_topology(report)
+        try:
+            from source_export_compare import compare_source_export
+            compare, saved = compare_source_export(project)
+            print("[SOURCE VS EXPORT] "
+                  f"Original STL: {compare['original_triangles']} triangles; "
+                  f"exported: {compare['exported_triangles']}; "
+                  f"matching: {compare['exact_face_matches_at_tolerance']}; "
+                  f"STL-only: {compare['triangles_only_in_stl']}; "
+                  f"export-only: {compare['triangles_only_in_export']}.",
+                  flush=True)
+            print("[SOURCE VS EXPORT] Edges inherited from STL: "
+                  f"{compare['bad_edges_shared_by_source_and_export']}; "
+                  "edges present only in exported geometry: "
+                  f"{compare['bad_edges_present_only_in_export']}.",
+                  flush=True)
+            print("[SOURCE VS EXPORT] Report: " + str(saved), flush=True)
+        except Exception as exc:
+            print("[SOURCE VS EXPORT WARNING] Comparison unavailable: "
+                  + str(exc), flush=True)
+            # An incomplete comparison cannot be claimed to be a passed
+            # geometry validation.
+            print("[EXPORT ONLY] Geometry comparison was not completed; "
+                  "do not interpret this as an acoustic validation.",
+                  flush=True)
+        print("[EXPORT ONLY] New project: " + str(project), flush=True)
+        print("[EXPORT ONLY] Blender export completed. NumCalc NOT launched.",
+              flush=True)
+        if quality['fatal_count'] or report['blockers']:
+            print("[EXPORT ONLY] Geometry preflight FAILED. Fix or assess "
+                  "the flagged surfaces; no acoustic solver was started.",
+                  flush=True)
+            return 2
+        print("[EXPORT ONLY] Geometry preflight passed basic topology and "
+              "wavelength/6 screening. This does NOT establish physical "
+              "accuracy or source/microphone air connectivity.", flush=True)
+        return 0
     if quality["fatal_count"]:
         print("[MESH QUALITY] NumCalc would abort on these triangles. "
               "Fix their geometry locally; no change to microphone coordinates is needed.",
@@ -499,6 +541,8 @@ def run(args):
 def get_args():
     ap=argparse.ArgumentParser()
     ap.add_argument('--mesh2hrtf',default=str(REPO_ROOT))
+    ap.add_argument('--export-only',action='store_true',
+                    help='Export revised STL through Blender and audit geometry, without NumCalc')
     ap.add_argument('--resume',default='',help='Resume a previously exported NumCalc project without re-exporting STL')
     ap.add_argument('--inspect-geometry',default='',metavar='PROJECT',
                     help='Audit existing exported mesh topology without starting Blender or NumCalc')

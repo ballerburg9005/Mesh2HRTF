@@ -2,14 +2,14 @@
   "source_stl": "/home/l0rd/model.stl",
   "project": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_012547_881072",
   "matching_tolerance_mm": 0.0001,
-  "original_triangles": 8998,
+  "original_triangles": 8994,
   "exported_triangles": 8997,
-  "exact_face_matches_at_tolerance": 8997,
-  "triangles_only_in_stl": 1,
-  "triangles_only_in_export": 0,
+  "exact_face_matches_at_tolerance": 8969,
+  "triangles_only_in_stl": 25,
+  "triangles_only_in_export": 28,
   "stl_welded_edge_topology": {
     "open_boundary_edges": 0,
-    "nonmanifold_edges": 1,
+    "nonmanifold_edges": 0,
     "degenerate_triangles": 0
   },
   "numcalc_export_welded_edge_topology": {
@@ -17,9 +17,131 @@
     "nonmanifold_edges": 1,
     "degenerate_triangles": 0
   },
-  "bad_edges_shared_by_source_and_export": 1,
-  "bad_edges_present_only_in_export": 2,
+  "bad_edges_shared_by_source_and_export": 0,
+  "bad_edges_present_only_in_export": 3,
   "stl_only_face_examples": [
+    {
+      "centroid_mm": [
+        -4.2218,
+        -0.0437,
+        0.35103
+      ],
+      "multiplicity": 1
+    },
+    {
+      "centroid_mm": [
+        -4.2239,
+        -0.62587,
+        -0.02883
+      ],
+      "multiplicity": 1
+    },
+    {
+      "centroid_mm": [
+        3.5318,
+        -1.2159,
+        -0.3301
+      ],
+      "multiplicity": 1
+    },
+    {
+      "centroid_mm": [
+        3.00673,
+        -1.2159,
+        -1.86987
+      ],
+      "multiplicity": 1
+    },
+    {
+      "centroid_mm": [
+        2.02063,
+        -1.2159,
+        -3.0018
+      ],
+      "multiplicity": 1
+    },
+    {
+      "centroid_mm": [
+        -4.15043,
+        -1.2159,
+        -0.3097
+      ],
+      "multiplicity": 1
+    },
+    {
+      "centroid_mm": [
+        -3.96113,
+        -1.2159,
+        1.52667
+      ],
+      "multiplicity": 1
+    },
+    {
+      "centroid_mm": [
+        -3.1419,
+        -1.2159,
+        2.76347
+      ],
+      "multiplicity": 1
+    },
+    {
+      "centroid_mm": [
+        -1.8287,
+        -1.2159,
+        3.68773
+      ],
+      "multiplicity": 1
+    },
+    {
+      "centroid_mm": [
+        -0.14457,
+        -1.2159,
+        3.97843
+      ],
+      "multiplicity": 1
+    },
+    {
+      "centroid_mm": [
+        1.4892,
+        -1.2159,
+        3.53783
+      ],
+      "multiplicity": 1
+    },
+    {
+      "centroid_mm": [
+        2.68617,
+        -1.2159,
+        2.5583
+      ],
+      "multiplicity": 1
+    },
+    {
+      "centroid_mm": [
+        3.3743,
+        -1.2159,
+        1.25557
+      ],
+      "multiplicity": 1
+    },
+    {
+      "centroid_mm": [
+        3.18927,
+        -1.2159,
+        -1.06887
+      ],
+      "multiplicity": 1
+    },
+    {
+      "centroid_mm": [
+        1.4281,
+        -1.2159,
+        -3.2412
+      ],
+      "multiplicity": 1
+    }
+  ],
+  "export_only_face_examples": [
     {
       "centroid_mm": [
         -4.23463,
@@ -27,8 +149,119 @@
         0.1242
       ],
       "multiplicity": 1
+    },
+    {
+      "centroid_mm": [
+        -4.22943,
+        -0.63373,
+        0.58957
+      ],
+      "multiplicity": 1
+    },
+    {
+      "centroid_mm": [
+        -4.23697,
+        -0.62587,
+        -0.19483
+      ],
+      "multiplicity": 1
+    },
+    {
+      "centroid_mm": [
+        -4.23487,
+        -0.0437,
+        0.18503
+      ],
+      "multiplicity": 1
+    },
+    {
+      "centroid_mm": [
+        -4.1635,
+        -1.2159,
+        -0.4757
+      ],
+      "multiplicity": 1
+    },
+    {
+      "centroid_mm": [
+        -4.1301,
+        -1.2159,
+        0.91897
+      ],
+      "multiplicity": 1
+    },
+    {
+      "centroid_mm": [
+        -3.61697,
+        -1.2159,
+        2.21047
+      ],
+      "multiplicity": 1
+    },
+    {
+      "centroid_mm": [
+        -2.5328,
+        -1.2159,
+        3.2999
+      ],
+      "multiplicity": 1
+    },
+    {
+      "centroid_mm": [
+        -1.02657,
+        -1.2159,
+        3.9171
+      ],
+      "multiplicity": 1
+    },
+    {
+      "centroid_mm": [
+        0.7172,
+        -1.2159,
+        3.84743
+      ],
+      "multiplicity": 1
+    },
+    {
+      "centroid_mm": [
+        2.15477,
+        -1.2159,
+        3.09757
+      ],
+      "multiplicity": 1
+    },
+    {
+      "centroid_mm": [
+        3.0879,
+        -1.2159,
+        1.9617
+      ],
+      "multiplicity": 1
+    },
+    {
+      "centroid_mm": [
+        3.53617,
+        -1.2159,
+        0.47673
+      ],
+      "multiplicity": 1
+    },
+    {
+      "centroid_mm": [
+        3.34927,
+        -1.2159,
+        -1.1311
+      ],
+      "multiplicity": 1
+    },
+    {
+      "centroid_mm": [
+        2.5216,
+        -1.2159,
+        -2.53197
+      ],
+      "multiplicity": 1
     }
   ],
-  "export_only_face_examples": [],
   "note": "Geometric triangle matching after quantizing vertices to the given tolerance. STL is a triangle soup, and raw trimesh watertightness with process=False can be misleading. The STL and NumCalc reference can differ due to import validation, triangulation, or unit/axis conversions. Matching topology alone does not validate acoustic physics."
 }

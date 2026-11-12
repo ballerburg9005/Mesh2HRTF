@@ -194,9 +194,8 @@ def audit_exported_topology(project, max_frequency_hz=None, write_overlay=True):
             "newmtl open_boundary\nKd 1.0 0.6 0.0\n"
             "newmtl nonmanifold\nKd 1.0 0.05 0.05\n"
             "newmtl winding_conflict\nKd 0.1 0.5 1.0\n")
-        # Blender's OBJ importer defaults to -Z forward / Y up; the
-        # saved Reference mesh is Y forward / Z up. Convert the overlay
-        # once here so File > Import > OBJ with defaults aligns it.
+        # Preserve native mesh XYZ for import with Forward Y / Up Z,
+        # Scale 1.0, as used for the source STL. Never pre-rotate vertices.
         with obj.open("w") as file:
             file.write("mtllib topology_defects.mtl\n")
             idx = 1

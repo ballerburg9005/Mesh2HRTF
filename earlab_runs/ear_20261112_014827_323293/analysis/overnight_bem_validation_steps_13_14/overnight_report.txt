@@ -1,0 +1,32 @@
+Mesh2HRTF OVERNIGHT BEM NUMERICAL REFERENCE
+=========================================
+Project: /home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293
+Started: 2026-11-12T02:16:32.334250
+Wall-time budget: 6 hours
+Original project outputs are untouched.
+Each case used one selected frequency step, not a broadband sweep.
+
+Frequency 3122.78 Hz / step 13
+  sl8      +14.863 dB  true residual 7.798e-09  (verified_repaired_mesh_baseline)
+  ml8      +19.433 dB  true residual 9.789e-09  (verified_repaired_mesh_baseline)
+  sl10     +14.863 dB  true residual 7.798e-09  (new_solve)
+  ml10     +19.438 dB  true residual 9.957e-09  (new_solve)
+  dense  failed           True residual 4.58471 exceeds 1e-8
+  No converged non-FMM reference here. Do NOT declare either FMM result correct.
+  ML8 minus SL8 = +4.570 dB
+  ML10 minus SL10 = +4.575 dB
+
+Frequency 3374.68 Hz / step 14
+  sl8      +13.097 dB  true residual 8.644e-09  (new_solve)
+  ml8      +17.585 dB  true residual 8.920e-09  (new_solve)
+  sl10     +13.097 dB  true residual 8.644e-09  (new_solve)
+  ml10     +17.585 dB  true residual 8.920e-09  (new_solve)
+  dense  failed           True residual 4.98362 exceeds 1e-8
+  No converged non-FMM reference here. Do NOT declare either FMM result correct.
+  ML8 minus SL8 = +4.488 dB
+  ML10 minus SL10 = +4.488 dB
+
+CAVEAT: True residual verifies the chosen discrete linear system,
+not the accuracy of the approximate FMM operator or geometry.
+The mesh has NOT been shown converged under surface refinement.
+Do not use these results as validated acoustic measurements.

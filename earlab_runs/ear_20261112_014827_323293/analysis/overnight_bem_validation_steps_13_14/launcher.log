@@ -1,0 +1,26 @@
+[OVERNIGHT PREFLIGHT] step 13, 3122.78 Hz, 8994 triangles, 0.61% of faces longer than wavelength/6
+[OVERNIGHT PREFLIGHT] step 14, 3374.68 Hz, 8994 triangles, 0.62% of faces longer than wavelength/6
+[OVERNIGHT] Reusing two already-verified 3123 Hz repaired-mesh results from /home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/fmm_new_mesh_step13_20261112_015811_978910/comparison.json
+[OVERNIGHT] 10 possible cases at 2 selected frequencies, maximum 900s per case and 6h global deadline.
+[OVERNIGHT] Overnight report: /home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_13_14/overnight_report.txt
+[OVERNIGHT] SKIP verified/reused 13:sl8
+[OVERNIGHT] SKIP verified/reused 13:ml8
+[OVERNIGHT] RUN 13:sl10: 3122.78 Hz; method=1, expansion=10, timeout=900s
+[OVERNIGHT] PASS 13:sl10: +14.863 dB, residual 7.80e-09
+[OVERNIGHT] RUN 13:ml10: 3122.78 Hz; method=4, expansion=10, timeout=900s
+[OVERNIGHT] PASS 13:ml10: +19.438 dB, residual 9.96e-09
+[OVERNIGHT] RUN 13:dense: 3122.78 Hz; method=0, expansion=8, timeout=900s
+[OVERNIGHT] FAILED 13:dense: True residual 4.58471 exceeds 1e-8; continuing.
+[OVERNIGHT] RUN 14:sl8: 3374.68 Hz; method=1, expansion=8, timeout=900s
+[OVERNIGHT] PASS 14:sl8: +13.097 dB, residual 8.64e-09
+[OVERNIGHT] RUN 14:ml8: 3374.68 Hz; method=4, expansion=8, timeout=900s
+[OVERNIGHT] PASS 14:ml8: +17.585 dB, residual 8.92e-09
+[OVERNIGHT] RUN 14:sl10: 3374.68 Hz; method=1, expansion=10, timeout=900s
+[OVERNIGHT] PASS 14:sl10: +13.097 dB, residual 8.64e-09
+[OVERNIGHT] RUN 14:ml10: 3374.68 Hz; method=4, expansion=10, timeout=900s
+[OVERNIGHT] PASS 14:ml10: +17.585 dB, residual 8.92e-09
+[OVERNIGHT] RUN 14:dense: 3374.68 Hz; method=0, expansion=8, timeout=900s
+[OVERNIGHT] FAILED 14:dense: True residual 4.98362 exceeds 1e-8; continuing.
+[OVERNIGHT COMPLETE] Converged cases: 8 / 10
+[OVERNIGHT COMPLETE] Read: /home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_13_14/overnight_report.txt
+[OVERNIGHT COMPLETE] JSON: /home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_13_14/results.json

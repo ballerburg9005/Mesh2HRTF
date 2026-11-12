@@ -1,0 +1,129 @@
+istart= 13 iend = 13
+
+---------- NumCalc started: 12/11/2026 2:17:46 ----------
+
+Running on:         SYBURG
+
+3D analysis
+Job title: Ear acoustic cavity and microphone response
+
+Warning: Element with very long side found!
+external elemen number = 8793
+internal element number = 8793
+
+
+Warning: Element with very long side found!
+external elemen number = 8794
+internal element number = 8794
+
+
+Warning: Element with very long side found!
+external elemen number = 8795
+internal element number = 8795
+
+
+Warning: Element with very long side found!
+external elemen number = 8795
+internal element number = 8795
+
+
+Warning: Element with very long side found!
+external elemen number = 8798
+internal element number = 8798
+
+
+Warning: Element with very long side found!
+external elemen number = 8798
+internal element number = 8798
+
+
+Warning: Element with very long side found!
+external elemen number = 8801
+internal element number = 8801
+
+
+Warning: Element with very long side found!
+external elemen number = 8801
+internal element number = 8801
+
+
+Warning: Element with very long side found!
+external elemen number = 8812
+internal element number = 8812
+
+
+Warning: Element with very long side found!
+external elemen number = 8833
+internal element number = 8833
+
+
+Warning: Element with very long side found!
+external elemen number = 8858
+internal element number = 8858
+
+
+Warning: Element with very long side found!
+external elemen number = 8861
+internal element number = 8861
+
+
+Warning: Element with very long side found!
+external elemen number = 8862
+internal element number = 8862
+
+
+Warning: Element with very long side found!
+external elemen number = 8862
+internal element number = 8862
+
+
+Step 13, Frequency = 3122.78 Hz
+
+Direct multilevel fast multipole BEM
+
+Number of equations = 8994
+
+Informations about clusters:
+   Level    Num. of clusters    Maximum radius   Minimum radius
+     0           42                0.0630797         0.00914655
+     1          139                0.0630797         0.00158152
+ resu. nets       1                0.000105409         0.000105409
+
+
+Informations about the FMM expansion:
+   Level    N. expa. terms    N. p. theta    N. p. phi    N. p. sphere
+     0          10              10              20           200
+     1          10              10              20           200
+
+CGS: err_ori = 1.68442
+10 0.0623531
+10 Abs Error:0.105029
+20 0.00283381
+20 Abs Error:0.00477335
+30 0.00170935
+30 Abs Error:0.00287926
+40 8.08616e-06
+40 Abs Error:1.36205e-05
+50 0.000492389
+50 Abs Error:0.000829393
+60 2.35345e-09
+60 Abs Error:3.96421e-09
+68 7.163e-10
+
+CGS failed true residual verification; trying restarted GMRES.
+
+Assembling the equation system         : 15
+Solving the equation system            : 13
+Post processing                        : 1
+Total                                  : 29
+
+
+Time Statistic for the job (in second):
+Input ............................ 0
+Address computation .............. 0
+Assembling the equation system ... 15
+Solving the equation system ...... 13
+Post processing .................. 1
+The whole job .................... 29
+
+---------- NumCalc ended: 12/11/2026 2:18:15 ----------

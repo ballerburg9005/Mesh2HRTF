@@ -198,6 +198,67 @@ the saved NumCalc log instead of launching another entire sweep.
 Neither comparison proves the original nonwatertight, under-resolved
 geometry is acoustically valid.
 
+## Cylinder-to-slit transition: check original STL versus export, not just OBJ
+
+A slotted cylinder's polygon/triangulation junction can produce skinny or
+irregular triangles while the underlying CAD design is intentional. An STL
+always contains triangles; the Mesh2Input exporter exports Blender's
+**triangulated** mesh, not original CAD n-gons. A nonmanifold edge in
+\`Elements.txt\` is real mesh connectivity, but is **not** sufficient proof
+that the original CAD shape is defective. Importantly, the prior OBJ
+diagnostic used Blender-native XYZ even though Blender 5.2 OBJ import
+defaults to **-Z Forward / Y Up**, rotating the highlighted faces.
+Newly regenerated/committed OBJ files are axis-converted for the **default**
+OBJ import. To avoid any ambiguity, prefer the native Blender overlay.
+
+First run the updated comparison (no NumCalc or Blender):
+
+\`\`\`sh
+cd ~/Mesh2HRTF
+git pull --ff-only
+tools/ear_acoustic_lab/.venv/bin/python \
+  tools/ear_acoustic_lab/run_analysis.py \
+  --inspect-geometry earlab_runs/ear_20261110_234807_961528
+\`\`\`
+
+If \`/home/l0rd/model.stl\` still exists, this also compares the **welded
+STL triangle coordinates** against the NumCalc export at 0.0001 mm
+tolerance. It writes
+\`analysis/stl_vs_numcalc_geometry.json\` with matching, missing and
+added triangles, as well as source-only versus export-only irregular
+edges. If the STL is elsewhere, run
+\`tools/ear_acoustic_lab/.venv/bin/python
+tools/ear_acoustic_lab/source_export_compare.py --project
+earlab_runs/ear_20261110_234807_961528 --stl /path/to/model.stl\`.
+
+To highlight the **exact saved Blender polygons and edges** without any
+OBJ axis rotation, use the saved export scene:
+
+\`\`\`sh
+cd ~/Mesh2HRTF
+blender --background \
+  "earlab_runs/ear_20261110_234807_961528/3d Model.blend" \
+  --python tools/ear_acoustic_lab/blender_mark_exported_topology.py -- \
+  --project earlab_runs/ear_20261110_234807_961528
+\`\`\`
+
+This checks that the saved Blender vertex coordinates and polygon vertex
+IDs **exactly correspond to** NumCalc's \`Nodes.txt\` and \`Elements.txt\`,
+then adds thick colored edge markers (red = nonmanifold, orange = open)
+directly to a **new** file,
+\`analysis/topology_inspection.blend\`. Open that .blend in Blender to
+inspect the cylinder-to-slit transition. The original STL, source .blend,
+mesh and solver results are untouched. If the coordinates or polygon IDs
+do not match, the script **refuses** to draw a misleading overlay. It
+requires Blender; it is not run by the Python-only CI suite.
+
+Do not automatically delete, fill or close the highlighted faces. The
+cylinder-to-slit junction may legitimately involve adjacent walls and
+openings that need faithful geometry modeling. Inspect its surface
+connectivity and acoustic air domain before editing. A complete manifold
+surface is still not proof that FMM approximations agree or that the
+microphone is in the intended air space.
+
 ## Stop invalid geometry before the next NumCalc sweep
 
 **The existing 80-tone run was inspected directly from its GitHub-exported

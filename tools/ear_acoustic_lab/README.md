@@ -215,17 +215,18 @@ of numerical iterations, memory or time; the job records that as
 a failed reference instead of inventing an answer. No 80-tone sweep
 or Blender re-export is involved.
 
-**Start once, then leave it running:**
+**One command to start; no more input required:**
 
 \`\`\`sh
-cd ~/Mesh2HRTF
-git pull --ff-only
-nohup tools/ear_acoustic_lab/.venv/bin/python -u \
-  tools/ear_acoustic_lab/overnight_bem_validation.py \
-  --project earlab_runs/ear_20261112_014827_323293 \
-  --timeout-per-case 900 --max-hours 6 \
-  > overnight_bem.log 2>&1 < /dev/null &
+cd ~/Mesh2HRTF && git pull --ff-only && bash tools/ear_acoustic_lab/start_overnight_bem.sh
 \`\`\`
+
+The launcher starts the test with \`nohup\` in the background and uses an
+exclusive \`flock\` to prevent accidentally running two copies. It
+writes to
+\`earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_13_14/launcher.log\`.
+Keep the computer **powered on and awake**; backgrounding a process
+does not prevent the operating system from suspending.
 
 The process has **15 minutes maximum per calculation**, a **6-hour
 overall budget**, a **2.5 GiB physical-memory reserve**, and **at least
@@ -242,7 +243,7 @@ is never overwritten. NumCalc must already be compiled and executable.
 
 \`\`\`sh
 cat earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_13_14/overnight_report.txt
-tail -80 overnight_bem.log
+tail -80 earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_13_14/launcher.log
 \`\`\`
 
 Progress is checkpointed after **every case** in

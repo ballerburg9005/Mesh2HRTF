@@ -1,0 +1,846 @@
+{
+  "8:sl8": {
+    "status": "converged",
+    "gain_db": 27.762689618799136,
+    "phase_deg": 51.90582020904729,
+    "pressure_real": 0.4625901333333333,
+    "pressure_imag": -1.5534386666666666,
+    "true_relative_residual": 9.74783e-09,
+    "iterative_solver": "GMRES",
+    "log_path": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step08_sl8/project/NumCalc/source_1/NC8-8.out",
+    "source": "new_solve",
+    "elapsed_s": 70.38,
+    "max_observed_process_rss_gib": 1.225,
+    "input_sha256": "937e995a0f5b4e9617211c6a6753920e46741669e4635f49929c6d768a3f54f7"
+  },
+  "8:ml8": {
+    "status": "failed",
+    "reason": "Expected NumCalc method 'Direct multilevel fast multipole BEM' not found in /home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step08_ml8/project/NumCalc/source_1/NC8-8.out",
+    "elapsed_s": 70.73,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step08_ml8/stdout.txt"
+  },
+  "8:sl10": {
+    "status": "converged",
+    "gain_db": 27.762257713138673,
+    "phase_deg": 51.90554240517529,
+    "pressure_real": 0.4625596,
+    "pressure_imag": -1.5533636666666666,
+    "true_relative_residual": 9.75376e-09,
+    "iterative_solver": "GMRES",
+    "log_path": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step08_sl10/project/NumCalc/source_1/NC8-8.out",
+    "source": "new_solve",
+    "elapsed_s": 68.68,
+    "max_observed_process_rss_gib": 1.251,
+    "input_sha256": "d6807802d6fd76a2d042539c9b75bfeebe13bfbd436bad174ec7f1e61fb8c774"
+  },
+  "8:ml10": {
+    "status": "failed",
+    "reason": "Expected NumCalc method 'Direct multilevel fast multipole BEM' not found in /home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step08_ml10/project/NumCalc/source_1/NC8-8.out",
+    "elapsed_s": 68.3,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step08_ml10/stdout.txt"
+  },
+  "8:dense": {
+    "status": "failed",
+    "reason": "True residual 2.54929 exceeds 1e-8",
+    "elapsed_s": 411.43,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step08_dense/stdout.txt"
+  },
+  "9:sl8": {
+    "status": "converged",
+    "gain_db": 24.346261599186164,
+    "phase_deg": 64.25329765640093,
+    "pressure_real": 0.9534250666666666,
+    "pressure_imag": -0.5359955333333334,
+    "true_relative_residual": 9.45371e-09,
+    "iterative_solver": "GMRES",
+    "log_path": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step09_sl8/project/NumCalc/source_1/NC9-9.out",
+    "source": "new_solve",
+    "elapsed_s": 64.81,
+    "max_observed_process_rss_gib": 1.225,
+    "input_sha256": "937e995a0f5b4e9617211c6a6753920e46741669e4635f49929c6d768a3f54f7"
+  },
+  "9:ml8": {
+    "status": "failed",
+    "reason": "Expected NumCalc method 'Direct multilevel fast multipole BEM' not found in /home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step09_ml8/project/NumCalc/source_1/NC9-9.out",
+    "elapsed_s": 64.21,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step09_ml8/stdout.txt"
+  },
+  "9:sl10": {
+    "status": "converged",
+    "gain_db": 24.346158862876678,
+    "phase_deg": 64.25178085573592,
+    "pressure_real": 0.9533996,
+    "pressure_imag": -0.5360144333333333,
+    "true_relative_residual": 9.44873e-09,
+    "iterative_solver": "GMRES",
+    "log_path": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step09_sl10/project/NumCalc/source_1/NC9-9.out",
+    "source": "new_solve",
+    "elapsed_s": 64.19,
+    "max_observed_process_rss_gib": 1.251,
+    "input_sha256": "d6807802d6fd76a2d042539c9b75bfeebe13bfbd436bad174ec7f1e61fb8c774"
+  },
+  "9:ml10": {
+    "status": "failed",
+    "reason": "Expected NumCalc method 'Direct multilevel fast multipole BEM' not found in /home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step09_ml10/project/NumCalc/source_1/NC9-9.out",
+    "elapsed_s": 64.12,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step09_ml10/stdout.txt"
+  },
+  "9:dense": {
+    "status": "failed",
+    "reason": "True residual 2.96392 exceeds 1e-8",
+    "elapsed_s": 393.85,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step09_dense/stdout.txt"
+  },
+  "10:sl8": {
+    "status": "converged",
+    "gain_db": 21.428060707106503,
+    "phase_deg": 70.83167327065459,
+    "pressure_real": 0.7721097333333334,
+    "pressure_imag": 0.12174619999999998,
+    "true_relative_residual": 9.99167e-09,
+    "iterative_solver": "GMRES",
+    "log_path": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step10_sl8/project/NumCalc/source_1/NC10-10.out",
+    "source": "new_solve",
+    "elapsed_s": 63.19,
+    "max_observed_process_rss_gib": 1.226,
+    "input_sha256": "937e995a0f5b4e9617211c6a6753920e46741669e4635f49929c6d768a3f54f7"
+  },
+  "10:ml8": {
+    "status": "failed",
+    "reason": "Expected NumCalc method 'Direct multilevel fast multipole BEM' not found in /home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step10_ml8/project/NumCalc/source_1/NC10-10.out",
+    "elapsed_s": 63.57,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step10_ml8/stdout.txt"
+  },
+  "10:sl10": {
+    "status": "converged",
+    "gain_db": 21.428131842550457,
+    "phase_deg": 70.82992717305402,
+    "pressure_real": 0.7721197666666666,
+    "pressure_imag": 0.12172366666666667,
+    "true_relative_residual": 9.98145e-09,
+    "iterative_solver": "GMRES",
+    "log_path": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step10_sl10/project/NumCalc/source_1/NC10-10.out",
+    "source": "new_solve",
+    "elapsed_s": 61.43,
+    "max_observed_process_rss_gib": 1.25,
+    "input_sha256": "d6807802d6fd76a2d042539c9b75bfeebe13bfbd436bad174ec7f1e61fb8c774"
+  },
+  "10:ml10": {
+    "status": "failed",
+    "reason": "Expected NumCalc method 'Direct multilevel fast multipole BEM' not found in /home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step10_ml10/project/NumCalc/source_1/NC10-10.out",
+    "elapsed_s": 61.56,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step10_ml10/stdout.txt"
+  },
+  "10:dense": {
+    "status": "failed",
+    "reason": "True residual 3.37468 exceeds 1e-8",
+    "elapsed_s": 390.96,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step10_dense/stdout.txt"
+  },
+  "11:sl8": {
+    "status": "converged",
+    "gain_db": 18.95667424610211,
+    "phase_deg": 74.56827741729072,
+    "pressure_real": 0.42000613333333336,
+    "pressure_imag": 0.4116343,
+    "true_relative_residual": 9.22568e-09,
+    "iterative_solver": "GMRES",
+    "log_path": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step11_sl8/project/NumCalc/source_1/NC11-11.out",
+    "source": "new_solve",
+    "elapsed_s": 63.34,
+    "max_observed_process_rss_gib": 1.227,
+    "input_sha256": "937e995a0f5b4e9617211c6a6753920e46741669e4635f49929c6d768a3f54f7"
+  },
+  "11:ml8": {
+    "status": "failed",
+    "reason": "Expected NumCalc method 'Direct multilevel fast multipole BEM' not found in /home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step11_ml8/project/NumCalc/source_1/NC11-11.out",
+    "elapsed_s": 63.26,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step11_ml8/stdout.txt"
+  },
+  "11:sl10": {
+    "status": "converged",
+    "gain_db": 18.956827343658755,
+    "phase_deg": 74.56651012625882,
+    "pressure_real": 0.42002623333333333,
+    "pressure_imag": 0.4116286,
+    "true_relative_residual": 9.22164e-09,
+    "iterative_solver": "GMRES",
+    "log_path": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step11_sl10/project/NumCalc/source_1/NC11-11.out",
+    "source": "new_solve",
+    "elapsed_s": 61.48,
+    "max_observed_process_rss_gib": 1.251,
+    "input_sha256": "d6807802d6fd76a2d042539c9b75bfeebe13bfbd436bad174ec7f1e61fb8c774"
+  },
+  "11:ml10": {
+    "status": "failed",
+    "reason": "Expected NumCalc method 'Direct multilevel fast multipole BEM' not found in /home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step11_ml10/project/NumCalc/source_1/NC11-11.out",
+    "elapsed_s": 60.7,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step11_ml10/stdout.txt"
+  },
+  "11:dense": {
+    "status": "failed",
+    "reason": "True residual 3.78127 exceeds 1e-8",
+    "elapsed_s": 391.27,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step11_dense/stdout.txt"
+  },
+  "12:sl8": {
+    "status": "converged",
+    "gain_db": 16.80360259819728,
+    "phase_deg": 76.80329250900306,
+    "pressure_real": 0.09241309333333332,
+    "pressure_imag": 0.44957519999999995,
+    "true_relative_residual": 9.17083e-09,
+    "iterative_solver": "GMRES",
+    "log_path": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step12_sl8/project/NumCalc/source_1/NC12-12.out",
+    "source": "new_solve",
+    "elapsed_s": 60.48,
+    "max_observed_process_rss_gib": 1.226,
+    "input_sha256": "937e995a0f5b4e9617211c6a6753920e46741669e4635f49929c6d768a3f54f7"
+  },
+  "12:ml8": {
+    "status": "failed",
+    "reason": "Expected NumCalc method 'Direct multilevel fast multipole BEM' not found in /home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step12_ml8/project/NumCalc/source_1/NC12-12.out",
+    "elapsed_s": 60.45,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step12_ml8/stdout.txt"
+  },
+  "12:sl10": {
+    "status": "converged",
+    "gain_db": 16.803787781669687,
+    "phase_deg": 76.80148329258836,
+    "pressure_real": 0.09242926,
+    "pressure_imag": 0.44958186666666666,
+    "true_relative_residual": 9.15466e-09,
+    "iterative_solver": "GMRES",
+    "log_path": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step12_sl10/project/NumCalc/source_1/NC12-12.out",
+    "source": "new_solve",
+    "elapsed_s": 59.48,
+    "max_observed_process_rss_gib": 1.251,
+    "input_sha256": "d6807802d6fd76a2d042539c9b75bfeebe13bfbd436bad174ec7f1e61fb8c774"
+  },
+  "12:ml10": {
+    "status": "failed",
+    "reason": "Expected NumCalc method 'Direct multilevel fast multipole BEM' not found in /home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step12_ml10/project/NumCalc/source_1/NC12-12.out",
+    "elapsed_s": 59.85,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step12_ml10/stdout.txt"
+  },
+  "12:dense": {
+    "status": "failed",
+    "reason": "True residual 4.18428 exceeds 1e-8",
+    "elapsed_s": 390.57,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step12_dense/stdout.txt"
+  },
+  "15:sl8": {
+    "status": "converged",
+    "gain_db": 11.509457446560315,
+    "phase_deg": 77.069358712499,
+    "pressure_real": -0.2480604,
+    "pressure_imag": 0.026823539999999996,
+    "true_relative_residual": 8.2203e-09,
+    "iterative_solver": "GMRES",
+    "log_path": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step15_sl8/project/NumCalc/source_1/NC15-15.out",
+    "source": "new_solve",
+    "elapsed_s": 59.73,
+    "max_observed_process_rss_gib": 1.25,
+    "input_sha256": "937e995a0f5b4e9617211c6a6753920e46741669e4635f49929c6d768a3f54f7"
+  },
+  "15:ml8": {
+    "status": "converged",
+    "gain_db": 15.87329277641528,
+    "phase_deg": 87.01514921397535,
+    "pressure_real": -0.4114628333333334,
+    "pressure_imag": -0.02714324,
+    "true_relative_residual": 9.59137e-09,
+    "iterative_solver": "GMRES",
+    "log_path": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step15_ml8/project/NumCalc/source_1/NC15-15.out",
+    "source": "new_solve",
+    "elapsed_s": 26.83,
+    "max_observed_process_rss_gib": 0.602,
+    "input_sha256": "ddb2947594992722d69813a1255234ed5116d615bfe2cd1d9788afcef2e0cd6d"
+  },
+  "15:sl10": {
+    "status": "converged",
+    "gain_db": 11.509457446560315,
+    "phase_deg": 77.069358712499,
+    "pressure_real": -0.2480604,
+    "pressure_imag": 0.026823539999999996,
+    "true_relative_residual": 8.2203e-09,
+    "iterative_solver": "GMRES",
+    "log_path": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step15_sl10/project/NumCalc/source_1/NC15-15.out",
+    "source": "new_solve",
+    "elapsed_s": 59.07,
+    "max_observed_process_rss_gib": 1.251,
+    "input_sha256": "d6807802d6fd76a2d042539c9b75bfeebe13bfbd436bad174ec7f1e61fb8c774"
+  },
+  "15:ml10": {
+    "status": "converged",
+    "gain_db": 15.87329277641528,
+    "phase_deg": 87.01514921397535,
+    "pressure_real": -0.4114628333333334,
+    "pressure_imag": -0.02714324,
+    "true_relative_residual": 9.59137e-09,
+    "iterative_solver": "GMRES",
+    "log_path": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step15_ml10/project/NumCalc/source_1/NC15-15.out",
+    "source": "new_solve",
+    "elapsed_s": 26.78,
+    "max_observed_process_rss_gib": 0.602,
+    "input_sha256": "32498ea3958a5dc2d2f376a418e43d0079aa110b9f81fdc699e53034c1bce113"
+  },
+  "15:dense": {
+    "status": "failed",
+    "reason": "True residual 5.38191 exceeds 1e-8",
+    "elapsed_s": 391.29,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step15_dense/stdout.txt"
+  },
+  "16:sl8": {
+    "status": "converged",
+    "gain_db": 10.104451006039369,
+    "phase_deg": 75.3919765345525,
+    "pressure_real": -0.19407756666666667,
+    "pressure_imag": -0.08591034666666668,
+    "true_relative_residual": 9.60537e-09,
+    "iterative_solver": "GMRES",
+    "log_path": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step16_sl8/project/NumCalc/source_1/NC16-16.out",
+    "source": "new_solve",
+    "elapsed_s": 61.08,
+    "max_observed_process_rss_gib": 1.266,
+    "input_sha256": "937e995a0f5b4e9617211c6a6753920e46741669e4635f49929c6d768a3f54f7"
+  },
+  "16:ml8": {
+    "status": "converged",
+    "gain_db": 14.302412792115033,
+    "phase_deg": 86.66480464595536,
+    "pressure_real": -0.28138203333333334,
+    "pressure_imag": -0.19812476666666667,
+    "true_relative_residual": 9.61881e-09,
+    "iterative_solver": "GMRES",
+    "log_path": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step16_ml8/project/NumCalc/source_1/NC16-16.out",
+    "source": "new_solve",
+    "elapsed_s": 28.39,
+    "max_observed_process_rss_gib": 0.637,
+    "input_sha256": "ddb2947594992722d69813a1255234ed5116d615bfe2cd1d9788afcef2e0cd6d"
+  },
+  "16:sl10": {
+    "status": "converged",
+    "gain_db": 10.104451006039369,
+    "phase_deg": 75.3919765345525,
+    "pressure_real": -0.19407756666666667,
+    "pressure_imag": -0.08591034666666668,
+    "true_relative_residual": 9.60537e-09,
+    "iterative_solver": "GMRES",
+    "log_path": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step16_sl10/project/NumCalc/source_1/NC16-16.out",
+    "source": "new_solve",
+    "elapsed_s": 61.77,
+    "max_observed_process_rss_gib": 1.265,
+    "input_sha256": "d6807802d6fd76a2d042539c9b75bfeebe13bfbd436bad174ec7f1e61fb8c774"
+  },
+  "16:ml10": {
+    "status": "converged",
+    "gain_db": 14.302412792115033,
+    "phase_deg": 86.66480464595536,
+    "pressure_real": -0.28138203333333334,
+    "pressure_imag": -0.19812476666666667,
+    "true_relative_residual": 9.61881e-09,
+    "iterative_solver": "GMRES",
+    "log_path": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step16_ml10/project/NumCalc/source_1/NC16-16.out",
+    "source": "new_solve",
+    "elapsed_s": 28.34,
+    "max_observed_process_rss_gib": 0.637,
+    "input_sha256": "32498ea3958a5dc2d2f376a418e43d0079aa110b9f81fdc699e53034c1bce113"
+  },
+  "16:dense": {
+    "status": "failed",
+    "reason": "True residual 5.78024 exceeds 1e-8",
+    "elapsed_s": 389.9,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step16_dense/stdout.txt"
+  },
+  "17:sl8": {
+    "status": "converged",
+    "gain_db": 8.894386279840576,
+    "phase_deg": 73.19002966439275,
+    "pressure_real": -0.11008466666666666,
+    "pressure_imag": -0.1482352,
+    "true_relative_residual": 9.99784e-09,
+    "iterative_solver": "GMRES",
+    "log_path": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step17_sl8/project/NumCalc/source_1/NC17-17.out",
+    "source": "new_solve",
+    "elapsed_s": 59.27,
+    "max_observed_process_rss_gib": 1.281,
+    "input_sha256": "937e995a0f5b4e9617211c6a6753920e46741669e4635f49929c6d768a3f54f7"
+  },
+  "17:ml8": {
+    "status": "failed",
+    "reason": "NumCalc exit code 1",
+    "elapsed_s": 38.51,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step17_ml8/stdout.txt"
+  },
+  "17:sl10": {
+    "status": "converged",
+    "gain_db": 8.894386279840576,
+    "phase_deg": 73.19002966439275,
+    "pressure_real": -0.11008466666666666,
+    "pressure_imag": -0.1482352,
+    "true_relative_residual": 9.99784e-09,
+    "iterative_solver": "GMRES",
+    "log_path": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step17_sl10/project/NumCalc/source_1/NC17-17.out",
+    "source": "new_solve",
+    "elapsed_s": 58.76,
+    "max_observed_process_rss_gib": 1.28,
+    "input_sha256": "d6807802d6fd76a2d042539c9b75bfeebe13bfbd436bad174ec7f1e61fb8c774"
+  },
+  "17:ml10": {
+    "status": "failed",
+    "reason": "NumCalc exit code 1",
+    "elapsed_s": 37.85,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step17_ml10/stdout.txt"
+  },
+  "17:dense": {
+    "status": "failed",
+    "reason": "True residual 6.17905 exceeds 1e-8",
+    "elapsed_s": 386.82,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step17_dense/stdout.txt"
+  },
+  "18:sl8": {
+    "status": "converged",
+    "gain_db": 7.878159479739985,
+    "phase_deg": 70.98616434758752,
+    "pressure_real": -0.02023585333333333,
+    "pressure_imag": -0.16300306666666667,
+    "true_relative_residual": 9.53155e-09,
+    "iterative_solver": "GMRES",
+    "log_path": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step18_sl8/project/NumCalc/source_1/NC18-18.out",
+    "source": "new_solve",
+    "elapsed_s": 58.72,
+    "max_observed_process_rss_gib": 1.28,
+    "input_sha256": "937e995a0f5b4e9617211c6a6753920e46741669e4635f49929c6d768a3f54f7"
+  },
+  "18:ml8": {
+    "status": "failed",
+    "reason": "NumCalc exit code 1",
+    "elapsed_s": 40.17,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step18_ml8/stdout.txt"
+  },
+  "18:sl10": {
+    "status": "converged",
+    "gain_db": 7.878159479739985,
+    "phase_deg": 70.98616434758752,
+    "pressure_real": -0.02023585333333333,
+    "pressure_imag": -0.16300306666666667,
+    "true_relative_residual": 9.53155e-09,
+    "iterative_solver": "GMRES",
+    "log_path": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step18_sl10/project/NumCalc/source_1/NC18-18.out",
+    "source": "new_solve",
+    "elapsed_s": 59.07,
+    "max_observed_process_rss_gib": 1.28,
+    "input_sha256": "d6807802d6fd76a2d042539c9b75bfeebe13bfbd436bad174ec7f1e61fb8c774"
+  },
+  "18:ml10": {
+    "status": "failed",
+    "reason": "NumCalc exit code 1",
+    "elapsed_s": 39.91,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step18_ml10/stdout.txt"
+  },
+  "18:dense": {
+    "status": "failed",
+    "reason": "True residual 6.57857 exceeds 1e-8",
+    "elapsed_s": 388.94,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step18_dense/stdout.txt"
+  },
+  "19:sl8": {
+    "status": "converged",
+    "gain_db": 6.957518390725562,
+    "phase_deg": 69.287642576206,
+    "pressure_real": 0.05760800333333333,
+    "pressure_imag": -0.13604076666666667,
+    "true_relative_residual": 8.49953e-09,
+    "iterative_solver": "GMRES",
+    "log_path": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step19_sl8/project/NumCalc/source_1/NC19-19.out",
+    "source": "new_solve",
+    "elapsed_s": 63.39,
+    "max_observed_process_rss_gib": 1.297,
+    "input_sha256": "937e995a0f5b4e9617211c6a6753920e46741669e4635f49929c6d768a3f54f7"
+  },
+  "19:ml8": {
+    "status": "failed",
+    "reason": "NumCalc exit code 1",
+    "elapsed_s": 39.15,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step19_ml8/stdout.txt"
+  },
+  "19:sl10": {
+    "status": "converged",
+    "gain_db": 6.957518390725562,
+    "phase_deg": 69.287642576206,
+    "pressure_real": 0.05760800333333333,
+    "pressure_imag": -0.13604076666666667,
+    "true_relative_residual": 8.49953e-09,
+    "iterative_solver": "GMRES",
+    "log_path": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step19_sl10/project/NumCalc/source_1/NC19-19.out",
+    "source": "new_solve",
+    "elapsed_s": 62.99,
+    "max_observed_process_rss_gib": 1.298,
+    "input_sha256": "d6807802d6fd76a2d042539c9b75bfeebe13bfbd436bad174ec7f1e61fb8c774"
+  },
+  "19:ml10": {
+    "status": "failed",
+    "reason": "NumCalc exit code 1",
+    "elapsed_s": 38.76,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step19_ml10/stdout.txt"
+  },
+  "19:dense": {
+    "status": "failed",
+    "reason": "True residual 6.97889 exceeds 1e-8",
+    "elapsed_s": 388.53,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step19_dense/stdout.txt"
+  },
+  "20:sl8": {
+    "status": "converged",
+    "gain_db": 5.992733958460087,
+    "phase_deg": 67.64690018728157,
+    "pressure_real": 0.1056331,
+    "pressure_imag": -0.07949607333333333,
+    "true_relative_residual": 9.87923e-09,
+    "iterative_solver": "GMRES",
+    "log_path": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step20_sl8/project/NumCalc/source_1/NC20-20.out",
+    "source": "new_solve",
+    "elapsed_s": 60.52,
+    "max_observed_process_rss_gib": 1.299,
+    "input_sha256": "937e995a0f5b4e9617211c6a6753920e46741669e4635f49929c6d768a3f54f7"
+  },
+  "20:ml8": {
+    "status": "failed",
+    "reason": "NumCalc exit code 1",
+    "elapsed_s": 38.67,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step20_ml8/stdout.txt"
+  },
+  "20:sl10": {
+    "status": "converged",
+    "gain_db": 5.992733958460087,
+    "phase_deg": 67.64690018728157,
+    "pressure_real": 0.1056331,
+    "pressure_imag": -0.07949607333333333,
+    "true_relative_residual": 9.87923e-09,
+    "iterative_solver": "GMRES",
+    "log_path": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step20_sl10/project/NumCalc/source_1/NC20-20.out",
+    "source": "new_solve",
+    "elapsed_s": 61.38,
+    "max_observed_process_rss_gib": 1.298,
+    "input_sha256": "d6807802d6fd76a2d042539c9b75bfeebe13bfbd436bad174ec7f1e61fb8c774"
+  },
+  "20:ml10": {
+    "status": "failed",
+    "reason": "NumCalc exit code 1",
+    "elapsed_s": 38.36,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step20_ml10/stdout.txt"
+  },
+  "20:dense": {
+    "status": "failed",
+    "reason": "True residual 7.38002 exceeds 1e-8",
+    "elapsed_s": 387.1,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step20_dense/stdout.txt"
+  },
+  "21:sl8": {
+    "status": "converged",
+    "gain_db": 4.995801573616413,
+    "phase_deg": 64.91279704918796,
+    "pressure_real": 0.11672973333333332,
+    "pressure_imag": -0.016347176666666668,
+    "true_relative_residual": 9.66815e-09,
+    "iterative_solver": "GMRES",
+    "log_path": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step21_sl8/project/NumCalc/source_1/NC21-21.out",
+    "source": "new_solve",
+    "elapsed_s": 62.83,
+    "max_observed_process_rss_gib": 1.316,
+    "input_sha256": "937e995a0f5b4e9617211c6a6753920e46741669e4635f49929c6d768a3f54f7"
+  },
+  "21:ml8": {
+    "status": "failed",
+    "reason": "NumCalc exit code 1",
+    "elapsed_s": 40.81,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step21_ml8/stdout.txt"
+  },
+  "21:sl10": {
+    "status": "converged",
+    "gain_db": 4.995801573616413,
+    "phase_deg": 64.91279704918796,
+    "pressure_real": 0.11672973333333332,
+    "pressure_imag": -0.016347176666666668,
+    "true_relative_residual": 9.66815e-09,
+    "iterative_solver": "GMRES",
+    "log_path": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step21_sl10/project/NumCalc/source_1/NC21-21.out",
+    "source": "new_solve",
+    "elapsed_s": 63.33,
+    "max_observed_process_rss_gib": 1.317,
+    "input_sha256": "d6807802d6fd76a2d042539c9b75bfeebe13bfbd436bad174ec7f1e61fb8c774"
+  },
+  "21:ml10": {
+    "status": "failed",
+    "reason": "NumCalc exit code 1",
+    "elapsed_s": 40.41,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step21_ml10/stdout.txt"
+  },
+  "21:dense": {
+    "status": "failed",
+    "reason": "True residual 7.78187 exceeds 1e-8",
+    "elapsed_s": 387.72,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step21_dense/stdout.txt"
+  },
+  "22:sl8": {
+    "status": "converged",
+    "gain_db": 4.143630691381278,
+    "phase_deg": 60.60254895124946,
+    "pressure_real": 0.1007599,
+    "pressure_imag": 0.035569663333333335,
+    "true_relative_residual": 9.79078e-09,
+    "iterative_solver": "GMRES",
+    "log_path": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step22_sl8/project/NumCalc/source_1/NC22-22.out",
+    "source": "new_solve",
+    "elapsed_s": 66.95,
+    "max_observed_process_rss_gib": 1.337,
+    "input_sha256": "937e995a0f5b4e9617211c6a6753920e46741669e4635f49929c6d768a3f54f7"
+  },
+  "22:ml8": {
+    "status": "failed",
+    "reason": "NumCalc exit code 1",
+    "elapsed_s": 50.66,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step22_ml8/stdout.txt"
+  },
+  "22:sl10": {
+    "status": "converged",
+    "gain_db": 4.143630691381278,
+    "phase_deg": 60.60254895124946,
+    "pressure_real": 0.1007599,
+    "pressure_imag": 0.035569663333333335,
+    "true_relative_residual": 9.79078e-09,
+    "iterative_solver": "GMRES",
+    "log_path": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step22_sl10/project/NumCalc/source_1/NC22-22.out",
+    "source": "new_solve",
+    "elapsed_s": 65.95,
+    "max_observed_process_rss_gib": 1.337,
+    "input_sha256": "d6807802d6fd76a2d042539c9b75bfeebe13bfbd436bad174ec7f1e61fb8c774"
+  },
+  "22:ml10": {
+    "status": "failed",
+    "reason": "NumCalc exit code 1",
+    "elapsed_s": 51.46,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step22_ml10/stdout.txt"
+  },
+  "22:dense": {
+    "status": "failed",
+    "reason": "True residual 8.18437 exceeds 1e-8",
+    "elapsed_s": 389.44,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step22_dense/stdout.txt"
+  },
+  "23:sl8": {
+    "status": "converged",
+    "gain_db": 3.607274445238029,
+    "phase_deg": 55.440246606887605,
+    "pressure_real": 0.06977265666666667,
+    "pressure_imag": 0.07227055,
+    "true_relative_residual": 9.47164e-09,
+    "iterative_solver": "GMRES",
+    "log_path": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step23_sl8/project/NumCalc/source_1/NC23-23.out",
+    "source": "new_solve",
+    "elapsed_s": 65.94,
+    "max_observed_process_rss_gib": 1.338,
+    "input_sha256": "937e995a0f5b4e9617211c6a6753920e46741669e4635f49929c6d768a3f54f7"
+  },
+  "23:ml8": {
+    "status": "failed",
+    "reason": "NumCalc exit code 1",
+    "elapsed_s": 45.63,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step23_ml8/stdout.txt"
+  },
+  "23:sl10": {
+    "status": "converged",
+    "gain_db": 3.607274445238029,
+    "phase_deg": 55.440246606887605,
+    "pressure_real": 0.06977265666666667,
+    "pressure_imag": 0.07227055,
+    "true_relative_residual": 9.47164e-09,
+    "iterative_solver": "GMRES",
+    "log_path": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step23_sl10/project/NumCalc/source_1/NC23-23.out",
+    "source": "new_solve",
+    "elapsed_s": 65.94,
+    "max_observed_process_rss_gib": 1.338,
+    "input_sha256": "d6807802d6fd76a2d042539c9b75bfeebe13bfbd436bad174ec7f1e61fb8c774"
+  },
+  "23:ml10": {
+    "status": "failed",
+    "reason": "NumCalc exit code 1",
+    "elapsed_s": 45.83,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step23_ml10/stdout.txt"
+  },
+  "23:dense": {
+    "status": "failed",
+    "reason": "True residual 8.5874 exceeds 1e-8",
+    "elapsed_s": 387.05,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step23_dense/stdout.txt"
+  },
+  "24:sl8": {
+    "status": "converged",
+    "gain_db": 3.4215487345533226,
+    "phase_deg": 50.75743423617817,
+    "pressure_real": 0.02866574666666667,
+    "pressure_imag": 0.0940589,
+    "true_relative_residual": 9.86817e-09,
+    "iterative_solver": "GMRES",
+    "log_path": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step24_sl8/project/NumCalc/source_1/NC24-24.out",
+    "source": "new_solve",
+    "elapsed_s": 64.64,
+    "max_observed_process_rss_gib": 1.359,
+    "input_sha256": "937e995a0f5b4e9617211c6a6753920e46741669e4635f49929c6d768a3f54f7"
+  },
+  "24:ml8": {
+    "status": "failed",
+    "reason": "NumCalc exit code 1",
+    "elapsed_s": 65.12,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step24_ml8/stdout.txt"
+  },
+  "24:sl10": {
+    "status": "converged",
+    "gain_db": 3.4215487345533226,
+    "phase_deg": 50.75743423617817,
+    "pressure_real": 0.02866574666666667,
+    "pressure_imag": 0.0940589,
+    "true_relative_residual": 9.86817e-09,
+    "iterative_solver": "GMRES",
+    "log_path": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step24_sl10/project/NumCalc/source_1/NC24-24.out",
+    "source": "new_solve",
+    "elapsed_s": 64.74,
+    "max_observed_process_rss_gib": 1.359,
+    "input_sha256": "d6807802d6fd76a2d042539c9b75bfeebe13bfbd436bad174ec7f1e61fb8c774"
+  },
+  "24:ml10": {
+    "status": "failed",
+    "reason": "NumCalc exit code 1",
+    "elapsed_s": 65.08,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step24_ml10/stdout.txt"
+  },
+  "24:dense": {
+    "status": "failed",
+    "reason": "True residual 8.99084 exceeds 1e-8",
+    "elapsed_s": 388.33,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step24_dense/stdout.txt"
+  },
+  "25:sl8": {
+    "status": "converged",
+    "gain_db": 3.484618342771366,
+    "phase_deg": 47.651458243663534,
+    "pressure_real": -0.02003584,
+    "pressure_imag": 0.09699899333333332,
+    "true_relative_residual": 8.59891e-09,
+    "iterative_solver": "GMRES",
+    "log_path": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step25_sl8/project/NumCalc/source_1/NC25-25.out",
+    "source": "new_solve",
+    "elapsed_s": 65.94,
+    "max_observed_process_rss_gib": 1.359,
+    "input_sha256": "937e995a0f5b4e9617211c6a6753920e46741669e4635f49929c6d768a3f54f7"
+  },
+  "25:ml8": {
+    "status": "failed",
+    "reason": "NumCalc exit code 1",
+    "elapsed_s": 65.21,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step25_ml8/stdout.txt"
+  },
+  "25:sl10": {
+    "status": "converged",
+    "gain_db": 3.484618342771366,
+    "phase_deg": 47.651458243663534,
+    "pressure_real": -0.02003584,
+    "pressure_imag": 0.09699899333333332,
+    "true_relative_residual": 8.59891e-09,
+    "iterative_solver": "GMRES",
+    "log_path": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step25_sl10/project/NumCalc/source_1/NC25-25.out",
+    "source": "new_solve",
+    "elapsed_s": 65.95,
+    "max_observed_process_rss_gib": 1.359,
+    "input_sha256": "d6807802d6fd76a2d042539c9b75bfeebe13bfbd436bad174ec7f1e61fb8c774"
+  },
+  "25:ml10": {
+    "status": "failed",
+    "reason": "NumCalc exit code 1",
+    "elapsed_s": 65.12,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step25_ml10/stdout.txt"
+  },
+  "25:dense": {
+    "status": "failed",
+    "reason": "True residual 9.39459 exceeds 1e-8",
+    "elapsed_s": 390.03,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step25_dense/stdout.txt"
+  },
+  "26:sl8": {
+    "status": "converged",
+    "gain_db": 3.633619319674331,
+    "phase_deg": 46.57098523892141,
+    "pressure_real": -0.06783416666666667,
+    "pressure_imag": 0.07450626,
+    "true_relative_residual": 9.9915e-09,
+    "iterative_solver": "GMRES",
+    "log_path": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step26_sl8/project/NumCalc/source_1/NC26-26.out",
+    "source": "new_solve",
+    "elapsed_s": 67.9,
+    "max_observed_process_rss_gib": 1.381,
+    "input_sha256": "937e995a0f5b4e9617211c6a6753920e46741669e4635f49929c6d768a3f54f7"
+  },
+  "26:ml8": {
+    "status": "failed",
+    "reason": "NumCalc exit code 1",
+    "elapsed_s": 61.14,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step26_ml8/stdout.txt"
+  },
+  "26:sl10": {
+    "status": "converged",
+    "gain_db": 3.633619319674331,
+    "phase_deg": 46.57098523892141,
+    "pressure_real": -0.06783416666666667,
+    "pressure_imag": 0.07450626,
+    "true_relative_residual": 9.9915e-09,
+    "iterative_solver": "GMRES",
+    "log_path": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step26_sl10/project/NumCalc/source_1/NC26-26.out",
+    "source": "new_solve",
+    "elapsed_s": 67.67,
+    "max_observed_process_rss_gib": 1.382,
+    "input_sha256": "d6807802d6fd76a2d042539c9b75bfeebe13bfbd436bad174ec7f1e61fb8c774"
+  },
+  "26:ml10": {
+    "status": "failed",
+    "reason": "NumCalc exit code 1",
+    "elapsed_s": 61.05,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step26_ml10/stdout.txt"
+  },
+  "26:dense": {
+    "status": "failed",
+    "reason": "True residual 9.79855 exceeds 1e-8",
+    "elapsed_s": 389.84,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step26_dense/stdout.txt"
+  },
+  "27:sl8": {
+    "status": "failed",
+    "reason": "NumCalc exit code 1",
+    "elapsed_s": 103.13,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step27_sl8/stdout.txt"
+  },
+  "27:ml8": {
+    "status": "failed",
+    "reason": "NumCalc exit code 1",
+    "elapsed_s": 63.6,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step27_ml8/stdout.txt"
+  },
+  "27:sl10": {
+    "status": "failed",
+    "reason": "NumCalc exit code 1",
+    "elapsed_s": 103.26,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step27_sl10/stdout.txt"
+  },
+  "27:ml10": {
+    "status": "failed",
+    "reason": "NumCalc exit code 1",
+    "elapsed_s": 64.1,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step27_ml10/stdout.txt"
+  },
+  "27:dense": {
+    "status": "failed",
+    "reason": "True residual 10.2026 exceeds 1e-8",
+    "elapsed_s": 390.18,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step27_dense/stdout.txt"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "project": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293",
+  "original_source_sha256": {
+    "NC.inp": "ddb2947594992722d69813a1255234ed5116d615bfe2cd1d9788afcef2e0cd6d",
+    "Nodes.txt": "d6b0d8904dd64b6bbd290e76d8bfb29dfac593a7e8ce67f146bfe81a5b566337",
+    "Elements.txt": "74d41717007b797e2fe4d74888bae08bb05dbff9865e0d59b2a4daba71a785ad",
+    "parameters.json": "66ac6b948a273cd6f9b8d4545eae62c34f68054fcea5e7b1bb97bb4505c7a0b8",
+    "earlab_config.json": "eb65bba11d97c201a07d44224b43d88ecbce245feaf5610d69f186055865e366"
+  },
+  "requested_steps": [
+    8,
+    9,
+    10,
+    11,
+    12,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27
+  ],
+  "created": "2026-11-12T03:09:39.475312",
+  "solver_binary_sha256": "ada58e7e1d022448db6d7e087cac8bca5fb6f09409528788dd8026b9922d185c"
+}

@@ -1,0 +1,203 @@
+[OVERNIGHT PREFLIGHT] step 8, 1863.29 Hz, 8994 triangles, 0.47% of faces longer than wavelength/6
+[OVERNIGHT PREFLIGHT] step 9, 2115.19 Hz, 8994 triangles, 0.50% of faces longer than wavelength/6
+[OVERNIGHT PREFLIGHT] step 10, 2367.09 Hz, 8994 triangles, 0.53% of faces longer than wavelength/6
+[OVERNIGHT PREFLIGHT] step 11, 2618.99 Hz, 8994 triangles, 0.57% of faces longer than wavelength/6
+[OVERNIGHT PREFLIGHT] step 12, 2870.89 Hz, 8994 triangles, 0.59% of faces longer than wavelength/6
+[OVERNIGHT PREFLIGHT] step 15, 3626.58 Hz, 8994 triangles, 0.63% of faces longer than wavelength/6
+[OVERNIGHT PREFLIGHT] step 16, 3878.48 Hz, 8994 triangles, 0.63% of faces longer than wavelength/6
+[OVERNIGHT PREFLIGHT] step 17, 4130.38 Hz, 8994 triangles, 0.64% of faces longer than wavelength/6
+[OVERNIGHT PREFLIGHT] step 18, 4382.28 Hz, 8994 triangles, 0.68% of faces longer than wavelength/6
+[OVERNIGHT PREFLIGHT] step 19, 4634.18 Hz, 8994 triangles, 0.71% of faces longer than wavelength/6
+[OVERNIGHT PREFLIGHT] step 20, 4886.08 Hz, 8994 triangles, 0.72% of faces longer than wavelength/6
+[OVERNIGHT PREFLIGHT] step 21, 5137.97 Hz, 8994 triangles, 0.73% of faces longer than wavelength/6
+[OVERNIGHT PREFLIGHT] step 22, 5389.87 Hz, 8994 triangles, 0.77% of faces longer than wavelength/6
+[OVERNIGHT PREFLIGHT] step 23, 5641.77 Hz, 8994 triangles, 0.80% of faces longer than wavelength/6
+[OVERNIGHT PREFLIGHT] step 24, 5893.67 Hz, 8994 triangles, 0.85% of faces longer than wavelength/6
+[OVERNIGHT PREFLIGHT] step 25, 6145.57 Hz, 8994 triangles, 0.95% of faces longer than wavelength/6
+[OVERNIGHT PREFLIGHT] step 26, 6397.47 Hz, 8994 triangles, 0.98% of faces longer than wavelength/6
+[OVERNIGHT PREFLIGHT] step 27, 6649.37 Hz, 8994 triangles, 1.05% of faces longer than wavelength/6
+[OVERNIGHT] 90 possible cases at 18 selected frequencies, maximum 900s per case and 8h global deadline.
+[OVERNIGHT] Overnight report: /home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/overnight_report.txt
+[OVERNIGHT] RUN 8:sl8: 1863.29 Hz; method=1, expansion=8, timeout=900s
+[OVERNIGHT] PASS 8:sl8: +27.763 dB, residual 9.75e-09
+[OVERNIGHT] RUN 8:ml8: 1863.29 Hz; method=4, expansion=8, timeout=900s
+[OVERNIGHT] FAILED 8:ml8: Expected NumCalc method 'Direct multilevel fast multipole BEM' not found in /home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step08_ml8/project/NumCalc/source_1/NC8-8.out; continuing.
+[OVERNIGHT] RUN 8:sl10: 1863.29 Hz; method=1, expansion=10, timeout=900s
+[OVERNIGHT] PASS 8:sl10: +27.762 dB, residual 9.75e-09
+[OVERNIGHT] RUN 8:ml10: 1863.29 Hz; method=4, expansion=10, timeout=900s
+[OVERNIGHT] FAILED 8:ml10: Expected NumCalc method 'Direct multilevel fast multipole BEM' not found in /home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step08_ml10/project/NumCalc/source_1/NC8-8.out; continuing.
+[OVERNIGHT] RUN 8:dense: 1863.29 Hz; method=0, expansion=8, timeout=900s
+[OVERNIGHT] FAILED 8:dense: True residual 2.54929 exceeds 1e-8; continuing.
+[OVERNIGHT] RUN 9:sl8: 2115.19 Hz; method=1, expansion=8, timeout=900s
+[OVERNIGHT] PASS 9:sl8: +24.346 dB, residual 9.45e-09
+[OVERNIGHT] RUN 9:ml8: 2115.19 Hz; method=4, expansion=8, timeout=900s
+[OVERNIGHT] FAILED 9:ml8: Expected NumCalc method 'Direct multilevel fast multipole BEM' not found in /home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step09_ml8/project/NumCalc/source_1/NC9-9.out; continuing.
+[OVERNIGHT] RUN 9:sl10: 2115.19 Hz; method=1, expansion=10, timeout=900s
+[OVERNIGHT] PASS 9:sl10: +24.346 dB, residual 9.45e-09
+[OVERNIGHT] RUN 9:ml10: 2115.19 Hz; method=4, expansion=10, timeout=900s
+[OVERNIGHT] FAILED 9:ml10: Expected NumCalc method 'Direct multilevel fast multipole BEM' not found in /home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step09_ml10/project/NumCalc/source_1/NC9-9.out; continuing.
+[OVERNIGHT] RUN 9:dense: 2115.19 Hz; method=0, expansion=8, timeout=900s
+[OVERNIGHT] FAILED 9:dense: True residual 2.96392 exceeds 1e-8; continuing.
+[OVERNIGHT] RUN 10:sl8: 2367.09 Hz; method=1, expansion=8, timeout=900s
+[OVERNIGHT] PASS 10:sl8: +21.428 dB, residual 9.99e-09
+[OVERNIGHT] RUN 10:ml8: 2367.09 Hz; method=4, expansion=8, timeout=900s
+[OVERNIGHT] FAILED 10:ml8: Expected NumCalc method 'Direct multilevel fast multipole BEM' not found in /home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step10_ml8/project/NumCalc/source_1/NC10-10.out; continuing.
+[OVERNIGHT] RUN 10:sl10: 2367.09 Hz; method=1, expansion=10, timeout=900s
+[OVERNIGHT] PASS 10:sl10: +21.428 dB, residual 9.98e-09
+[OVERNIGHT] RUN 10:ml10: 2367.09 Hz; method=4, expansion=10, timeout=900s
+[OVERNIGHT] FAILED 10:ml10: Expected NumCalc method 'Direct multilevel fast multipole BEM' not found in /home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step10_ml10/project/NumCalc/source_1/NC10-10.out; continuing.
+[OVERNIGHT] RUN 10:dense: 2367.09 Hz; method=0, expansion=8, timeout=900s
+[OVERNIGHT] FAILED 10:dense: True residual 3.37468 exceeds 1e-8; continuing.
+[OVERNIGHT] RUN 11:sl8: 2618.99 Hz; method=1, expansion=8, timeout=900s
+[OVERNIGHT] PASS 11:sl8: +18.957 dB, residual 9.23e-09
+[OVERNIGHT] RUN 11:ml8: 2618.99 Hz; method=4, expansion=8, timeout=900s
+[OVERNIGHT] FAILED 11:ml8: Expected NumCalc method 'Direct multilevel fast multipole BEM' not found in /home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step11_ml8/project/NumCalc/source_1/NC11-11.out; continuing.
+[OVERNIGHT] RUN 11:sl10: 2618.99 Hz; method=1, expansion=10, timeout=900s
+[OVERNIGHT] PASS 11:sl10: +18.957 dB, residual 9.22e-09
+[OVERNIGHT] RUN 11:ml10: 2618.99 Hz; method=4, expansion=10, timeout=900s
+[OVERNIGHT] FAILED 11:ml10: Expected NumCalc method 'Direct multilevel fast multipole BEM' not found in /home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step11_ml10/project/NumCalc/source_1/NC11-11.out; continuing.
+[OVERNIGHT] RUN 11:dense: 2618.99 Hz; method=0, expansion=8, timeout=900s
+[OVERNIGHT] FAILED 11:dense: True residual 3.78127 exceeds 1e-8; continuing.
+[OVERNIGHT] RUN 12:sl8: 2870.89 Hz; method=1, expansion=8, timeout=900s
+[OVERNIGHT] PASS 12:sl8: +16.804 dB, residual 9.17e-09
+[OVERNIGHT] RUN 12:ml8: 2870.89 Hz; method=4, expansion=8, timeout=900s
+[OVERNIGHT] FAILED 12:ml8: Expected NumCalc method 'Direct multilevel fast multipole BEM' not found in /home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step12_ml8/project/NumCalc/source_1/NC12-12.out; continuing.
+[OVERNIGHT] RUN 12:sl10: 2870.89 Hz; method=1, expansion=10, timeout=900s
+[OVERNIGHT] PASS 12:sl10: +16.804 dB, residual 9.15e-09
+[OVERNIGHT] RUN 12:ml10: 2870.89 Hz; method=4, expansion=10, timeout=900s
+[OVERNIGHT] FAILED 12:ml10: Expected NumCalc method 'Direct multilevel fast multipole BEM' not found in /home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step12_ml10/project/NumCalc/source_1/NC12-12.out; continuing.
+[OVERNIGHT] RUN 12:dense: 2870.89 Hz; method=0, expansion=8, timeout=900s
+[OVERNIGHT] FAILED 12:dense: True residual 4.18428 exceeds 1e-8; continuing.
+[OVERNIGHT] RUN 15:sl8: 3626.58 Hz; method=1, expansion=8, timeout=900s
+[OVERNIGHT] PASS 15:sl8: +11.509 dB, residual 8.22e-09
+[OVERNIGHT] RUN 15:ml8: 3626.58 Hz; method=4, expansion=8, timeout=900s
+[OVERNIGHT] PASS 15:ml8: +15.873 dB, residual 9.59e-09
+[OVERNIGHT] RUN 15:sl10: 3626.58 Hz; method=1, expansion=10, timeout=900s
+[OVERNIGHT] PASS 15:sl10: +11.509 dB, residual 8.22e-09
+[OVERNIGHT] RUN 15:ml10: 3626.58 Hz; method=4, expansion=10, timeout=900s
+[OVERNIGHT] PASS 15:ml10: +15.873 dB, residual 9.59e-09
+[OVERNIGHT] RUN 15:dense: 3626.58 Hz; method=0, expansion=8, timeout=900s
+[OVERNIGHT] FAILED 15:dense: True residual 5.38191 exceeds 1e-8; continuing.
+[OVERNIGHT] RUN 16:sl8: 3878.48 Hz; method=1, expansion=8, timeout=900s
+[OVERNIGHT] PASS 16:sl8: +10.104 dB, residual 9.61e-09
+[OVERNIGHT] RUN 16:ml8: 3878.48 Hz; method=4, expansion=8, timeout=900s
+[OVERNIGHT] PASS 16:ml8: +14.302 dB, residual 9.62e-09
+[OVERNIGHT] RUN 16:sl10: 3878.48 Hz; method=1, expansion=10, timeout=900s
+[OVERNIGHT] PASS 16:sl10: +10.104 dB, residual 9.61e-09
+[OVERNIGHT] RUN 16:ml10: 3878.48 Hz; method=4, expansion=10, timeout=900s
+[OVERNIGHT] PASS 16:ml10: +14.302 dB, residual 9.62e-09
+[OVERNIGHT] RUN 16:dense: 3878.48 Hz; method=0, expansion=8, timeout=900s
+[OVERNIGHT] FAILED 16:dense: True residual 5.78024 exceeds 1e-8; continuing.
+[OVERNIGHT] RUN 17:sl8: 4130.38 Hz; method=1, expansion=8, timeout=900s
+[OVERNIGHT] PASS 17:sl8: +8.894 dB, residual 1.00e-08
+[OVERNIGHT] RUN 17:ml8: 4130.38 Hz; method=4, expansion=8, timeout=900s
+[OVERNIGHT] FAILED 17:ml8: NumCalc exit code 1; continuing.
+[OVERNIGHT] RUN 17:sl10: 4130.38 Hz; method=1, expansion=10, timeout=900s
+[OVERNIGHT] PASS 17:sl10: +8.894 dB, residual 1.00e-08
+[OVERNIGHT] RUN 17:ml10: 4130.38 Hz; method=4, expansion=10, timeout=900s
+[OVERNIGHT] FAILED 17:ml10: NumCalc exit code 1; continuing.
+[OVERNIGHT] RUN 17:dense: 4130.38 Hz; method=0, expansion=8, timeout=900s
+[OVERNIGHT] FAILED 17:dense: True residual 6.17905 exceeds 1e-8; continuing.
+[OVERNIGHT] RUN 18:sl8: 4382.28 Hz; method=1, expansion=8, timeout=900s
+[OVERNIGHT] PASS 18:sl8: +7.878 dB, residual 9.53e-09
+[OVERNIGHT] RUN 18:ml8: 4382.28 Hz; method=4, expansion=8, timeout=900s
+[OVERNIGHT] FAILED 18:ml8: NumCalc exit code 1; continuing.
+[OVERNIGHT] RUN 18:sl10: 4382.28 Hz; method=1, expansion=10, timeout=900s
+[OVERNIGHT] PASS 18:sl10: +7.878 dB, residual 9.53e-09
+[OVERNIGHT] RUN 18:ml10: 4382.28 Hz; method=4, expansion=10, timeout=900s
+[OVERNIGHT] FAILED 18:ml10: NumCalc exit code 1; continuing.
+[OVERNIGHT] RUN 18:dense: 4382.28 Hz; method=0, expansion=8, timeout=900s
+[OVERNIGHT] FAILED 18:dense: True residual 6.57857 exceeds 1e-8; continuing.
+[OVERNIGHT] RUN 19:sl8: 4634.18 Hz; method=1, expansion=8, timeout=900s
+[OVERNIGHT] PASS 19:sl8: +6.958 dB, residual 8.50e-09
+[OVERNIGHT] RUN 19:ml8: 4634.18 Hz; method=4, expansion=8, timeout=900s
+[OVERNIGHT] FAILED 19:ml8: NumCalc exit code 1; continuing.
+[OVERNIGHT] RUN 19:sl10: 4634.18 Hz; method=1, expansion=10, timeout=900s
+[OVERNIGHT] PASS 19:sl10: +6.958 dB, residual 8.50e-09
+[OVERNIGHT] RUN 19:ml10: 4634.18 Hz; method=4, expansion=10, timeout=900s
+[OVERNIGHT] FAILED 19:ml10: NumCalc exit code 1; continuing.
+[OVERNIGHT] RUN 19:dense: 4634.18 Hz; method=0, expansion=8, timeout=900s
+[OVERNIGHT] FAILED 19:dense: True residual 6.97889 exceeds 1e-8; continuing.
+[OVERNIGHT] RUN 20:sl8: 4886.08 Hz; method=1, expansion=8, timeout=900s
+[OVERNIGHT] PASS 20:sl8: +5.993 dB, residual 9.88e-09
+[OVERNIGHT] RUN 20:ml8: 4886.08 Hz; method=4, expansion=8, timeout=900s
+[OVERNIGHT] FAILED 20:ml8: NumCalc exit code 1; continuing.
+[OVERNIGHT] RUN 20:sl10: 4886.08 Hz; method=1, expansion=10, timeout=900s
+[OVERNIGHT] PASS 20:sl10: +5.993 dB, residual 9.88e-09
+[OVERNIGHT] RUN 20:ml10: 4886.08 Hz; method=4, expansion=10, timeout=900s
+[OVERNIGHT] FAILED 20:ml10: NumCalc exit code 1; continuing.
+[OVERNIGHT] RUN 20:dense: 4886.08 Hz; method=0, expansion=8, timeout=900s
+[OVERNIGHT] FAILED 20:dense: True residual 7.38002 exceeds 1e-8; continuing.
+[OVERNIGHT] RUN 21:sl8: 5137.97 Hz; method=1, expansion=8, timeout=900s
+[OVERNIGHT] PASS 21:sl8: +4.996 dB, residual 9.67e-09
+[OVERNIGHT] RUN 21:ml8: 5137.97 Hz; method=4, expansion=8, timeout=900s
+[OVERNIGHT] FAILED 21:ml8: NumCalc exit code 1; continuing.
+[OVERNIGHT] RUN 21:sl10: 5137.97 Hz; method=1, expansion=10, timeout=900s
+[OVERNIGHT] PASS 21:sl10: +4.996 dB, residual 9.67e-09
+[OVERNIGHT] RUN 21:ml10: 5137.97 Hz; method=4, expansion=10, timeout=900s
+[OVERNIGHT] FAILED 21:ml10: NumCalc exit code 1; continuing.
+[OVERNIGHT] RUN 21:dense: 5137.97 Hz; method=0, expansion=8, timeout=900s
+[OVERNIGHT] FAILED 21:dense: True residual 7.78187 exceeds 1e-8; continuing.
+[OVERNIGHT] RUN 22:sl8: 5389.87 Hz; method=1, expansion=8, timeout=900s
+[OVERNIGHT] PASS 22:sl8: +4.144 dB, residual 9.79e-09
+[OVERNIGHT] RUN 22:ml8: 5389.87 Hz; method=4, expansion=8, timeout=900s
+[OVERNIGHT] FAILED 22:ml8: NumCalc exit code 1; continuing.
+[OVERNIGHT] RUN 22:sl10: 5389.87 Hz; method=1, expansion=10, timeout=900s
+[OVERNIGHT] PASS 22:sl10: +4.144 dB, residual 9.79e-09
+[OVERNIGHT] RUN 22:ml10: 5389.87 Hz; method=4, expansion=10, timeout=900s
+[OVERNIGHT] FAILED 22:ml10: NumCalc exit code 1; continuing.
+[OVERNIGHT] RUN 22:dense: 5389.87 Hz; method=0, expansion=8, timeout=900s
+[OVERNIGHT] FAILED 22:dense: True residual 8.18437 exceeds 1e-8; continuing.
+[OVERNIGHT] RUN 23:sl8: 5641.77 Hz; method=1, expansion=8, timeout=900s
+[OVERNIGHT] PASS 23:sl8: +3.607 dB, residual 9.47e-09
+[OVERNIGHT] RUN 23:ml8: 5641.77 Hz; method=4, expansion=8, timeout=900s
+[OVERNIGHT] FAILED 23:ml8: NumCalc exit code 1; continuing.
+[OVERNIGHT] RUN 23:sl10: 5641.77 Hz; method=1, expansion=10, timeout=900s
+[OVERNIGHT] PASS 23:sl10: +3.607 dB, residual 9.47e-09
+[OVERNIGHT] RUN 23:ml10: 5641.77 Hz; method=4, expansion=10, timeout=900s
+[OVERNIGHT] FAILED 23:ml10: NumCalc exit code 1; continuing.
+[OVERNIGHT] RUN 23:dense: 5641.77 Hz; method=0, expansion=8, timeout=900s
+[OVERNIGHT] FAILED 23:dense: True residual 8.5874 exceeds 1e-8; continuing.
+[OVERNIGHT] RUN 24:sl8: 5893.67 Hz; method=1, expansion=8, timeout=900s
+[OVERNIGHT] PASS 24:sl8: +3.422 dB, residual 9.87e-09
+[OVERNIGHT] RUN 24:ml8: 5893.67 Hz; method=4, expansion=8, timeout=900s
+[OVERNIGHT] FAILED 24:ml8: NumCalc exit code 1; continuing.
+[OVERNIGHT] RUN 24:sl10: 5893.67 Hz; method=1, expansion=10, timeout=900s
+[OVERNIGHT] PASS 24:sl10: +3.422 dB, residual 9.87e-09
+[OVERNIGHT] RUN 24:ml10: 5893.67 Hz; method=4, expansion=10, timeout=900s
+[OVERNIGHT] FAILED 24:ml10: NumCalc exit code 1; continuing.
+[OVERNIGHT] RUN 24:dense: 5893.67 Hz; method=0, expansion=8, timeout=900s
+[OVERNIGHT] FAILED 24:dense: True residual 8.99084 exceeds 1e-8; continuing.
+[OVERNIGHT] RUN 25:sl8: 6145.57 Hz; method=1, expansion=8, timeout=900s
+[OVERNIGHT] PASS 25:sl8: +3.485 dB, residual 8.60e-09
+[OVERNIGHT] RUN 25:ml8: 6145.57 Hz; method=4, expansion=8, timeout=900s
+[OVERNIGHT] FAILED 25:ml8: NumCalc exit code 1; continuing.
+[OVERNIGHT] RUN 25:sl10: 6145.57 Hz; method=1, expansion=10, timeout=900s
+[OVERNIGHT] PASS 25:sl10: +3.485 dB, residual 8.60e-09
+[OVERNIGHT] RUN 25:ml10: 6145.57 Hz; method=4, expansion=10, timeout=900s
+[OVERNIGHT] FAILED 25:ml10: NumCalc exit code 1; continuing.
+[OVERNIGHT] RUN 25:dense: 6145.57 Hz; method=0, expansion=8, timeout=900s
+[OVERNIGHT] FAILED 25:dense: True residual 9.39459 exceeds 1e-8; continuing.
+[OVERNIGHT] RUN 26:sl8: 6397.47 Hz; method=1, expansion=8, timeout=900s
+[OVERNIGHT] PASS 26:sl8: +3.634 dB, residual 9.99e-09
+[OVERNIGHT] RUN 26:ml8: 6397.47 Hz; method=4, expansion=8, timeout=900s
+[OVERNIGHT] FAILED 26:ml8: NumCalc exit code 1; continuing.
+[OVERNIGHT] RUN 26:sl10: 6397.47 Hz; method=1, expansion=10, timeout=900s
+[OVERNIGHT] PASS 26:sl10: +3.634 dB, residual 9.99e-09
+[OVERNIGHT] RUN 26:ml10: 6397.47 Hz; method=4, expansion=10, timeout=900s
+[OVERNIGHT] FAILED 26:ml10: NumCalc exit code 1; continuing.
+[OVERNIGHT] RUN 26:dense: 6397.47 Hz; method=0, expansion=8, timeout=900s
+[OVERNIGHT] FAILED 26:dense: True residual 9.79855 exceeds 1e-8; continuing.
+[OVERNIGHT] RUN 27:sl8: 6649.37 Hz; method=1, expansion=8, timeout=900s
+[OVERNIGHT] FAILED 27:sl8: NumCalc exit code 1; continuing.
+[OVERNIGHT] RUN 27:ml8: 6649.37 Hz; method=4, expansion=8, timeout=900s
+[OVERNIGHT] FAILED 27:ml8: NumCalc exit code 1; continuing.
+[OVERNIGHT] RUN 27:sl10: 6649.37 Hz; method=1, expansion=10, timeout=900s
+[OVERNIGHT] FAILED 27:sl10: NumCalc exit code 1; continuing.
+[OVERNIGHT] RUN 27:ml10: 6649.37 Hz; method=4, expansion=10, timeout=900s
+[OVERNIGHT] FAILED 27:ml10: NumCalc exit code 1; continuing.
+[OVERNIGHT] RUN 27:dense: 6649.37 Hz; method=0, expansion=8, timeout=900s
+[OVERNIGHT] FAILED 27:dense: True residual 10.2026 exceeds 1e-8; continuing.
+[OVERNIGHT COMPLETE] Converged cases: 38 / 90
+[OVERNIGHT COMPLETE] Read: /home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/overnight_report.txt
+[OVERNIGHT COMPLETE] JSON: /home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/results.json

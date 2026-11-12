@@ -1,0 +1,248 @@
+
+Start time: 12/11/2026 6:6:34
+
+
+>> G E N E R A L   P A R A M E T E R S <<
+
+
+3D analysis
+
+Warning: Element with very long side found!
+external elemen number = 8793
+internal element number = 8793
+
+
+Warning: Element with very long side found!
+external elemen number = 8794
+internal element number = 8794
+
+
+Warning: Element with very long side found!
+external elemen number = 8795
+internal element number = 8795
+
+
+Warning: Element with very long side found!
+external elemen number = 8795
+internal element number = 8795
+
+
+Warning: Element with very long side found!
+external elemen number = 8798
+internal element number = 8798
+
+
+Warning: Element with very long side found!
+external elemen number = 8798
+internal element number = 8798
+
+
+Warning: Element with very long side found!
+external elemen number = 8801
+internal element number = 8801
+
+
+Warning: Element with very long side found!
+external elemen number = 8801
+internal element number = 8801
+
+
+Warning: Element with very long side found!
+external elemen number = 8812
+internal element number = 8812
+
+
+Warning: Element with very long side found!
+external elemen number = 8833
+internal element number = 8833
+
+
+Warning: Element with very long side found!
+external elemen number = 8858
+internal element number = 8858
+
+
+Warning: Element with very long side found!
+external elemen number = 8861
+internal element number = 8861
+
+
+Warning: Element with very long side found!
+external elemen number = 8862
+internal element number = 8862
+
+
+Warning: Element with very long side found!
+external elemen number = 8862
+internal element number = 8862
+
+Mesh2HRTF 1.3.0
+Ear acoustic cavity and microphone response
+
+Number of frequency steps ................... = 80
+
+First step .................................. = 0
+Number of steps ............................. = 80
+Step increment .............................. = 1e-06
+Highest allowable frequency .................. = 40713.3
+
+
+
+>> B A S I C   P A R A M E T E R S   F O R   B E M <<
+
+Number of element groups .................... = 2
+Total number of elements .................... = 8995
+Number of boundary elements ................. = 8994
+Number of evaluation elements ............... = 1
+Maximum edge length of boundary elements .... = 0.0961665
+Average edge length of boundary elements .... = 0.00187718
+Minimum edge length of boundary elements .... = 0.000269166
+
+Total number of nodes ....................... = 4502
+Number of nodes of the boundary elements .... = 4499
+Number of nodes of the evaluation elements .. = 3
+
+Number of symmetric planes .................. = 0
+
+Number of incident plane waves .............. = 0
+Number of incident spharic waves ............ = 1
+
+Sound speed ................................. = 343
+Density of the medium ....................... = 1.2
+
+Diameter of the BE-mesh ..................... = 0.116514
+
+Minimum number of terms in the FMM expansion. = 8
+
+Exterior domain problem
+
+Harmonic time factor = EXP(-i*omega*t)
+
+methodSolver_  = 0: CGS iterative solver
+methodPreconditioner_ = 0: incomplete LU-decomposition preconditioner
+
+ No.   Freq.   Lambda/L_BE_Mesh  Lambda/L_Element
+  1     100      29.4384           2012.66
+  2 351.899      8.36559           571.944
+  3 603.797      4.87554           333.334
+  4 855.696      3.44029           235.208
+  5 1107.59      2.65787           181.715
+  6 1359.49       2.1654           148.045
+  7 1611.39      1.82689           124.902
+  8 1863.29      1.57991           108.017
+  9 2115.19      1.39176           95.1528
+ 10 2367.09      1.24365           85.0269
+ 11 2618.99      1.12404           76.8489
+ 12 2870.89      1.02541            70.106
+ 13 3122.78     0.942697           64.4509
+ 14 3374.68     0.872331             59.64
+ 15 3626.58      0.81174           55.4975
+ 16 3878.48     0.759019           51.8931
+ 17 4130.38     0.712729           48.7283
+ 18 4382.28      0.67176           45.9273
+ 19 4634.18     0.635246           43.4309
+ 20 4886.08     0.602496           41.1918
+ 21 5137.97     0.572957           39.1723
+ 22 5389.87      0.54618           37.3416
+ 23 5641.77     0.521794           35.6743
+ 24 5893.67     0.499492           34.1496
+ 25 6145.57     0.479018           32.7498
+ 26 6397.47     0.460157           31.4603
+ 27 6649.37     0.442725           30.2685
+ 28 6901.27     0.426565           29.1637
+ 29 7153.16     0.411544           28.1367
+ 30 7405.06     0.397544           27.1795
+ 31 7656.96     0.384466           26.2854
+ 32 7908.86     0.372221           25.4482
+ 33 8160.76     0.360731           24.6627
+ 34 8412.66      0.34993           23.9242
+ 35 8664.56     0.339757           23.2287
+ 36 8916.46     0.330158           22.5725
+ 37 9168.35     0.321087           21.9523
+ 38 9420.25     0.312501           21.3653
+ 39 9672.15     0.304363           20.8088
+ 40 9924.05     0.296637           20.2807
+ 41 10175.9     0.289294           19.7786
+ 42 10427.8     0.282306           19.3008
+ 43 10679.7     0.275647           18.8456
+ 44 10931.6     0.269295           18.4113
+ 45 11183.5      0.26323           17.9966
+ 46 11435.4     0.257431           17.6002
+ 47 11687.3     0.251883           17.2209
+ 48 11939.2     0.246569           16.8575
+ 49 12191.1     0.241474           16.5092
+ 50   12443     0.236585            16.175
+ 51 12694.9     0.231891           15.8541
+ 52 12946.8     0.227379           15.5456
+ 53 13198.7      0.22304           15.2489
+ 54 13450.6     0.218863           14.9633
+ 55 13702.5     0.214839           14.6883
+ 56 13954.4     0.210961           14.4231
+ 57 14206.3      0.20722           14.1674
+ 58 14458.2      0.20361           13.9205
+ 59 14710.1     0.200123           13.6822
+ 60   14962     0.196754           13.4518
+ 61 15213.9     0.193497           13.2291
+ 62 15465.8     0.190345           13.0136
+ 63 15717.7     0.187294           12.8051
+ 64 15969.6      0.18434           12.6031
+ 65 16221.5     0.181478           12.4074
+ 66 16473.4     0.178703           12.2176
+ 67 16725.3     0.176011           12.0336
+ 68 16977.2       0.1734           11.8551
+ 69 17229.1     0.170864           11.6818
+ 70   17481     0.168402           11.5134
+ 71 17732.9      0.16601           11.3499
+ 72 17984.8     0.163685           11.1909
+ 73 18236.7     0.161424           11.0363
+ 74 18488.6     0.159225            10.886
+ 75 18740.5     0.157084           10.7396
+ 76 18992.4     0.155001           10.5972
+ 77 19244.3     0.152972           10.4585
+ 78 19496.2     0.150996           10.3234
+ 79 19748.1      0.14907           10.1917
+ 80   20000     0.147192           10.0633
+
+
+
+
+>> S T E P   N U M B E R   A N D   F R E Q U E N C Y <<
+
+Step 27, Frequency = 6649.37 Hz
+
+Direct multilevel fast multipole BEM
+
+Number of equations = 8994
+
+Informations about clusters:
+   Level    Num. of clusters    Maximum radius   Minimum radius
+     0           42                0.0630797         0.00914655
+     1          139                0.0630797         0.00158152
+ resu. nets       1                0.000105409         0.000105409
+
+
+Informations about the FMM expansion:
+   Level    N. expa. terms    N. p. theta    N. p. phi    N. p. sphere
+     0          18              18              36           648
+     1          18              18              36           648
+
+Nonzeros of the near field matrix ..................... = 22234006
+Nonzeros of the T-matrix .............................. = 11656224
+    Nonzeros of T_lev_0 ............................... = 5828112
+    Nonzeros of T_lev_1 ............................... = 5828112
+Nonzeros of the D-matrices ............................ = 5843664
+    Nonzeros of D_lev_0 ............................... = 228096
+    Nonzeros of D_lev_1 ............................... = 5615568
+Nonzeros of the S-matrix .............................. = 11656224
+    Nonzeros of S_lev_0 ............................... = 5828112
+    Nonzeros of S_lev_1 ............................... = 5828112
+Sum of nonzeros of the FMBEM matrices ................. = 51390118
+Warning: Maximum number of iterations is reached!
+
+
+CGS solver: number of iterations = 250, relative error = 0.3964
+CGS TRUE relative residual = 2392.34
+CGS failed true residual verification; trying restarted GMRES.
+
+GMRES fallback failed after 360 iterations, true relative residual = 0.0429902
+CGS and GMRES failed convergence. Frequency rejected without pressure output; do not interpret it as resonance.

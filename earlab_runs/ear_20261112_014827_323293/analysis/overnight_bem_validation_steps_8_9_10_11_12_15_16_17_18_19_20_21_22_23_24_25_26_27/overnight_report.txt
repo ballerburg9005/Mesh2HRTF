@@ -1,0 +1,160 @@
+Mesh2HRTF OVERNIGHT BEM NUMERICAL REFERENCE
+=========================================
+Project: /home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293
+Started: 2026-11-12T03:09:39.475454
+Wall-time budget: 8 hours
+Original project outputs are untouched.
+Each case used one selected frequency step, not a broadband sweep.
+
+Frequency 1863.29 Hz / step 8
+  sl8      +27.763 dB  true residual 9.748e-09  (new_solve)
+  ml8    failed           Expected NumCalc method 'Direct multilevel fast multipole BEM' not found in /home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step08_ml8/project/NumCalc/source_1/NC8-8.out
+  sl10     +27.762 dB  true residual 9.754e-09  (new_solve)
+  ml10   failed           Expected NumCalc method 'Direct multilevel fast multipole BEM' not found in /home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step08_ml10/project/NumCalc/source_1/NC8-8.out
+  dense  failed           True residual 2.54929 exceeds 1e-8
+  No converged non-FMM reference here. Do NOT declare either FMM result correct.
+
+Frequency 2115.19 Hz / step 9
+  sl8      +24.346 dB  true residual 9.454e-09  (new_solve)
+  ml8    failed           Expected NumCalc method 'Direct multilevel fast multipole BEM' not found in /home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step09_ml8/project/NumCalc/source_1/NC9-9.out
+  sl10     +24.346 dB  true residual 9.449e-09  (new_solve)
+  ml10   failed           Expected NumCalc method 'Direct multilevel fast multipole BEM' not found in /home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step09_ml10/project/NumCalc/source_1/NC9-9.out
+  dense  failed           True residual 2.96392 exceeds 1e-8
+  No converged non-FMM reference here. Do NOT declare either FMM result correct.
+
+Frequency 2367.09 Hz / step 10
+  sl8      +21.428 dB  true residual 9.992e-09  (new_solve)
+  ml8    failed           Expected NumCalc method 'Direct multilevel fast multipole BEM' not found in /home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step10_ml8/project/NumCalc/source_1/NC10-10.out
+  sl10     +21.428 dB  true residual 9.981e-09  (new_solve)
+  ml10   failed           Expected NumCalc method 'Direct multilevel fast multipole BEM' not found in /home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step10_ml10/project/NumCalc/source_1/NC10-10.out
+  dense  failed           True residual 3.37468 exceeds 1e-8
+  No converged non-FMM reference here. Do NOT declare either FMM result correct.
+
+Frequency 2618.99 Hz / step 11
+  sl8      +18.957 dB  true residual 9.226e-09  (new_solve)
+  ml8    failed           Expected NumCalc method 'Direct multilevel fast multipole BEM' not found in /home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step11_ml8/project/NumCalc/source_1/NC11-11.out
+  sl10     +18.957 dB  true residual 9.222e-09  (new_solve)
+  ml10   failed           Expected NumCalc method 'Direct multilevel fast multipole BEM' not found in /home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step11_ml10/project/NumCalc/source_1/NC11-11.out
+  dense  failed           True residual 3.78127 exceeds 1e-8
+  No converged non-FMM reference here. Do NOT declare either FMM result correct.
+
+Frequency 2870.89 Hz / step 12
+  sl8      +16.804 dB  true residual 9.171e-09  (new_solve)
+  ml8    failed           Expected NumCalc method 'Direct multilevel fast multipole BEM' not found in /home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step12_ml8/project/NumCalc/source_1/NC12-12.out
+  sl10     +16.804 dB  true residual 9.155e-09  (new_solve)
+  ml10   failed           Expected NumCalc method 'Direct multilevel fast multipole BEM' not found in /home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/overnight_bem_validation_steps_8_9_10_11_12_15_16_17_18_19_20_21_22_23_24_25_26_27/step12_ml10/project/NumCalc/source_1/NC12-12.out
+  dense  failed           True residual 4.18428 exceeds 1e-8
+  No converged non-FMM reference here. Do NOT declare either FMM result correct.
+
+Frequency 3626.58 Hz / step 15
+  sl8      +11.509 dB  true residual 8.220e-09  (new_solve)
+  ml8      +15.873 dB  true residual 9.591e-09  (new_solve)
+  sl10     +11.509 dB  true residual 8.220e-09  (new_solve)
+  ml10     +15.873 dB  true residual 9.591e-09  (new_solve)
+  dense  failed           True residual 5.38191 exceeds 1e-8
+  No converged non-FMM reference here. Do NOT declare either FMM result correct.
+  ML8 minus SL8 = +4.364 dB
+  ML10 minus SL10 = +4.364 dB
+
+Frequency 3878.48 Hz / step 16
+  sl8      +10.104 dB  true residual 9.605e-09  (new_solve)
+  ml8      +14.302 dB  true residual 9.619e-09  (new_solve)
+  sl10     +10.104 dB  true residual 9.605e-09  (new_solve)
+  ml10     +14.302 dB  true residual 9.619e-09  (new_solve)
+  dense  failed           True residual 5.78024 exceeds 1e-8
+  No converged non-FMM reference here. Do NOT declare either FMM result correct.
+  ML8 minus SL8 = +4.198 dB
+  ML10 minus SL10 = +4.198 dB
+
+Frequency 4130.38 Hz / step 17
+  sl8       +8.894 dB  true residual 9.998e-09  (new_solve)
+  ml8    failed           NumCalc exit code 1
+  sl10      +8.894 dB  true residual 9.998e-09  (new_solve)
+  ml10   failed           NumCalc exit code 1
+  dense  failed           True residual 6.17905 exceeds 1e-8
+  No converged non-FMM reference here. Do NOT declare either FMM result correct.
+
+Frequency 4382.28 Hz / step 18
+  sl8       +7.878 dB  true residual 9.532e-09  (new_solve)
+  ml8    failed           NumCalc exit code 1
+  sl10      +7.878 dB  true residual 9.532e-09  (new_solve)
+  ml10   failed           NumCalc exit code 1
+  dense  failed           True residual 6.57857 exceeds 1e-8
+  No converged non-FMM reference here. Do NOT declare either FMM result correct.
+
+Frequency 4634.18 Hz / step 19
+  sl8       +6.958 dB  true residual 8.500e-09  (new_solve)
+  ml8    failed           NumCalc exit code 1
+  sl10      +6.958 dB  true residual 8.500e-09  (new_solve)
+  ml10   failed           NumCalc exit code 1
+  dense  failed           True residual 6.97889 exceeds 1e-8
+  No converged non-FMM reference here. Do NOT declare either FMM result correct.
+
+Frequency 4886.08 Hz / step 20
+  sl8       +5.993 dB  true residual 9.879e-09  (new_solve)
+  ml8    failed           NumCalc exit code 1
+  sl10      +5.993 dB  true residual 9.879e-09  (new_solve)
+  ml10   failed           NumCalc exit code 1
+  dense  failed           True residual 7.38002 exceeds 1e-8
+  No converged non-FMM reference here. Do NOT declare either FMM result correct.
+
+Frequency 5137.97 Hz / step 21
+  sl8       +4.996 dB  true residual 9.668e-09  (new_solve)
+  ml8    failed           NumCalc exit code 1
+  sl10      +4.996 dB  true residual 9.668e-09  (new_solve)
+  ml10   failed           NumCalc exit code 1
+  dense  failed           True residual 7.78187 exceeds 1e-8
+  No converged non-FMM reference here. Do NOT declare either FMM result correct.
+
+Frequency 5389.87 Hz / step 22
+  sl8       +4.144 dB  true residual 9.791e-09  (new_solve)
+  ml8    failed           NumCalc exit code 1
+  sl10      +4.144 dB  true residual 9.791e-09  (new_solve)
+  ml10   failed           NumCalc exit code 1
+  dense  failed           True residual 8.18437 exceeds 1e-8
+  No converged non-FMM reference here. Do NOT declare either FMM result correct.
+
+Frequency 5641.77 Hz / step 23
+  sl8       +3.607 dB  true residual 9.472e-09  (new_solve)
+  ml8    failed           NumCalc exit code 1
+  sl10      +3.607 dB  true residual 9.472e-09  (new_solve)
+  ml10   failed           NumCalc exit code 1
+  dense  failed           True residual 8.5874 exceeds 1e-8
+  No converged non-FMM reference here. Do NOT declare either FMM result correct.
+
+Frequency 5893.67 Hz / step 24
+  sl8       +3.422 dB  true residual 9.868e-09  (new_solve)
+  ml8    failed           NumCalc exit code 1
+  sl10      +3.422 dB  true residual 9.868e-09  (new_solve)
+  ml10   failed           NumCalc exit code 1
+  dense  failed           True residual 8.99084 exceeds 1e-8
+  No converged non-FMM reference here. Do NOT declare either FMM result correct.
+
+Frequency 6145.57 Hz / step 25
+  sl8       +3.485 dB  true residual 8.599e-09  (new_solve)
+  ml8    failed           NumCalc exit code 1
+  sl10      +3.485 dB  true residual 8.599e-09  (new_solve)
+  ml10   failed           NumCalc exit code 1
+  dense  failed           True residual 9.39459 exceeds 1e-8
+  No converged non-FMM reference here. Do NOT declare either FMM result correct.
+
+Frequency 6397.47 Hz / step 26
+  sl8       +3.634 dB  true residual 9.992e-09  (new_solve)
+  ml8    failed           NumCalc exit code 1
+  sl10      +3.634 dB  true residual 9.992e-09  (new_solve)
+  ml10   failed           NumCalc exit code 1
+  dense  failed           True residual 9.79855 exceeds 1e-8
+  No converged non-FMM reference here. Do NOT declare either FMM result correct.
+
+Frequency 6649.37 Hz / step 27
+  sl8    failed           NumCalc exit code 1
+  ml8    failed           NumCalc exit code 1
+  sl10   failed           NumCalc exit code 1
+  ml10   failed           NumCalc exit code 1
+  dense  failed           True residual 10.2026 exceeds 1e-8
+  No converged non-FMM reference here. Do NOT declare either FMM result correct.
+
+CAVEAT: True residual verifies the chosen discrete linear system,
+not the accuracy of the approximate FMM operator or geometry.
+The mesh has NOT been shown converged under surface refinement.
+Do not use these results as validated acoustic measurements.

@@ -1,0 +1,116 @@
+istart= 19 iend = 19
+
+---------- NumCalc started: 12/11/2026 4:45:38 ----------
+
+Running on:         SYBURG
+
+3D analysis
+Job title: Ear acoustic cavity and microphone response
+
+Warning: Element with very long side found!
+external elemen number = 8793
+internal element number = 8793
+
+
+Warning: Element with very long side found!
+external elemen number = 8794
+internal element number = 8794
+
+
+Warning: Element with very long side found!
+external elemen number = 8795
+internal element number = 8795
+
+
+Warning: Element with very long side found!
+external elemen number = 8795
+internal element number = 8795
+
+
+Warning: Element with very long side found!
+external elemen number = 8798
+internal element number = 8798
+
+
+Warning: Element with very long side found!
+external elemen number = 8798
+internal element number = 8798
+
+
+Warning: Element with very long side found!
+external elemen number = 8801
+internal element number = 8801
+
+
+Warning: Element with very long side found!
+external elemen number = 8801
+internal element number = 8801
+
+
+Warning: Element with very long side found!
+external elemen number = 8812
+internal element number = 8812
+
+
+Warning: Element with very long side found!
+external elemen number = 8833
+internal element number = 8833
+
+
+Warning: Element with very long side found!
+external elemen number = 8858
+internal element number = 8858
+
+
+Warning: Element with very long side found!
+external elemen number = 8861
+internal element number = 8861
+
+
+Warning: Element with very long side found!
+external elemen number = 8862
+internal element number = 8862
+
+
+Warning: Element with very long side found!
+external elemen number = 8862
+internal element number = 8862
+
+
+Step 19, Frequency = 4634.18 Hz
+
+Traditional BEM
+
+Number of equations = 8994
+Number of entries of the coefficient matrix = 80892036
+
+CGS: err_ori = 6.24074
+10 0.00160062
+10 Abs Error:0.00998906
+20 0.0465413
+20 Abs Error:0.290452
+30 5.46176e-05
+30 Abs Error:0.000340855
+40 8.99368e-06
+40 Abs Error:5.61273e-05
+50 2.76637e-08
+50 Abs Error:1.72642e-07
+60 5.43672e-10
+60 Abs Error:3.39292e-09
+Iteration method CGS failed, direct method is used!
+
+Assembling the equation system         : 50
+Solving the equation system            : 338
+Post processing                        : 0
+Total                                  : 388
+
+
+Time Statistic for the job (in second):
+Input ............................ 0
+Address computation .............. 0
+Assembling the equation system ... 50
+Solving the equation system ...... 338
+Post processing .................. 0
+The whole job .................... 388
+
+---------- NumCalc ended: 12/11/2026 4:52:6 ----------

@@ -239,11 +239,13 @@ irregular triangles while the underlying CAD design is intentional. An STL
 always contains triangles; the Mesh2Input exporter exports Blender's
 **triangulated** mesh, not original CAD n-gons. A nonmanifold edge in
 \`Elements.txt\` is real mesh connectivity, but is **not** sufficient proof
-that the original CAD shape is defective. Importantly, the prior OBJ
-diagnostic used Blender-native XYZ even though Blender 5.2 OBJ import
-defaults to **-Z Forward / Y Up**, rotating the highlighted faces.
-Newly regenerated/committed OBJ files are axis-converted for the **default**
-OBJ import. To avoid any ambiguity, prefer the native Blender overlay.
+that the original CAD shape is defective. **IMPORTANT: Import every diagnostic OBJ with Forward Axis = Y,
+Up Axis = Z, and Scale = 1.0.** This is the import convention used
+successfully with the original STL. The temporary OBJ pre-rotation was
+incorrect for these settings and has been reverted. Existing OBJ files
+created by the affected version must be regenerated after `git pull`;
+the committed overlays for the older scan have also been corrected.
+For zero ambiguity, use the native Blender overlay below.
 
 First run the updated comparison (no NumCalc or Blender):
 
@@ -264,6 +266,18 @@ edges. If the STL is elsewhere, run
 \`tools/ear_acoustic_lab/.venv/bin/python
 tools/ear_acoustic_lab/source_export_compare.py --project
 earlab_runs/ear_20261110_234807_961528 --stl /path/to/model.stl\`.
+
+If you exported a revised STL to
+`earlab_runs/ear_20261112_012547_881072` before this correction, regenerate
+its diagnostic OBJ coordinates locally (no Blender or NumCalc):
+
+```sh
+tools/ear_acoustic_lab/.venv/bin/python   tools/ear_acoustic_lab/run_analysis.py   --inspect-geometry earlab_runs/ear_20261112_012547_881072
+```
+
+That refreshed `topology_defects.obj` is native XYZ; use the same Y/Z
+settings above. Do not interpret triangles from the old, rotated overlay
+as displaced geometry.
 
 To highlight the **exact saved Blender polygons and edges** without any
 OBJ axis rotation, use the saved export scene:

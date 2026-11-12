@@ -105,11 +105,9 @@ def analyze_exported_mesh(project, units="mm"):
                 file.write("usemtl fatal\n" if hit["grade"] == "FATAL"
                            else "usemtl warning\n")
                 for p in hit["_points"]:
-                    # _points are Blender-native coordinates already in
-                    # STL units. Convert axes for Blender's default OBJ
-                    # importer without applying the metre conversion twice.
-                    obj_point = (p[0], p[2], -p[1])
-                    file.write("v " + " ".join(f"{coord:.12g}" for coord in obj_point) + "\n")
+                    # Native Blender XYZ in original STL units. Import
+                    # OBJ with Forward Y, Up Z, Scale 1.0 (no pre-rotation).
+                    file.write("v " + " ".join(f"{coord:.12g}" for coord in p) + "\n")
                 file.write(f"f {idx} {idx+1} {idx+2}\n")
                 idx += 3
 

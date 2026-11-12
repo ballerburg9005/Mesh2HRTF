@@ -10,6 +10,8 @@ import json
 import math
 from pathlib import Path
 
+from blender_obj_axes import mesh2input_to_obj
+
 
 def _load_reference(project):
     folder = Path(project) / "ObjectMeshes" / "Reference"
@@ -192,7 +194,9 @@ def audit_exported_topology(project, max_frequency_hz=None, write_overlay=True):
             "newmtl open_boundary\nKd 1.0 0.6 0.0\n"
             "newmtl nonmanifold\nKd 1.0 0.05 0.05\n"
             "newmtl winding_conflict\nKd 0.1 0.5 1.0\n")
-        scale = 1000. if units == "mm" else 1.
+        # Blender's OBJ importer defaults to -Z forward / Y up; the
+        # saved Reference mesh is Y forward / Z up. Convert the overlay
+        # once here so File > Import > OBJ with defaults aligns it.
         with obj.open("w") as file:
             file.write("mtllib topology_defects.mtl\n")
             idx = 1
@@ -202,8 +206,8 @@ def audit_exported_topology(project, max_frequency_hz=None, write_overlay=True):
                 for node in triangles[tid]:
                     point = nodes[node]
                     file.write("v " + " ".join(
-                        f"{coordinate * scale:.12g}" for coordinate in point)
-                        + "\n")
+                        f"{coordinate:.12g}" for coordinate in
+                        mesh2input_to_obj(point, units)) + "\n")
                 file.write(f"f {idx} {idx+1} {idx+2}\n")
                 idx += 3
 

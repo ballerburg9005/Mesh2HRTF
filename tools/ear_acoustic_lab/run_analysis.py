@@ -386,6 +386,7 @@ def run(args):
         step('Export-only geometry validation (NO NumCalc)')
         report = audit_exported_topology(project, max_frequency_hz=fmax)
         print_topology(report)
+        comparison_failed = False
         try:
             from source_export_compare import compare_source_export
             compare, saved = compare_source_export(project)
@@ -403,6 +404,7 @@ def run(args):
                   flush=True)
             print("[SOURCE VS EXPORT] Report: " + str(saved), flush=True)
         except Exception as exc:
+            comparison_failed = True
             print("[SOURCE VS EXPORT WARNING] Comparison unavailable: "
                   + str(exc), flush=True)
             # An incomplete comparison cannot be claimed to be a passed
@@ -413,9 +415,9 @@ def run(args):
         print("[EXPORT ONLY] New project: " + str(project), flush=True)
         print("[EXPORT ONLY] Blender export completed. NumCalc NOT launched.",
               flush=True)
-        if quality['fatal_count'] or report['blockers']:
-            print("[EXPORT ONLY] Geometry preflight FAILED. Fix or assess "
-                  "the flagged surfaces; no acoustic solver was started.",
+        if quality['fatal_count'] or report['blockers'] or comparison_failed:
+            print("[EXPORT ONLY] Geometry preflight FAILED or incomplete. "
+                  "Review reports; no acoustic solver was started.",
                   flush=True)
             return 2
         print("[EXPORT ONLY] Geometry preflight passed basic topology and "

@@ -1,21 +1,21 @@
-"""Coordinate conversion for Blender's default OBJ import axis settings.
+"""Blender-native XYZ for diagnostic OBJ files imported Y-forward / Z-up.
 
-Mesh2Input stores Blender-native xyz in metres. Blender 5.2 OBJ import
-defaults to forward=-Z and up=Y, not the STL import's Y/Z convention.
-Using conventional OBJ coordinates (x,z,-y) ensures no manual rotation is
-needed when importing a diagnostic overlay over '3d Model.blend'.
+NumCalc saves Blender-native XYZ in metres. Our users import the original
+STL and overlay OBJ with the same Y-forward / Z-up convention. Do not
+pre-rotate OBJ vertices; doing so and then selecting Y/Z import axes causes
+a second rotation and makes correct triangles appear elsewhere.
 """
 
 
 def mesh2input_to_obj(point_m, units="mm"):
+    """Convert metres to source STL units, preserving X, Y, Z exactly."""
     if units not in ("mm", "m"):
         raise ValueError("Expected units mm or m")
     x, y, z = (float(value) for value in point_m)
     scale = 1000.0 if units == "mm" else 1.0
-    return x * scale, z * scale, -y * scale
+    return x * scale, y * scale, z * scale
 
 
-def obj_default_import_to_blender(point):
-    """Inverse transform, for tests and documentation only."""
-    x, y, z = (float(value) for value in point)
-    return x, -z, y
+def obj_y_forward_z_up_to_blender(point):
+    """Identity when imported with Forward Y, Up Z and Scale 1.0."""
+    return tuple(float(value) for value in point)

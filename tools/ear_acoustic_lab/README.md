@@ -198,6 +198,43 @@ the saved NumCalc log instead of launching another entire sweep.
 Neither comparison proves the original nonwatertight, under-resolved
 geometry is acoustically valid.
 
+## Visualize the overnight test (PNG + HTML, no solver)
+
+The overnight testing script saved results, not visualizations.
+To generate a **self-contained interactive HTML overview** and three
+**PNG plots** directly from the existing saved NumCalc results:
+
+\`\`\`sh
+cd ~/Mesh2HRTF
+git pull --ff-only
+tools/ear_acoustic_lab/.venv/bin/python -u \
+  tools/ear_acoustic_lab/render_overnight_dashboard.py \
+  --project earlab_runs/ear_20261112_014827_323293
+xdg-open earlab_runs/ear_20261112_014827_323293/analysis/visual_overview/index.html
+\`\`\`
+
+The generated files are located in
+\`earlab_runs/ear_20261112_014827_323293/analysis/visual_overview/\`:
+
+- \`index.html\` — **interactive offline frequency plot** with hover,
+  method table, failure map and evidence warnings
+- \`frequency_response.png\` — converged SL/ML gains and explicitly
+  **unverified** dense direct pressure candidates
+- \`method_disagreement.png\` — ML minus SL and dense-candidate minus SL
+- \`solver_status.png\` — matrix of verified, failed, automatically
+  switched, or direct-unverified cases
+- \`chart_data.json\` — machine-readable points and source references
+
+Nothing is recalculated: the tool reads the saved NumCalc
+\`NC*-*.out\`, \`pEvalGrid\` and \`results.json\` files. It corrects
+the misleading statuses in the *visual report only*:
+when NumCalc requested ML-FMM but actually ran SL-FMM below the
+switch threshold, it is labeled \`auto_single\`, not a failed ML solve.
+For traditional dense BEM, a successful direct Gaussian-elimination
+fallback's pressure is shown as an **UNVERIFIED candidate** because
+the final direct-solution residual is missing. Those candidates must
+not be treated as a converged non-FMM reference.
+
 ## Overnight bounded BEM validation on repaired geometry
 
 The repaired 8994-triangle mesh still gave **+14.863 dB SL-FMM** versus

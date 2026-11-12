@@ -71,7 +71,11 @@ def set_numcalc_method(nc_text, bem_method, expansion_terms=8):
                         raise ValueError(
                             "Overnight reference expects NumCalc iterative "
                             "solver=0; refusing an unbounded direct solve.")
-                    a[3] = str(expansion_terms)
+                    # Mesh2Input often writes 0, which NumCalc converts
+                    # to the default minimum of 8. Keep it unchanged for
+                    # order=8 so existing verified baseline is reusable.
+                    if expansion_terms == 10:
+                        a[3] = "10"
                     a[7] = str(bem_method)
                     lines[k] = " ".join(a) + "\n"
                     return "".join(lines)
@@ -303,10 +307,22 @@ def run(project, steps=(13,14), per_case_timeout=900,
     if not solver.is_file() or not os.access(solver, os.X_OK):
         raise FileNotFoundError("Compiled NumCalc executable missing: " + str(solver))
     snapshot = _snapshot(project)
-    method_row = set_numcalc_method(nc_original, 4, 8)
-    # Fail closed unless the original exported method is the expected ML-FMM.
-    if method_row.replace(" 4 0\n", " 4 0\n") is None:
-        raise AssertionError("unreachable")
+    # Confirm this is an unchanged Mesh2Input multilevel export, not
+    # an already modified single-level or dense BEM project.
+    original_row = None
+    lines = nc_original.splitlines()
+    for i, line in enumerate(lines):
+        if line.strip() == "## 1. Main Parameters I":
+            original_row = next(
+                (v.split() for v in lines[i+1:i+6]
+                 if v.strip() and not v.lstrip().startswith("#")), None)
+            break
+    if (original_row is None or len(original_row) < 9 or
+            original_row[7] != "4" or original_row[8] != "0"):
+        raise ValueError(
+            "Expected fresh Mesh2Input export (METHODBEM=4, ISOLVER=0). "
+            "Use your clean 8994-triangle export project.")
+
     if any(step < 1 or step > len(params["frequencies"]) for step in steps):
         raise ValueError("Requested frequency step outside project")
     for step in steps:
@@ -325,17 +341,20 @@ def run(project, steps=(13,14), per_case_timeout=900,
                        "_".join(map(str, steps)))
     root.mkdir(parents=True, exist_ok=True)
     manifest = root / "manifest.json"
+    binary_sha = _sha256(solver)
     if manifest.exists():
         saved = json.loads(manifest.read_text())
-        if saved.get("original_source_sha256") != snapshot:
+        if (saved.get("original_source_sha256") != snapshot or
+                saved.get("solver_binary_sha256") != binary_sha):
             raise RuntimeError(
-                "Input project changed since prior overnight run. "
-                "Refusing to reuse incompatible results: " + str(root))
+                "Input project or NumCalc binary changed since prior "
+                "overnight run. Refusing to mix incomparable results: "
+                + str(root))
     else:
         manifest.write_text(json.dumps({
             "project": str(project), "original_source_sha256": snapshot,
             "requested_steps": list(steps), "created": dt.datetime.now().isoformat(),
-            "solver_binary_sha256": _sha256(solver)}, indent=2) + "\n")
+            "solver_binary_sha256": binary_sha}, indent=2) + "\n")
     results_path = root / "results.json"
     results = (json.loads(results_path.read_text())
                if results_path.is_file() else {})

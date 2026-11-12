@@ -1,0 +1,39 @@
+{
+  "original_project": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293",
+  "step": 13,
+  "frequency_hz": 3122.7848101265827,
+  "mesh": {
+    "triangle_count": 8994,
+    "frequency_hz": 3122.7848101265827,
+    "triangles_over_wavelength_six": 55,
+    "fraction_over_wavelength_six": 0.0061151879030464755,
+    "max_triangle_edge_mm": 96.16654112411044,
+    "note": "Heuristic screen; not a mesh-convergence test."
+  },
+  "original_sha256": {
+    "NC.inp": "ddb2947594992722d69813a1255234ed5116d615bfe2cd1d9788afcef2e0cd6d",
+    "Nodes.txt": "d6b0d8904dd64b6bbd290e76d8bfb29dfac593a7e8ce67f146bfe81a5b566337",
+    "Elements.txt": "74d41717007b797e2fe4d74888bae08bb05dbff9865e0d59b2a4daba71a785ad"
+  },
+  "single_level": {
+    "method": "GMRES",
+    "true_relative_residual": 7.79821e-09,
+    "gain_db": 14.862722766608012,
+    "phase_deg": 77.93003287390584,
+    "pressure_real": -0.13296156666666667,
+    "pressure_imag": 0.34213916666666666,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/fmm_new_mesh_step13_20261112_015811_978910/single_level/NumCalc/source_1/NC13-13.out"
+  },
+  "multilevel": {
+    "method": "GMRES",
+    "true_relative_residual": 9.78881e-09,
+    "gain_db": 19.432598162349677,
+    "phase_deg": 85.13268280543781,
+    "pressure_real": -0.29584123333333334,
+    "pressure_imag": 0.5462421333333333,
+    "log": "/home/l0rd/Mesh2HRTF/earlab_runs/ear_20261112_014827_323293/analysis/fmm_new_mesh_step13_20261112_015811_978910/multilevel/NumCalc/source_1/NC13-13.out"
+  },
+  "multilevel_minus_single_db": 4.569875395741665,
+  "method_agreement_within_1_db": false,
+  "interpretation": "Solver-converged FMM method comparison only. Neither agreement nor disagreement validates physical pressure, geometry, BEM approximation accuracy, or mesh convergence."
+}

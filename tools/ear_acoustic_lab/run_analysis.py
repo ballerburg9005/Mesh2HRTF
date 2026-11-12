@@ -429,9 +429,21 @@ def run(args):
         print("[EXPORT ONLY] Blender export completed. NumCalc NOT launched.",
               flush=True)
         if quality['fatal_count'] or report['blockers'] or comparison_failed:
-            print("[EXPORT ONLY] Geometry preflight FAILED or incomplete. "
-                  "Review reports; no acoustic solver was started.",
-                  flush=True)
+            topology_bad = bool(
+                report["open_boundary_edges"] or
+                report["nonmanifold_edges"] or
+                report["winding_conflicts"] or
+                report["degenerate_triangle_ids"] or
+                report["edge_connected_components"] != 1)
+            if not topology_bad and not quality['fatal_count'] and not comparison_failed:
+                print("[EXPORT ONLY] Topology and STL/export match PASSED. "
+                      "The requested 20 kHz bandwidth FAILED the "
+                      "wavelength/6 resolution screen; no NumCalc started.",
+                      flush=True)
+            else:
+                print("[EXPORT ONLY] Topology/export preflight FAILED or "
+                      "incomplete. Review reports; no NumCalc started.",
+                      flush=True)
             return 2
         print("[EXPORT ONLY] Geometry preflight passed basic topology and "
               "wavelength/6 screening. This does NOT establish physical "

@@ -119,13 +119,18 @@ def run(project, step=13, timeout=150, min_free_gib=6.):
         f'fmm_new_mesh_step{step}_' + dt.datetime.now().strftime(
             '%Y%m%d_%H%M%S_%f')))
     run_dir.mkdir(parents=True)
-    for folder in ('ObjectMeshes', 'EvaluationGrids'):
-        original = project / folder
-        if not original.is_dir():
-            raise FileNotFoundError("Missing exported geometry: " + str(original))
-        (run_dir / folder).symlink_to(original, target_is_directory=True)
-    (run_dir / 'parameters.json').write_text(json.dumps(params))
-    (run_dir / 'earlab_config.json').write_text(json.dumps(cfg))
+    for label in ('single_level', 'multilevel'):
+        # Preserve Mesh2HRTF's conventional NumCalc/source_1 directory,
+        # while keeping both FMM variants in entirely separate sandboxes.
+        sandbox = run_dir / label
+        sandbox.mkdir()
+        for folder in ('ObjectMeshes', 'EvaluationGrids'):
+            original = project / folder
+            if not original.is_dir():
+                raise FileNotFoundError("Missing exported geometry: " + str(original))
+            (sandbox / folder).symlink_to(original, target_is_directory=True)
+        (sandbox / 'parameters.json').write_text(json.dumps(params))
+        (sandbox / 'earlab_config.json').write_text(json.dumps(cfg))
     print(f"[FOCUSED] {freq:.2f} Hz / step {step}. "
           "Two sequential isolated FMM solves, NO Blender/80-tone sweep.",
           flush=True)
@@ -143,7 +148,7 @@ def run(project, step=13, timeout=150, min_free_gib=6.):
     ]
     try:
         for label, input_text, method_log in variants:
-            subfolder = run_dir / 'NumCalc' / f'source_{label}'
+            subfolder = run_dir / label / 'NumCalc' / 'source_1'
             subfolder.mkdir(parents=True)
             (subfolder / 'NC.inp').write_text(input_text)
             print(f"[FOCUSED] Running {label}, step {step} only...", flush=True)

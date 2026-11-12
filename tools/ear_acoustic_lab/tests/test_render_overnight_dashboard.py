@@ -66,7 +66,7 @@ class OfflineOvernightDashboardTest(unittest.TestCase):
             html=(output/"index.html").read_text()
             self.assertIn("not a validated HRTF",html)
             self.assertIn("UNVERIFIED",html)
-            self.assertIn("Auto-switched",html)
+            self.assertIn("auto-switched to sl-fmm",html)
             self.assertEqual(len(paths),1)
 
 
